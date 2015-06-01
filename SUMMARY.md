@@ -72,4 +72,3 @@
 * [Glosario](glossary.md)
 * [Investigacion Academica](academic-research.md)
 
-
