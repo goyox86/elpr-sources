@@ -218,18 +218,10 @@ src/main.rs:10     io::stdin().read_line(&mut adivinanza);
 
 Rust nos advierte que no hemos usado el valor `Result`. Esta advertencia viene de una anotacion especial que tiene `io::Result`. Rust esta tratando de decirte que no has manejado un posible error. La manera correcta de suprimir el error es, en efecto escribir el codigo para el manejo de erroes. Por suerte, si solo queremos terminar la ejecucion del programa de haber un problema, podemos usador estos dos pequeños metodos. Si podemos recuperarnos del error de alguna manera, hariamos algo diferente,  pero dejemos eso para un proyecto futuro.
 
-Rust warns us that we haven’t used the `Result` value. This warning comes from
-a special annotation that `io::Result` has. Rust is trying to tell you that
-you haven’t handled a possible error. The right way to suppress the error is
-to actually write error handling. Luckily, if we just want to crash if there’s
-a problem, we can use these two little methods. If we can recover from the
-error somehow, we’d do something else, but we’ll save that for a future
-project.
-
-There’s just one line of this first example left:
+Solo nos queda una linea de este primer ejemplo:
 
 ```rust,ignore
-    println!("You guessed: {}", guess);
+    println!("Haz adivinado: {}", adivinanza);
 }
 ```
 
