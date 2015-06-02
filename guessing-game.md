@@ -242,7 +242,7 @@ De cualquier modo, ese es el tour. Podemos ejecutarlo con `cargo run`:
 $ cargo run
    Compiling guessing_game v0.1.0 (file:///home/tu/proyectos/adivinanzas)
      Running `target/debug/adivinanzas`
-Guess the number!
+Adivina el numero!
 Please input your guess.
 6
 You guessed: 6
