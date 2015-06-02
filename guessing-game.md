@@ -231,7 +231,7 @@ Esta linea imprime la cadena de caracteres en la que guardamos neustra entrada. 
 let x = 5;
 let y = 10;
 
-println!("x y y: {} and {}", x, y);
+println!("x y y: {} y {}", x, y);
 ```
 
 Fácil.
