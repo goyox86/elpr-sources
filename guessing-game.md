@@ -236,7 +236,7 @@ println!("x y y: {} and {}", x, y);
 
 Fácil.
 
-Anyway, that’s the tour. We can run what we have with `cargo run`:
+De cualquier modo, ese es el tour. Podemos ejecutarlo con `cargo run`:
 
 ```bash
 $ cargo run
