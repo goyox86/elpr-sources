@@ -245,7 +245,7 @@ $ cargo run
 Adivina el numero!
 Por favor introduzca su adivinanza.
 6
-You guessed: 6
+Haz adivinado: 6
 ```
 
 All right! Our first part is done: we can get input from the keyboard,
