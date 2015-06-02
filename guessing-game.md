@@ -243,7 +243,7 @@ $ cargo run
    Compiling guessing_game v0.1.0 (file:///home/tu/proyectos/adivinanzas)
      Running `target/debug/adivinanzas`
 Adivina el numero!
-"Por favor introduzca su adivinanza.
+Por favor introduzca su adivinanza.
 6
 You guessed: 6
 ```
