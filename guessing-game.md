@@ -256,9 +256,7 @@ A continuación necesitamos generar un numero secreto. Rust todavía no incluye 
 
 [randcrate]: https://crates.io/crates/rand
 
-Using external crates is where Cargo really shines. Before we can write
-the code using `rand`, we need to modify our `Cargo.toml`. Open it up, and
-add these few lines at the bottom:
+Usar crates externos es donde Cargo realmente brilla. Antes que podamos escribir codigo que haga uso de `rand`, debemos modificar nuestro archivo `Cargo.toml`. Abrelo, y agrega estas lineas al final:
 
 ```toml
 [dependencies]
