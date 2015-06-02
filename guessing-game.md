@@ -252,7 +252,7 @@ En hora buena! Nuestra primera parte ha terminado: podemos obtener entrada del t
 
 # Generando un numero secreto
 
-A continuación necesitamos generar un numero secreto. Rust todavía no incluye una funcionalidad de numeros aleatorios en la biblioteca estándar. Sin embargo, el quipo de Rust provee un [`rand` crate][randcrate]. Un ‘crate’ es un paquete de código Rust. Nosotros hemos estado construyendo un ‘crate binaro’, el cual es un ejecutable. `rand` es un ‘crate biblioteca’, el cual contiene codigo a ser usado por otros programas.
+A continuación necesitamos generar un numero secreto. Rust todavía no incluye una funcionalidad de numeros aleatorios en la biblioteca estándar. Sin embargo, el quipo de Rust provee un [`rand` crate][randcrate]. Un ‘crate’ es un paquete de código Rust. Nosotros hemos estado construyendo un ‘crate binaro’, el cual es un ejecutable. `rand` es un ‘crate biblioteca’, que contiene codigo a ser usado por otros programas.
 
 Next, we need to generate a secret number. Rust does not yet include random
 number functionality in its standard library. The Rust team does, however,
