@@ -234,7 +234,7 @@ let y = 10;
 println!("x y y: {} and {}", x, y);
 ```
 
-Easy.
+Fácil.
 
 Anyway, that’s the tour. We can run what we have with `cargo run`:
 
