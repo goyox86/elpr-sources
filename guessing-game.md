@@ -292,7 +292,7 @@ $ cargo build
  Downloading libc v0.1.6
    Compiling libc v0.1.6
    Compiling rand v0.3.8
-   Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
+   Compiling guessing_game v0.1.0 (file:///home/tu/proyectos/adivinanzas)
 ```
 
 (You may see different versions, of course.)
