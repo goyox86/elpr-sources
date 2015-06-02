@@ -240,8 +240,8 @@ De cualquier modo, ese es el tour. Podemos ejecutarlo con `cargo run`:
 
 ```bash
 $ cargo run
-   Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
-     Running `target/debug/guessing_game`
+   Compiling guessing_game v0.1.0 (file:///home/tu/proyectos/adivinanzas)
+     Running `target/debug/adivinanzas`
 Guess the number!
 Please input your guess.
 6
@@ -292,7 +292,7 @@ $ cargo build
  Downloading libc v0.1.6
    Compiling libc v0.1.6
    Compiling rand v0.3.8
-   Compiling guessing_game v0.1.0 (file:///home/tu/proyectos/adivinanzas)
+   Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
 ```
 
 (You may see different versions, of course.)
