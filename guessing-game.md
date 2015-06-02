@@ -225,15 +225,13 @@ Solo nos queda una linea de este primer ejemplo:
 }
 ```
 
-This prints out the string we saved our input in. The `{}`s are a placeholder,
-and so we pass it `guess` as an argument. If we had multiple `{}`s, we would
-pass multiple arguments:
+Esta linea imprime la cadena de caracteres en la que guardamos neustra entrada. Los `{}`s son marcadores de posicion, es por ello que pasamos `adivinanza` como argumento.  De haber habido multiples `{}`s, debiamos haber pasado multiples argumentos:
 
 ```rust
 let x = 5;
 let y = 10;
 
-println!("x and y: {} and {}", x, y);
+println!("x y y: {} and {}", x, y);
 ```
 
 Easy.
