@@ -248,10 +248,9 @@ Por favor introduzca su adivinanza.
 Haz adivinado: 6
 ```
 
-All right! Our first part is done: we can get input from the keyboard,
-and then print it back out.
+En hora buena! Nuestra primera parte ha terminado: podemos obtener entrada del teclado e imprimirla de vuelta.
 
-# Generating a secret number
+# Generando un numero secreto
 
 Next, we need to generate a secret number. Rust does not yet include random
 number functionality in its standard library. The Rust team does, however,
