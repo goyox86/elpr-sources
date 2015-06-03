@@ -605,7 +605,7 @@ fn main() {
             .ok()
             .expect("Please type a number!");
 
-        println!("You guessed: {}", guess);
+        println!("Haz adivinado: {}", guess);
 
         match guess.cmp(&secret_number) {
             Ordering::Less    => println!("Too small!"),
