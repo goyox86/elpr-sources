@@ -305,7 +305,7 @@ $ cargo build
     Compiling adivinanzas v0.1.0 (file:///home/tu/proyectos/adivinanzas)
 ```
 
-Entonces 
+Entonces, le hemos dicho a Cargo `0.3.x` que queriamos cualquier version `0.3.x` de `rand`, y este descargo la ultima version para el momento de la escritura de este tutorial, `v0.3.8`. Pero que pasa cuando la siguiente version `v0.3.9` sea publicada con un importante bugfix? Si bien recibir bugfixes es importante, que pasa si `0.3.9` contiene una regresion que rompe nuestro codigo?
 
 So, we told Cargo we wanted any `0.3.x` version of `rand`, and so it fetched the latest
 version at the time this was written, `v0.3.8`. But what happens when next
