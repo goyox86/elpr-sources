@@ -413,7 +413,7 @@ fn main() {
         .ok()
         .expect("Fallo al leer linea");
 
-    println!("("Haz adivinado: {}"", adivinanza);
+    println!("Haz adivinado: {}", adivinanza);
 
     match adivinanza.cmp(&numero_secreto) {
         Ordering::Less    => println!("Muy pequeño!"),
