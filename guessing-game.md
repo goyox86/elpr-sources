@@ -450,14 +450,9 @@ enum Foo {
 
 Con esta definición, cualquier cosa de tipo `Foo` puede ser bien sea un `Foo::Bar` o un `Foo::Baz`. Usamos el `::` para indicar el espacio de nombres para una variante `enum` en particular.
 
-With this definition, anything of type `Foo` can be either a
-`Foo::Bar` or a `Foo::Baz`. We use the `::` to indicate the
-namespace for a particular `enum` variant.
+La enum [`Ordering`][ordering]  tiene tres posibles variantes:  `Less`, `Equal`,
+and `Greater` (menor, igual y mayor respectivamente). La sentencia `match` toma un valor de un tipo, y te permite crear un ‘brazo’ para cada valor posible. Debido a que tenemos tres posibles tipos de `Ordering`, tenemos tres brazos:
 
-The [`Ordering`][ordering] enum has three possible variants: `Less`, `Equal`,
-and `Greater`. The `match` statement takes a value of a type, and lets you
-create an ‘arm’ for each possible value. Since we have three types of
-`Ordering`, we have three arms:
 
 ```rust,ignore
 match guess.cmp(&secret_number) {
