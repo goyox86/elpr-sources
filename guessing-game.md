@@ -528,7 +528,7 @@ fn main() {
 
     let mut adivinanza = String::new();
 
-    io::stdin().read_line(&mut guess)
+    io::stdin().read_line(&mut adivinanza)
         .ok()
         .expect("failed to read line");
 
