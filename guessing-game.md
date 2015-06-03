@@ -601,7 +601,7 @@ fn main() {
             .ok()
             .expect("failed to read line");
 
-        let guess: u32 = guess.trim().parse()
+        let adivinanza: u32 = adivinanza.trim().parse()
             .ok()
             .expect("Please type a number!");
 
