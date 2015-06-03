@@ -338,7 +338,7 @@ fn main() {
 
     io::stdin().read_line(&mut adivinanza)
         .ok()
-        .expect("failed to read line");
+        .expect("Fallo al leer linea"));
 
     println!("Haz adivinado: {}", adivinanza);
 }
