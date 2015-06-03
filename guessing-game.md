@@ -456,9 +456,9 @@ and `Greater` (menor, igual y mayor respectivamente). La sentencia `match` toma 
 
 ```rust,ignore
 match guess.cmp(&secret_number) {
-    Ordering::Less    => println!("Too small!"),
-    Ordering::Greater => println!("Too big!"),
-    Ordering::Equal   => println!("You win!"),
+    Ordering::Less    => println!("Muy pequeño!"),
+    Ordering::Greater => println!("Muy grande!"),
+    Ordering::Equal   => println!("Haz ganado!"),
 }
 ```
 
