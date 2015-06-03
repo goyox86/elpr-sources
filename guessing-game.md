@@ -382,7 +382,7 @@ Adivina el numero!
 El numero secreto es: 83
 Por favor introduce tu adivinanza.
 5
-"Haz adivinado: 5
+Haz adivinado: 5
 ```
 
 Great! Next up: let’s compare our guess to the secret guess.
