@@ -562,14 +562,11 @@ Haz adivinado: 76
 Muy grande!
 ```
 
-Nice! You can see I even added spaces before my guess, and it still figured
-out that I guessed 76. Run the program a few times, and verify that guessing
-the number works, as well as guessing a number too small.
+Excelente! Puedes ver que incluso he agregado espacios antes de mi intento, y aun así el programa determino que intente 76. Ejecuta el programa unas pocas veces, y verifica que adivinar el numero funciona, asi como intentar un numero muy pequeno.
 
-Now we’ve got most of the game working, but we can only make one guess. Let’s
-change that by adding loops!
+Ahora tenemos la mayoria del juego funcionando, pero solo podemos intentar adivinar una vez. Tratemos de cambiar eso agregando ciclos!
 
-# Looping
+# Iteracion / Bucles / Ciclos
 
 The `loop` keyword gives us an infinite loop. Let’s add that in:
 
