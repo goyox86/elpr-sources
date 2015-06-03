@@ -626,15 +626,15 @@ Adivina el numero!
 El numero secreto es: 59
 Por favor introduce tu adivinanza.
 45
-You guessed: 45
+Haz adivinado: 45
 Too small!
 Por favor introduce tu adivinanza.
 60
-You guessed: 60
+Haz adivinado: 60
 Too big!
 Por favor introduce tu adivinanza.
 59
-You guessed: 59
+Haz adivinado: 59
 You win!
 Por favor introduce tu adivinanza.
 quit
