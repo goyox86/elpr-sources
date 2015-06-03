@@ -525,9 +525,9 @@ fn main() {
 The new three lines:
 
 ```rust,ignore
-    let guess: u32 = guess.trim().parse()
+    let adivinanza: u32 = adivinanza.trim().parse()
         .ok()
-        .expect("Please type a number!");
+        .expect("Por favor introduce un numero!");
 ```
 
 Wait a minute, I thought we already had a `guess`? We do, but Rust allows us
