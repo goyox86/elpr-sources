@@ -344,7 +344,7 @@ fn main() {
 }
 ```
 
-La primera cosa que hemos hecho es cambiar la primera linea. Ahora dice `extern crate rand`. Debido a que declaramos `rand` en nuestra sección `[dependencies]`, podemos usar `extern crate` para hacerle saber a Rust que estaremos haciendo uso de ello. Esto es qeuivalente a un `use rand;`, de manera que podamos hacer uso de lo que sea dentro del crate `rand` a traves del prefijo `rand::`.
+La primera cosa que hemos hecho es cambiar la primera linea. Ahora dice `extern crate rand`. Debido a que declaramos `rand` en nuestra sección `[dependencies]`, podemos usar `extern crate` para hacerle saber a Rust que estaremos haciendo uso de `rand`. Esto es qeuivalente a un `use rand;`, de manera que podamos hacer uso de lo que sea dentro del crate `rand` a traves del prefijo `rand::`.
 
 The first thing we’ve done is change the first line. It now says
 `extern crate rand`. Because we declared `rand` in our `[dependencies]`, we
