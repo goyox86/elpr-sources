@@ -334,7 +334,7 @@ fn main() {
 
     println!("Por favor introduce tu adivinanza.");
 
-    let mut guess = String::new();
+    let mut adivinanza = String::new();
 
     io::stdin().read_line(&mut guess)
         .ok()
