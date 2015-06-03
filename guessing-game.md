@@ -545,6 +545,8 @@ Seguido por una invocaciÃ³n a `ok().expect()`. AquÃ­ `adivinanza` hace referenci
 [parse]: ../std/primitive.str.html#method.parse
 [number]: primitive-types.html#numeric-types
 
+Al igual que `read_line()`, nuestra llamada a `parse()` podria causar un error. Que tal si nuestra cadena de caracteres contenia `Aß‘í¥ ?  No habria  forma de convertir  eso en un numeo
+
 Just like `read_line()`, our call to `parse()` could cause an error. What if
 our string contained `Aß‘í¥ ? Thereâ€™d be no way to convert that to a number. As
 such, weâ€™ll do the same thing we did with `read_line()`: use the `ok()` and
