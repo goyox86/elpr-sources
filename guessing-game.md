@@ -620,8 +620,8 @@ Pruebalo. Pero espera, no acabamos de agregar un ciclo infinito? Sip. Recuerdas 
 
 ```bash
 $ cargo run
-   Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
-     Running `target/guessing_game`
+   Compiling adivinanzas v0.1.0 (file:///home/tu/proyectos/adivinanzas)
+     Running `target/adivinanzas`
 Guess the number!
 The secret number is: 59
 Please input your guess.
