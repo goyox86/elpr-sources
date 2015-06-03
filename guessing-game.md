@@ -532,7 +532,7 @@ fn main() {
         .ok()
         .expect("Fallo al leer linea");
 
-    let adivinanza: u32 = guess.trim().parse()
+    let adivinanza: u32 = adivinanza.trim().parse()
         .ok()
         .expect("Please type a number!");
 
