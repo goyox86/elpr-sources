@@ -542,20 +542,6 @@ guess.trim().parse()
 
 Seguido por una invocación a `ok().expect()`. Aquí `adivinanza` hace referencia a la vieja versión, la que era un `String` que contenía nuestra entrada de usuario en ella. El metodo `trim()` en los `String`s elimina cualquier espacio en blanco al principio y al final de nuestras cadenas de caracteres. Esto es importante, debido a que tuvimos que presionar la tecla ‘retorno’ para satisfacer a `read_line()`. Esto significa que si escribimos `5` y presionamos ‘retorno’ `adivinanza` luce como así: `5\n`. El `\n` representa ‘nueva linea’ (‘newline’), la tecla enter. `trim()` se deshace de esto, dejando nuestra cadena de caracteres solo con el `5`. El [metodo `parse()` en las cadenas caracteres][parse] parsea una cadena de caracteres en algún tipo de numero. Debido a que puede parsear una variedad de numeros, debemos darle a Rust una pista del tipo exacto de numero que deseamos. De ahí la parte `let adivinanza: u32`. Los dos puntos (colon) (`:`)  despues de `adivinanza` le dicen a Rust que vamos a anotar el tipo. `u32` es un entero sin signo de treinta y dos bits. Rust posee [una variedad de tipos numero integrados][number], pero nosotros hemos escojido `u32`.  Es una buena opción por defecto para un numero positivo pequeno. 
 
-Followed by an `ok().expect()` invocation. Here, `guess` refers to the old
-`guess`, the one that was a `String` with our input in it. The `String`
-method on `String`s will eliminate any white space at the beginning and end of
-our string. This is important, as we had to press the ‘return’ key to satisfy
-`read_line()`. This means that if we type `5` and hit return, `guess` looks
-like this: `5\n`. The `\n` represents ‘newline’, the enter key. `trim()` gets
-rid of this, leaving our string with just the `5`. The [`parse()` method on
-strings][parse] parses a string into some kind of number. Since it can parse a
-variety of numbers, we need to give Rust a hint as to the exact type of number
-we want. Hence, `let guess: u32`. The colon (`:`) after `guess` tells Rust
-we’re going to annotate its type. `u32` is an unsigned, thirty-two bit
-integer. Rust has [a number of built-in number types][number], but we’ve
-chosen `u32`. It’s a good default choice for a small positive number.
-
 [parse]: ../std/primitive.str.html#method.parse
 [number]: primitive-types.html#numeric-types
 
