@@ -270,7 +270,6 @@ La sección `[dependencies]` de `Cargo.toml` es como la sección `[package]`: to
 [cargodoc]: http://doc.crates.io/crates-io.html
 
 Ahora, sin cambiar nada en nuestro código, construyamos nuestro proyecto:
-Now, without changing any of our code, let’s build our project:
 
 ```bash
 $ cargo build
