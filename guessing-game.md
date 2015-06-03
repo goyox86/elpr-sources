@@ -356,7 +356,7 @@ Hay dos lineas mas en el medio:
 ```rust,ignore
     let numero_secreto = rand::thread_rng().gen_range(1, 101);
 
-    println!("The secret number is: {}", secret_number);
+    println!("El numero secreto es: {}", numero_secreto);
 ```
 
 We use the `rand::thread_rng()` function to get a copy of the random number
