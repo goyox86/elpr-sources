@@ -570,6 +570,14 @@ Ahora tenemos la mayoria del juego funcionando, pero solo podemos intentar adivi
 
 La palabra clave `loop` nos proporciona un ciclo infinito. Agreguemosla:
 
+
+Adivina el numero!
+El numero secreto es: 58
+Por favor introduce tu adivinanza.
+  76
+Haz adivinado: 76
+Muy grande!
+
 ```rust,ignore
 extern crate rand;
 
@@ -578,7 +586,7 @@ use std::cmp::Ordering;
 use rand::Rng;
 
 fn main() {
-    println!("Guess the number!");
+    println!("Adivina el numero!");
 
     let secret_number = rand::thread_rng().gen_range(1, 101);
 
