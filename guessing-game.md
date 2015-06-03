@@ -436,11 +436,6 @@ match adivinanza.cmp(&numero_secreto) {
 
 El metodo `cmp()` puede ser llamado an cualquier cosa que pueda ser comparada, este toma una referencia a la cosa con la cual quieras comparar. Retorna el tipo `Ordering` que hicimos disponible anteriormente. Hemos usado una sentencia [`match`][match] para determinar exactamente que tipo de `Ordering` es. `Ordering` es un [`enum`][enum], abreviacion para  ‘enumeration’, las cuales lucen de la siguiente manera: 
 
-The `cmp()` method can be called on anything that can be compared, and it
-takes a reference to the thing you want to compare it to. It returns the
-`Ordering` type we `use`d earlier. We use a [`match`][match] statement to
-determine exactly what kind of `Ordering` it is. `Ordering` is an
-[`enum`][enum], short for ‘enumeration’, which looks like this:
 
 ```rust
 enum Foo {
