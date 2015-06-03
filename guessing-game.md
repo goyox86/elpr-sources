@@ -423,15 +423,17 @@ fn main() {
 }
 ```
 
+Algunas piezas aca. La primera es otro `use`.  Hemos hecho disponible un tipo llamado `std::cmp::Ordering`. Despues, cinco nuevas lineas al fondo que lo usan:
+
 A few new bits here. The first is another `use`. We bring a type called
 `std::cmp::Ordering` into scope. Then, five new lines at the bottom that use
 it:
 
 ```rust,ignore
-match guess.cmp(&secret_number) {
-    Ordering::Less    => println!("Too small!"),
-    Ordering::Greater => println!("Too big!"),
-    Ordering::Equal   => println!("You win!"),
+match adivinanza.cmp(&numero_secreto) {
+    Ordering::Less    => println!("Muy pequeño!"),
+    Ordering::Greater => println!("Muy grande!"),
+    Ordering::Equal   => println!("Haz ganado!"),
 }
 ```
 
