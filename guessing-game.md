@@ -317,9 +317,7 @@ Hay mucho mas que decir acerca de [Cargo][doccargo] y [su ecosistema][doccratesi
 [doccargo]: http://doc.crates.io
 [doccratesio]: http://doc.crates.io/crates-io.html
 
-Hagamos _uso_ ahora de `rand`
-
-Let’s get on to actually _using_ `rand`. Here’s our next step:
+Hagamos _uso_ ahora de `rand`. He aqui nuestro siguiente paso:
 
 ```rust,ignore
 extern crate rand;
