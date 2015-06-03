@@ -559,7 +559,7 @@ El numero secreto es: 58
 Por favor introduce tu adivinanza.
   76
 Haz adivinado: 76
-Too big!
+Muy grande!
 ```
 
 Nice! You can see I even added spaces before my guess, and it still figured
