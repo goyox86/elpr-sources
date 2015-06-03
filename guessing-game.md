@@ -467,11 +467,12 @@ match guess.cmp(&secret_number) {
 Si es `Less`, imprimimos `Too small!`, si es `Greater`, `Too big!`, y si es
 `Equal`, `Haz ganado!`. `match` es realmente util, y es usado con fercuencia en Rust.
 
-I did mention that this won’t quite work yet, though. Let’s try it:
+Anteriormente mencione que todavia no funciona. Pongamoslo a prueba:
+
 
 ```bash
 $ cargo build
-   Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
+   Compiling adivinanzas v0.1.0 (file:///home/tu/proyectos/adivinanzas)
 src/main.rs:28:21: 28:35 error: mismatched types:
  expected `&collections::string::String`,
     found `&_`
