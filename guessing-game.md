@@ -348,12 +348,6 @@ La primera cosa que hemos hecho es cambiar la primera linea. Ahora dice `extern 
 
 Después, hemos agregado otra linea `use`: `use rand::Rng`. En unos momentos estaremos haciendo uso de un metodo, y esto requiere que `Rng` este disponible para que funcione. La idea basica es la siguiente: los metodos estan dentro de algo llamado ‘traits’ (Rasgos), y para que el metodo funcione necesita que el trait este disponible. Para mayores detalles dirigete a la sección [Rasgos][traits].
 
-Next, we added another `use` line: `use rand::Rng`. We’re going to use a
-method in a moment, and it requires that `Rng` be in scope to work. The basic
-idea is this: methods are defined on something called ‘traits’, and for the
-method to work, it needs the trait to be in scope. For more about the
-details, read the [traits][traits] section.
-
 [traits]: traits.html
 
 There are two other lines we added, in the middle:
