@@ -484,31 +484,7 @@ error: aborting due to previous error
 Could not compile `adivinanzas`.
 ```
 
-Oops! Un gran error. Lo principal en el es que tenemos ‘tipos incompatibles’ (‘mismatched types’). Rust posee un fuerte, sistema de tipos estatico. Sin embargo, también tiene inferencia de tipos. Cuando escribimos  `let adivinanza = String::new()`, Rust fue capaz de inferir que `adivinanza` debia ser un `String`, y por ello no nos hizo escribir el tipo. Con nuestro `numero_secreto`, hay un numero de tipos que pueden tener un valor entre uno y cien: `i32`, un numero de treinta y dos bits, `u32`, un numero sin signo de treinta y dos bits, o `i64` un numero de sesenta y cuatro bits u otros. Hasta ahora, eso no ha importado, debido a que Rust por defecto usa `i32`. Sin embargo, en este caso, Rust no sabe como comparar `adivinanza` con `numero_secreto`. Ambos necesitan ser del mismo tipo. A la final, queremos convertir el `String` que leimos como entrada en un tipo real de numero, para efectos de la comparacion. Podemos hacer eso con tres lineas mas. He aqui nuestro nuevo programa: 
-
-fn main() {
-    println!("Adivina el numero!");
-
-    let numero_secreto = rand::thread_rng().gen_range(1, 101);
-
-    println!("El numero secreto es: {}", numero_secreto);
-
-    println!("Por favor introduce tu adivinanza.");
-
-    let mut adivinanza = String::new();
-
-    io::stdin().read_line(&mut adivinanza)
-        .ok()
-        .expect("Fallo al leer linea");
-
-    println!("Haz adivinado: {}", adivinanza);
-
-    match adivinanza.cmp(&numero_secreto) {
-        Ordering::Less    => println!("Muy pequeño!"),
-        Ordering::Greater => println!("Muy grande!"),
-        Ordering::Equal   => println!("Haz ganado!"),
-    }
-}
+Oops! Un gran error. Lo principal en el es que tenemos ‘tipos incompatibles’ (‘mismatched types’). Rust posee un fuerte, sistema de tipos estatico. Sin embargo, también tiene inferencia de tipos. Cuando escribimos  `let adivinanza = String::new()`, Rust fue capaz de inferir que `adivinanza` debia ser un `String`, y por ello no nos hizo escribir el tipo. Con nuestro `numero_secreto`, hay un numero de tipos que pueden tener un valor entre uno y cien: `i32`, un numero de treinta y dos bits, `u32`, un numero sin signo de treinta y dos bits, o `i64` un numero de sesenta y cuatro bits u otros. Hasta ahora, eso no ha importado, debido a que Rust por defecto usa `i32`. Sin embargo, en este caso, Rust no sabe como comparar `adivinanza` con `numero_secreto`. Ambos necesitan ser del mismo tipo. A la final, queremos convertir el `String` que leimos como entrada en un tipo real de numero, para efectos de la comparacion. Podemos hacer eso con tres lineas mas. He aqui nuestro nuevo programa:
 
 ```rust,ignore
 extern crate rand;
