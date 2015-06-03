@@ -350,10 +350,11 @@ Después, hemos agregado otra linea `use`: `use rand::Rng`. En unos momentos est
 
 [traits]: traits.html
 
-There are two other lines we added, in the middle:
+Hay dos lineas mas en el medio: 
+
 
 ```rust,ignore
-    let secret_number = rand::thread_rng().gen_range(1, 101);
+    let numero_secreto = rand::thread_rng().gen_range(1, 101);
 
     println!("The secret number is: {}", secret_number);
 ```
