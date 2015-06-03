@@ -631,7 +631,7 @@ Muy pequeño!
 Por favor introduce tu adivinanza.
 60
 Haz adivinado: 60
-Too big!
+Muy grande!
 Por favor introduce tu adivinanza.
 59
 Haz adivinado: 59
