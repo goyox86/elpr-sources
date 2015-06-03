@@ -346,7 +346,7 @@ fn main() {
 
 La primera cosa que hemos hecho es cambiar la primera linea. Ahora dice `extern crate rand`. Debido a que declaramos `rand` en nuestra sección `[dependencies]`, podemos usar `extern crate` para hacerle saber a Rust que estaremos haciendo uso de `rand`. Esto es equivalente a un `use rand;`, de manera que podamos hacer uso de lo que sea dentro del crate `rand` a traves del prefijo `rand::`.
 
-Después, hemos agregado otra linea `use`: `use rand::Rng`. En unos momentos estaremos haciendo uso de un metodo, y esto requiere que `Rng` este disponible para que funcione. La idea basica es la siguiente: los metodos estan dentro de algo llamado ‘traits’ (Rasgos), y para que el metodo funcione neceita que el trait este disponible. Para mayores detalles dirigete a la sección [Rasgos][traits].
+Después, hemos agregado otra linea `use`: `use rand::Rng`. En unos momentos estaremos haciendo uso de un metodo, y esto requiere que `Rng` este disponible para que funcione. La idea basica es la siguiente: los metodos estan dentro de algo llamado ‘traits’ (Rasgos), y para que el metodo funcione necesita que el trait este disponible. Para mayores detalles dirigete a la sección [Rasgos][traits].
 
 Next, we added another `use` line: `use rand::Rng`. We’re going to use a
 method in a moment, and it requires that `Rng` be in scope to work. The basic
