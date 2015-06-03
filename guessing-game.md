@@ -326,7 +326,7 @@ use std::io;
 use rand::Rng;
 
 fn main() {
-    println!("Guess the number!");
+    println!("Adivina el numero!");
 
     let secret_number = rand::thread_rng().gen_range(1, 101);
 
