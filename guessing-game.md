@@ -553,7 +553,7 @@ Probemos nuestro programa!
 ```bash
 $ cargo run
    Compiling adivinanzas v0.1.0 (file:///home/tu/proyectos/adivinanzas)
-     Running `target/guessing_game`
+     Running `target/adivinanzas`
 Guess the number!
 The secret number is: 58
 Please input your guess.
