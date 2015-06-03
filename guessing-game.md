@@ -484,7 +484,7 @@ error: aborting due to previous error
 Could not compile `adivinanzas`.
 ```
 
-Oops! Este es un gran error. Lo principal en el error es que tenemos ‘tipos incompatibles’ (‘mismatched types’). Rust posee un fuerte, sistema de tipos estatico. Sin embargo, también tiene inferencia de tipos. Cuando escribimos  `let adivinanza = String::new()`, Rust fue capaz de inferir que `adivinanza`
+Oops! Un gran error. Lo principal en el error es que tenemos ‘tipos incompatibles’ (‘mismatched types’). Rust posee un fuerte, sistema de tipos estatico. Sin embargo, también tiene inferencia de tipos. Cuando escribimos  `let adivinanza = String::new()`, Rust fue capaz de inferir que `adivinanza` debia ser un `String`, y por ello no nos hizo escribir el tipo. Con nuestro `numero_secreto`, hay un numero de tipos que pueden tener un valor entre uno y cien: `i32`, un numero de treinta y dos bits, `u32`, un numero sin signo de treinta y dos bits, o `i64` un numero de sesenta y cuatro bits u otros. Hasta ahora, eso no ha importado, debido a que Rust por defecto usa `i32`. Sim embargo, en este caso, Rust no sabe como comparar `adivinanza` con `numero_secreto`. Amobos necesitan ser del mismo tipo. Al final, queremos convertir el `String` que leimos como entrada en un tipo real de numero, para efectos de la comparacion. Podemos hacer eso con tres lineas mas. He aqui nuestro nuevo programa: 
 
 Whew! This is a big error. The core of it is that we have ‘mismatched types’.
 Rust has a strong, static type system. However, it also has type inference.
