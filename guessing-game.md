@@ -623,7 +623,7 @@ $ cargo run
    Compiling adivinanzas v0.1.0 (file:///home/tu/proyectos/adivinanzas)
      Running `target/adivinanzas`
 Adivina el numero!
-The secret number is: 59
+El numero secreto es: 59
 Please input your guess.
 45
 You guessed: 45
