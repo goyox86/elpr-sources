@@ -373,14 +373,14 @@ $ cargo run
      Running `target/debug/adivinanzas`
 Adivina el numero!
 The secret number is: 7
-Please input your guess.
+Por favor introduce tu adivinanza.
 4
 You guessed: 4
 $ cargo run
      Running `target/debug/adivinanzas`
 Adivina el numero!
 The secret number is: 83
-Please input your guess.
+Por favor introduce tu adivinanza.
 5
 You guessed: 5
 ```
