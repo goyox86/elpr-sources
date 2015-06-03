@@ -359,7 +359,7 @@ Hay dos lineas mas en el medio:
     println!("El numero secreto es: {}", numero_secreto);
 ```
 
-Hacemos uso de la función `rand::thread_rng()` para obtener una copia del generador de numeros aleatorios, el cual es local al [hilo][concurrency] de ejecucion en el cual estamos. Debido a que hemos hecho disponible a `rand::Rng` a traves de `use rand::Rng`, este tiene un metodo `gen_range()` disponible. Este metodo acepta dos argumentos, y genera un numero aleatorio entre estos. Es inclusivo en el limite inferior, pero exclusivo en el limite superior, por eso necesitamos `1` y `101` para obtener un numero entre uno y cien.
+Hacemos uso de la función `rand::thread_rng()` para obtener una copia del generador de numeros aleatorios, el cual es local al [hilo][concurrency] de ejecucion en el cual estamos. Debido a que hemos hecho disponible a `rand::Rng` a traves de `use rand::Rng`, este tiene un metodo `gen_range()` disponible. Este metodo acepta dos argumentos, y genera un numero aleatorio entre estos. Es inclusivo en el limite inferior, pero es exclusivo en el limite superior, por eso necesitamos `1` y `101` para obtener un numero entre uno y cien.
 
 We use the `rand::thread_rng()` function to get a copy of the random number
 generator, which is local to the particular [thread][concurrency] of execution
