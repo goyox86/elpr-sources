@@ -530,7 +530,11 @@ Las tres nuevas lineas:
         .expect("Por favor introduce un numero!");
 ```
 
-Espera un momento, pense que ya teniamos una `adivinanza`?
+Espera un momento, pensé que ya teniamos una `adivinanza`? La tenemos, pero
+Rust nos permite sobreescribir (‘shadow’) la `adivinanza` previa con una nueva.
+Esto es usado con frecuencia en esta misma situación, en donde `adivinanza` es un `String`, pero queremos convertirlo a un `u32`. Este shadowing nos permite reusar el nombre `adivinanza` en vez de forzarnos a idear dos nombres únicos como `adivinanza_str` y `adivinanza`, u otros.
+
+Estamos asco
 
 Wait a minute, I thought we already had a `guess`? We do, but Rust allows us
 to ‘shadow’ the previous `guess` with a new one. This is often used in this
