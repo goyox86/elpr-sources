@@ -524,7 +524,7 @@ fn main() {
 
     println!("El numero secreto es: {}", numero_secreto);
 
-    println!("Please input your guess.");
+    println!("Por favor introduce tu adivinanza.");
 
     let mut guess = String::new();
 
