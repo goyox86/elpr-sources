@@ -484,7 +484,7 @@ error: aborting due to previous error
 Could not compile `adivinanzas`.
 ```
 
-Oops! Este es un gran error. Lo principal en el error es que tenemos ‘tipos incompatibles’ (‘mismatched types’)
+Oops! Este es un gran error. Lo principal en el error es que tenemos ‘tipos incompatibles’ (‘mismatched types’). Rust posee un fuerte, sistema de tipos estatico. Sin embargo, también tiene inferencia de tipos 
 
 Whew! This is a big error. The core of it is that we have ‘mismatched types’.
 Rust has a strong, static type system. However, it also has type inference.
