@@ -599,7 +599,7 @@ fn main() {
 
         io::stdin().read_line(&mut adivinanza)
             .ok()
-            .expect("failed to read line");
+            .expect("Fallo al leer linea");
 
         let adivinanza: u32 = adivinanza.trim().parse()
             .ok()
