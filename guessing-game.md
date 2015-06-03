@@ -369,7 +369,7 @@ Trata de ejecutar el programa unas pocas veces:
 
 ```bash
 $ cargo run
-   Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
+   Compiling guessing_game v0.1.0 (file:///home/tu/proyectos/adivinanzas)
      Running `target/debug/guessing_game`
 Guess the number!
 The secret number is: 7
