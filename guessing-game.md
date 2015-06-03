@@ -385,7 +385,7 @@ Por favor introduce tu adivinanza.
 Haz adivinado: 5
 ```
 
-Great! Next up: let’s compare our guess to the secret guess.
+Gradioso! A continuacion: comparemos nuestra adivinanza con el numero secreto.
 
 # Comparing guesses
 
