@@ -641,7 +641,7 @@ quit
 thread '<main>' panicked at 'Please type a number!'
 ```
 
-Ha! `quit` actually quits. As does any other non-number input. Well, this is
+Ja! `quit` en efecto termina la ejecución. As does any other non-number input. Well, this is
 suboptimal to say the least. First, let’s actually quit when you win the game:
 
 ```rust,ignore
