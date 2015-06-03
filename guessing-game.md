@@ -486,19 +486,6 @@ Could not compile `adivinanzas`.
 
 Oops! Un gran error. Lo principal en el es que tenemos ‘tipos incompatibles’ (‘mismatched types’). Rust posee un fuerte, sistema de tipos estatico. Sin embargo, también tiene inferencia de tipos. Cuando escribimos  `let adivinanza = String::new()`, Rust fue capaz de inferir que `adivinanza` debia ser un `String`, y por ello no nos hizo escribir el tipo. Con nuestro `numero_secreto`, hay un numero de tipos que pueden tener un valor entre uno y cien: `i32`, un numero de treinta y dos bits, `u32`, un numero sin signo de treinta y dos bits, o `i64` un numero de sesenta y cuatro bits u otros. Hasta ahora, eso no ha importado, debido a que Rust por defecto usa `i32`. Sin embargo, en este caso, Rust no sabe como comparar `adivinanza` con `numero_secreto`. Ambos necesitan ser del mismo tipo. A la final, queremos convertir el `String` que leimos como entrada en un tipo real de numero, para efectos de la comparacion. Podemos hacer eso con tres lineas mas. He aqui nuestro nuevo programa: 
 
-Whew! This is a big error. The core of it is that we have ‘mismatched types’.
-Rust has a strong, static type system. However, it also has type inference.
-When we wrote `let guess = String::new()`, Rust was able to infer that `guess`
-should be a `String`, and so it doesn’t make us write out the type. And with
-our `secret_number`, there are a number of types which can have a value
-between one and a hundred: `i32`, a thirty-two-bit number, or `u32`, an
-unsigned thirty-two-bit number, or `i64`, a sixty-four-bit number or others.
-So far, that hasn’t mattered, and so Rust defaults to an `i32`. However, here,
-Rust doesn’t know how to compare the `guess` and the `secret_number`. They
-need to be the same type. Ultimately, we want to convert the `String` we
-read as input into a real number type, for comparison. We can do that
-with three more lines. Here’s our new program:
-
 ```rust,ignore
 extern crate rand;
 
