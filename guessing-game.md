@@ -641,8 +641,7 @@ quit
 thread '<main>' panicked at 'Please type a number!'
 ```
 
-Ja! `quit` en efecto termina la ejecución. As does any other non-number input. Well, this is
-suboptimal to say the least. First, let’s actually quit when you win the game:
+Ja! `quit` en efecto termina la ejecución. Asi como cualquier otra entrada que no sea un numero. Bueno, esto es suboptimo por decir lo menos. Primero salgamos cuando ganemos:
 
 ```rust,ignore
 extern crate rand;
