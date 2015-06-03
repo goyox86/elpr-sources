@@ -635,7 +635,7 @@ Muy grande!
 Por favor introduce tu adivinanza.
 59
 Haz adivinado: 59
-You win!
+Haz ganado!
 Por favor introduce tu adivinanza.
 quit
 thread '<main>' panicked at 'Please type a number!'
