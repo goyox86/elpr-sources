@@ -403,7 +403,7 @@ fn main() {
 
     let numero_secreto = rand::thread_rng().gen_range(1, 101);
 
-    println!("The secret number is: {}", secret_number);
+    println!("El numero secreto es: {}", secret_number);
 
     println!("Please input your guess.");
 
