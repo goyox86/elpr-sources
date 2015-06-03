@@ -306,7 +306,7 @@ make a trivial change, and then save it again, we’ll just see one line:
 
 ```bash
 $ cargo build
-   Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
+    Compiling adivinanzas v0.1.0 (file:///home/tu/proyectos/adivinanzas)
 ```
 
 So, we told Cargo we wanted any `0.3.x` version of `rand`, and so it fetched the latest
