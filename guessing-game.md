@@ -405,9 +405,9 @@ fn main() {
 
     println!("El numero secreto es: {}", secret_number);
 
-    println!("Please input your guess.");
+    println!("Por favor introduce tu adivinanza.");
 
-    let mut guess = String::new();
+    let mut adivinanza = String::new();
 
     io::stdin().read_line(&mut guess)
         .ok()
