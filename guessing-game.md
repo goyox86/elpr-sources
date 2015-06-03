@@ -522,13 +522,15 @@ fn main() {
 }
 ```
 
-The new three lines:
+Las tres nuevas lineas:
 
 ```rust,ignore
     let adivinanza: u32 = adivinanza.trim().parse()
         .ok()
         .expect("Por favor introduce un numero!");
 ```
+
+
 
 Wait a minute, I thought we already had a `guess`? We do, but Rust allows us
 to ‘shadow’ the previous `guess` with a new one. This is often used in this
