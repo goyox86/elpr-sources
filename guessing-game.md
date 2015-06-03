@@ -375,7 +375,7 @@ Adivina el numero!
 El numero secreto es: 7
 Por favor introduce tu adivinanza.
 4
-You guessed: 4
+"Haz adivinado: 4
 $ cargo run
      Running `target/debug/adivinanzas`
 Adivina el numero!
