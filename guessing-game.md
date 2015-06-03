@@ -447,6 +447,9 @@ enum Foo {
 [match]: match.html
 [enum]: enums.html
 
+
+Con esta definición, cualquier cosa de tipo `Foo` puede ser bien sea un `Foo::Bar` o un `Foo::Baz`. Usamos el `::` para indicar el espacio de nombres para una variante `enum` en particular.
+
 With this definition, anything of type `Foo` can be either a
 `Foo::Bar` or a `Foo::Baz`. We use the `::` to indicate the
 namespace for a particular `enum` variant.
