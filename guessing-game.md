@@ -264,15 +264,7 @@ Usar crates externos es donde Cargo realmente brilla. Antes que podamos escribir
 rand="0.3.0"
 ```
 
-La sección `[dependencies]` de `Cargo.toml` es como la sección `[package]`: todo lo que le sigue es parte de ella, hasta que la siguiente sección comience. Cargo usa la sección de dependencias para saber cuales dependencias en crates externos tenemos, asi como las versiones requeridas. En este caso hemos usado la version `0.3.0`.  Cargo entiende [Versionado Semantico][semver]
-
-The `[dependencies]` section of `Cargo.toml` is like the `[package]` section:
-everything that follows it is part of it, until the next section starts.
-Cargo uses the dependencies section to know what dependencies on external
-crates you have, and what versions you require. In this case, we’ve used version `0.3.0`.
-Cargo understands [Semantic Versioning][semver], which is a standard for writing version
-numbers. If we wanted to use the latest version we could use `*` or we could use a range
-of versions. [Cargo’s documentation][cargodoc] contains more details.
+La sección `[dependencies]` de `Cargo.toml` es como la sección `[package]`: todo lo que le sigue es parte de ella, hasta que la siguiente sección comience. Cargo usa la sección de dependencias para saber en cuales crates externos dependemos, asi como las versiones requeridas. En este caso hemos usado la version `0.3.0`. Cargo entiende [Versionado Semantico][semver], que es un estandar para las escritura de numeros de version. Si quisieramos usar la ultima version podriamos haber usado `*` o un rango de versiones. La [documentación de Cargo][cargodoc]  contiene mas detalles.
 
 [semver]: http://semver.org
 [cargodoc]: http://doc.crates.io/crates-io.html
