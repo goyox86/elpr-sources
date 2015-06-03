@@ -387,7 +387,7 @@ Haz adivinado: 5
 
 Gradioso! A continuacion: comparemos nuestra adivinanza con el numero secreto.
 
-# Comparing guesses
+# Comparando adivinanzas
 
 Now that we’ve got user input, let’s compare our guess to the random guess.
 Here’s our next step, though it doesn’t quite work yet:
