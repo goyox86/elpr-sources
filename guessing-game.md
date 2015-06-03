@@ -391,9 +391,6 @@ Gradioso! A continuacion: comparemos nuestra adivinanza con el numero secreto.
 
 Ahora que tenemos entrada del usuario, comparemos la adivinanza con nuestro numero secreto. He aqui nuestro siguiente paso, aunque todavia no funciona completamente:
 
-Now that we’ve got user input, let’s compare our guess to the random guess.
-Here’s our next step, though it doesn’t quite work yet:
-
 ```rust,ignore
 extern crate rand;
 
