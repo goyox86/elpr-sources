@@ -627,7 +627,7 @@ El numero secreto es: 59
 Por favor introduce tu adivinanza.
 45
 Haz adivinado: 45
-Too small!
+"Muy pequeño!"
 Por favor introduce tu adivinanza.
 60
 Haz adivinado: 60
