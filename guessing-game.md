@@ -369,15 +369,15 @@ Trata de ejecutar el programa unas pocas veces:
 
 ```bash
 $ cargo run
-   Compiling guessing_game v0.1.0 (file:///home/tu/proyectos/adivinanzas)
-     Running `target/debug/guessing_game`
+   Compiling adivinanzas v0.1.0 (file:///home/tu/proyectos/adivinanzas)
+     Running `target/debug/adivinanzas`
 Guess the number!
 The secret number is: 7
 Please input your guess.
 4
 You guessed: 4
 $ cargo run
-     Running `target/debug/guessing_game`
+     Running `target/debug/adivinanzas`
 Guess the number!
 The secret number is: 83
 Please input your guess.
