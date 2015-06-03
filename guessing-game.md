@@ -624,19 +624,19 @@ $ cargo run
      Running `target/adivinanzas`
 Adivina el numero!
 El numero secreto es: 59
-Please input your guess.
+Por favor introduce tu adivinanza.
 45
 You guessed: 45
 Too small!
-Please input your guess.
+Por favor introduce tu adivinanza.
 60
 You guessed: 60
 Too big!
-Please input your guess.
+Por favor introduce tu adivinanza.
 59
 You guessed: 59
 You win!
-Please input your guess.
+Por favor introduce tu adivinanza.
 quit
 thread '<main>' panicked at 'Please type a number!'
 ```
