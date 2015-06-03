@@ -547,16 +547,12 @@ Seguido por una invocación a `ok().expect()`. Aquí `adivinanza` hace referenci
 
 Al igual que `read_line()`, nuestra llamada a `parse()` podria causar un error. Que tal si nuestra cadena de caracteres contenia `Aߑ���?` No habría  forma de convertir eso en un numero. Es por ello que haremos lo mismo que hicimos con `read_line()`: usar los metodos `ok()` y `expect()` para terminar abruptamente si hay algun error. 
 
-Just like `read_line()`, our call to `parse()` could cause an error. What if
-our string contained `Aߑ���? There’d be no way to convert that to a number. As
-such, we’ll do the same thing we did with `read_line()`: use the `ok()` and
-`expect()` methods to crash if there’s an error.
 
-Let’s try our program out!
+Probemos nuestro programa!
 
 ```bash
 $ cargo run
-   Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
+   Compiling adivinanzas v0.1.0 (file:///home/tu/proyectos/adivinanzas)
      Running `target/guessing_game`
 Guess the number!
 The secret number is: 58
