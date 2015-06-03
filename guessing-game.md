@@ -299,15 +299,13 @@ $ cargo build
 
 Asi es, no hay salida! Cargo sabe que nuestro proyecto ha sido construido, asi como todas sus dependencias, asi que no nay razon para hacer todo el proceso otra vez. Sin nada que hacer, simplemente termina la ejecucion. Si abrimos `src/main.rs` otra vez, hacemos un cambio trivial, salvamos los cambios, solamente veriamos una linea:
 
-That’s right, no output! Cargo knows that our project has been built, and that
-all of its dependencies are built, and so there’s no reason to do all that
-stuff. With nothing to do, it simply exits. If we open up `src/main.rs` again,
-make a trivial change, and then save it again, we’ll just see one line:
 
 ```bash
 $ cargo build
     Compiling adivinanzas v0.1.0 (file:///home/tu/proyectos/adivinanzas)
 ```
+
+Entonces 
 
 So, we told Cargo we wanted any `0.3.x` version of `rand`, and so it fetched the latest
 version at the time this was written, `v0.3.8`. But what happens when next
