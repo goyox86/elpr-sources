@@ -588,9 +588,9 @@ use rand::Rng;
 fn main() {
     println!("Adivina el numero!");
 
-    let secret_number = rand::thread_rng().gen_range(1, 101);
+    let numero_secreto = rand::thread_rng().gen_range(1, 101);
 
-    println!("The secret number is: {}", secret_number);
+    println!("El numero secreto es: {}", secret_number);
 
     loop {
         println!("Please input your guess.");
