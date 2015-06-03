@@ -314,11 +314,6 @@ y menores a `0.4.0`. Si queremos movernos a `0.4.x`, necesitariamos actualizar e
 
 Hay mucho mas que decir acerca de [Cargo][doccargo] y [su ecosistema][doccratesio], pero por ahora, eso es todo lo que necesitamos saber. Cargo hace realmente fácil reusar bibliotecas, y los Rusteros tienden a escribir proyectos pequenos los cuales estan construidos de un numero de paquetes mas pequeños.
 
-There’s a lot more to say about [Cargo][doccargo] and [its
-ecosystem][doccratesio], but for now, that’s all we need to know. Cargo makes
-it really easy to re-use libraries, and so Rustaceans tend to write smaller
-projects which are assembled out of a number of sub-packages.
-
 [doccargo]: http://doc.crates.io
 [doccratesio]: http://doc.crates.io/crates-io.html
 
