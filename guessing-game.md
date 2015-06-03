@@ -651,6 +651,39 @@ use std::cmp::Ordering;
 use rand::Rng;
 
 fn main() {
+    println!("Adivina el numero!");
+
+    let numero_secreto = rand::thread_rng().gen_range(1, 101);
+
+    println!("El numero secreto es: {}", numero_secreto);
+
+    loop {
+        println!("Por favor introduce tu adivinanza.");
+
+        let mut adivinanza = String::new();
+
+        io::stdin().read_line(&mut adivinanza)
+            .ok()
+            .expect("Fallo al leer linea");
+
+        let adivinanza: u32 = adivinanza.trim().parse()
+            .ok()
+            .expect("Por favor introduce un numero!");
+
+        println!("Haz adivinado: {}", adivinanza);
+
+        match guess.cmp(&secret_number) {
+            Ordering::Less    => println!("Too small!"),
+            Ordering::Greater => println!("Too big!"),
+            Ordering::Equal   => {
+                println!("You win!");
+                break;
+            }
+        }
+    }
+}
+
+fn main() {
     println!("Guess the number!");
 
     let secret_number = rand::thread_rng().gen_range(1, 101);
