@@ -372,14 +372,14 @@ $ cargo run
    Compiling adivinanzas v0.1.0 (file:///home/tu/proyectos/adivinanzas)
      Running `target/debug/adivinanzas`
 Adivina el numero!
-The secret number is: 7
+El numero secreto es: 7
 Por favor introduce tu adivinanza.
 4
 You guessed: 4
 $ cargo run
      Running `target/debug/adivinanzas`
 Adivina el numero!
-The secret number is: 83
+El numero secreto es: 83
 Por favor introduce tu adivinanza.
 5
 You guessed: 5
