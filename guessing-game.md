@@ -467,6 +467,9 @@ match guess.cmp(&secret_number) {
 Si es `Less`, imprimimos `Muy pequeño!`, if it’s `Greater`, `Muy grande!`, and if
 `Equal`, `You win!`. `match` is really useful, and is used often in Rust.
 
+Si es `Less`, imprimimos `Too small!`, si es `Greater`, `Too big!`, y si es
+`Equal`, `Haz ganado!`. `match` es realmente util, y es usado con fercuencia en Rust.
+
 I did mention that this won’t quite work yet, though. Let’s try it:
 
 ```bash
