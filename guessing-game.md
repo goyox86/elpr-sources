@@ -281,7 +281,9 @@ $ cargo build
    Compiling adivinanzas v0.1.0 (file:///home/tu/proyectos/adivinanzas)
 ```
 
-(You may see different versions, of course.)
+(Podrias ver versiones diferentes, por supuesto.)
+
+Un montón de salida mas! Ahora que tenemos una dependencia externa, Cargo descarga del registro las ultimas versiones de todo, lo cual puede copiar datos desde [Crates.io][cratesio]. Crates.io es donde la gente del ecosistema Rust publica sus proyectos open source para que otros los usen.
 
 Lots of new output! Now that we have an external dependency, Cargo fetches the
 latest versions of everything from the registry, which is a copy of data from
