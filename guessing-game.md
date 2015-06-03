@@ -530,6 +530,8 @@ Las tres nuevas lineas:
         .expect("Por favor introduce un numero!");
 ```
 
+Espera un momento, pense que ya teniamos una `adivinanza`?
+
 Wait a minute, I thought we already had a `guess`? We do, but Rust allows us
 to ‘shadow’ the previous `guess` with a new one. This is often used in this
 exact situation, where `guess` starts as a `String`, but we want to convert it
