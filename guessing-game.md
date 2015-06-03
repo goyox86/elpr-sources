@@ -425,9 +425,6 @@ fn main() {
 
 Algunas piezas aca. La primera es otro `use`.  Hemos hecho disponible un tipo llamado `std::cmp::Ordering`. Despues, cinco nuevas lineas al fondo que lo usan:
 
-A few new bits here. The first is another `use`. We bring a type called
-`std::cmp::Ordering` into scope. Then, five new lines at the bottom that use
-it:
 
 ```rust,ignore
 match adivinanza.cmp(&numero_secreto) {
