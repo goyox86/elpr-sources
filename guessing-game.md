@@ -340,7 +340,7 @@ fn main() {
         .ok()
         .expect("failed to read line");
 
-    println!("You guessed: {}", adivinanza);
+    println!("Haz adivinado: {}", adivinanza);
 }
 ```
 
