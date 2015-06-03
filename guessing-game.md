@@ -415,7 +415,7 @@ fn main() {
 
     println!("You guessed: {}", adivinanza);
 
-    match adivinanza.cmp(&secret_number) {
+    match adivinanza.cmp(&numero_secreto) {
         Ordering::Less    => println!("Too small!"),
         Ordering::Greater => println!("Too big!"),
         Ordering::Equal   => println!("You win!"),
