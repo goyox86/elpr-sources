@@ -363,12 +363,9 @@ Hacemos uso de la función `rand::thread_rng()` para obtener una copia del gener
 
 [concurrency]: concurrency.html
 
-The second line just prints out the secret number. This is useful while
-we’re developing our program, so we can easily test it out. But we’ll be
-deleting it for the final version. It’s not much of a game if it prints out
-the answer when you start it up!
+La segunda lina solo imprime el numero secreto. Esto es util mietras desarrollamos nuestro programa , de manera tal que podamos probarlo. Estaremos elminando esta linea para la version final. No es un juego si imprime la respuesta cuando lo inicias!
 
-Try running our new program a few times:
+Trata de ejecutar el programa unas pocas veces:
 
 ```bash
 $ cargo run
