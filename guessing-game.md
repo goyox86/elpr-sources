@@ -534,16 +534,7 @@ Espera un momento, pensé que ya teniamos una `adivinanza`? La tenemos, pero
 Rust nos permite sobreescribir (‘shadow’) la `adivinanza` previa con una nueva.
 Esto es usado con frecuencia en esta misma situación, en donde `adivinanza` es un `String`, pero queremos convertirlo a un `u32`. Este shadowing nos permite reusar el nombre `adivinanza` en vez de forzarnos a idear dos nombres únicos como `adivinanza_str` y `adivinanza`, u otros.
 
-Estamos asco
-
-Wait a minute, I thought we already had a `guess`? We do, but Rust allows us
-to ‘shadow’ the previous `guess` with a new one. This is often used in this
-exact situation, where `guess` starts as a `String`, but we want to convert it
-to an `u32`. Shadowing lets us re-use the `guess` name, rather than forcing us
-to come up with two unique names like `guess_str` and `guess`, or something
-else.
-
-We bind `guess` to an expression that looks like something we wrote earlier:
+Estamos asociando `adivinanza` a una expresion que luce como algo que escribimos anteriormente:
 
 ```rust,ignore
 guess.trim().parse()
