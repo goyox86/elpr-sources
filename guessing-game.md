@@ -558,7 +558,7 @@ Adivina el numero!
 El numero secreto es: 58
 Por favor introduce tu adivinanza.
   76
-You guessed: 76
+Haz adivinado: 76
 Too big!
 ```
 
