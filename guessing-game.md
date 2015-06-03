@@ -285,10 +285,6 @@ $ cargo build
 
 Un montón de salida mas! Ahora que tenemos una dependencia externa, Cargo descarga del registro las ultimas versiones de todo, lo cual puede copiar datos desde [Crates.io][cratesio]. Crates.io es donde la gente del ecosistema Rust publica sus proyectos open source para que otros los usen.
 
-Lots of new output! Now that we have an external dependency, Cargo fetches the
-latest versions of everything from the registry, which is a copy of data from
-[Crates.io][cratesio]. Crates.io is where people in the Rust ecosystem
-post their open source Rust projects for others to use.
 
 [cratesio]: https://crates.io
 
