@@ -534,9 +534,9 @@ fn main() {
 
     let adivinanza: u32 = adivinanza.trim().parse()
         .ok()
-        .expect("Please type a number!");
+        .expect("Por favor introduce un numero!");
 
-    println!("You guessed: {}", guess);
+    println!("Haz adivinado: {}", adivinanza);
 
     match guess.cmp(&secret_number) {
         Ordering::Less    => println!("Too small!"),
