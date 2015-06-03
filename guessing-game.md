@@ -603,7 +603,7 @@ fn main() {
 
         let adivinanza: u32 = adivinanza.trim().parse()
             .ok()
-            .expect("Please type a number!");
+            .expect("Por favor introduce un numero!");
 
         println!("Haz adivinado: {}", adivinanza);
 
