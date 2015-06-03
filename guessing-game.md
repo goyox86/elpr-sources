@@ -684,6 +684,8 @@ fn main() {
 }
 ```
 
+Al agregar la linea `break` despues del "Haz ganado!", romperemos el ciclo cuando ganemos. Salir del ciclo también significa salir del programa, debido a que es la ultima cosa en `main()`. Solo nos queda una sola mejora por hacer: cuando alguien introduzca un valor no numérico, no queremos terminar la ejecucion, queremos simplemente ignorarlo. Podemos hacerlo de la siguiente manera:
+
 By adding the `break` line after the `You win!`, we’ll exit the loop when we
 win. Exiting the loop also means exiting the program, since it’s the last
 thing in `main()`. We have just one more tweak to make: when someone inputs a
