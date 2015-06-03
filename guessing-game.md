@@ -616,6 +616,7 @@ fn main() {
 }
 ```
 
+Pruebalo. Pero espera, no acabamos de agregar un ciclo infinito? Sip. Recuerdas nuestra discucion acerca de `parse()`? Si damos una respuesta no numérica, retornaremos y finalizaremos la ejecución.
 And try it out. But wait, didn’t we just add an infinite loop? Yup. Remember
 our discussion about `parse()`? If we give a non-number answer, we’ll `return`
 and quit. Observe:
