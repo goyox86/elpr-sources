@@ -305,13 +305,9 @@ $ cargo build
     Compiling adivinanzas v0.1.0 (file:///home/tu/proyectos/adivinanzas)
 ```
 
-Entonces, le hemos dicho a Cargo `0.3.x` que queriamos cualquier version `0.3.x` de `rand`, y este descargo la ultima version para el momento de la escritura de este tutorial, `v0.3.8`. Pero que pasa cuando la siguiente version `v0.3.9` sea publicada con un importante bugfix? Si bien recibir bugfixes es importante, que pasa si `0.3.9` contiene una regresion que rompe nuestro codigo?
+Entonces, le hemos dicho a Cargo `0.3.x` que queriamos cualquier versión `0.3.x` de `rand`, y este descargo la ultima version para el momento de la escritura de este tutorial, `v0.3.8`. Pero que pasa cuando la siguiente versión `v0.3.9` sea publicada con un importante bugfix? Si bien recibir bugfixes es importante, que pasa si `0.3.9` contiene una regresion que rompe nuestro codigo?
 
-So, we told Cargo we wanted any `0.3.x` version of `rand`, and so it fetched the latest
-version at the time this was written, `v0.3.8`. But what happens when next
-week, version `v0.3.9` comes out, with an important bugfix? While getting
-bugfixes is important, what if `0.3.9` contains a regression that breaks our
-code?
+La respuesta a este problema es el archivo `Cargo.lock`, archivo que encontraras en tu directorio de proyecto. Cuando construyes tu proyecto por primera vez, cargo determina todas las versiones que coinciden con tus criterios y las escribe en el archivo `Cargo.lock`. Cuando construyes tu proyecto en el futuro, Cargo notara que que un archivo `Cargo.lock` existe, y usara las versiones especificadas en el mismo, en vez de hacer todo el trabajo de determinar las versiones otra vez. Esto te permite tener una construcción reproducible de manera automatica. En otras palabras, nos quedaremos en `0.3.8` hasta que subamos de version de manera explicita, de igual manera la gente con la que hemos comartido nuestro codigo, gracias al archivo `Cargo.lock`.
 
 The answer to this problem is the `Cargo.lock` file you’ll now find in your
 project directory. When you build your project for the first time, Cargo
