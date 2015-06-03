@@ -622,7 +622,7 @@ Pruebalo. Pero espera, no acabamos de agregar un ciclo infinito? Sip. Recuerdas 
 $ cargo run
    Compiling adivinanzas v0.1.0 (file:///home/tu/proyectos/adivinanzas)
      Running `target/adivinanzas`
-Guess the number!
+Adivina el numero!
 The secret number is: 59
 Please input your guess.
 45
