@@ -464,8 +464,11 @@ match guess.cmp(&secret_number) {
 
 [ordering]: ../std/cmp/enum.Ordering.html
 
-If it’s `Less`, we print `Too small!`, if it’s `Greater`, `Too big!`, and if
+Si es `Less`, imprimimos `Muy pequeño!`, if it’s `Greater`, `Muy grande!`, and if
 `Equal`, `You win!`. `match` is really useful, and is used often in Rust.
+
+If it’s `Less`, we print `Too small!`, if it’s `Greater`, `Too big!`, and if
+`Equal`, `Haz ganado!`. `match` is really useful, and is used often in Rust.
 
 I did mention that this won’t quite work yet, though. Let’s try it:
 
