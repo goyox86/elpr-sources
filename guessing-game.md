@@ -361,13 +361,6 @@ Hay dos lineas mas en el medio:
 
 Hacemos uso de la función `rand::thread_rng()` para obtener una copia del generador de numeros aleatorios, el cual es local al [hilo][concurrency] de ejecucion en el cual estamos. Debido a que hemos hecho disponible a `rand::Rng` a traves de `use rand::Rng`, este tiene un metodo `gen_range()` disponible. Este metodo acepta dos argumentos, y genera un numero aleatorio entre estos. Es inclusivo en el limite inferior, pero es exclusivo en el limite superior, por eso necesitamos `1` y `101` para obtener un numero entre uno y cien.
 
-We use the `rand::thread_rng()` function to get a copy of the random number
-generator, which is local to the particular [thread][concurrency] of execution
-we’re in. Because we `use rand::Rng`’d above, it has a `gen_range()` method
-available. This method takes two arguments, and generates a number between
-them. It’s inclusive on the lower bound, but exclusive on the upper bound,
-so we need `1` and `101` to get a number between one and a hundred.
-
 [concurrency]: concurrency.html
 
 The second line just prints out the secret number. This is useful while
