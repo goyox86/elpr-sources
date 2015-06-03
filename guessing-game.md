@@ -478,10 +478,10 @@ src/main.rs:28:21: 28:35 error: mismatched types:
     found `&_`
 (expected struct `collections::string::String`,
     found integral variable) [E0308]
-src/main.rs:28     match guess.cmp(&secret_number) {
+src/main.rs:28     match adivinanza.cmp(&numero_secreto) {
                                    ^~~~~~~~~~~~~~
 error: aborting due to previous error
-Could not compile `guessing_game`.
+Could not compile `adivinanzas`.
 ```
 
 Whew! This is a big error. The core of it is that we have ‘mismatched types’.
