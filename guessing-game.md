@@ -309,15 +309,7 @@ Entonces, le hemos dicho a Cargo `0.3.x` que queriamos cualquier versión `0.3.x
 
 La respuesta a este problema es el archivo `Cargo.lock`, archivo que encontraras en tu directorio de proyecto. Cuando construyes tu proyecto por primera vez, cargo determina todas las versiones que coinciden con tus criterios y las escribe en el archivo `Cargo.lock`. Cuando construyes tu proyecto en el futuro, Cargo notara que que un archivo `Cargo.lock` existe, y usara las versiones especificadas en el mismo, en vez de hacer todo el trabajo de determinar las versiones otra vez. Esto te permite tener una construcción reproducible de manera automatica. En otras palabras, nos quedaremos en `0.3.8` hasta que subamos de version de manera explicita, de igual manera lo hará la gente con la que hemos compartido nuestro código, gracias al archivo `Cargo.lock`.
 
-The answer to this problem is the `Cargo.lock` file you’ll now find in your
-project directory. When you build your project for the first time, Cargo
-figures out all of the versions that fit your criteria, and then writes them
-to the `Cargo.lock` file. When you build your project in the future, Cargo
-will see that the `Cargo.lock` file exists, and then use that specific version
-rather than do all the work of figuring out versions again. This lets you
-have a repeatable build automatically. In other words, we’ll stay at `0.3.8`
-until we explicitly upgrade, and so will anyone who we share our code with,
-thanks to the lock file.
+Pero que pasa cuando _queremos_ usar 
 
 What about when we _do_ want to use `v0.3.9`? Cargo has another command,
 `update`, which says ‘ignore the lock, figure out all the latest versions that
