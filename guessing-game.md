@@ -570,8 +570,6 @@ Ahora tenemos la mayoria del juego funcionando, pero solo podemos intentar adivi
 
 La palabra clave `loop` nos proporciona un ciclo infinito. Agreguemosla:
 
-The `loop` keyword gives us an infinite loop. Let’s add that in:
-
 ```rust,ignore
 extern crate rand;
 
