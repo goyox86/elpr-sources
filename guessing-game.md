@@ -731,7 +731,7 @@ fn main() {
 Estas son las lineas que han cambiado:
 
 ```rust,ignore
-let adivinanza: u32 = match adivinanza.trim().parse() {
+let corazonada: u32 = match corazonada.trim().parse() {
     Ok(num) => num,
     Err(_) => continue,
 };
@@ -747,17 +747,17 @@ $ cargo run
      Running `target/adivinanzas`
 Adivina el numero!
 El numero secreto es: 61
-Por favor introduce tu adivinanza.
+Por favor introduce tu corazonada.
 10
 Haz adivinado: 10
 Muy pequeño!
-Por favor introduce tu adivinanza.
+Por favor introduce tu corazonada.
 99
 Haz adivinado: 99
 Muy pequeño!
-Por favor introduce tu adivinanza.
+Por favor introduce tu corazonada.
 foo
-Por favor introduce tu adivinanza.
+Por favor introduce tu corazonada.
 61
 Haz adivinado: 61
 Haz ganado!
