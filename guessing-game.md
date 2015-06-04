@@ -810,9 +810,7 @@ fn main() {
 
 # Completado!
 
-At this point, you have successfully built the Guessing Game! Congratulations!
+En este punto, has terminado satisfactoriamente el juego de las adivinanza! Felicitaciones!
 
-This first project showed you a lot: `let`, `match`, methods, associated
-functions, using external crates, and more. Our next project will show off
-even more.
+Este primer proyecto te enseno un montón: `let`, `match`, metodos, funciones asociadas, usar crates externos, y mas. Nuestro siguiente proyecto demostrara aun mas.
 
