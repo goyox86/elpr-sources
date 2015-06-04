@@ -778,7 +778,7 @@ use rand::Rng;
 fn main() {
     println!("Adivina el numero!");
 
-    let secret_number = rand::thread_rng().gen_range(1, 101);
+    let numero_secreto = rand::thread_rng().gen_range(1, 101);
 
     loop {
         println!("Por favor introduce tu adivinanza.");
@@ -794,9 +794,9 @@ fn main() {
             Err(_) => continue,
         };
 
-        println!("Haz adivinado:", guess);
+        println!("Haz adivinado:", adivinanza);
 
-        match guess.cmp(&secret_number) {
+        match guess.cmp(&numero_secreto) {
             Ordering::Less    => println!("Too small!"),
             Ordering::Greater => println!("Too big!"),
             Ordering::Equal   => {
