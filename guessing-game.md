@@ -363,7 +363,7 @@ Hacemos uso de la función `rand::thread_rng()` para obtener una copia del gener
 
 [concurrency]: concurrency.html
 
-La segunda linea solo imprime el numero secreto. Esto es útil mietras desarrollamos nuestro programa, de manera tal que podamos probarlo. Estaremos elminando esta linea para la version final. No es un juego si imprime la respuesta cuando lo inicias!
+La segunda linea solo imprime el numero secreto. Esto es útil mietras desarrollamos nuestro programa, de manera tal que podamos probarlo. Estaremos eliminando esta linea para la version final. No es un juego si imprime la respuesta cuando lo inicias!
 
 Trata de ejecutar el programa unas pocas veces:
 
