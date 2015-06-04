@@ -159,7 +159,7 @@ io::stdin()
 
 Recuerdas como usamos `use` en `std::io` en la primera linea de nuestro programa? Ahora estamos llamando una funcion asociada en `std::io`. De no haber usado `use std::io`, pudimos haber escrito esta linea como `std::io::stdin()`.
 
-Esta función en particular retorna un handle a la entrada estandar de tu terminal. Mas especificamente, un [std::io::Stdin][iostdin].
+Esta función en particular retorna un handle a la entrada estándar de tu terminal. Mas especificamente, un [std::io::Stdin][iostdin].
 
 [iostdin]: ../std/io/struct.Stdin.html
 
