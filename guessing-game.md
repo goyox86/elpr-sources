@@ -375,14 +375,14 @@ Adivina el numero!
 El numero secreto es: 7
 Por favor introduce tu corazonada.
 4
-Haz adivinado: 4
+Tu corazonada fue: 4
 $ cargo run
      Running `target/debug/adivinanzas`
 Adivina el numero!
 El numero secreto es: 83
 Por favor introduce tu corazonada.
 5
-Haz adivinado: 5
+Tu corazonada fue: 5
 ```
 
 Gradioso! A continuacion: comparemos nuestra adivinanza con el numero secreto.
