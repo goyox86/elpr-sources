@@ -332,15 +332,15 @@ fn main() {
 
     println!("El numero secreto es: {}", numero_secreto);
 
-    println!("Por favor introduce tu adivinanza.");
+    println!("Por favor introduce tu corazonada.");
 
-    let mut adivinanza = String::new();
+    let mut corazonada = String::new();
 
-    io::stdin().read_line(&mut adivinanza)
+    io::stdin().read_line(&mut corazonada)
         .ok()
         .expect("Fallo al leer linea"));
 
-    println!("Haz adivinado: {}", adivinanza);
+    println!("Haz adivinado: {}", corazonada);
 }
 ```
 
