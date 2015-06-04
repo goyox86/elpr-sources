@@ -808,7 +808,7 @@ fn main() {
 }
 ```
 
-# Complete!
+# Completado!
 
 At this point, you have successfully built the Guessing Game! Congratulations!
 
