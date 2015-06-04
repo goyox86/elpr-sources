@@ -82,7 +82,7 @@ Hay un monton aqui! Tratemos de ir a traves de ello, pieza por pieza.
 use std::io;
 ```
 
-Necesitaremos recibir entrada del usuario, y luego imprimir el resultado como salida. Debido a esto necesitamos la biblioteca `io` de la biblioteca estandar. Rust solo importa pocas para en todos los programas, este conjunto de cosas se denomina [‘preludio’][prelude]. Si no esta en el preludio tendras que llamarlo directamente a traves de `use`.
+Necesitaremos recibir entrada del usuario, para luego imprimir el resultado como salida. Debido a esto necesitamos la biblioteca `io` de la biblioteca estandar. Rust solo importa pocas para en todos los programas, este conjunto de cosas se denomina [‘preludio’][prelude]. Si no esta en el preludio tendras que llamarlo directamente a traves de `use`.
 
 [prelude]: ../std/prelude/index.html
 
