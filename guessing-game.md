@@ -4,7 +4,7 @@ Para nuestro primer proyecto, implementaremos un problema clásico de programaci
 
 # Configuracion Inicial
 
-Creemos un nuevo proyecto. Anda a tu directorio de proyectos. Recuerdas como creamos nuestra estructura de directorios y un `Cargo.toml` para `hola_mundo`? Cargo posse un comando que hace eso por nosotros. Intentemos probarlo:
+Creemos un nuevo proyecto. Anda a tu directorio de proyectos. Recuerdas como creamos nuestra estructura de directorios y un `Cargo.toml` para `hola_mundo`? Cargo posse un comando que hace eso por nosotros. Probemoslo:
 
 ```bash
 $ cd ~/proyectos
