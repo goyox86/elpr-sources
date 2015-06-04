@@ -427,7 +427,7 @@ Algunas piezas acá. La primera es otro `use`.  Hemos hecho disponible un tipo l
 
 
 ```rust,ignore
-match adivinanza.cmp(&numero_secreto) {
+match corazonada.cmp(&numero_secreto) {
     Ordering::Less    => println!("Muy pequeño!"),
     Ordering::Greater => println!("Muy grande!"),
     Ordering::Equal   => println!("Haz ganado!"),
@@ -478,13 +478,13 @@ src/main.rs:28:21: 28:35 error: mismatched types:
     found `&_`
 (expected struct `collections::string::String`,
     found integral variable) [E0308]
-src/main.rs:28     match adivinanza.cmp(&numero_secreto) {
+src/main.rs:28     match corazonada.cmp(&numero_secreto) {
                                    ^~~~~~~~~~~~~~
 error: aborting due to previous error
 Could not compile `adivinanzas`.
 ```
 
-Oops! Un gran error. Lo principal en el es que tenemos ‘tipos incompatibles’ (‘mismatched types’). Rust posee un fuerte, sistema de tipos estatico. Sin embargo, también tiene inferencia de tipos. Cuando escribimos  `let adivinanza = String::new()`, Rust fue capaz de inferir que `adivinanza` debia ser un `String`, y por ello no nos hizo escribir el tipo. Con nuestro `numero_secreto`, hay un numero de tipos que pueden tener un valor entre uno y cien: `i32`, un numero de treinta y dos bits, `u32`, un numero sin signo de treinta y dos bits, o `i64` un numero de sesenta y cuatro bits u otros. Hasta ahora, eso no ha importado, debido a que Rust por defecto usa `i32`. Sin embargo, en este caso, Rust no sabe como comparar `adivinanza` con `numero_secreto`. Ambos necesitan ser del mismo tipo. A la final, queremos convertir el `String` que leimos como entrada en un tipo real de numero, para efectos de la comparación. Podemos hacer eso con tres lineas mas. He aqui nuestro nuevo programa:
+Oops! Un gran error. Lo principal en el es que tenemos ‘tipos incompatibles’ (‘mismatched types’). Rust posee un fuerte, sistema de tipos estatico. Sin embargo, también tiene inferencia de tipos. Cuando escribimos  `let corazonada = String::new()`, Rust fue capaz de inferir que `corazonada` debia ser un `String`, y por ello no nos hizo escribir el tipo. Con nuestro `numero_secreto`, hay un numero de tipos que pueden tener un valor entre uno y cien: `i32`, un numero de treinta y dos bits, `u32`, un numero sin signo de treinta y dos bits, o `i64` un numero de sesenta y cuatro bits u otros. Hasta ahora, eso no ha importado, debido a que Rust por defecto usa `i32`. Sin embargo, en este caso, Rust no sabe como comparar `corazonada` con `numero_secreto`. Ambos necesitan ser del mismo tipo. A la final, queremos convertir el `String` que leimos como entrada en un tipo real de numero, para efectos de la comparación. Podemos hacer eso con tres lineas mas. He aqui nuestro nuevo programa:
 
 ```rust,ignore
 extern crate rand;
@@ -500,21 +500,21 @@ fn main() {
 
     println!("El numero secreto es: {}", numero_secreto);
 
-    println!("Por favor introduce tu adivinanza.");
+    println!("Por favor introduce tu corazonada.");
 
-    let mut adivinanza = String::new();
+    let mut corazonada = String::new();
 
-    io::stdin().read_line(&mut adivinanza)
+    io::stdin().read_line(&mut corazonada)
         .ok()
         .expect("Fallo al leer linea");
 
-    let adivinanza: u32 = adivinanza.trim().parse()
+    let corazonada: u32 = corazonada.trim().parse()
         .ok()
         .expect("Por favor introduce un numero!");
 
-    println!("Haz adivinado: {}", adivinanza);
+    println!("Haz adivinado: {}", corazonada);
 
-    match adivinanza.cmp(&numero_secreto) {
+    match corazonada.cmp(&numero_secreto) {
         Ordering::Less    => println!("Muy pequeño!"),
         Ordering::Greater => println!("Muy grande!"),
         Ordering::Equal   => println!("Haz ganado!"),
@@ -525,7 +525,7 @@ fn main() {
 Las tres nuevas lineas:
 
 ```rust,ignore
-    let adivinanza: u32 = adivinanza.trim().parse()
+    let corazonada: u32 = corazonada.trim().parse()
         .ok()
         .expect("Por favor introduce un numero!");
 ```
