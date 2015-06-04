@@ -193,7 +193,7 @@ Cuando llamas a un metodo con la sintaxis `.foo()` puedes introducir un salto de
     io::stdin().read_line(&mut adivinanza).ok().expect("Fallo lectura de linea");
 ```
 
-Pero eso se hace dificil de leer. Asi que lo hemos dividido en tres lineas para tres llamadas a metodo. Yaa hemos hablado de `read_line()`, pero que acerca de `ok()` y `expect()`? Bueno, ya mencionamos que `read_line()` coloca la entrada del usuario en el `&mut String` que le proprocionamos. Pero tambien retorna un valor: en este caso un [`io::Result`][ioresult]. Rust posse un numero de tipos llamados `Result` en su biblioteca estandar: un [`Result`][result] generico, y versiones especificas para sub-librerias, como `io::Result`.
+Pero eso es mas difícil de leer. Asi que lo hemos dividido en tres lineas para tres llamadas a metodo. Yaa hemos hablado de `read_line()`, pero que acerca de `ok()` y `expect()`? Bueno, ya mencionamos que `read_line()` coloca la entrada del usuario en el `&mut String` que le proprocionamos. Pero tambien retorna un valor: en este caso un [`io::Result`][ioresult]. Rust posse un numero de tipos llamados `Result` en su biblioteca estandar: un [`Result`][result] generico, y versiones especificas para sub-librerias, como `io::Result`.
 
 [ioresult]: ../std/io/type.Result.html
 [result]: ../std/result/enum.Result.html
