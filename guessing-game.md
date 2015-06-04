@@ -52,7 +52,7 @@ $ cargo run
 Hola, mundo!
 ```
 
-Grandioso! El comando `run` es muy util cuando necesitas iterar rapido en un proyecto. Nuestro juego es uno de esos prpyectos, necesitaremos probar rapidamente cada iteracion antes de movernos a la siguiente.
+Grandioso! El comando `run` es muy útil cuando necesitas iterar rapido en un proyecto. Nuestro juego es uno de esos prpyectos, necesitaremos probar rapidamente cada iteracion antes de movernos a la siguiente.
 
 # Procesando un Intento de Adivinanza
 
