@@ -122,7 +122,7 @@ Esto creara una nueva variable llamada `foo`, y la enlazara al valor `bar`. En m
 Por ejemplo, son [immutables][immutable] por defecto. Es por ello que nuestro ejemplo usa `mut`: esto hace un binding mutable, en vez de inmutable. `let` no solo toma un nombre del lado izquierdo, `let` acepta un ‘[patrón][patterns]’. Usaremos los patrones un poco mas tarde. Es suficiente por ahora usar: 
 
 ```rust
-let foo = 5; // immutable.
+let foo = 5; // inmutable.
 let mut bar = 5; // mutable
 ```
 
