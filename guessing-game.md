@@ -288,7 +288,7 @@ Un montón de salida mas! Ahora que tenemos una dependencia externa, Cargo desca
 
 [cratesio]: https://crates.io
 
-Despues de actualizar el registro, Cargo chequea nuestras dependencias (en `[dependencies]`) y las descarga de no tenerlas todavía. En este caso solo dijimos que queriamos depender en `rand`, y tambien obtuvimos una copia de `libc`. Esto es debido a que `rand` depende de `libc` para funcionar. Despues de descargar las dependencias, Cargo las compila, para despues compilar nuestro código.
+Despues de actualizar el registro, Cargo chequea nuestras dependencias (en `[dependencies]`) y las descarga de no tenerlas todavía. En este caso solo dijimos que queriamos depender en `rand`, y tambien obtuvimos una copia de `libc`. Esto es debido a que `rand` depende a su vez de `libc` para funcionar. Despues de descargar las dependencias, Cargo las compila, para despues compilar nuestro código.
 
 Si ejecutamos  `cargo build`, obtendremos una salida diferente:
 
