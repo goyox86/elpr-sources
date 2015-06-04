@@ -423,7 +423,7 @@ fn main() {
 }
 ```
 
-Algunas piezas aca. La primera es otro `use`.  Hemos hecho disponible un tipo llamado `std::cmp::Ordering`. Despues, cinco nuevas lineas al fondo que lo usan:
+Algunas piezas acá. La primera es otro `use`.  Hemos hecho disponible un tipo llamado `std::cmp::Ordering`. Despues, cinco nuevas lineas al fondo que lo usan:
 
 
 ```rust,ignore
