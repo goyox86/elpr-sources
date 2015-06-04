@@ -157,13 +157,13 @@ Otro monton! Vallamos pieza por pieza. La primera linea tiene dos partes. He aqu
 io::stdin()
 ```
 
-Recuerdas como usamos `use` en `std::io` en la primera linea de nuestro programa? Ahora estamos llamando una funcion asociada en `std::io`. De no haber usado `use std::io`, pudimos haber escrito esta linea como `std::io::stdin()`.
+Recuerdas como usamos `use` en `std::io` en la primera linea de nuestro programa? Ahora estamos llamando una función asociada en `std::io`. De no haber usado `use std::io`, pudimos haber escrito esta linea como `std::io::stdin()`.
 
 Esta función en particular retorna un handle a la entrada estándar de tu terminal. Mas especificamente, un [std::io::Stdin][iostdin].
 
 [iostdin]: ../std/io/struct.Stdin.html
 
-La siguiente parte usara dicho hadle para obtener entrada del usuario:
+La siguiente parte usara dicho handle para obtener entrada del usuario:
 
 ```rust,ignore
 .read_line(&mut adivinanza)
