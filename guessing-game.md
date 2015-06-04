@@ -558,7 +558,7 @@ Adivina el numero!
 El numero secreto es: 58
 Por favor introduce tu corazonada.
   76
-Haz adivinado: 76
+Tu corazonada fue: 76
 Muy grande!
 ```
 
