@@ -534,7 +534,7 @@ Espera un momento, pensé que ya teniamos una `adivinanza`? La tenemos, pero
 Rust nos permite sobreescribir (‘shadow’) la `adivinanza` previa con una nueva.
 Esto es usado con frecuencia en esta misma situación, en donde `adivinanza` es un `String`, pero queremos convertirlo a un `u32`. Este shadowing nos permite reusar el nombre `adivinanza` en vez de forzarnos a idear dos nombres únicos como `adivinanza_str` y `adivinanza`, u otros.
 
-Estamos asociando `adivinanza` a una expresion que luce como algo que escribimos anteriormente:
+Estamos asociando `adivinanza` a una expresión que luce como algo que escribimos anteriormente:
 
 ```rust,ignore
 guess.trim().parse()
