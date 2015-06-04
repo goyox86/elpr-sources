@@ -100,7 +100,7 @@ Como has visto con anterioridad, la función `main()` es el punto de entrada a t
     println!("Por favor introduzce tu adivinanza.");
 ```
 
-Anteriormente aprendimos que `println!()` es un [macro][macros] que imprime una [cadena de caracteres][strings] a la pantalla.
+Anteriormente aprendimos que `println!()` es una [macro][macros] que imprime una [cadena de caracteres][strings] a la pantalla.
 
 [macros]: macros.html
 [strings]: strings.html
