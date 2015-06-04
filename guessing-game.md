@@ -718,9 +718,9 @@ fn main() {
 
         match adivinanza.cmp(&numero_secreto) {
             Ordering::Less    => println!("Muy pequeño!"),
-            Ordering::Greater => println!("Too big!"),
+            Ordering::Greater => println!("Muy grande!"),
             Ordering::Equal   => {
-                println!("You win!");
+                println!("Haz ganado!");
                 break;
             }
         }
