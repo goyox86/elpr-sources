@@ -297,7 +297,7 @@ Si ejecutamos  `cargo build`, obtendremos una salida diferente:
 $ cargo build
 ```
 
-Asi es, no hay salida! Cargo sabe que nuestro proyecto ha sido construido, asi como todas sus dependencias, asi que no nay razon para hacer todo el proceso otra vez. Sin nada que hacer, simplemente termina la ejecucion. Si abrimos `src/main.rs` otra vez, hacemos un cambio trivial, salvamos los cambios, solamente veriamos una linea:
+Asi es, no hay salida! Cargo sabe que nuestro proyecto ha sido construido, asi como todas sus dependencias, asi que no nay razón para hacer todo el proceso otra vez. Sin nada que hacer, simplemente termina la ejecucion. Si abrimos `src/main.rs` otra vez, hacemos un cambio trivial, salvamos los cambios, solamente veriamos una linea:
 
 
 ```bash
