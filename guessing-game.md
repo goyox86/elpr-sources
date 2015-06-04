@@ -766,6 +766,8 @@ Haz ganado!
 Genial! Con una ultima mejora, finalizamos el juego de las advinanzas. Te imaginas cual es? Es correcto, no queremos imprimir el numero secreto. Era bueno para las pruebas, pero arruina nuestro juego. He aqui nuestro código fuente final:
 
 
+
+
 ```rust,ignore
 extern crate rand;
 
@@ -774,7 +776,7 @@ use std::cmp::Ordering;
 use rand::Rng;
 
 fn main() {
-    println!("Guess the number!");
+    println!("Adivina el numero!");
 
     let secret_number = rand::thread_rng().gen_range(1, 101);
 
