@@ -245,7 +245,7 @@ $ cargo run
 Adivina el numero!
 Por favor introduce tu corazonada.
 6
-Haz adivinado: 6
+Tu corazonada fue: 6
 ```
 
 En hora buena! Nuestra primera parte ha terminado: podemos obtener entrada del teclado e imprimirla de vuelta.
