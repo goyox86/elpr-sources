@@ -64,7 +64,7 @@ use std::io;
 fn main() {
     println!("Adivina el numero!");
 
-    println!("Por favor introduzca su adivinanza.");
+    println!("Por favor introduzce tu adivinanza.");
 
     let mut adivinanza = String::new();
 
