@@ -731,7 +731,7 @@ fn main() {
 Estas son las lineas que cambiaron:
 
 ```rust,ignore
-let guess: u32 = match guess.trim().parse() {
+let adivinanza: u32 = match adivinanza.trim().parse() {
     Ok(num) => num,
     Err(_) => continue,
 };
