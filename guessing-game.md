@@ -64,15 +64,15 @@ use std::io;
 fn main() {
     println!("Adivina el numero!");
 
-    println!("Por favor introduzce tu adivinanza.");
+    println!("Por favor introduzce tu corazonada.");
 
-    let mut adivinanza = String::new();
+    let mut corazonada = String::new();
 
-    io::stdin().read_line(&mut adivinanza)
+    io::stdin().read_line(&mut corazonada)
         .ok()
         .expect("Fallo lectura de linea");
 
-    println!("Haz adivinado: {}", adivinanza);
+    println!("Haz adivinado: {}", corazonada);
 }
 ```
 
