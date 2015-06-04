@@ -2,7 +2,7 @@
 
 Para nuestro primer proyecto, implementaremos un problema clásico de programación para principiantes: un juego de adivinanzas. Como funciona el juego: Nuestro programa generara un numero entero aleatorio entre uno y cien. Nos pedira que introduzcamos un valor. Despues de haber proporcionado nuestro numero, este nos dirá si estuvimos muy por debajo y muy por encima. Una vez que adivinemos el numero correcto, nos felicitara. Suena bien?
 
-# Configuracion Inicial
+# Configuración Inicial
 
 Creemos un nuevo proyecto. Anda a tu directorio de proyectos. Recuerdas como creamos nuestra estructura de directorios y un `Cargo.toml` para `hola_mundo`? Cargo posse un comando que hace eso por nosotros. Probemoslo:
 
