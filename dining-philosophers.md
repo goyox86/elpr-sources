@@ -1,4 +1,4 @@
-% Dining Philosophers
+## Dining Philosophers
 
 For our second project, let’s look at a classic concurrency problem. It’s
 called ‘the dining philosophers’. It was originally conceived by Dijkstra in
