@@ -530,17 +530,17 @@ Las tres nuevas lineas:
         .expect("Por favor introduce un numero!");
 ```
 
-Espera un momento, pensé que ya teniamos una `adivinanza`? La tenemos, pero
-Rust nos permite sobreescribir (‘shadow’) la `adivinanza` previa con una nueva.
-Esto es usado con frecuencia en esta misma situación, en donde `adivinanza` es un `String`, pero queremos convertirlo a un `u32`. Este shadowing nos permite reusar el nombre `adivinanza` en vez de forzarnos a idear dos nombres únicos como `adivinanza_str` y `adivinanza`, u otros.
+Espera un momento, pensé que ya teniamos una `corazonada`? La tenemos, pero
+Rust nos permite sobreescribir (‘shadow’) la `corazonada` previa con una nueva.
+Esto es usado con frecuencia en esta misma situación, en donde `corazonada` es un `String`, pero queremos convertirlo a un `u32`. Este shadowing nos permite reusar el nombre `corazonada` en vez de forzarnos a idear dos nombres únicos como `corazonada_str` y `corazonada`, u otros.
 
-Estamos asociando `adivinanza` a una expresión que luce como algo que escribimos anteriormente:
+Estamos asociando `corazonada` a una expresión que luce como algo que escribimos anteriormente:
 
 ```rust,ignore
 guess.trim().parse()
 ```
 
-Seguido por una invocación a `ok().expect()`. Aquí `adivinanza` hace referencia a la vieja versión, la que era un `String` que contenía nuestra entrada de usuario en ella. El metodo `trim()` en los `String`s elimina cualquier espacio en blanco al principio y al final de nuestras cadenas de caracteres. Esto es importante, debido a que tuvimos que presionar la tecla ‘retorno’ para satisfacer a `read_line()`. Esto significa que si escribimos `5` y presionamos ‘retorno’ `adivinanza` luce como así: `5\n`. El `\n` representa ‘nueva linea’ (‘newline’), la tecla enter. `trim()` se deshace de esto, dejando nuestra cadena de caracteres solo con el `5`. El [metodo `parse()` en las cadenas caracteres][parse] parsea una cadena de caracteres en algún tipo de numero. Debido a que puede parsear una variedad de numeros, debemos darle a Rust una pista del tipo exacto de numero que deseamos. De ahí la parte `let adivinanza: u32`. Los dos puntos (`:`)  despues de `adivinanza` le dicen a Rust que vamos a anotar el tipo. `u32` es un entero sin signo de treinta y dos bits. Rust posee [una variedad de tipos numero integrados][number], pero nosotros hemos escojido `u32`.  Es una buena opción por defecto para un numero positivo pequeño. 
+Seguido por una invocación a `ok().expect()`. Aquí `corazonada` hace referencia a la vieja versión, la que era un `String` que contenía nuestra entrada de usuario en ella. El metodo `trim()` en los `String`s elimina cualquier espacio en blanco al principio y al final de nuestras cadenas de caracteres. Esto es importante, debido a que tuvimos que presionar la tecla ‘retorno’ para satisfacer a `read_line()`. Esto significa que si escribimos `5` y presionamos ‘retorno’ `corazonada` luce como así: `5\n`. El `\n` representa ‘nueva linea’ (‘newline’), la tecla enter. `trim()` se deshace de esto, dejando nuestra cadena de caracteres solo con el `5`. El [metodo `parse()` en las cadenas caracteres][parse] parsea una cadena de caracteres en algún tipo de numero. Debido a que puede parsear una variedad de numeros, debemos darle a Rust una pista del tipo exacto de numero que deseamos. De ahí la parte `let corazonada: u32`. Los dos puntos (`:`)  despues de `corazonada` le dicen a Rust que vamos a anotar el tipo. `u32` es un entero sin signo de treinta y dos bits. Rust posee [una variedad de tipos numero integrados][number], pero nosotros hemos escojido `u32`.  Es una buena opción por defecto para un numero positivo pequeño. 
 
 [parse]: ../std/primitive.str.html#method.parse
 [number]: primitive-types.html#numeric-types
@@ -556,7 +556,7 @@ $ cargo run
      Running `target/adivinanzas`
 Adivina el numero!
 El numero secreto es: 58
-Por favor introduce tu adivinanza.
+Por favor introduce tu corazonada.
   76
 Haz adivinado: 76
 Muy grande!
@@ -592,21 +592,21 @@ fn main() {
     println!("El numero secreto es: {}", numero_secreto);
 
     loop {
-        println!("Por favor introduce tu adivinanza.");
+        println!("Por favor introduce tu corazonada.");
 
-        let mut adivinanza = String::new();
+        let mut corazonada = String::new();
 
-        io::stdin().read_line(&mut adivinanza)
+        io::stdin().read_line(&mut corazonada)
             .ok()
             .expect("Fallo al leer linea");
 
-        let adivinanza: u32 = adivinanza.trim().parse()
+        let corazonada: u32 = corazonada.trim().parse()
             .ok()
             .expect("Por favor introduce un numero!");
 
-        println!("Haz adivinado: {}", adivinanza);
+        println!("Haz corazonada: {}", corazonada);
 
-        match adivinanza.cmp(&numero_secreto) {
+        match corazonada.cmp(&numero_secreto) {
             Ordering::Less    => println!("Muy pequeño!"),
             Ordering::Greater => println!("Muy grande!"),
             Ordering::Equal   => println!("Haz ganado!"),
@@ -623,19 +623,19 @@ $ cargo run
      Running `target/adivinanzas`
 Adivina el numero!
 El numero secreto es: 59
-Por favor introduce tu adivinanza.
+Por favor introduce tu corazonada.
 45
 Haz adivinado: 45
 Muy pequeño!
-Por favor introduce tu adivinanza.
+Por favor introduce tu corazonada.
 60
 Haz adivinado: 60
 Muy grande!
-Por favor introduce tu adivinanza.
+Por favor introduce tu corazonada.
 59
 Haz adivinado: 59
 Haz ganado!
-Por favor introduce tu adivinanza.
+Por favor introduce tu corazonada.
 quit
 thread '<main>' panicked at 'Please type a number!'
 ```
@@ -657,21 +657,21 @@ fn main() {
     println!("El numero secreto es: {}", numero_secreto);
 
     loop {
-        println!("Por favor introduce tu adivinanza.");
+        println!("Por favor introduce tu corazonada.");
 
-        let mut adivinanza = String::new();
+        let mut corazonada = String::new();
 
-        io::stdin().read_line(&mut adivinanza)
+        io::stdin().read_line(&mut corazonada)
             .ok()
             .expect("Fallo al leer linea");
 
-        let adivinanza: u32 = adivinanza.trim().parse()
+        let corazonada: u32 = corazonada.trim().parse()
             .ok()
             .expect("Por favor introduce un numero!");
 
-        println!("Haz adivinado: {}", adivinanza);
+        println!("Haz adivinado: {}", corazonada);
 
-        match guess.cmp(&secret_number) {
+        match corazonada.cmp(&secret_number) {
             Ordering::Less    => println!("Too small!"),
             Ordering::Greater => println!("Too big!"),
             Ordering::Equal   => {
