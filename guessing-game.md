@@ -166,15 +166,15 @@ Esta función en particular retorna un handle a la entrada estándar de tu termi
 La siguiente parte usara dicho handle para obtener entrada del usuario:
 
 ```rust,ignore
-.read_line(&mut adivinanza)
+.read_line(&mut corazonada)
 ```
 
-Aqui, llamamos el metodo [`read_line()`][read_line] en nuestro handle. Los [metodos][method] son similares a las funciones asociadas, pero solo estan disponibles en una instancia en particular de un tipo, en vez de en el tipo en si. También estamos pasando un argumento a `read_line()`: `&mut adivinanza`.
+Aqui, llamamos el metodo [`read_line()`][read_line] en nuestro handle. Los [metodos][method] son similares a las funciones asociadas, pero solo estan disponibles en una instancia en particular de un tipo, en vez de en el tipo en si. También estamos pasando un argumento a `read_line()`: `&mut corazonada`.
 
 [read_line]: ../std/io/struct.Stdin.html#method.read_line
 [method]: method-syntax.html
 
-Recuerdas cuando creamos `adivinanza`? Dijimos que era mutable. Sin embargo `read_line` no acepta un `String` como argumento: acepta un `&mut String`. Rust posee una caracteristica llamada ‘[referencias][references]’ (‘references’), la cual permite tener multiples referencias a una pieza de data, de esta manera se reduce la necesidad de copiado. Las referencias son una caracteristica compleja, debido a que uno de los puntos de venta mas fuertes de Rust es acerca de cuan fácil y seguro es usar referencias. Por ahora no necesitamos saber mucho de esos detalles para finalizar nuestro programa. Todo lo que necesitamos saber por el momento es que al igual que los bindings `let` las referencias son inmutables por defecto. Como consecuencia necesitamos escribir `&mut adivinanza` en vez de `&adivinanza`.
+Recuerdas cuando creamos `corazonada`? Dijimos que era mutable. Sin embargo `read_line` no acepta un `String` como argumento: acepta un `&mut String`. Rust posee una caracteristica llamada ‘[referencias][references]’ (‘references’), la cual permite tener multiples referencias a una pieza de data, de esta manera se reduce la necesidad de copiado. Las referencias son una caracteristica compleja, debido a que uno de los puntos de venta mas fuertes de Rust es acerca de cuan fácil y seguro es usar referencias. Por ahora no necesitamos saber mucho de esos detalles para finalizar nuestro programa. Todo lo que necesitamos saber por el momento es que al igual que los bindings `let` las referencias son inmutables por defecto. Como consecuencia necesitamos escribir `&mut corazonada` en vez de `&corazonada`.
 
 Porque `read_line()` acepta una referencia mutable a una cadena de caracteres. Su trabajo es tomar lo que el usuario ingresa en la entrada estandar, y colocarlo en una cadena de caracteres. Debido a ello toma dicha cadena como argumento, y debido a que debe de agregar la entrada del usuario, este necesita ser mutable.
 
@@ -190,7 +190,7 @@ Todavia no hemos terminado con esta linea. Si bien es una sola linea de texto, e
 Cuando llamas a un metodo con la sintaxis `.foo()` puedes introducir un salto de linea y otro espacio. Esto te ayuda a dividir lineas largas. Pudimos haber escrito:
 
 ```rust,ignore
-    io::stdin().read_line(&mut adivinanza).ok().expect("Fallo lectura de linea");
+    io::stdin().read_line(&mut corazonada).ok().expect("Fallo lectura de linea");
 ```
 
 Pero eso es mas difícil de leer. Así que lo hemos dividido en tres lineas para tres llamadas a metodo. Ya hemos hablado de `read_line()`, pero que acerca de `ok()` y `expect()`? Bueno, ya mencionamos que `read_line()` coloca la entrada del usuario en el `&mut String` que le proprocionamos. Pero tambien retorna un valor: en este caso un [`io::Result`][ioresult]. Rust posee un numero de tipos llamados `Result` en su biblioteca estandar: un [`Result`][result] generico, y versiones especificas para sub-bibliotecas, como `io::Result`.
@@ -212,7 +212,7 @@ $ cargo build
    Compiling adivinanzas v0.1.0 (file:///home/tu/proyectos/adivinanzas)
 src/main.rs:10:5: 10:39 warning: unused result which must be used,
 #[warn(unused_must_use)] on by default
-src/main.rs:10     io::stdin().read_line(&mut adivinanza);
+src/main.rs:10     io::stdin().read_line(&mut corazonada);
                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
@@ -221,7 +221,7 @@ Rust nos advierte que no hemos usado el valor `Result`. Esta advertencia viene d
 Solo nos queda una linea de este primer ejemplo:
 
 ```rust,ignore
-    println!("Haz adivinado: {}", adivinanza);
+    println!("Haz adivinado: {}", corazonada);
 }
 ```
 
@@ -243,7 +243,7 @@ $ cargo run
    Compiling guessing_game v0.1.0 (file:///home/tu/proyectos/adivinanzas)
      Running `target/debug/adivinanzas`
 Adivina el numero!
-Por favor introduzca su adivinanza.
+Por favor introduce tu corazonada.
 6
 Haz adivinado: 6
 ```
