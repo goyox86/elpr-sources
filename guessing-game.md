@@ -450,7 +450,7 @@ enum Foo {
 
 Con esta definición, cualquier cosa de tipo `Foo` puede ser bien sea un `Foo::Bar` o un `Foo::Baz`. Usamos el `::` para indicar el espacio de nombres para una variante `enum` en particular.
 
-La enum [`Ordering`][ordering]  tiene tres posibles variantes:  `Less`, `Equal`,
+La enum [`Ordering`][ordering] tiene tres posibles variantes:  `Less`, `Equal`,
 and `Greater` (menor, igual y mayor respectivamente). La sentencia `match` toma un valor de un tipo, y te permite crear un ‘brazo’ para cada valor posible. Debido a que tenemos tres posibles tipos de `Ordering`, tenemos tres brazos:
 
 
