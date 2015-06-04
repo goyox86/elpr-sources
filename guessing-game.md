@@ -781,20 +781,20 @@ fn main() {
     let numero_secreto = rand::thread_rng().gen_range(1, 101);
 
     loop {
-        println!("Por favor introduce tu adivinanza.");
+        println!("Por favor introduce tu corazonada.");
 
-        let mut adivinanza = String::new();
+        let mut corazonada = String::new();
 
-        io::stdin().read_line(&mut adivinanza)
+        io::stdin().read_line(&mut corazonada)
             .ok()
             .expect("Fallo al leer linea");
 
-        let adivinanza: u32 = match adivinanza.trim().parse() {
+        let corazonada: u32 = match corazonada.trim().parse() {
             Ok(num) => num,
             Err(_) => continue,
         };
 
-        println!("Haz adivinado:", adivinanza);
+        println!("Haz adivinado:", corazonada);
 
         match guess.cmp(&numero_secreto) {
             Ordering::Less    => println!("Muy pequeño!"),
