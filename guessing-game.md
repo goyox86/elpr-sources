@@ -380,7 +380,7 @@ $ cargo run
      Running `target/debug/adivinanzas`
 Adivina el numero!
 El numero secreto es: 83
-Por favor introduce tu adivinanza.
+Por favor introduce tu corazonada.
 5
 Haz adivinado: 5
 ```
