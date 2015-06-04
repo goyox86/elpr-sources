@@ -566,7 +566,7 @@ Excelente! Puedes ver que incluso he agregado espacios antes de mi intento, y au
 
 Ahora tenemos la mayoria del juego funcionando, pero solo podemos intentar adivinar una vez. Tratemos de cambiar eso agregando ciclos!
 
-# Iteración / Bucles / Ciclos
+# Iteración
 
 La palabra clave `loop` nos proporciona un ciclo infinito. Agreguemosla:
 
