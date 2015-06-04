@@ -701,22 +701,22 @@ fn main() {
     println!("El numero secreto es: {}", numero_secreto);
 
     loop {
-        println!("Por favor introduce tu adivinanza.");
+        println!("Por favor introduce tu corazonada.");
 
-        let mut adivinanza = String::new();
+        let mut corazonada = String::new();
 
-        io::stdin().read_line(&mut adivinanza)
+        io::stdin().read_line(&mut corazonada)
             .ok()
             .expect("Fallo al leer linea");
 
-        let adivinanza: u32 = match adivinanza.trim().parse() {
+        let corazonada: u32 = match corazonada.trim().parse() {
             Ok(num) => num,
             Err(_) => continue,
         };
 
-        println!("Haz adivinado: {}", adivinanza);
+        println!("Haz adivinado: {}", corazonada);
 
-        match adivinanza.cmp(&numero_secreto) {
+        match corazonada.cmp(&numero_secreto) {
             Ordering::Less    => println!("Muy pequeño!"),
             Ordering::Greater => println!("Muy grande!"),
             Ordering::Equal   => {
