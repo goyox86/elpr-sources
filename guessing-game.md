@@ -119,7 +119,7 @@ let foo = bar;
 
 Esto creara una nueva variable llamada `foo`, y la enlazara al valor `bar`. En muchos lenguajes, esto es llamado una ‘variable’ pero las variables de Rust tienen un par de trucos bajo la manga.
 
-Por ejemplo, estas son [immutables][immutable] por defecto. Es por ello que nuestro ejemplo usa `mut`: esto hace un binding mutable, en vez de inmutable. `let` no toma un nombre del lado izquierdo, `let` acepta un ‘[patrón][patterns]’. Usaremos los patrones un poco mas tarde. Es suficiente usar po ahora: 
+Por ejemplo, son [immutables][immutable] por defecto. Es por ello que nuestro ejemplo usa `mut`: esto hace un binding mutable, en vez de inmutable. `let` no toma un nombre del lado izquierdo, `let` acepta un ‘[patrón][patterns]’. Usaremos los patrones un poco mas tarde. Es suficiente usar po ahora: 
 
 ```rust
 let foo = 5; // immutable.
