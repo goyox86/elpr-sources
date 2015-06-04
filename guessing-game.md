@@ -129,7 +129,7 @@ let mut bar = 5; // mutable
 [immutable]: mutability.html
 [patterns]: patterns.html
 
-An, y `//` inicia un comentario, hasta el final de la linea. Rust ignora todo en [comentarios][comments]
+Ah, y `//` inicia un comentario, hasta el final de la linea. Rust ignora todo en [comentarios][comments]
 
 [comments]: comments.html
 
