@@ -176,7 +176,7 @@ Aqui, llamamos el metodo [`read_line()`][read_line] en nuestro handle. Los [meto
 
 Recuerdas cuando creamos `adivinanza`? Dijimos que era mutable. Sin embargo `read_line` no acepta un `String` como argumento: acepta un `&mut String`. Rust posee una caracteristica llamada ‘[referencias][references]’ (‘references’), la cual permite tener multiples referencias a una pieza de data, de esta manera se reduce la necesidad de copiado. Las referencias son una caracteristica compleja, debido a que uno de los puntos de venta mas fuertes de Rust es acerca de cuan fácil y seguro es usar referencias. Por ahora no necesitamos saber mucho de esos detalles para finalizar nuestro programa. Todo lo que necesitamos saber por el momento es que al igual que los bindings `let` las referencias son inmutables por defecto. Como consecuencia necesitamos escribir `&mut adivinanza` en vez de `&adivinanza`.
 
-Porque `read_line()` acepta una referencia mutable a una cadena de caracteres. Su trabajo es tomar lo que el usuario ingresa en la entrada estandar, y colocarlo en una cadena de caracteres. Debido a ello toma dicha cadena como argumento, y debidoa que debe de agregar la entrada del usuario, este necesita ser mutable.
+Porque `read_line()` acepta una referencia mutable a una cadena de caracteres. Su trabajo es tomar lo que el usuario ingresa en la entrada estandar, y colocarlo en una cadena de caracteres. Debido a ello toma dicha cadena como argumento, y debido a que debe de agregar la entrada del usuario, este necesita ser mutable.
 
 [references]: references-and-borrowing.html
 
