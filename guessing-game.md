@@ -225,7 +225,7 @@ Solo nos queda una linea de este primer ejemplo:
 }
 ```
 
-Esta linea imprime la cadena de caracteres en la que guardamos neustra entrada. Los `{}`s son marcadores de posicion, es por ello que pasamos `adivinanza` como argumento.  De haber habido multiples `{}`s, debiamos haber pasado multiples argumentos:
+Esta linea imprime la cadena de caracteres en la que guardamos nuestra entrada. Los `{}`s son marcadores de posicion, es por ello que pasamos `adivinanza` como argumento.  De haber habido multiples `{}`s, debiamos haber pasado multiples argumentos:
 
 ```rust
 let x = 5;
