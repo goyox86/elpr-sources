@@ -698,7 +698,7 @@ fn main() {
 
     let numero_secreto = rand::thread_rng().gen_range(1, 101);
 
-    println!("The secret number is: {}", numero_secreto);
+    println!("El numero secreto es: {}", numero_secreto);
 
     loop {
         println!("Por favor introduce tu adivinanza.");
