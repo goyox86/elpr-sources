@@ -14,7 +14,7 @@ $ cd adivinanzas
 
 Pasamos el nombre de nuestro proyecto a `cargo new`, junto con el flag `--bin`, debido a que estamos creando un binario, en vez de una biblioteca.
 
-Echa un vistazo al `Cargo.toml` generado
+Echa un vistazo al `Cargo.toml` generado:
 
 ```toml
 [package]
