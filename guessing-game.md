@@ -24,7 +24,7 @@ version = "0.1.0"
 authors = ["Tu Nombre <tu@ejemplo.com>"]
 ```
 
-Cargo obtiene esta información  de tu entorno. Si no esta correcta, anda y corrigela.
+Cargo obtiene esta información  de tu entorno. Si no esta correcta, corrigela.
 
 Finalmente, Cargo ha generado un ‘Hola, mundo!’ para nosotros. Echa un vistazo a `src/main.rs`:
 
