@@ -1,6 +1,6 @@
 # Summary
 
-* [introduction](README.md)
+* [Introducción](README.md)
 * [Primeros Pasos](getting-started.md)
    * [Instalando Rust](installing-rust.md)
    * [Hola, mundo!](hello-world.md)
