@@ -743,24 +743,24 @@ Ahora deberiamos estar bien! Probemos:
 
 ```bash
 $ cargo run
-   Compiling guessing_game v0.1.0 (file:///home/you/projects/guessing_game)
-     Running `target/guessing_game`
-Guess the number!
-The secret number is: 61
-Please input your guess.
+   Compiling adivinanzas v0.1.0 (file:///home/tu/proyectos/adivinanzas)
+     Running `target/adivinanzas`
+Adivina el numero!
+El numero secreto es: 61
+Por favor introduce tu adivinanza.
 10
-You guessed: 10
-Too small!
-Please input your guess.
+Haz adivinado: 10
+Muy pequeño!
+Por favor introduce tu adivinanza.
 99
-You guessed: 99
-Too big!
-Please input your guess.
+Haz adivinado: 99
+Muy pequeño!
+Por favor introduce tu adivinanza.
 foo
-Please input your guess.
+Por favor introduce tu adivinanza.
 61
-You guessed: 61
-You win!
+Haz adivinado: 61
+Haz ganado!
 ```
 
 Awesome! With one tiny last tweak, we have finished the guessing game. Can you
