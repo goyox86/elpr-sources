@@ -312,7 +312,7 @@ La respuesta a este problema es el archivo `Cargo.lock`, archivo que encontraras
 Pero que pasa cuando _queremos_ usar `v0.3.9`? Cargo posee otro comando, `update`, que se traduce en ‘ignora el bloqueo y determina todas las ultimas versiones que coincidan con lo que hemos especficado. De funcionar esto, escribe esas versiones al archivo de bloqueo `Cargo.lock`’. Pero, por defecto, Cargo solo buscara versiones mayores a `0.3.0`
 y menores a `0.4.0`. Si queremos movernos a `0.4.x`, necesitariamos actualizar el archivo `Cargo.toml` directamente. Cuando lo hacemos, la siguente vez que ejecutemos `cargo build`, Cargo actualizara el indice y re-evaluara nuestros requerimentos acerca de `rand`.
 
-Hay mucho mas que decir acerca de [Cargo][doccargo] y [su ecosistema][doccratesio], pero por ahora, eso es todo lo que necesitamos saber. Cargo hace realmente fácil reusar bibliotecas, y los Rusteros tienden a escribir proyectos pequenos los cuales estan construidos de un numero de paquetes mas pequeños.
+Hay mucho mas que decir acerca de [Cargo][doccargo] y [su ecosistema][doccratesio], pero por ahora, eso es todo lo que necesitamos saber. Cargo hace realmente fácil reusar bibliotecas, y los Rusteros tienden a escribir proyectos pequenos los cuales estan construidos por un conjunto de paquetes mas pequeños.
 
 [doccargo]: http://doc.crates.io
 [doccratesio]: http://doc.crates.io/crates-io.html
