@@ -56,7 +56,7 @@ Grandioso! El comando `run` es muy útil cuando necesitas iterar rapido en un pr
 
 # Procesando un Intento de Adivinanza
 
-Probemoslo! La primera cosa que necesitamos hacer para nuestro juego de adivinanzas es permitir a nuestro jugador entrar un intento de adivinanza. Coloca esto en tu `src/main.rs`:
+Probemoslo! La primera cosa que necesitamos hacer para nuestro juego de adivinanzas es permitir a nuestro jugador ingresar un intento de adivinanza. Coloca esto en tu `src/main.rs`:
 
 ```rust,no_run
 use std::io;
