@@ -97,7 +97,7 @@ Como has visto con anterioridad, la función `main()` es el punto de entrada a t
 ```rust,ignore
     println!("Adivina el numero!");
 
-    println!("Por favor introduzce tu adivinanza.");
+    println!("Por favor introduzce tu corazonada.");
 ```
 
 Anteriormente aprendimos que `println!()` es una [macro][macros] que imprime una [cadena de caracteres][strings] a la pantalla.
@@ -106,7 +106,7 @@ Anteriormente aprendimos que `println!()` es una [macro][macros] que imprime una
 [strings]: strings.html
 
 ```rust,ignore
-    let mut adivinanza = String::new();
+    let mut corazonada = String::new();
 ```
 
 Ahora nos estamos poniendo interesantes! Hay un montón de cosas pasando en esta pequeña linea. La primera cosas a notar es que es una [sentencia let][let], usada para crear variables. Tiene la forma:
@@ -133,7 +133,7 @@ Ah,  `//` inicia un comentario, hasta el final de la linea. Rust ignora todo en 
 
 [comments]: comments.html
 
-Entonces sabemos que `let mut adivinanza` introducirá un binding mutable llamado `adivinanza`, pero tenemos que ver al otro lado del `=` para saber a que esta siendo asociado: `String::new()`.
+Entonces sabemos que `let mut corazonada` introducirá un binding mutable llamado `adivinanza`, pero tenemos que ver al otro lado del `=` para saber a que esta siendo asociado: `String::new()`.
 
 `String` es un tipo de cadena de caracter, proporcionado por la biblioteca estandar. Un  [`String`][string] es un segmento de texto codificado en UTF-8 capaz de crecer.
 
