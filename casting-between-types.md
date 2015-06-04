@@ -1,0 +1,1 @@
+# Conversión entre tipos

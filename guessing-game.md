@@ -43,7 +43,7 @@ $ cargo build
 
 Excelente! Abre tu `src/main.rs` otra vez. Estaremos escribiendo todo nuestro codigo en este archivo.
 
-Antes de continuar, dejame mostrarte un comando mas de Cargo: `run`. `cargo run` es una especie de `cargo build`, pero con la diferencia de que tambien ejecuta el binario producido. Probemoslo: 
+Antes de continuar, dejame mostrarte un comando mas de Cargo: `run`. `cargo run` es una especie de `cargo build`, pero con la diferencia de que tambien ejecuta el binario producido. Probemoslo:
 
 ```bash
 $ cargo run
@@ -64,7 +64,7 @@ use std::io;
 fn main() {
     println!("Adivina el numero!");
 
-    println!("Por favor introduzce tu corazonada.");
+    println!("Por favor introduce tu corazonada.");
 
     let mut corazonada = String::new();
 
@@ -97,7 +97,7 @@ Como has visto con anterioridad, la función `main()` es el punto de entrada a t
 ```rust,ignore
     println!("Adivina el numero!");
 
-    println!("Por favor introduzce tu corazonada.");
+    println!("Por favor introduce tu corazonada.");
 ```
 
 Anteriormente aprendimos que `println!()` es una [macro][macros] que imprime una [cadena de caracteres][strings] a la pantalla.
@@ -119,7 +119,7 @@ let foo = bar;
 
 Esto creara una nueva variable llamada `foo`, y la enlazara al valor `bar`. En muchos lenguajes, esto es llamado una ‘variable’ pero las variables de Rust tienen un par de trucos bajo la manga.
 
-Por ejemplo, son [immutables][immutable] por defecto. Es por ello que nuestro ejemplo usa `mut`: esto hace un binding mutable, en vez de inmutable. `let` no solo toma un nombre del lado izquierdo, `let` acepta un ‘[patrón][patterns]’. Usaremos los patrones un poco mas tarde. Es suficiente por ahora usar: 
+Por ejemplo, son [immutables][immutable] por defecto. Es por ello que nuestro ejemplo usa `mut`: esto hace un binding mutable, en vez de inmutable. `let` no solo toma un nombre del lado izquierdo, `let` acepta un ‘[patrón][patterns]’. Usaremos los patrones un poco mas tarde. Es suficiente por ahora usar:
 
 ```rust
 let foo = 5; // inmutable.
@@ -141,7 +141,7 @@ Entonces sabemos que `let mut corazonada` introducirá un binding mutable llamad
 
 La sintaxis `::new()` usa `::` porque es una ‘función asociada’ de un tipo particular. Es decir esta asociada con `String` en si mismo, en vez de con una instacia en particular de `String`. Algunos lenguajes llaman a esto un ‘metodo estatico’.
 
-Esta funcion es llamada `new()`, porque crea un nuevo `String` vacio. Encontraras una función `new()` en muchos tipos, debido a que es un nombre común para la creación de un nuevo valor de algun tipo. 
+Esta funcion es llamada `new()`, porque crea un nuevo `String` vacio. Encontraras una función `new()` en muchos tipos, debido a que es un nombre común para la creación de un nuevo valor de algun tipo.
 
 Continuemos:
 
@@ -209,11 +209,10 @@ Si quitamos las llamadas a esos  dos metodos, nuestro programa compilara, pero o
 
 ```bash
 $ cargo build
-   Compiling adivinanzas v0.1.0 (file:///home/tu/proyectos/adivinanzas)
-src/main.rs:10:5: 10:39 warning: unused result which must be used,
-#[warn(unused_must_use)] on by default
+  Compiling adivinanzas v0.1.0 (file:///home/tu/proyectos/adivinanzas)
+src/main.rs:10:5: 10:44 warning: unused result which must be used, #[warn(unused_must_use)] on by default
 src/main.rs:10     io::stdin().read_line(&mut corazonada);
-                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
 Rust nos advierte que no hemos usado el valor `Result`. Esta advertencia viene de una anotación especial que tiene `io::Result`. Rust esta tratando de decirte que no has manejado un posible error. La manera correcta de suprimir el error es, en efecto escribir el código para el manejo de erroes. Por suerte, si solo queremos terminar la ejecución del programa de haber un problema, podemos usar estos dos pequeños metodos. Si pudieramos recuperarnos del error de alguna manera, hariamos algo diferente, pero dejemos eso para un proyecto futuro.
@@ -338,7 +337,7 @@ fn main() {
 
     io::stdin().read_line(&mut corazonada)
         .ok()
-        .expect("Fallo al leer linea"));
+        .expect("Fallo al leer linea");
 
     println!("Tu corazonada fue: {}", corazonada);
 }
@@ -346,11 +345,11 @@ fn main() {
 
 La primera cosa que hemos hecho es cambiar la primera linea. Ahora dice `extern crate rand`. Debido a que declaramos `rand` en nuestra sección `[dependencies]`, podemos usar `extern crate` para hacerle saber a Rust que estaremos haciendo uso de `rand`. Esto es equivalente a un `use rand;`, de manera que podamos hacer uso de lo que sea dentro del crate `rand` a traves del prefijo `rand::`.
 
-Después, hemos agregado otra linea `use`: `use rand::Rng`. En unos momentos estaremos haciendo uso de un metodo, y esto requiere que `Rng` este disponible para que funcione. La idea basica es la siguiente: los metodos estan dentro de algo llamado ‘traits’ (Rasgos), y para que el metodo funcione necesita que el trait este disponible. Para mayores detalles dirigete a la sección [Rasgos][traits].
+Después, hemos agregado otra linea `use`: `use rand::Rng`. En unos momentos estaremos haciendo uso de un metodo, y esto requiere que `Rng` este disponible para que funcione. La idea basica es la siguiente: los metodos estan dentro de algo llamado ‘traits’ (Rasgos), y para que el metodo funcione necesita que el trait este disponible. Para mayores detalles dirigete a la sección [Rasgos][traits] (Traits).
 
 [traits]: traits.html
 
-Hay dos lineas mas en el medio: 
+Hay dos lineas mas en el medio:
 
 
 ```rust,ignore
@@ -434,7 +433,7 @@ match corazonada.cmp(&numero_secreto) {
 }
 ```
 
-El metodo `cmp()` puede ser llamado an cualquier cosa que pueda ser comparada, este toma una referencia a la cosa con la cual quieras comparar. Retorna el tipo `Ordering` que hicimos disponible anteriormente. Hemos usado una sentencia [`match`][match] para determinar exactamente que tipo de `Ordering` es. `Ordering` es un [`enum`][enum], abreviacion para ‘enumeration’, las cuales lucen de la siguiente manera: 
+El metodo `cmp()` puede ser llamado an cualquier cosa que pueda ser comparada, este toma una referencia a la cosa con la cual quieras comparar. Retorna el tipo `Ordering` que hicimos disponible anteriormente. Hemos usado una sentencia [`match`][match] para determinar exactamente que tipo de `Ordering` es. `Ordering` es un [`enum`][enum], abreviacion para ‘enumeration’, las cuales lucen de la siguiente manera:
 
 
 ```rust
@@ -540,12 +539,12 @@ Estamos asociando `corazonada` a una expresión que luce como algo que escribimo
 guess.trim().parse()
 ```
 
-Seguido por una invocación a `ok().expect()`. Aquí `corazonada` hace referencia a la vieja versión, la que era un `String` que contenía nuestra entrada de usuario en ella. El metodo `trim()` en los `String`s elimina cualquier espacio en blanco al principio y al final de nuestras cadenas de caracteres. Esto es importante, debido a que tuvimos que presionar la tecla ‘retorno’ para satisfacer a `read_line()`. Esto significa que si escribimos `5` y presionamos ‘retorno’ `corazonada` luce como así: `5\n`. El `\n` representa ‘nueva linea’ (‘newline’), la tecla enter. `trim()` se deshace de esto, dejando nuestra cadena de caracteres solo con el `5`. El [metodo `parse()` en las cadenas caracteres][parse] parsea una cadena de caracteres en algún tipo de numero. Debido a que puede parsear una variedad de numeros, debemos darle a Rust una pista del tipo exacto de numero que deseamos. De ahí la parte `let corazonada: u32`. Los dos puntos (`:`)  despues de `corazonada` le dicen a Rust que vamos a anotar el tipo. `u32` es un entero sin signo de treinta y dos bits. Rust posee [una variedad de tipos numero integrados][number], pero nosotros hemos escojido `u32`.  Es una buena opción por defecto para un numero positivo pequeño. 
+Seguido por una invocación a `ok().expect()`. Aquí `corazonada` hace referencia a la vieja versión, la que era un `String` que contenía nuestra entrada de usuario en ella. El metodo `trim()` en los `String`s elimina cualquier espacio en blanco al principio y al final de nuestras cadenas de caracteres. Esto es importante, debido a que tuvimos que presionar la tecla ‘retorno’ para satisfacer a `read_line()`. Esto significa que si escribimos `5` y presionamos ‘retorno’ `corazonada` luce como así: `5\n`. El `\n` representa ‘nueva linea’ (‘newline’), la tecla enter. `trim()` se deshace de esto, dejando nuestra cadena de caracteres solo con el `5`. El [metodo `parse()` en las cadenas caracteres][parse] parsea una cadena de caracteres en algún tipo de numero. Debido a que puede parsear una variedad de numeros, debemos darle a Rust una pista del tipo exacto de numero que deseamos. De ahí la parte `let corazonada: u32`. Los dos puntos (`:`)  despues de `corazonada` le dicen a Rust que vamos a anotar el tipo. `u32` es un entero sin signo de treinta y dos bits. Rust posee [una variedad de tipos numero integrados][number], pero nosotros hemos escojido `u32`.  Es una buena opción por defecto para un numero positivo pequeño.
 
 [parse]: ../std/primitive.str.html#method.parse
 [number]: primitive-types.html#numeric-types
 
-Al igual que `read_line()`, nuestra llamada a `parse()` podria causar un error. Que tal si nuestra cadena de caracteres contiene `Aߑ���?` No habría  forma de convertir eso en un numero. Es por ello que haremos lo mismo que hicimos con `read_line()`: usar los metodos `ok()` y `expect()` para terminar abruptamente si hay algun error. 
+Al igual que `read_line()`, nuestra llamada a `parse()` podria causar un error. Que tal si nuestra cadena de caracteres contiene `Aߑ���?` No habría  forma de convertir eso en un numero. Es por ello que haremos lo mismo que hicimos con `read_line()`: usar los metodos `ok()` y `expect()` para terminar abruptamente si hay algun error.
 
 
 Probemos nuestro programa!
@@ -671,9 +670,9 @@ fn main() {
 
         println!("Tu corazonada fue: {}", corazonada);
 
-        match corazonada.cmp(&secret_number) {
-            Ordering::Less    => println!("Too small!"),
-            Ordering::Greater => println!("Too big!"),
+        match corazonada.cmp(&numero_secreto) {
+            Ordering::Less    => println!("Muy pequeño!"),
+            Ordering::Greater => println!("Muy grande!"),
             Ordering::Equal   => {
                 println!("Haz ganado!");
                 break;
@@ -793,7 +792,7 @@ fn main() {
 
         println!("Tu corazonada fue: {}", corazonada);
 
-        match guess.cmp(&numero_secreto) {
+        match corazonada.cmp(&numero_secreto) {
             Ordering::Less    => println!("Muy pequeño!"),
             Ordering::Greater => println!("Muy grande!"),
             Ordering::Equal   => {

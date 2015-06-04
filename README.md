@@ -48,7 +48,7 @@ Hemos usado `mut` para hacer `x` mutable: En Rust las variable son immutables po
 
 Es importate mencionar que no necesitamos una anotacion de tipos aqui: si bien Rust es estaticamente tipado, no necesitamos anotar el tipo de forma explicita. Rust posee inferencia de tipos para balancear el poder de el tipado estatico con la verbosidad de las anotaciones de tipos.
 
-Rust prefiere asignacion en la pila que asignacion en el monticulo: `x` es puesto directamente en la pila. Sin embargo, el tipo `Vec<T>` asigna espacio para los elementos del vector en el monticulo. Si no estas familiarizado con esta distincion puedes ignorarla por ahora o echar un vistazo [‘La Pila y el Monticulo’][heap]. Rust como un lenguaje de programacion de sistemas, te da la habilidad de controlar como la memoria es asignada, pero como estamos comenzando no es tan relevante. 
+Rust prefiere asignacion en la pila que asignacion en el monticulo: `x` es puesto directamente en la pila. Sin embargo, el tipo `Vec<T>` asigna espacio para los elementos del vector en el monticulo. Si no estas familiarizado con esta distincion puedes ignorarla por ahora o echar un vistazo [‘La Pila y el Monticulo’][heap]. Rust como un lenguaje de programacion de sistemas, te da la habilidad de controlar como la memoria es asignada, pero como estamos comenzando no es tan relevante.
 
 [var]: variable-bindings.html
 [macro]: macros.html

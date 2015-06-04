@@ -1,0 +1,1 @@
+# Objectos Rasgo
