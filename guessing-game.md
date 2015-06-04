@@ -72,7 +72,7 @@ fn main() {
         .ok()
         .expect("Fallo lectura de linea");
 
-    println!("Haz adivinado: {}", corazonada);
+    println!("Tu corazonada fue: {}", corazonada);
 }
 ```
 
@@ -221,7 +221,7 @@ Rust nos advierte que no hemos usado el valor `Result`. Esta advertencia viene d
 Solo nos queda una linea de este primer ejemplo:
 
 ```rust,ignore
-    println!("Haz adivinado: {}", corazonada);
+    println!("Tu corazonada fue: {}", corazonada);
 }
 ```
 
@@ -340,7 +340,7 @@ fn main() {
         .ok()
         .expect("Fallo al leer linea"));
 
-    println!("Haz adivinado: {}", corazonada);
+    println!("Tu corazonada fue: {}", corazonada);
 }
 ```
 
@@ -413,7 +413,7 @@ fn main() {
         .ok()
         .expect("Fallo al leer linea");
 
-    println!("Haz adivinado: {}", corazonada);
+    println!("Tu corazonada fue: {}", corazonada);
 
     match corazonada.cmp(&numero_secreto) {
         Ordering::Less    => println!("Muy pequeño!"),
@@ -512,7 +512,7 @@ fn main() {
         .ok()
         .expect("Por favor introduce un numero!");
 
-    println!("Haz adivinado: {}", corazonada);
+    println!("Tu corazonada fue: {}", corazonada);
 
     match corazonada.cmp(&numero_secreto) {
         Ordering::Less    => println!("Muy pequeño!"),
@@ -669,7 +669,7 @@ fn main() {
             .ok()
             .expect("Por favor introduce un numero!");
 
-        println!("Haz adivinado: {}", corazonada);
+        println!("Tu corazonada fue: {}", corazonada);
 
         match corazonada.cmp(&secret_number) {
             Ordering::Less    => println!("Too small!"),
@@ -714,7 +714,7 @@ fn main() {
             Err(_) => continue,
         };
 
-        println!("Haz adivinado: {}", corazonada);
+        println!("Tu corazonada fue: {}", corazonada);
 
         match corazonada.cmp(&numero_secreto) {
             Ordering::Less    => println!("Muy pequeño!"),
@@ -791,7 +791,7 @@ fn main() {
             Err(_) => continue,
         };
 
-        println!("Haz adivinado:", corazonada);
+        println!("Tu corazonada fue: {}", corazonada);
 
         match guess.cmp(&numero_secreto) {
             Ordering::Less    => println!("Muy pequeño!"),
