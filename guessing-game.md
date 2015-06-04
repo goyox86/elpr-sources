@@ -737,7 +737,7 @@ let adivinanza: u32 = match adivinanza.trim().parse() {
 };
 ```
 
-Es asi como pasamos de ‘terminar abruptamente en un error’ a ‘efectivamente manejar el error’, a traves del cambio de `ok().expect()` a una sentencia `match`. El `Result` retornado por `parse()` es un enum como `Ordering`, pero en este caso cada variante tiene alguna data asociada: `Ok` es exito, y `Err` es una falla. Cada uno contiene mas informacion: el entero parseado si hay exito, o un tipo de error. En este caso hacemos `match` en`Ok(num)`, el cual asigna el valor interno del `Ok` a el nombre `num`, y seguidamente retorna en el lado derecho. En el caso de `Err`, no nos importa que tipo de error es, es por ello que usamos `_` en lugar de un nombre. Esto ignora el error y `continue` nos mueve a la siguiente iteracion del ciclo (`loop`).
+Es asi como pasamos de ‘terminar abruptamente en un error’ a ‘efectivamente manejar el error’, a través del cambio de `ok().expect()` a una sentencia `match`. El `Result` retornado por `parse()` es un enum como `Ordering`, pero en este caso cada variante tiene alguna data asociada: `Ok` es exito, y `Err` es una falla. Cada uno contiene mas informacion: el entero parseado si hay exito, o un tipo de error. En este caso hacemos `match` en`Ok(num)`, el cual asigna el valor interno del `Ok` a el nombre `num`, y seguidamente retorna en el lado derecho. En el caso de `Err`, no nos importa que tipo de error es, es por ello que usamos `_` en lugar de un nombre. Esto ignora el error y `continue` nos mueve a la siguiente iteracion del ciclo (`loop`).
 
 This is how you generally move from ‘crash on error’ to ‘actually handle the
 error’, by switching from `ok().expect()` to a `match` statement. The `Result`
