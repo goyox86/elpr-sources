@@ -70,7 +70,7 @@ fn main() {
 
     io::stdin().read_line(&mut corazonada)
         .ok()
-        .expect("Fallo lectura de linea");
+        .expect("Fallo al leer linea");
 
     println!("Tu corazonada fue: {}", corazonada);
 }
