@@ -765,10 +765,6 @@ Haz ganado!
 
 Genial! Con una ultima mejora, finalizamos el juego de las advinanzas. Te imaginas cual es? Es correcto, no queremos imprimir el numero secreto. Era bueno para las pruebas, pero arruina nuestro juego. He aqui nuestro código fuente final:
 
-Awesome! With one tiny last tweak, we have finished the guessing game. Can you
-think of what it is? That’s right, we don’t want to print out the secret
-number. It was good for testing, but it kind of ruins the game. Here’s our
-final source:
 
 ```rust,ignore
 extern crate rand;
