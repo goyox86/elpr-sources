@@ -570,7 +570,6 @@ Ahora tenemos la mayoria del juego funcionando, pero solo podemos intentar adivi
 
 La palabra clave `loop` nos proporciona un ciclo infinito. Agreguemosla:
 
-
 Adivina el numero!
 El numero secreto es: 58
 Por favor introduce tu adivinanza.
