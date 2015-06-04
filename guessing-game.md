@@ -133,7 +133,7 @@ Ah,  `//` inicia un comentario, hasta el final de la linea. Rust ignora todo en 
 
 [comments]: comments.html
 
-Entonces sabemos que `let mut corazonada` introducirá un binding mutable llamado `adivinanza`, pero tenemos que ver al otro lado del `=` para saber a que esta siendo asociado: `String::new()`.
+Entonces sabemos que `let mut corazonada` introducirá un binding mutable llamado `corazonada`, pero tenemos que ver al otro lado del `=` para saber a que esta siendo asociado: `String::new()`.
 
 `String` es un tipo de cadena de caracter, proporcionado por la biblioteca estandar. Un  [`String`][string] es un segmento de texto codificado en UTF-8 capaz de crecer.
 
@@ -146,7 +146,7 @@ Esta funcion es llamada `new()`, porque crea un nuevo `String` vacio. Encontrara
 Continuemos:
 
 ```rust,ignore
-    io::stdin().read_line(&mut adivinanza)
+    io::stdin().read_line(&mut corazonada)
         .ok()
         .expect("Fallo lectura de linea");
 ```
