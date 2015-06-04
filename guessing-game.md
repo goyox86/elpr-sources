@@ -180,7 +180,7 @@ Porque `read_line()` acepta una referencia mutable a una cadena de caracteres. S
 
 [references]: references-and-borrowing.html
 
-Todavia no hemos terminado con esta linea. Si bien es una sola linea de texto, es solo la primera parte de una linea logica de codigo completa:
+Todavia no hemos terminado con esta linea. Si bien es una sola linea de texto, es solo la primera parte de una linea logica de código completa:
 
 ```rust,ignore
         .ok()
