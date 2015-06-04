@@ -43,7 +43,7 @@ $ cargo build
 
 Excelente! Abre tu `src/main.rs` otra vez. Estaremos escribiendo todo nuestro codigo en este archivo.
 
-Antes de continuar, dejame mostrarte un comando mas de Cargo: `run`. `cargo run` es una especie de `cargo build`, pero con la diferencia de que tambien ejecuta el binario producido. Pruebalo: 
+Antes de continuar, dejame mostrarte un comando mas de Cargo: `run`. `cargo run` es una especie de `cargo build`, pero con la diferencia de que tambien ejecuta el binario producido. Probemoslo: 
 
 ```bash
 $ cargo run
