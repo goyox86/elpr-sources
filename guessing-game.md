@@ -625,15 +625,15 @@ Adivina el numero!
 El numero secreto es: 59
 Por favor introduce tu corazonada.
 45
-Haz adivinado: 45
+Tu corazonada fue: 45
 Muy pequeño!
 Por favor introduce tu corazonada.
 60
-Haz adivinado: 60
+Tu corazonada fue: 60
 Muy grande!
 Por favor introduce tu corazonada.
 59
-Haz adivinado: 59
+Tu corazonada fue: 59
 Haz ganado!
 Por favor introduce tu corazonada.
 quit
