@@ -264,7 +264,7 @@ Usar crates externos es donde Cargo realmente brilla. Antes que podamos escribir
 rand="0.3.0"
 ```
 
-La sección `[dependencies]` de `Cargo.toml` es como la sección `[package]`: todo lo que le sigue es parte de ella, hasta que la siguiente sección comience. Cargo usa la sección de dependencias para saber en cuales crates externos dependemos, asi como las versiones requeridas. En este caso hemos usado la version `0.3.0`. Cargo entiende [Versionado Semantico][semver], que es un estandar para las escritura de numeros de version. Si quisieramos usar la ultima version podriamos haber usado `*` o un rango de versiones. La [documentación de Cargo][cargodoc]  contiene mas detalles.
+La sección `[dependencies]` de `Cargo.toml` es como la sección `[package]`: todo lo que le sigue es parte de ella, hasta que la siguiente sección comience. Cargo usa la sección de dependencias para saber en cuales crates externos dependemos, asi como las versiones requeridas. En este caso hemos usado la versión `0.3.0`. Cargo entiende [Versionado Semantico][semver], que es un estandar para las escritura de numeros de version. Si quisieramos usar la ultima version podriamos haber usado `*` o un rango de versiones. La [documentación de Cargo][cargodoc]  contiene mas detalles.
 
 [semver]: http://semver.org
 [cargodoc]: http://doc.crates.io/crates-io.html
