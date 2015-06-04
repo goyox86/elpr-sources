@@ -169,7 +169,7 @@ La siguiente parte usara dicho handle para obtener entrada del usuario:
 .read_line(&mut adivinanza)
 ```
 
-Aqui, llamamos el metodo [`read_line()`][read_line] en nuestro handle. Los [metodos][method] son similares a las funciones asociadas, pero solo estan disponibles en una instancia en particular de un tipo, en vez de en el tipo en si. Tambien estamos pasandoun argumento a `read_line()`: `&mut adivinanza`.
+Aqui, llamamos el metodo [`read_line()`][read_line] en nuestro handle. Los [metodos][method] son similares a las funciones asociadas, pero solo estan disponibles en una instancia en particular de un tipo, en vez de en el tipo en si. También estamos pasando un argumento a `read_line()`: `&mut adivinanza`.
 
 [read_line]: ../std/io/struct.Stdin.html#method.read_line
 [method]: method-syntax.html
