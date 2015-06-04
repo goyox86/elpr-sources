@@ -728,7 +728,7 @@ fn main() {
 }
 ```
 
-Estas son las lineas que cambiaron:
+Estas son las lineas que han cambiado:
 
 ```rust,ignore
 let adivinanza: u32 = match adivinanza.trim().parse() {
