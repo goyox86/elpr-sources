@@ -1,6 +1,6 @@
 # Juego de Adivinanzas
 
-Para nuestro primer proyecto, implementaremos un problema clásico de programación para principiantes: un juego de adivinanzas. Como funciona el juego: Nuestro programa generara un numero entero aleatorio entre uno y cien. Nos pedira que introduzcamos un valor. Despues de haber proporcionado nuestro numero, este nos dira si estuvimos muy por debajo y muy por encima. Una vez que adivinemos el numero correcto, nos felicitara. Te suena bien
+Para nuestro primer proyecto, implementaremos un problema clásico de programación para principiantes: un juego de adivinanzas. Como funciona el juego: Nuestro programa generara un numero entero aleatorio entre uno y cien. Nos pedira que introduzcamos un valor. Despues de haber proporcionado nuestro numero, este nos dirá si estuvimos muy por debajo y muy por encima. Una vez que adivinemos el numero correcto, nos felicitara. Te suena bien
 
 # Configuracion Inicial
 
