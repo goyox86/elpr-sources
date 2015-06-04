@@ -139,7 +139,7 @@ Entonces sabemos que `let mut adivinanza` introducirá un binding mutable llamad
 
 [string]: ../std/string/struct.String.html
 
-La sintaxis `::new()` usa `::` porque es una ‘función asociada’ de un tipo particular. Es decir esta asociada con `String` en si mismo, en vez de con una instacia en particular de `String`. Algunos lenguajes llaman a esto un ‘metodo estatico
+La sintaxis `::new()` usa `::` porque es una ‘función asociada’ de un tipo particular. Es decir esta asociada con `String` en si mismo, en vez de con una instacia en particular de `String`. Algunos lenguajes llaman a esto un ‘metodo estatico’.
 
 Esta funcion es llamada `new()`, porque crea un nuevo `String` vacio. Encontraras una funcion `new()` en muchos tipos, debido a que es un nombre común para la creacion de un nuevo valor de algun tipo. 
 
