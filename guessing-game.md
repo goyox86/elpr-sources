@@ -783,18 +783,18 @@ fn main() {
     loop {
         println!("Por favor introduce tu adivinanza.");
 
-        let mut guess = String::new();
+        let mut adivinanza = String::new();
 
-        io::stdin().read_line(&mut guess)
+        io::stdin().read_line(&mut adivinanza)
             .ok()
             .expect("failed to read line");
 
-        let guess: u32 = match guess.trim().parse() {
+        let adivinanza: u32 = match adivinanza.trim().parse() {
             Ok(num) => num,
             Err(_) => continue,
         };
 
-        println!("You guessed: {}", guess);
+        println!("Haz adivinado:", guess);
 
         match guess.cmp(&secret_number) {
             Ordering::Less    => println!("Too small!"),
