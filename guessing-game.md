@@ -283,7 +283,7 @@ $ cargo build
 
 (Podrias ver versiones diferentes, por supuesto.)
 
-Un montón de salida mas! Ahora que tenemos una dependencia externa, Cargo descarga del registro las ultimas versiones de todo, lo cual puede copiar datos desde [Crates.io][cratesio]. Crates.io es donde las personas del ecosistema Rust publica sus proyectos open source para que otros los usen.
+Un montón de salida mas! Ahora que tenemos una dependencia externa, Cargo descarga del registro las ultimas versiones de todo, lo cual puede copiar datos desde [Crates.io][cratesio]. Crates.io es donde las personas del ecosistema Rust publican sus proyectos open source para que otros los usen.
 
 
 [cratesio]: https://crates.io
