@@ -694,11 +694,11 @@ use std::cmp::Ordering;
 use rand::Rng;
 
 fn main() {
-    println!("Guess the number!");
+    println!("Adivina el numero!");
 
-    let secret_number = rand::thread_rng().gen_range(1, 101);
+    let numero_secreto = rand::thread_rng().gen_range(1, 101);
 
-    println!("The secret number is: {}", secret_number);
+    println!("The secret number is: {}", numero_secreto);
 
     loop {
         println!("Please input your guess.");
@@ -716,7 +716,7 @@ fn main() {
 
         println!("You guessed: {}", guess);
 
-        match guess.cmp(&secret_number) {
+        match guess.cmp(&numero_secreto) {
             Ordering::Less    => println!("Too small!"),
             Ordering::Greater => println!("Too big!"),
             Ordering::Equal   => {
@@ -728,7 +728,7 @@ fn main() {
 }
 ```
 
-These are the lines that changed:
+Estas son las lineas que cambiaron:
 
 ```rust,ignore
 let guess: u32 = match guess.trim().parse() {
