@@ -109,7 +109,7 @@ Anteriormente aprendimos que `println!()` es una [macro][macros] que imprime una
     let mut adivinanza = String::new();
 ```
 
-Ahora nos estamos poniendo interesantes! Hay un monton de cosas pasando en esta pequeña linea. La primera cosas a notar es que es una [sentencia let][let], que es usada para crear variables. Tiene la forma:
+Ahora nos estamos poniendo interesantes! Hay un montón de cosas pasando en esta pequeña linea. La primera cosas a notar es que es una [sentencia let][let], que es usada para crear variables. Tiene la forma:
 
 ```rust,ignore
 let foo = bar;
