@@ -112,13 +112,6 @@ Porque no aceptar un `String` directamente? Es mas facil de llamar. Si recibiera
 
 Una ultima cosas que habrás notado: solo definimos un `Filosofo`, y no parecemos hacer nada con el. Rust es un lenguaje ‘basado en expresiones’, lo que significa que casi cualquier cosa en Rust es una expresión que retorna un valor. Esto es cierto para las funciones también, la ultima expresion es retornada automáticamente. Debido a que creamos un nuevo `Filosofo` como la ultima expresion de esta funcion, terminamos retornandolo.
 
-One last thing you’ll notice: we just define a `Philosopher`, and seemingly
-don’t do anything with it. Rust is an ‘expression based’ language, which means
-that almost everything in Rust is an expression which returns a value. This is
-true of functions as well, the last expression is automatically returned. Since
-we create a new `Philosopher` as the last expression of this function, we end
-up returning it.
-
 This name, `new()`, isn’t anything special to Rust, but it is a convention for
 functions that create new instances of structs. Before we talk about why, let’s
 look at `main()` again:
