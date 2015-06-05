@@ -93,16 +93,13 @@ fn new(nombre: &str) -> Filosofo {
 
 Recibimos un argumento, un `nombre`, de tipo `name`. Esto es una referencia a otra cadena de caracteres. Esta retorna ina instancia de nuestra estructura `Filosofo`. 
 
-We take one argument, a `name`, of type `&str`. This is a reference to another
-string. It returns an instance of our `Philosopher` struct.
-
 ```rust
-# struct Philosopher {
+# struct Filosofo {
 #     name: String,
 # }
-# impl Philosopher {
-#    fn new(name: &str) -> Philosopher {
-Philosopher {
+# impl Filosofo {
+#    fn new(name: &str) -> Filosofo {
+Filosofo {
     name: name.to_string(),
 }
 #     }
