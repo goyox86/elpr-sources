@@ -76,6 +76,8 @@ impl Filosofo {
 }
 ```
 
+Este bloque  `impl` nos permite definir cosas en estructuras `Filosofo`. En este caso estamos definiendo una ‘función asociada’
+
 This `impl` block lets us define things on `Filosofo` structs. In this case,
 we define an ‘associated function’ called `new`. The first line looks like this:
 
