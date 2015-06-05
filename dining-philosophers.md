@@ -61,7 +61,7 @@ Aqui, creamos una [`estructura`][struct] (struct) para representar un filosofo. 
 [struct]: structs.html
 [string]: strings.html
 
-Let’s continue:
+Continuemos:
 
 ```rust
 # struct Philosopher {
