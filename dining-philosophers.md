@@ -25,11 +25,11 @@ that would solve this problem:
 
 Ahora, imaginemos esta secuencia de eventos:
 
-1. Filosofo 1 comienza el algoritmo, tomando el tenedor a su izuierda.
-2. Filosofo 2 comienza el algoritmo, tomando el tenedor a su izuierda.
-3. Filosofo 3 comienza el algoritmo, tomando el tenedor a su izuierda.
-4. Filosofo 4 comienza el algoritmo, tomando el tenedor a su izuierda.
-5. Filosofo 5 comienza el algoritmo, tomando el tenedor a su izuierda.
+1. Filosofo 1 comienza el algoritmo, tomando el tenedor a su izquierda.
+2. Filosofo 2 comienza el algoritmo, tomando el tenedor a su izquierda.
+3. Filosofo 3 comienza el algoritmo, tomando el tenedor a su izquierda.
+4. Filosofo 4 comienza el algoritmo, tomando el tenedor a su izquierda.
+5. Filosofo 5 comienza el algoritmo, tomando el tenedor a su izquierda.
 6. ... ? Todos los tenedores han sido tomados, pero nadie puede comer!
 
 Existen diferentes formas de resolver este problema. Te guiaremos a traves de la solución de este tutorial. Por ahora, comencemos modelando el problema en si mismo. Comenzaremos con los filósofos:
