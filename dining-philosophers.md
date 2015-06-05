@@ -110,7 +110,7 @@ Lo anterior crea un nuevo `Filosofo`, y setea su campo `nombre` a nuestro argume
 
 Porque no aceptar un `String` directamente? Es mas facil de llamar. Si recibieramos un `String` pero quien nos llama tuviese un `&str` ellos se verian en la obligación de llamar `.to_string()` de su lado. La desventaja de esta flexibilidad es que _siempre_ hacemos una copia. Para este pequeno programa, esto no es particularmente importante, como sabemos, estaremos usando cadenas cortas de cualquier modo.
 
-Una ultima cosas que habras notado: solo definimos un `Filosofo`
+Una ultima cosas que habras notado: solo definimos un `Filosofo`, y no parecemos hacer nada con el. Rust es un lenguaje ‘basado en expresiones’, lo que significa que casi cualquier cosa en Rust es una expresion que retorna un valor. Esto es cierto para las funciones también
 
 One last thing you’ll notice: we just define a `Philosopher`, and seemingly
 don’t do anything with it. Rust is an ‘expression based’ language, which means
