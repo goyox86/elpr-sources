@@ -1,17 +1,17 @@
-## Filosofos Cenando
+## Filósofos Cenando
 
-Para nuestro segundo proyecto, echemos un vistazo a un problema clasico de concurrecia. Se llama ‘La cena de los filosofos’. Fue originalmente concebido por Dijkstra en 1965, pero nosotros usaremos una version ligeramente dadaptada de [este paper][paper] por Tony Hoare en 1985. 
+Para nuestro segundo proyecto, echemos un vistazo a un problema clásico de concurrencia. Se llama ‘La cena de los filosofos’. Fue originalmente concebido por Dijkstra en 1965, pero nosotros usaremos una version ligeramente dadaptada de [este paper][paper] por Tony Hoare en 1985. 
 
 [paper]: http://www.usingcsp.com/cspbook.pdf
 
-> En tiempos ancestrales, un filantropo adinerado preparo una universidad para alojar a cinco 
-> filosofos eminentes. Cada filosofo tenia una habitación en la cual popodíadia desempeñar su 
-> actividad profesional del pensamiento: también habia un comedor en común, amoblado con una
-> mesa circular, rodeada por cinco sillas, cada una identificada con el nombre del filosofo que > se sentaba en ella. Los filósofos sentaban en sentido anti-horario alrededor de la mesa. A la > izquierda de cada filosofo yacia un tenedor dorado, y en el medio un tazon de espagueti, el 
-> cual era constantemente rebastecido. Se esperaba que un filosofo empleara la mayoria de su 
-> tiempo pensando; pero cuando se sintieran con hambre, ese dirigiera a el comedor tomara el tenedor que estaba a su izquierda y lo sumieran en el espagueti. Pero tal era naturaleza enredada del espagueti que un segundo tenedor era requerido para llevarlo a la boca. El filosofo por ende tenia que tambien tomar el tenedor a su derecha. Cuando terminaban debian bajar ambos tenedores, levantarse de la silla y continuar pensando. Por supuesto, un tenedor puede ser usado por un solo filosofo a la vez. Si otro filosofo lo desea, tiene que esperar hasta que el tenedor este disponible nuevamente.
+> En tiempos ancestrales, un filántropo adinerado preparo una universidad para alojar a cinco 
+> filósofos eminentes. Cada filosofo tenia una habitación en la cual podía desempeñar su 
+> actividad profesional del pensamiento: también había un comedor en común, amoblado con una
+> mesa circular, rodeada por cinco sillas, cada una identificada con el nombre del filosofo que > se sentaba en ella. Los filósofos sentaban en sentido anti-horario alrededor de la mesa. A la > izquierda de cada filosofo yacía un tenedor dorado, y en el medio un tazón de espagueti, el 
+> cual era constantemente reabastecido. Se esperaba que un filosofo empleara la mayoría de su 
+> tiempo pensando; pero cuando se sintieran con hambre, ese dirigiera a el comedor tomara el tenedor que estaba a su izquierda y lo sumieran en el espagueti. Pero tal era naturaleza enredada del espagueti que un segundo tenedor era requerido para llevarlo a la boca. El filosofo por ende tenia que también tomar el tenedor a su derecha. Cuando terminaban debian bajar ambos tenedores, levantarse de la silla y continuar pensando. Por supuesto, un tenedor puede ser usado por un solo filosofo a la vez. Si otro filosofo lo desea, tiene que esperar hasta que el tenedor este disponible nuevamente.
 
-Este problema clasico exhibe algunos elementos de la concurrencia. La razon es que es efectivamente un poco dificil de implementar: una implementacion simple puede un deadlock. Por ejemplo, consideremos un algoritmo simple que resolveria este problema:
+Este problema clásico exhibe algunos elementos de la concurrencia. La razón es que es efectivamente un poco difícil de implementar: una implementación simple puede un deadlock. Por ejemplo, consideremos un algoritmo simple que resolvería este problema:
 
 This classic problem shows off a few different elements of concurrency. The
 reason is that it's actually slightly tricky to implement: a simple
@@ -19,7 +19,7 @@ implementation can deadlock. For example, let's consider a simple algorithm
 that would solve this problem:
 
 1. Un filosofo tomo el tenedor a su izquierda.
-2. Despues toma el tenedor en a su derecha.
+2. Después toma el tenedor en a su derecha.
 3. Come
 4. Devuelve los tenedores.
 
@@ -32,7 +32,7 @@ Ahora, imaginemos esta secuencia de eventos:
 5. Filosofo 5 comienza el algoritmo, tomando el tenedor a su izquierda.
 6. ... ? Todos los tenedores han sido tomados, pero nadie puede comer!
 
-Existen diferentes formas de resolver este problema. Te guiaremos a traves de la solución de este tutorial. Por ahora, comencemos modelando el problema en si mismo. Comenzaremos con los filósofos:
+Existen diferentes formas de resolver este problema. Te guiaremos a   de la solución de este tutorial. Por ahora, comencemos modelando el problema en si mismo. Comenzaremos con los filósofos:
 
 ```rust
 struct Filosofo {
@@ -108,9 +108,9 @@ Filosofo {
 
 Lo anterior crea un nuevo `Filosofo`, y setea su campo `nombre` a nuestro argumento `nombre`. No solo a el argumento en si mismo, debido a que llamamos `.to_string()` en el. Lo cual crea una copia de la cadena a la que apunta nuestro `&str`, y nos da un nuevo `String`, que es del tipo del campo `nombre` de `Filosofo`.
 
-Porque no aceptar un `String` directamente? Es mas facil de llamar. Si recibieramos un `String` pero quien nos llama tuviese un `&str` ellos se verian en la obligación de llamar `.to_string()` de su lado. La desventaja de esta flexibilidad es que _siempre_ hacemos una copia. Para este pequeno programa, esto no es particularmente importante, como sabemos, estaremos usando cadenas cortas de cualquier modo.
+Porque no aceptar un `String` directamente? Es mas fácil de llamar. Si recibiéramos un `String` pero quien nos llama tuviese un `&str` ellos se verían en la obligación de llamar `.to_string()` de su lado. La desventaja de esta flexibilidad es que _siempre_ hacemos una copia. Para este pequeño programa, esto no es particularmente importante, como sabemos, estaremos usando cadenas cortas de cualquier modo.
 
-Una ultima cosas que habrás notado: solo definimos un `Filosofo`, y no parecemos hacer nada con el. Rust es un lenguaje ‘basado en expresiones’, lo que significa que casi cualquier cosa en Rust es una expresión que retorna un valor. Esto es cierto para las funciones también, la ultima expresion es retornada automáticamente. Debido a que creamos un nuevo `Filosofo` como la ultima expresion de esta funcion, terminamos retornandolo.
+Una ultima cosas que habrás notado: solo definimos un `Filosofo`, y no parecemos hacer nada con el. Rust es un lenguaje ‘basado en expresiones’, lo que significa que casi cualquier cosa en Rust es una expresión que retorna un valor. Esto es cierto para las funciones también, la ultima expresión es retornada automáticamente. Debido a que creamos un nuevo `Filosofo` como la ultima expresión de esta función, terminamos retornándolo.
 
 Este nombre `new()`, no es nada especial para Rust, pero es una convención para funciones que crean nuevas instancias de estructuras. Antes que hablemos del porque, echamos un vistazo a `main()` otra vez: 
 
@@ -137,215 +137,199 @@ fn main() {
 }
 ```
 
-Here, we create five variable bindings with five new philosophers. These are my
-favorite five, but you can substitute anyone you want. If we _didn’t_ define
-that `new()` function, it would look like this:
+Aca, creamos cinco variables con cinco nuevos filósofos. Estos son mis cinco favoritos, pero tu puedes substituirlos con quien tu creas. De no haber definido la función `new()` , luciría así:
+
 
 ```rust
-# struct Philosopher {
-#     name: String,
+# struct Filosofo {
+#     nombre: String,
 # }
 fn main() {
-    let p1 = Philosopher { name: "Judith Butler".to_string() };
-    let p2 = Philosopher { name: "Gilles Deleuze".to_string() };
-    let p3 = Philosopher { name: "Karl Marx".to_string() };
-    let p4 = Philosopher { name: "Emma Goldman".to_string() };
-    let p5 = Philosopher { name: "Michel Foucault".to_string() };
+    let f1 = Filosofo { nombre: "Judith Butler".to_string() };
+    let f2 = Filosofo { nombre: "Gilles Deleuze".to_string() };
+    let f3 = Filosofo { nombre: "Karl Marx".to_string() };
+    let f4 = Filosofo { nombre: "Emma Goldman".to_string() };
+    let f5 = Filosofo { nombre: "Michel Foucault".to_string() };
 }
 ```
 
-That’s much noisier. Using `new` has other advantages too, but even in
-this simple case, it ends up being nicer to use.
+Un poco mas ruidoso. Usar `new` tiene también posee otras ventajas, pero incluso en este simple caso termina por ser de mejor utilidad.
 
-Now that we’ve got the basics in place, there’s a number of ways that we can
-tackle the broader problem here. I like to start from the end first: let’s
-set up a way for each philosopher to finish eating. As a tiny step, let’s make
-a method, and then loop through all the philosophers, calling it:
+Ahora que tenemos lo básico en su lugar, hay un numero de maneras en las cuales podemos atacar en problema mas amplio. A mi me gusta comenzar por el final: creemos una forma para que cada filosofo pueda finalizar de comer. Como un paso pequeño, hagamos un método, y luego iteremos a través de todos los filósofos llamándolo:
+
 
 ```rust
-struct Philosopher {
-    name: String,
+struct Filosofo {
+    nombre: String,
 }
 
-impl Philosopher {
-    fn new(name: &str) -> Philosopher {
-        Philosopher {
-            name: name.to_string(),
+impl Filosofo {
+    fn new(nombre: &str) -> Filosofo {
+        Filosofo {
+            nombre: nombre.to_string(),
         }
     }
 
-    fn eat(&self) {
-        println!("{} is done eating.", self.name);
+    fn comer(&self) {
+        println!("{} ha finalizado de comer.", self.nombre);
     }
 }
 
 fn main() {
-    let philosophers = vec![
-        Philosopher::new("Judith Butler"),
-        Philosopher::new("Gilles Deleuze"),
-        Philosopher::new("Karl Marx"),
-        Philosopher::new("Emma Goldman"),
-        Philosopher::new("Michel Foucault"),
+    let filosofos = vec![
+        Filosofo::new("Judith Butler"),
+        Filosofo::new("Gilles Deleuze"),
+        Filosofo::new("Karl Marx"),
+        Filosofo::new("Emma Goldman"),
+        Filosofo::new("Michel Foucault"),
     ];
 
-    for p in &philosophers {
-        p.eat();
+    for f in &filosofos {
+        f.comer();
     }
 }
 ```
 
-Let’s look at `main()` first. Rather than have five individual variable
-bindings for our philosophers, we make a `Vec<T>` of them instead. `Vec<T>` is
-also called a ‘vector’, and it’s a growable array type. We then use a
-[`for`][for] loop to iterate through the vector, getting a reference to each
-philosopher in turn.
+Primero veamos a `main()`. En lugar de tener cinco variables individuales para nuestros filósofos, creamos un `Vec<T>`. `Vec<T>` es llamado también un ‘vector’, y es un arreglo capaz de crecer. Después usamos un ciclo [`for`][for] para iterar a través del vector, obteniendo un referencia a cada filosofo a la vez.
 
-[for]: for-loops.html
-
-In the body of the loop, we call `p.eat()`, which is defined above:
+En el cuerpo del bucle, llamamos `f.comer();`, que esta definido como:
 
 ```rust,ignore
-fn eat(&self) {
-    println!("{} is done eating.", self.name);
+fn comer(&self) {
+    println!("{} ha finalizado de comer.", self.nombre);
 }
 ```
 
-In Rust, methods take an explicit `self` parameter. That’s why `eat()` is a
-method, but `new` is an associated function: `new()` has no `self`. For our
-first version of `eat()`, we just print out the name of the philosopher, and
-mention they’re done eating. Running this program should give you the following
-output:
+En Rust, los métodos reciben un parámetro explícito `self`.  Es por ello que `comer()` es un método pero `new` es una función asociada:  `new()` no tiene `self`. Para nuestra primera version de `comer()`, solo imprimimos el nombre del filósofo, y mencionamos que ha finalizado de comer. Ejecutar este programa deber generar la siguiente salida:
 
 ```text
-Judith Butler is done eating.
-Gilles Deleuze is done eating.
-Karl Marx is done eating.
-Emma Goldman is done eating.
-Michel Foucault is done eating.
+Judith Butler ha finalizado de comer.
+Gilles Deleuze ha finalizado de comer.
+Karl Marx ha finalizado de comer.
+Emma Goldman ha finalizado de comer.
+Michel Foucault ha finalizado de comer.
 ```
 
-Easy enough, they’re all done! We haven’t actually implemented the real problem
-yet, though, so we’re not done yet!
+Muy fácil, todos han terminado! No hemos implementado el problema real todavía, así que no hemos terminado!
 
-Next, we want to make our philosophers not just finish eating, but actually
-eat. Here’s the next version:
+A continuation, no solo queremos solo finalicen de comer, sino que efectivamente coman. He aquí la siguiente versión: 
+
 
 ```rust
 use std::thread;
 
-struct Philosopher {
-    name: String,
+struct Filosofo {
+    nombre: String,
 }
 
-impl Philosopher {
-    fn new(name: &str) -> Philosopher {
-        Philosopher {
-            name: name.to_string(),
+impl Filosofo {
+    fn new(nombre: &str) -> Filosofo {
+        Filosofo {
+            nombre: nombre.to_string(),
         }
     }
 
-    fn eat(&self) {
-        println!("{} is eating.", self.name);
+    fn comer(&self) {
+        println!("{} esta comiendo.", self.nombre);
 
         thread::sleep_ms(1000);
 
-        println!("{} is done eating.", self.name);
+        println!("{} ha finalizado de comer.", self.nombre);
     }
 }
 
 fn main() {
-    let philosophers = vec![
-        Philosopher::new("Judith Butler"),
-        Philosopher::new("Gilles Deleuze"),
-        Philosopher::new("Karl Marx"),
-        Philosopher::new("Emma Goldman"),
-        Philosopher::new("Michel Foucault"),
+    let filosofos = vec![
+        Filosofo::new("Judith Butler"),
+        Filosofo::new("Gilles Deleuze"),
+        Filosofo::new("Karl Marx"),
+        Filosofo::new("Emma Goldman"),
+        Filosofo::new("Michel Foucault"),
     ];
 
-    for p in &philosophers {
-        p.eat();
+    for f in &filosofos {
+        f.comer();
     }
 }
 ```
 
-Just a few changes. Let’s break it down.
+Solo unos pocos cambios. Analicemoslos parte por parte.
 
 ```rust,ignore
 use std::thread;
 ```
 
-`use` brings names into scope. We’re going to start using the `thread` module
-from the standard library, and so we need to `use` it.
+`use` hace disponibles nombres en nuestro ámbito (scope). Comenzaremos a usar el modulo `thread` de la biblioteca estándar, y es por ello que necesitamos hacer `use` en el.
+
 
 ```rust,ignore
-    fn eat(&self) {
-        println!("{} is eating.", self.name);
+    fn comer(&self) {
+        println!("{} esta comiendo.", self.nombre);
 
         thread::sleep_ms(1000);
 
-        println!("{} is done eating.", self.name);
+        println!("{} ha finalizado de comer.", self.nombre);
     }
 ```
 
-We now print out two messages, with a `sleep_ms()` in the middle. This will
-simulate the time it takes a philosopher to eat.
+Ahora estamos imprimiendo dos mensajes, con un `sleep_ms()` en el medio. Lo cual simulara el tiempo que tarda un filosofo en comer.
 
-If you run this program, you should see each philosopher eat in turn:
+Si ejecutas este programa, deberias ver comer a cada filosofo a la vez:
 
 ```text
-Judith Butler is eating.
-Judith Butler is done eating.
-Gilles Deleuze is eating.
-Gilles Deleuze is done eating.
-Karl Marx is eating.
-Karl Marx is done eating.
-Emma Goldman is eating.
-Emma Goldman is done eating.
-Michel Foucault is eating.
-Michel Foucault is done eating.
+Judith Butler esta comiendo.
+Judith Butler ha finalizado de comer.
+Gilles Deleuze esta comiendo.
+Gilles Deleuze ha finalizado de comer.
+Karl Marx esta comiendo.
+Karl Marx ha finalizado de comer.
+Emma Goldman esta comiendo.
+Emma Goldman ha finalizado de comer.
+Michel Foucault esta comiendo.
+Michel Foucault ha finalizado de comer.
 ```
 
-Excellent! We’re getting there. There’s just one problem: we aren’t actually
-operating in a concurrent fashion, which is a core part of the problem!
+Excelente! Estamos avanzando. Solo hay un problema: no estamos operando de manera concurrente, lo cual es parte central de nuestro problema!
 
-To make our philosophers eat concurrently, we need to make a small change.
-Here’s the next iteration:
+Para hacer a nuestros filósofos comer de manera concurrente, necesitamos hacer un pequeño cambio.
+
+He aqui la siguiente iteración:
 
 ```rust
 use std::thread;
 
-struct Philosopher {
-    name: String,
+struct Filosofo {
+    nombre: String,
 }
 
-impl Philosopher {
-    fn new(name: &str) -> Philosopher {
-        Philosopher {
-            name: name.to_string(),
+impl Filosofo {
+    fn new(nombre: &str) -> Filosofo {
+        Filosofo {
+            nombre: nombre.to_string(),
         }
     }
 
-    fn eat(&self) {
-        println!("{} is eating.", self.name);
+    fn comer(&self) {
+        println!("{} esta comiendo.", self.nombre);
 
         thread::sleep_ms(1000);
 
-        println!("{} is done eating.", self.name);
+        println!("{} ha finalizado de comer.", self.nombre);
     }
 }
 
 fn main() {
-    let philosophers = vec![
-        Philosopher::new("Judith Butler"),
-        Philosopher::new("Gilles Deleuze"),
-        Philosopher::new("Karl Marx"),
-        Philosopher::new("Emma Goldman"),
-        Philosopher::new("Michel Foucault"),
+    let filosofos = vec![
+        Filosofo::new("Judith Butler"),
+        Filosofo::new("Gilles Deleuze"),
+        Filosofo::new("Karl Marx"),
+        Filosofo::new("Emma Goldman"),
+        Filosofo::new("Michel Foucault"),
     ];
 
-    let handles: Vec<_> = philosophers.into_iter().map(|p| {
+    let handles: Vec<_> = filosofos.into_iter().map(|f| {
         thread::spawn(move || {
-            p.eat();
+            f.comer();
         })
     }).collect();
 
@@ -355,62 +339,45 @@ fn main() {
 }
 ```
 
-All we’ve done is change the loop in `main()`, and added a second one! Here’s the
-first change:
+Todo lo que hemos hecho es cambiar el ciclo en `main()`, y agregado un segundo! Este es el primer cambio:
 
 ```rust,ignore
-let handles: Vec<_> = philosophers.into_iter().map(|p| {
+let handles: Vec<_> = filosofos.into_iter().map(|f| {
     thread::spawn(move || {
-        p.eat();
+         f.comer();
     })
 }).collect();
 ```
 
-While this is only five lines, they’re a dense five. Let’s break it down.
+Aun así son solo cinco lineas, son cinco densas lineas. Analicemos por partes.
 
 ```rust,ignore
 let handles: Vec<_> =
 ```
 
-We introduce a new binding, called `handles`. We’ve given it this name because
-we are going to make some new threads, and that will return some handles to those
-threads that let us control their operation. We need to explicitly annotate
-the type here, though, due to an issue we’ll talk about later. The `_` is
-a type placeholder. We’re saying “`handles` is a vector of something, but you
-can figure out what that something is, Rust.”
+Introducimos un nuevo binding, llamado `handles`. Le hemos dado este nombre porque crearemos algunos nuevos hilos, que resultaran en algunos handles (agarradores, manillas) a esos dichos hilos los cuales nos permitan controlar su operación. Necesitamos anotar el tipo explícitamente, debido a algo que haremos referencia mas adelante. El  `_` es un marcador de posición para un tipo. Estamos diciendo “`handles` es un vector de algo, pero tu, Rust, puedes determinar que es ese algo.”
 
 ```rust,ignore
-philosophers.into_iter().map(|p| {
+filosofos.into_iter().map(|f| {
 ```
 
-We take our list of philosophers and call `into_iter()` on it. This creates an
-iterator that takes ownership of each philosopher. We need to do this to pass
-them to our threads. We take that iterator and call `map` on it, which takes a
-closure as an argument and calls that closure on each element in turn.
+Tomamos nuestra lista de filósofos y llamamos `into_iter()` en ella. Esto crea un iterador que se adueña (toma pertenencia) de cada filosofo. Necesitamos hacer esto para poder pasar los filósofos a nuestros hilos. Luego tomamos ese iterador y llamamos `map` en el, método que toma un closure como argumento y llama dicho closure en cada uno de los elemento a la vez. 
 
 ```rust,ignore
     thread::spawn(move || {
-        p.eat();
+        f.comer();
     })
 ```
 
-Here’s where the concurrency happens. The `thread::spawn` function takes a closure
-as an argument and executes that closure in a new thread. This closure needs
-an extra annotation, `move`, to indicate that the closure is going to take
-ownership of the values it’s capturing. Primarily, the `p` variable of the
-`map` function.
+Es aquí donde la concurrencia ocurre. La función `thread::spawn` toma un closure como argumento y ejecuta ese closure en un nuevo hilo. El closure necesita una anotación extra, `move`, para indicar que el closure va a adueñarse de los valores que esta capturando. Principalmente, la variable `f` de la función `map`.
 
-Inside the thread, all we do is call `eat()` on `p`.
+Dentro del hilo, todo lo que hacemos es llamar a `comer();` en `f`.
 
 ```rust,ignore
 }).collect();
 ```
 
-Finally, we take the result of all those `map` calls and collect them up.
-`collect()` will make them into a collection of some kind, which is why we
-needed to annotate the return type: we want a `Vec<T>`. The elements are the
-return values of the `thread::spawn` calls, which are handles to those threads.
-Whew!
+Finalmente, tomamos el resultado de todos esas llamadas a `map` y los coleccionamos. `collect()` los convertirá en una colección de alguna tipo, que es el porque anotamos el tipo de retorno: queremos un `Vec<T>`. Los elementos son los valores retornados de las llamadas a `thread::spawn`, que son handles a esos hilos. Whew!
 
 ```rust,ignore
 for h in handles {
@@ -418,82 +385,78 @@ for h in handles {
 }
 ```
 
-At the end of `main()`, we loop through the handles and call `join()` on them,
-which blocks execution until the thread has completed execution. This ensures
-that the threads complete their work before the program exits.
+Al final de `main()`, iteramos a través de los handles llamando `join()` en ellos, lo cual bloquea la ejecución hasta que el hilo haya completado su ejecución. Esto asegura que el hilo complete su ejecución antes que el programa termine. 
 
-If you run this program, you’ll see that the philosophers eat out of order!
-We have multi-threading!
+Si ejecutas este programa, veras que los filósofos comen sin orden!
+Tenemos multi-hilos!
+
 
 ```text
-Gilles Deleuze is eating.
-Gilles Deleuze is done eating.
-Emma Goldman is eating.
-Emma Goldman is done eating.
-Michel Foucault is eating.
-Judith Butler is eating.
-Judith Butler is done eating.
-Karl Marx is eating.
-Karl Marx is done eating.
-Michel Foucault is done eating.
+Gilles Deleuze esta comiendo.
+Gilles Deleuze ha finalizado de comer.
+Emma Goldman esta comiendo.
+Emma Goldman ha finalizado de comer.
+Michel Foucault esta comiendo.
+Judith Butler esta comiendo.
+Judith Butler ha finalizado de comer.
+Karl Marx esta comiendo.
+Karl Marx ha finalizado de comer.
+Michel Foucault ha finalizado de comer.
 ```
 
-But what about the forks? We haven’t modeled them at all yet.
+Pero que acerca de los tenedores no los hemos modelado del todo todavía.
 
-To do that, let’s make a new `struct`:
+Para hacerlo, creemos un nuevo `struct`:
 
 ```rust
 use std::sync::Mutex;
 
-struct Table {
-    forks: Vec<Mutex<()>>,
+struct Mesa {
+    tenedores: Vec<Mutex<()>>,
 }
 ```
 
-This `Table` has a vector of `Mutex`es. A mutex is a way to control
-concurrency: only one thread can access the contents at once. This is exactly
-the property we need with our forks. We use an empty tuple, `()`, inside the
-mutex, since we’re not actually going to use the value, just hold onto it.
+Esta `Mesa` contiene un vector de `Mutex`es. Un mutex es una forma de controlar concurrencia, solo un hilo puede acceder el contenido a la vez. Esta es la exactamente la propiedad que necesitamos para nuestros tenedores. Usamos una dupla vacía, `()`,  dentro del mutex, debido a que no vamos a usar el valor, solo nos aferraremos a el.
 
-Let’s modify the program to use the `Table`:
+Modifiquemos el programa para hacer uso de `Mesa`:
 
 ```rust
 use std::thread;
 use std::sync::{Mutex, Arc};
 
-struct Philosopher {
-    name: String,
-    left: usize,
-    right: usize,
+struct Filosofo {
+    nombre: String,
+    izquierda: usize,
+    derecha: usize,
 }
 
-impl Philosopher {
-    fn new(name: &str, left: usize, right: usize) -> Philosopher {
-        Philosopher {
-            name: name.to_string(),
-            left: left,
-            right: right,
+impl Filosofo {
+    fn new(name: &str, izquierda: usize, derecha: usize) -> Filosofo {
+        Filosofo {
+            nombre: nombre.to_string(),
+            izquierda: izquierda,
+            derecha: derecha,
         }
     }
 
-    fn eat(&self, table: &Table) {
-        let _left = table.forks[self.left].lock().unwrap();
-        let _right = table.forks[self.right].lock().unwrap();
+    fn comer(&self, mesa: &Mesa) {
+        let _izquierda = mesa.tenedores[self.izquierda].lock().unwrap();
+        let _derecha = mesa.tenedores[self.derecha].lock().unwrap();
 
-        println!("{} is eating.", self.name);
+        println!("{} esta comiendo.", self.nombre);
 
         thread::sleep_ms(1000);
 
-        println!("{} is done eating.", self.name);
+        println!("{} ha finalizado de comer.", self.nombre);
     }
 }
 
-struct Table {
-    forks: Vec<Mutex<()>>,
+struct Mesa {
+    tenedores: Vec<Mutex<()>>,
 }
 
 fn main() {
-    let table = Arc::new(Table { forks: vec![
+    let mesa = Arc::new(Mesa { tenedores: vec![
         Mutex::new(()),
         Mutex::new(()),
         Mutex::new(()),
@@ -501,19 +464,19 @@ fn main() {
         Mutex::new(()),
     ]});
 
-    let philosophers = vec![
-        Philosopher::new("Judith Butler", 0, 1),
-        Philosopher::new("Gilles Deleuze", 1, 2),
-        Philosopher::new("Karl Marx", 2, 3),
-        Philosopher::new("Emma Goldman", 3, 4),
-        Philosopher::new("Michel Foucault", 0, 4),
+    let filosofos = vec![
+        Filosofo::new("Judith Butler", 0, 1),
+        Filosofo::new("Gilles Deleuze", 1, 2),
+        Filosofo::new("Karl Marx", 2, 3),
+        Filosofo::new("Emma Goldman", 3, 4),
+        Filosofo::new("Michel Foucault", 0, 4),
     ];
 
-    let handles: Vec<_> = philosophers.into_iter().map(|p| {
-        let table = table.clone();
+    let handles: Vec<_> = filosofos.into_iter().map(|f| {
+        let mesa = mesa.clone();
 
         thread::spawn(move || {
-            p.eat(&table);
+            f.comer(&mesa);
         })
     }).collect();
 
@@ -523,80 +486,67 @@ fn main() {
 }
 ```
 
-Lots of changes! However, with this iteration, we’ve got a working program.
-Let’s go over the details:
+Muchos cambios! Sin embrago, con esta iteración, hemos obtenido un programa funcional.
+Veamos los detalles:
 
 ```rust,ignore
 use std::sync::{Mutex, Arc};
 ```
 
-We’re going to use another structure from the `std::sync` package: `Arc<T>`.
-We’ll talk more about it when we use it.
+Usaremos otra estructura del paquete `std::sync`: `Arc<T>`.
+
+Hablaremos mas acerca de ella cuando la usemos.
+
 
 ```rust,ignore
-struct Philosopher {
-    name: String,
-    left: usize,
-    right: usize,
+struct Filosofo {
+    nombre: String,
+    izquierda: usize,
+    derecha: usize,
 }
 ```
 
-We need to add two more fields to our `Philosopher`. Each philosopher is going
-to have two forks: the one on their left, and the one on their right.
-We’ll use the `usize` type to indicate them, as it’s the type that you index
-vectors with. These two values will be the indexes into the `forks` our `Table`
-has.
+Vamos a necesitar agregar dos campos mas a nuestra estrutura `Filosofo`. Cada filosofo tendra dos tenedores: el de la izquierda, y el de la derecha. Usaremos el tipo `usize` para indicarlos, debido a que este es el tipo con el cual se indexan los vectores. Estos dos valores serán indices en los `tenedores` que nuestra `Mesa` posee.
+
 
 ```rust,ignore
-fn new(name: &str, left: usize, right: usize) -> Philosopher {
-    Philosopher {
-        name: name.to_string(),
-        left: left,
-        right: right,
+fn new(nombre: &str, izquierda: usize, derecha: usize) -> Filosofo {
+    Filosofo {
+        nombre: nombre.to_string(),
+        izquierda: izquierda,
+        derecha: derecha,
     }
 }
 ```
 
-We now need to construct those `left` and `right` values, so we add them to
-`new()`.
+Ahora necesitamos construir esos valores `izquierda` y `derecha`, de manera que podamos agregaremos a `new()`.
+
 
 ```rust,ignore
-fn eat(&self, table: &Table) {
-    let _left = table.forks[self.left].lock().unwrap();
-    let _right = table.forks[self.right].lock().unwrap();
+fn comer(&self, mesa: &Mesa) {
+    let _izquierda = mesa.tenedores[self.izquierda].lock().unwrap();
+    let _derecha = mesa.tenedores[self.derecha].lock().unwrap();
 
-    println!("{} is eating.", self.name);
+    println!("{} esta comiendo.", self.nombre);
 
     thread::sleep_ms(1000);
 
-    println!("{} is done eating.", self.name);
+    println!("{} ha finalizado de comer.", self.nombre);
 }
 ```
 
-We have two new lines. We’ve also added an argument, `table`. We access the
-`Table`’s list of forks, and then use `self.left` and `self.right` to access
-the fork at that particular index. That gives us access to the `Mutex` at that
-index, and we call `lock()` on it. If the mutex is currently being accessed by
-someone else, we’ll block until it becomes available.
+Tenemos dos nuevas lineas, también hemos agregado un argumento, `mesa`. Accedemos a la lista de tenedores de la `Mesa`, y después usamos `self.izquierda` y `self.derecha` para acceder al tenedor en un indice en particular. Eso nos da acceso al `Mutex` en ese indice, en donde llamamos `lock()`. Si el mutex esta siendo accedido actualmente por alguien mas, nos bloquearemos hasta que este disponible. 
 
-The call to `lock()` might fail, and if it does, we want to crash. In this
-case, the error that could happen is that the mutex is [‘poisoned’][poison],
-which is what happens when the thread panics while the lock is held. Since this
-shouldn’t happen, we just use `unwrap()`.
+La llamada a `lock()` puede fallar, y si lo hace, queremos terminar abruptamente. En este caso el error que puede ocurrir es que el mutex este [‘envenenado’][poison] (‘poisoned’), que es lo que ocurre cuando el hilo hace pánico mientras el mantiene el bloqueo. Debido a que esto no debería ocurrir, simplemente usamos `unwrap()`.
 
 [poison]: ../std/sync/struct.Mutex.html#poisoning
 
-One other odd thing about these lines: we’ve named the results `_left` and
-`_right`. What’s up with that underscore? Well, we aren’t planning on
-_using_ the value inside the lock. We just want to acquire it. As such,
-Rust will warn us that we never use the value. By using the underscore,
-we tell Rust that this is what we intended, and it won’t throw a warning.
+Otra cosa extraña acerca de esta lineas: hemos nombrado los resultados `_izquierda` and `_derecha`. Que hay con ese sub-guion? Bueno, en realidad no planeamos _usar_ el valor dentro del bloqueo. Solo queremos adquirirlo. A consecuencia de esto Rust nos advertira que nunca usamos el valor. A través del uso del sub-guion le decimos a Rust que es lo que quisimos, de esa manera no generara la advertencia. 
 
-What about releasing the lock? Well, that will happen when `_left` and
-`_right` go out of scope, automatically.
+Que acerca de soltar el bloqueo, Bueno, esto ocurrirá cuando `_izquierda` y `_derecha` salgan de ámbito, automáticamente. 
 
 ```rust,ignore
-    let table = Arc::new(Table { forks: vec![
+    let mesa = Arc::new(Mesa { tenedores: vec![
         Mutex::new(()),
         Mutex::new(()),
         Mutex::new(()),
@@ -605,61 +555,48 @@ What about releasing the lock? Well, that will happen when `_left` and
     ]});
 ```
 
-Next, in `main()`, we make a new `Table` and wrap it in an `Arc<T>`.
-‘arc’ stands for ‘atomic reference count’, and we need that to share
-our `Table` across multiple threads. As we share it, the reference
-count will go up, and when each thread ends, it will go back down.
-
+A continuacion, en `main()`, creamos una nueva `Mesa` y la envolvemos en un `Arc<T>`. ‘arc’ proviene de ‘atomic reference count’ (cuenta de referencias atómica),necesitamos compartir nuestra `Mesa` entre multiples hilos. A media que la compartimos, la cuenta de referencias subirá, y cuando cada hilo termine, ira bajando.
 
 ```rust,ignore
-let philosophers = vec![
-    Philosopher::new("Judith Butler", 0, 1),
-    Philosopher::new("Gilles Deleuze", 1, 2),
-    Philosopher::new("Karl Marx", 2, 3),
-    Philosopher::new("Emma Goldman", 3, 4),
-    Philosopher::new("Michel Foucault", 0, 4),
+let filosofos = vec![
+    Filosofo::new("Judith Butler", 0, 1),
+    Filosofo::new("Gilles Deleuze", 1, 2),
+    Filosofo::new("Karl Marx", 2, 3),
+    Filosofo::new("Emma Goldman", 3, 4),
+    Filosofo::new("Michel Foucault", 0, 4),
 ];
 ```
 
-We need to pass in our `left` and `right` values to the constructors for our
-`Philosopher`s. But there’s one more detail here, and it’s _very_ important. If
-you look at the pattern, it’s all consistent until the very end. Monsieur
-Foucault should have `4, 0` as arguments, but instead, has `0, 4`. This is what
-prevents deadlock, actually: one of our philosophers is left handed! This is
-one way to solve the problem, and in my opinion, it’s the simplest.
+Necesitamos pasar nuestros valores `izquierda` and `derecha` a los constructores de nuestros `Filosofo`s. Pero hay un detalle mas aquí, y es _muy_ importante. Si observas al patron, es conocítente hasta el final,  Monsieur Foucaultdebe tener `4, 0` como argumentos, pero en vez de esto tiene `0, 4`. Esto es lo que previene deadlocks, en efecto: uno de los filósofos es zurdo! Esa es una forma de resolver el problema, y en mi opinion, es la mas simple.
 
 ```rust,ignore
-let handles: Vec<_> = philosophers.into_iter().map(|p| {
-    let table = table.clone();
+let handles: Vec<_> = filosofos.into_iter().map(|f| {
+    let table = mesa.clone();
 
     thread::spawn(move || {
-        p.eat(&table);
+        f.comer(&mesa);
     })
 }).collect();
 ```
 
-Finally, inside of our `map()`/`collect()` loop, we call `table.clone()`. The
-`clone()` method on `Arc<T>` is what bumps up the reference count, and when it
-goes out of scope, it decrements the count. You’ll notice we can introduce a
-new binding to `table` here, and it will shadow the old one. This is often used
-so that you don’t need to come up with two unique names.
+Finalmente, dentro de nuestro ciclo `map()`/`collect()`, llamamos `mesa.clone()`. El método `clone()` en `Arc<T>` es lo que incrementa la cuenta de referencias, y cuando sale de ámbito, decrementa la cuenta. Notaras que podemos introducir una nueva variable  `table`, y esta sobre escribirá (shadow) la anterior. Esto es frecuentemente usado de manera tal de no tener que inventar dos nombres únicos. 
 
-With this, our program works! Only two philosophers can eat at any one time,
-and so you’ll get some output like this:
+Con todo esto, nuestro programa funciona! Solo dos filosofo pueden comer en un momento dado y en consecuencia tendrás salida que lucirá así:
+
 
 ```text
-Gilles Deleuze is eating.
-Emma Goldman is eating.
-Emma Goldman is done eating.
-Gilles Deleuze is done eating.
-Judith Butler is eating.
-Karl Marx is eating.
-Judith Butler is done eating.
-Michel Foucault is eating.
+Gilles Deleuze esta comiendo.
+Emma Goldman esta comiendo.
+Emma Goldman ha finalizado de comer.
+Gilles Deleuze ha finalizado de comer.
+Judith Butler esta comiendo.
+Karl Marx esta comiendo.
+Judith Butler ha finalizado de comer.
+Michel Foucault esta comiendo.
 Karl Marx is done eating.
-Michel Foucault is done eating.
+Michel Foucault ha finalizado de comer.
 ```
 
-Congrats! You’ve implemented a classic concurrency problem in Rust.
+Felicitaciones! Haz implementado un problema clásico de concurrencia en Rust.
 
 
