@@ -19,9 +19,9 @@ implementation can deadlock. For example, let's consider a simple algorithm
 that would solve this problem:
 
 1. Un filosofo tomo el tenedor a su izquierda.
-2. Despues toman el tenedor en a su derecha.
-3. Comen
-4. Devuelven los tenedores.
+2. Despues toma el tenedor en a su derecha.
+3. Come
+4. Devuelve los tenedores.
 
 Now, let’s imagine this sequence of events:
 
