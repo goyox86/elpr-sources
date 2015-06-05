@@ -32,7 +32,7 @@ Ahora, imaginemos esta secuencia de eventos:
 5. Filosofo 5 comienza el algoritmo, tomando el tenedor a su izuierda.
 6. ... ? Todos los tenedores han sido tomados, pero nadie puede comer!
 
-Existen diferentes formas de resolver este problema. Te guiaremos a traves de la solucion de este tutorial. Por ahora, comencemos modelando el problema en si mismo. Comenzaremos con los filósofos:
+Existen diferentes formas de resolver este problema. Te guiaremos a traves de la solución de este tutorial. Por ahora, comencemos modelando el problema en si mismo. Comenzaremos con los filósofos:
 
 ```rust
 struct Philosopher {
