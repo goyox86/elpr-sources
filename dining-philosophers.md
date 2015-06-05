@@ -67,7 +67,7 @@ Continuemos:
 # struct Filosofo {
 #     nombre: String,
 # }
-impl Philosopher {
+impl Filosofo {
     fn new(nombre: &str) -> Philosopher {
         Philosopher {
             nombre: nombre.to_string(),
