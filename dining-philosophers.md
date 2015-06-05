@@ -129,11 +129,11 @@ Este nombre `new()`, no es nada especial para Rust, pero es una convención para
 # }
 #
 fn main() {
-    let p1 = Filosofo::new("Judith Butler");
-    let p2 = Filosofo::new("Gilles Deleuze");
-    let p3 = Filosofo::new("Karl Marx");
-    let p4 = Filosofo::new("Emma Goldman");
-    let p5 = Filosofo::new("Michel Foucault");
+    let f1 = Filosofo::new("Judith Butler");
+    let f2 = Filosofo::new("Gilles Deleuze");
+    let f3 = Filosofo::new("Karl Marx");
+    let f4 = Filosofo::new("Emma Goldman");
+    let f5 = Filosofo::new("Michel Foucault");
 }
 ```
 
