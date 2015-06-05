@@ -117,13 +117,13 @@ Este nombre `new()`, no es nada especial para Rust, pero es una convención para
 
 ```rust
 # struct Filosofo {
-#     name: String,
+#     nombre: String,
 # }
 #
 # impl Filosofo {
-#     fn new(name: &str) -> Filosofo {
+#     fn new(nombre: &str) -> Filosofo {
 #         Filosofo {
-#             name: name.to_string(),
+#             nombre: nombre.to_string(),
 #         }
 #     }
 # }
