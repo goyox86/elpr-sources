@@ -25,16 +25,14 @@ that would solve this problem:
 
 Ahora, imaginemos esta secuencia de eventos:
 
-1. Philosopher 1 begins the algorithm, picking up the fork on their left.
-2. Philosopher 2 begins the algorithm, picking up the fork on their left.
-3. Philosopher 3 begins the algorithm, picking up the fork on their left.
-4. Philosopher 4 begins the algorithm, picking up the fork on their left.
-5. Philosopher 5 begins the algorithm, picking up the fork on their left.
-6. ... ? All the forks are taken, but nobody can eat!
+1. Filosofo 1 comienza el algoritmo, tomando el tenedor a su izuierda.
+2. Filosofo 2 comienza el algoritmo, tomando el tenedor a su izuierda.
+3. Filosofo 3 comienza el algoritmo, tomando el tenedor a su izuierda.
+4. Filosofo 4 comienza el algoritmo, tomando el tenedor a su izuierda.
+5. Filosofo 5 comienza el algoritmo, tomando el tenedor a su izuierda.
+6. ... ? Todos los tenedores han sido tomados, pero nadie puede comer!
 
-There are different ways to solve this problem. We’ll get to our solution in
-the tutorial itself. For now, let’s get started modelling the problem itself.
-We’ll start with the philosophers:
+Existen diferentes formas de resolver este problema. Te guiaremos a traves de la solucion de este tutorial. Por ahora, comencemos modelando el problema en si mismo. Comenzaremos con los filósofos:
 
 ```rust
 struct Philosopher {
