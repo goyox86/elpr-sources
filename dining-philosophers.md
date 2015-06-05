@@ -1,9 +1,6 @@
-## Dining Philosophers
+## Filosofos Cenando
 
-For our second project, let’s look at a classic concurrency problem. It’s
-called ‘the dining philosophers’. It was originally conceived by Dijkstra in
-1965, but we’ll use a lightly adapted version from [this paper][paper] by Tony
-Hoare in 1985.
+Para nuestro segundo proyecto, echemos un vistazo a un problema clasico de concurrecia. Se llama ‘La cena de los filosofos’. Fue originalmente concebido por Dijkstra en 1965, pero nosotros usaremos una version ligeramente dadaptada de [este paper][paper] por Tony Hoare en 1985. 
 
 [paper]: http://www.usingcsp.com/cspbook.pdf
 
