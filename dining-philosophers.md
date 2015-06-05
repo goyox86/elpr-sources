@@ -108,11 +108,6 @@ Filosofo {
 
 Lo anterior crea un nuevo `Filosofo`, y setea su campo `nombre` a nuestro argumento `nombre`. No solo a el argumento en si mismo, debido a que llamamos `.to_string()` en el. Lo cual crea una copia de la cadena a la que apunta nuestro `&str`, y nos da un nuevo `String`, que es del tipo del campo `nombre` de `Filosofo`.
 
-This creates a new `Philosopher`, and sets its `name` to our `name` argument.
-Not just the argument itself, though, as we call `.to_string()` on it. This
-will create a copy of the string that our `&str` points to, and give us a new
-`String`, which is the type of the `name` field of `Philosopher`.
-
 Why not accept a `String` directly? It’s nicer to call. If we took a `String`,
 but our caller had a `&str`, they’d have to call this method themselves. The
 downside of this flexibility is that we _always_ make a copy. For this small
