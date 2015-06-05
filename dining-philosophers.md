@@ -80,12 +80,12 @@ Este bloque `impl` nos permite definir cosas en estructuras `Filosofo`. En este 
 
 ```rust
 # struct Filosofo {
-#     name: String,
+#     nombre: String,
 # }
 # impl Filosofo {
-fn new(name: &str) -> Filosofo {
+fn new(nombre: &str) -> Filosofo {
 #         Filosofo {
-#             name: name.to_string(),
+#             nombre: nombre.to_string(),
 #         }
 #     }
 # }
