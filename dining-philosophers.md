@@ -7,7 +7,7 @@ Para nuestro segundo proyecto, echemos un vistazo a un problema clasico de concu
 > En tiempos ancestrales, un filantropo adinerado preparo una universidad para alojar a cinco 
 > filosofos eminentes. Cada filosofo tenia una habitación en la cual popodíadia desempeñar su 
 > actividad profesional del pensamiento: también habia un comedor en común, amoblado con una
-> mesa circular, rodeada por cinco sillas, cada una identificada con el nombre del filosofo que > se sentaba en ella. Los filósofos sentaban en sentido anti-horario alrededor de la mesa. A la      > izquierda de cada filosofo yacia un tenedor dorado, y en el medio un tazon de espagueti, el 
+> mesa circular, rodeada por cinco sillas, cada una identificada con el nombre del filosofo que > se sentaba en ella. Los filósofos sentaban en sentido anti-horario alrededor de la mesa. A la > izquierda de cada filosofo yacia un tenedor dorado, y en el medio un tazon de espagueti, el 
 > cual era constantemente rebastecido. Se esperaba que un filosofo empleara la mayoria de su 
 > tiempo pensando; pero cuando se sintieran con hambre, ellos iban a el comedor tomaran el   
 > tenedor que estaba a su izquierda y lo sumieran en el espagueti. Pero tal era naturaleza 
