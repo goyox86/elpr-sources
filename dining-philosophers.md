@@ -9,31 +9,19 @@ Para nuestro segundo proyecto, echemos un vistazo a un problema clasico de concu
 > actividad profesional del pensamiento: también habia un comedor en común, amoblado con una
 > mesa circular, rodeada por cinco sillas, cada una identificada con el nombre del filosofo que > se sentaba en ella. Los filósofos sentaban en sentido anti-horario alrededor de la mesa. A la > izquierda de cada filosofo yacia un tenedor dorado, y en el medio un tazon de espagueti, el 
 > cual era constantemente rebastecido. Se esperaba que un filosofo empleara la mayoria de su 
-> tiempo pensando; pero cuando se sintieran con hambre, ese dirigiera a el comedor tomara el tenedor que estaba a su izquierda y lo sumieran en el espagueti. Pero tal era naturaleza enredada del espagueti que un segundo tenedor era requerido para llevarlo a la boca. El filosofo por ende tenia que tambien tomar el tenedor a su derecha. Cuando terminaban debian bajar ambos tenedores, levantarse de la silla y continuar pensando. Por supuesto, un tenedor puede ser usado por un solo filosofo a la vez. Si otro filosofo lo desea, tiene que esperar hasta que el tenedor este disonible nuevamente.
+> tiempo pensando; pero cuando se sintieran con hambre, ese dirigiera a el comedor tomara el tenedor que estaba a su izquierda y lo sumieran en el espagueti. Pero tal era naturaleza enredada del espagueti que un segundo tenedor era requerido para llevarlo a la boca. El filosofo por ende tenia que tambien tomar el tenedor a su derecha. Cuando terminaban debian bajar ambos tenedores, levantarse de la silla y continuar pensando. Por supuesto, un tenedor puede ser usado por un solo filosofo a la vez. Si otro filosofo lo desea, tiene que esperar hasta que el tenedor este disponible nuevamente.
 
-
-> In ancient times, a wealthy philanthropist endowed a College to accommodate
-> five eminent philosophers. Each philosopher had a room in which they could
-> engage in their professional activity of thinking; there was also a common
-> dining room, furnished with a circular table, surrounded by five chairs, each
-> labelled by the name of the philosopher who was to sit in it. They sat
-> anticlockwise around the table. To the left of each philosopher there was
-> laid a golden fork, and in the centre stood a large bowl of spaghetti, which
-> was constantly replenished. A philosopher was expected to spend most of
-> their time thinking; but when they felt hungry, they went to the dining
-> room, sat down in their own chair, picked up their own fork on their left,
-> and plunged it into the spaghetti. But such is the tangled nature of
-> spaghetti that a second fork is required to carry it to the mouth. The
-> philosopher therefore had also to pick up the fork on their right. When
-> they were finished they would put down both their forks, get up from their
-> chair, and continue thinking. Of course, a fork can be used by only one
-> philosopher at a time. If the other philosopher wants it, they just have
-> to wait until the fork is available again.
+Este problema clasico exhibe algunos elementos de la concurrencia. La razon es que es efectivamente un poco dificil de implementar: una implementacion simple puede un deadlock. Por ejemplo, consideremos un algoritmo simple que resolveria este problema:
 
 This classic problem shows off a few different elements of concurrency. The
 reason is that it's actually slightly tricky to implement: a simple
 implementation can deadlock. For example, let's consider a simple algorithm
 that would solve this problem:
+
+1. Un filosofo tomo el tenedor a su izquierda.
+2. Despues toman el tenedor en a su derecha.
+3. Comen
+4. Devuelven los tenedores.
 
 1. A philosopher picks up the fork on their left.
 2. They then pick up the fork on their right.
