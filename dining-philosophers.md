@@ -106,7 +106,7 @@ Filosofo {
 # }
 ```
 
-Lo anterior crea un nuevo `Filosofo`, y setea su campo `nombre` a nuestro argumento `nombre`. No solo a el argumento en si mismo, debido a que llamamos `.to_string()` en el. Lo cual creara una copia de la cadena a la que apunta nuestro `&str`, y nos da un nuevo `String`, que es del tipo del campo `nombre` field of `Filosofo`.
+Lo anterior crea un nuevo `Filosofo`, y setea su campo `nombre` a nuestro argumento `nombre`. No solo a el argumento en si mismo, debido a que llamamos `.to_string()` en el. Lo cual crea una copia de la cadena a la que apunta nuestro `&str`, y nos da un nuevo `String`, que es del tipo del campo `nombre` field of `Filosofo`.
 
 This creates a new `Philosopher`, and sets its `name` to our `name` argument.
 Not just the argument itself, though, as we call `.to_string()` on it. This
