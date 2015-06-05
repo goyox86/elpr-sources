@@ -35,24 +35,24 @@ Ahora, imaginemos esta secuencia de eventos:
 Existen diferentes formas de resolver este problema. Te guiaremos a traves de la solución de este tutorial. Por ahora, comencemos modelando el problema en si mismo. Comenzaremos con los filósofos:
 
 ```rust
-struct Philosopher {
-    name: String,
+struct Filosofo {
+    nombre: String,
 }
 
-impl Philosopher {
-    fn new(name: &str) -> Philosopher {
-        Philosopher {
+impl Filosofo {
+    fn new(name: &str) -> Filosofo {
+        Filosofo {
             name: name.to_string(),
         }
     }
 }
 
 fn main() {
-    let p1 = Philosopher::new("Judith Butler");
-    let p2 = Philosopher::new("Gilles Deleuze");
-    let p3 = Philosopher::new("Karl Marx");
-    let p4 = Philosopher::new("Emma Goldman");
-    let p5 = Philosopher::new("Michel Foucault");
+    let f1 = Filosofo::new("Judith Butler");
+    let f2 = Filosofo::new("Gilles Deleuze");
+    let f3 = Filosofo::new("Karl Marx");
+    let f4 = Filosofo::new("Emma Goldman");
+    let f5 = Filosofo::new("Michel Foucault");
 }
 ```
 
