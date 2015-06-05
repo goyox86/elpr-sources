@@ -4,6 +4,20 @@ Para nuestro segundo proyecto, echemos un vistazo a un problema clasico de concu
 
 [paper]: http://www.usingcsp.com/cspbook.pdf
 
+> En tiempo ancestrales, un filantropo adinerado preparo una universidad para alojar a cinco 
+> filosofos eminentes. Cada filosofo tenia una habitacion en la cual podia desempenar su 
+> actividad profesional del pensamiento: tambien habia un comedor en comun, amoblado con una
+> mesa circular, rodeada por cinco sillas, cada una identificada con el nombre del filosofo que > se sentaba en ella. Ellos se sentaban en sentido anti-horario alrededor de la mesa. A la      > izquierda de cada filosofo yacia un tenedor dorado, y en el medio un tazon de espagueti, el 
+> cual era constantemente rebastecido. Se esperaba que un filosofo empleara la mayoria de su 
+> tiempo pensando; pero cuando se sintieran con hambre, ellos iban a el comedor tomaran el   
+> tenedor que estaba a su izquierda y lo sumieran en el espagueti. Pero tal era naturaleza 
+> enredada del espagueti que un segundo teneros era requerido para llevarlo a la boca. El 
+> filosofo por ende tenia que tambien tomar el tenedor a su derecha. Cuando terminaban debian
+> colocar los filosofos debian bajar sus tenedres, levantarse de la silla y continuar pensando.
+> Por supuesto, un tenedir puede ser usado por un solo filosofo a la vez. Si otro filosofo lo
+> desea, tiene que esperar hasta que el tenedor este disonible nuevamente.
+
+
 > In ancient times, a wealthy philanthropist endowed a College to accommodate
 > five eminent philosophers. Each philosopher had a room in which they could
 > engage in their professional activity of thinking; there was also a common
