@@ -116,24 +116,24 @@ Este nombre `new()`, no es nada especial para Rust, pero es una convención para
 
 
 ```rust
-# struct Philosopher {
+# struct Filosofo {
 #     name: String,
 # }
 #
-# impl Philosopher {
-#     fn new(name: &str) -> Philosopher {
-#         Philosopher {
+# impl Filosofo {
+#     fn new(name: &str) -> Filosofo {
+#         Filosofo {
 #             name: name.to_string(),
 #         }
 #     }
 # }
 #
 fn main() {
-    let p1 = Philosopher::new("Judith Butler");
-    let p2 = Philosopher::new("Gilles Deleuze");
-    let p3 = Philosopher::new("Karl Marx");
-    let p4 = Philosopher::new("Emma Goldman");
-    let p5 = Philosopher::new("Michel Foucault");
+    let p1 = Filosofo::new("Judith Butler");
+    let p2 = Filosofo::new("Gilles Deleuze");
+    let p3 = Filosofo::new("Karl Marx");
+    let p4 = Filosofo::new("Emma Goldman");
+    let p5 = Filosofo::new("Michel Foucault");
 }
 ```
 
