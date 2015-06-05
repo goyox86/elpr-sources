@@ -23,11 +23,6 @@ that would solve this problem:
 3. Comen
 4. Devuelven los tenedores.
 
-1. A philosopher picks up the fork on their left.
-2. They then pick up the fork on their right.
-3. They eat.
-4. They return the forks.
-
 Now, let’s imagine this sequence of events:
 
 1. Philosopher 1 begins the algorithm, picking up the fork on their left.
