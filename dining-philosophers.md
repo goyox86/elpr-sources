@@ -64,13 +64,13 @@ Aqui, creamos una [`estructura`][struct] (struct) para representar un filosofo. 
 Continuemos:
 
 ```rust
-# struct Philosopher {
-#     name: String,
+# struct Filosofo {
+#     nombre: String,
 # }
 impl Philosopher {
-    fn new(name: &str) -> Philosopher {
+    fn new(nombre: &str) -> Philosopher {
         Philosopher {
-            name: name.to_string(),
+            nombre: nombre.to_string(),
         }
     }
 }
