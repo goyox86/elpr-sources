@@ -23,7 +23,7 @@ that would solve this problem:
 3. Come
 4. Devuelve los tenedores.
 
-Now, let’s imagine this sequence of events:
+Ahora, imaginemos esta secuencia de eventos:
 
 1. Philosopher 1 begins the algorithm, picking up the fork on their left.
 2. Philosopher 2 begins the algorithm, picking up the fork on their left.
