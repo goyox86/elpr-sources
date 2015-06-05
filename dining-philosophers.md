@@ -91,6 +91,8 @@ fn new(nombre: &str) -> Filosofo {
 # }
 ```
 
+Recibimos un argumento, un `nombre`, de tipo `name`. Esto es una referencia a otra cadena de caracteres. Esta retorna ina instancia de nuestra estructura `Filosofo`. 
+
 We take one argument, a `name`, of type `&str`. This is a reference to another
 string. It returns an instance of our `Philosopher` struct.
 
