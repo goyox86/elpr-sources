@@ -95,12 +95,12 @@ Recibimos un argumento, un `nombre`, de tipo `name`. Esto es una referencia a ot
 
 ```rust
 # struct Filosofo {
-#     name: String,
+#     nombre: String,
 # }
 # impl Filosofo {
-#    fn new(name: &str) -> Filosofo {
+#    fn new(nombre: &str) -> Filosofo {
 Filosofo {
-    name: name.to_string(),
+    nombre: nombre.to_string(),
 }
 #     }
 # }
