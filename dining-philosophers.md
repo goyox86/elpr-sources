@@ -40,7 +40,7 @@ struct Filosofo {
 }
 
 impl Filosofo {
-    fn new(name: &str) -> Filosofo {
+    fn new(nombre: &str) -> Filosofo {
         Filosofo {
             name: name.to_string(),
         }
