@@ -56,7 +56,7 @@ fn main() {
 }
 ```
 
-Aqui, creamos una [`estructura`][struct] (struct) para representar un filosofo. Por ahora el nombre es todo lo que necesitamos. Escojimos el tipo [`String`][string] para el nombre, en vez de `&str`. Generalmente hablando, trabajar con tipo que es dueño de su data es mas fácil que trabajar con uno que use referencias.
+Aquí, creamos una [`estructura`][struct] (struct) para representar un filosofo. Por ahora el nombre es todo lo que necesitamos. Escojimos el tipo [`String`][string] para el nombre, en vez de `&str`. Generalmente hablando, trabajar con tipo que es dueño de su data es mas fácil que trabajar con uno que use referencias.
 
 [struct]: structs.html
 [string]: strings.html
