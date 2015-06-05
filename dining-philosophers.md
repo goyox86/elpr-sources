@@ -68,8 +68,8 @@ Continuemos:
 #     nombre: String,
 # }
 impl Filosofo {
-    fn new(nombre: &str) -> Philosopher {
-        Philosopher {
+    fn new(nombre: &str) -> Filosofo {
+        Filosofo {
             nombre: nombre.to_string(),
         }
     }
