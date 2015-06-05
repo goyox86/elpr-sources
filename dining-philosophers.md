@@ -78,16 +78,13 @@ impl Filosofo {
 
 Este bloque `impl` nos permite definir cosas en estructuras `Filosofo`. En este caso estamos definiendo una ‘función asociada’ llamada `new`. La primera linea luce asi: 
 
-This `impl` block lets us define things on `Filosofo` structs. In this case,
-we define an ‘associated function’ called `new`. The first line looks like this:
-
 ```rust
-# struct Philosopher {
+# struct Filosofo {
 #     name: String,
 # }
-# impl Philosopher {
-fn new(name: &str) -> Philosopher {
-#         Philosopher {
+# impl Filosofo {
+fn new(name: &str) -> Filosofo {
+#         Filosofo {
 #             name: name.to_string(),
 #         }
 #     }
