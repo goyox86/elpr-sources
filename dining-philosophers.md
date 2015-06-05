@@ -42,7 +42,7 @@ struct Filosofo {
 impl Filosofo {
     fn new(nombre: &str) -> Filosofo {
         Filosofo {
-            name: name.to_string(),
+            nombre: nombre.to_string(),
         }
     }
 }
