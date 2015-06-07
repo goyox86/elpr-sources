@@ -19,7 +19,7 @@ Para nuestro segundo proyecto, echemos un vistazo a un problema clásico de conc
 > un tenedor puede ser usado por un solo filósofo a la vez. Si otro filósofo lo desea, 
 > tiene que esperar hasta que el tenedor este disponible nuevamente.
 
-Este problema clásico exhibe algunos elementos de la concurrencia. La razón de ello es que es una solución efectivamente un poco difícil de implementar: una implementación simple puede un deadlock. Por ejemplo, consideremos un algoritmo simple que podría resolver este problema:
+Este problema clásico exhibe algunos elementos de la concurrencia. La razón de ello es que es una solución efectivamente difícil de implementar: una implementación simple puede generar un deadlock. Por ejemplo, consideremos un algoritmo simple que podría resolver este problema:
 
 1. Un filósofo toma el tenedor a su izquierda.
 2. Después toma el tenedor en a su derecha.
