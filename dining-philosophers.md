@@ -1,27 +1,30 @@
 ## Filósofos Cenando
 
-Para nuestro segundo proyecto, echemos un vistazo a un problema clásico de concurrencia. Se llama ‘La cena de los filosofos’. Fue originalmente concebido por Dijkstra en 1965, pero nosotros usaremos una version ligeramente dadaptada de [este paper][paper] por Tony Hoare en 1985. 
+Para nuestro segundo proyecto, echemos un vistazo a un problema clásico de concurrencia. Se llama ‘La cena de los filósofos’. Fue originalmente concebido por Dijkstra en 1965, pero nosotros usaremos una version ligeramente adaptada de [este paper][paper] por Tony Hoare en 1985. 
 
 [paper]: http://www.usingcsp.com/cspbook.pdf
 
 > En tiempos ancestrales, un filántropo adinerado preparo una universidad para alojar a cinco 
-> filósofos eminentes. Cada filosofo tenia una habitación en la cual podía desempeñar su 
+> filósofos eminentes. Cada filósofo tenia una habitación en la cual podía desempeñar su 
 > actividad profesional del pensamiento: también había un comedor en común, amoblado con una
-> mesa circular, rodeada por cinco sillas, cada una identificada con el nombre del filosofo que > se sentaba en ella. Los filósofos sentaban en sentido anti-horario alrededor de la mesa. A la > izquierda de cada filosofo yacía un tenedor dorado, y en el medio un tazón de espagueti, el 
-> cual era constantemente reabastecido. Se esperaba que un filosofo empleara la mayoría de su 
-> tiempo pensando; pero cuando se sintieran con hambre, ese dirigiera a el comedor tomara el tenedor que estaba a su izquierda y lo sumieran en el espagueti. Pero tal era naturaleza enredada del espagueti que un segundo tenedor era requerido para llevarlo a la boca. El filosofo por ende tenia que también tomar el tenedor a su derecha. Cuando terminaban debian bajar ambos tenedores, levantarse de la silla y continuar pensando. Por supuesto, un tenedor puede ser usado por un solo filosofo a la vez. Si otro filosofo lo desea, tiene que esperar hasta que el tenedor este disponible nuevamente.
+> mesa circular, rodeada por cinco sillas, cada una identificada con el nombre del filosofo que 
+> se sentaba en ella. Los filósofos se sentaban en sentido anti-horario alrededor de la mesa. A la 
+> izquierda de cada filósofo yacía un tenedor dorado, y en el centro un tazón de espagueti, el 
+> cual era constantemente rellenado. Se esperaba que un filósofo empleara la mayoría de su 
+> tiempo pensando; pero cuando se sintieran con hambre, se dirigiera a el comedor tomara el 
+> tenedor que estaba a su izquierda y lo sumieran en el espagueti. Pero tal era naturaleza 
+> enredada del espagueti que un segundo tenedor era requerido para llevarlo a la boca. 
+> El filósofo por ende tenia que también tomar el tenedor a su derecha. Cuando terminaban 
+> debían bajar ambos tenedores, levantarse de la silla y continuar pensando. Por supuesto, 
+> un tenedor puede ser usado por un solo filósofo a la vez. Si otro filósofo lo desea, 
+> tiene que esperar hasta que el tenedor este disponible nuevamente.
 
-Este problema clásico exhibe algunos elementos de la concurrencia. La razón es que es efectivamente un poco difícil de implementar: una implementación simple puede un deadlock. Por ejemplo, consideremos un algoritmo simple que resolvería este problema:
+Este problema clásico exhibe algunos elementos de la concurrencia. La razón de ello es que es una solución efectivamente un poco difícil de implementar: una implementación simple puede un deadlock. Por ejemplo, consideremos un algoritmo simple que podría resolver este problema:
 
-This classic problem shows off a few different elements of concurrency. The
-reason is that it's actually slightly tricky to implement: a simple
-implementation can deadlock. For example, let's consider a simple algorithm
-that would solve this problem:
-
-1. Un filosofo tomo el tenedor a su izquierda.
+1. Un filósofo toma el tenedor a su izquierda.
 2. Después toma el tenedor en a su derecha.
-3. Come
-4. Devuelve los tenedores.
+3. Come.
+4. Baja los tenedores.
 
 Ahora, imaginemos esta secuencia de eventos:
 
@@ -32,7 +35,7 @@ Ahora, imaginemos esta secuencia de eventos:
 5. Filosofo 5 comienza el algoritmo, tomando el tenedor a su izquierda.
 6. ... ? Todos los tenedores han sido tomados, pero nadie puede comer!
 
-Existen diferentes formas de resolver este problema. Te guiaremos a   de la solución de este tutorial. Por ahora, comencemos modelando el problema en si mismo. Comenzaremos con los filósofos:
+Existen diferentes formas de resolver este problema. Te guiaremos a través de la solución de este tutorial. Por ahora, comencemos modelando el problema. Empecemos con los filósofos:
 
 ```rust
 struct Filosofo {
@@ -56,7 +59,7 @@ fn main() {
 }
 ```
 
-Acá, creamos una [`estructura`][struct] (struct) para representar un filosofo. Por ahora el nombre es todo lo que necesitamos. Escojimos el tipo [`String`][string] para el nombre, en vez de `&str`. Generalmente hablando, trabajar con tipo que es dueño de su data es mas fácil que trabajar con uno que use referencias.
+Acá, creamos una [`estructura`][struct] (struct) para representar un filósofo. Por ahora el nombre es todo lo que necesitamos. Elegimos el tipo [`String`][string] para el nombre, en vez de `&str`. Generalmente hablando, trabajar con tipo que es dueño (posee pertenencia) de su data es mas fácil que trabajar con uno que use referencias.
 
 [struct]: structs.html
 [string]: strings.html
@@ -76,7 +79,7 @@ impl Filosofo {
 }
 ```
 
-Este bloque `impl` nos permite definir cosas en estructuras `Filosofo`. En este caso estamos definiendo una ‘función asociada’ llamada `new`. La primera linea luce asi: 
+Este bloque `impl` nos permite definir cosas en estructuras `Filosofo`. En este caso estamos definiendo una ‘función asociada’ llamada `new`. La primera linea luce así: 
 
 ```rust
 # struct Filosofo {
@@ -91,7 +94,7 @@ fn new(nombre: &str) -> Filosofo {
 # }
 ```
 
-Recibimos un argumento, un `nombre`, de tipo `name`. Esto es una referencia a otra cadena de caracteres. Esta retorna ina instancia de nuestra estructura `Filosofo`. 
+Recibimos un argumento, `nombre`, de tipo `&str`. Una referencia a otra cadena de caracteres. Esta retorna una instancia de nuestra estructura `Filosofo`. 
 
 ```rust
 # struct Filosofo {
@@ -106,13 +109,13 @@ Filosofo {
 # }
 ```
 
-Lo anterior crea un nuevo `Filosofo`, y setea su campo `nombre` a nuestro argumento `nombre`. No solo a el argumento en si mismo, debido a que llamamos `.to_string()` en el. Lo cual crea una copia de la cadena a la que apunta nuestro `&str`, y nos da un nuevo `String`, que es del tipo del campo `nombre` de `Filosofo`.
+Lo anterior crea un nuevo `Filosofo`, y asigna nuestro argumento `nombre` a el campo `nombre`. No a el argumento en si mismo, debido a que llamamos `.to_string()` en el. Lo cual crea una copia de la cadena a la que apunta nuestro `&str`, y nos da un nuevo `String`, que es del tipo del campo `nombre` de `Filosofo`.
 
-Porque no aceptar un `String` directamente? Es mas fácil de llamar. Si recibiéramos un `String` pero quien nos llama tuviese un `&str` ellos se verían en la obligación de llamar `.to_string()` de su lado. La desventaja de esta flexibilidad es que _siempre_ hacemos una copia. Para este pequeño programa, esto no es particularmente importante, como sabemos, estaremos usando cadenas cortas de cualquier modo.
+Porque no aceptar un `String` directamente? Es mas fácil de llamar. Si recibiéramos un `String` pero quien nos llama tuviese un `&str` ellos se verían en la obligación de llamar `.to_string()` de su lado. La desventaja de esta flexibilidad es que _siempre_ hacemos una copia. Para este pequeño programa, esto no es particularmente importante, y que sabemos que estaremos usando cadenas cortas de cualquier modo.
 
 Una ultima cosas que habrás notado: solo definimos un `Filosofo`, y no parecemos hacer nada con el. Rust es un lenguaje ‘basado en expresiones’, lo que significa que casi cualquier cosa en Rust es una expresión que retorna un valor. Esto es cierto para las funciones también, la ultima expresión es retornada automáticamente. Debido a que creamos un nuevo `Filosofo` como la ultima expresión de esta función, terminamos retornándolo.
 
-Este nombre `new()`, no es nada especial para Rust, pero es una convención para funciones que crean nuevas instancias de estructuras. Antes que hablemos del porque, echamos un vistazo a `main()` otra vez: 
+El nombre `new()`, no es nada especial para Rust, pero es una convención para funciones que crean nuevas instancias de estructuras. Antes que hablemos del porque, echamos un vistazo a `main()` otra vez:
 
 
 ```rust
@@ -137,7 +140,7 @@ fn main() {
 }
 ```
 
-Aca, creamos cinco variables con cinco nuevos filósofos. Estos son mis cinco favoritos, pero tu puedes substituirlos con quien tu creas. De no haber definido la función `new()` , luciría así:
+Acá, creamos cinco variables con cinco nuevos filósofos. Estos son mis cinco favoritos, pero puedes substituirlos con quienes prefieras. De no haber definido la función `new()` , `main()` luciría así:
 
 
 ```rust
@@ -155,7 +158,7 @@ fn main() {
 
 Un poco mas ruidoso. Usar `new` tiene también posee otras ventajas, pero incluso en este simple caso termina por ser de mejor utilidad.
 
-Ahora que tenemos lo básico en su lugar, hay un numero de maneras en las cuales podemos atacar en problema mas amplio. A mi me gusta comenzar por el final: creemos una forma para que cada filosofo pueda finalizar de comer. Como un paso pequeño, hagamos un método, y luego iteremos a través de todos los filósofos llamándolo:
+Ahora que tenemos lo básico en su lugar, hay un numero de maneras en las cuales podemos atacar el problema mas amplio. A mi me gusta comenzar por el final: creemos una forma para que cada filosofo pueda finalizar de comer. Como un paso pequeño, hagamos un método, y luego iteremos a través de todos los filósofos llamándolo:
 
 
 ```rust
@@ -200,7 +203,7 @@ fn comer(&self) {
 }
 ```
 
-En Rust, los métodos reciben un parámetro explícito `self`.  Es por ello que `comer()` es un método pero `new` es una función asociada:  `new()` no tiene `self`. Para nuestra primera version de `comer()`, solo imprimimos el nombre del filósofo, y mencionamos que ha finalizado de comer. Ejecutar este programa deber generar la siguiente salida:
+En Rust, los métodos reciben un parámetro explícito `self`.  Es por ello que `comer()` es un método y `new` es una función asociada: `new()` no tiene `self`. Para nuestra primera version de `comer()`, solo imprimimos el nombre del filósofo, y mencionamos que ha finalizado de comer. Ejecutar este programa deber generar la siguiente salida:
 
 ```text
 Judith Butler ha finalizado de comer.
@@ -210,9 +213,9 @@ Emma Goldman ha finalizado de comer.
 Michel Foucault ha finalizado de comer.
 ```
 
-Muy fácil, todos han terminado! No hemos implementado el problema real todavía, así que no hemos terminado!
+Muy fácil, todos han terminado de comer! Pero hemos implementado el problema real todavía, así que aun no terminamos!
 
-A continuation, no solo queremos solo finalicen de comer, sino que efectivamente coman. He aquí la siguiente versión: 
+A continuación, no solo queremos solo finalicen de comer, sino que efectivamente coman. He aquí la siguiente versión: 
 
 
 ```rust
@@ -253,7 +256,7 @@ fn main() {
 }
 ```
 
-Solo unos pocos cambios. Analicemoslos parte por parte.
+Solo unos pocos cambios. Analicémoslos parte por parte.
 
 ```rust,ignore
 use std::thread;
@@ -289,7 +292,7 @@ Michel Foucault esta comiendo.
 Michel Foucault ha finalizado de comer.
 ```
 
-Excelente! Estamos avanzando. Solo hay un problema: no estamos operando de manera concurrente, lo cual es parte central de nuestro problema!
+Excelente! Estamos avanzando. Solo hay un detalle: no estamos operando de manera concurrente, lo cual es parte central de nuestro problema!
 
 Para hacer a nuestros filósofos comer de manera concurrente, necesitamos hacer un pequeño cambio.
 
@@ -355,13 +358,13 @@ Aun así son solo cinco lineas, son cinco densas lineas. Analicemos por partes.
 let handles: Vec<_> =
 ```
 
-Introducimos un nuevo binding, llamado `handles`. Le hemos dado este nombre porque crearemos algunos nuevos hilos, que resultaran en algunos handles (agarradores, manillas) a esos dichos hilos los cuales nos permitan controlar su operación. Necesitamos anotar el tipo explícitamente, debido a algo que haremos referencia mas adelante. El  `_` es un marcador de posición para un tipo. Estamos diciendo “`handles` es un vector de algo, pero tu, Rust, puedes determinar que es ese algo.”
+Introducimos una nueva variable, llamada `handles`. Le hemos dado este nombre porque crearemos algunos nuevos hilos, que resultaran en algunos handles (agarradores, manillas) a esos dichos hilos los cuales nos permitirán controlar su operación. Necesitamos anotar el tipo explícitamente, debido a algo que haremos referencia mas adelante. El  `_` es un marcador de posición para un tipo. Estamos diciendo “`handles` es un vector de algo, pero tu, Rust, puedes determinar que es ese algo.”
 
 ```rust,ignore
 filosofos.into_iter().map(|f| {
 ```
 
-Tomamos nuestra lista de filósofos y llamamos `into_iter()` en ella. Esto crea un iterador que se adueña (toma pertenencia) de cada filosofo. Necesitamos hacer esto para poder pasar los filósofos a nuestros hilos. Luego tomamos ese iterador y llamamos `map` en el, método que toma un closure como argumento y llama dicho closure en cada uno de los elemento a la vez. 
+Tomamos nuestra lista de filósofos y llamamos `into_iter()` en ella. Esto crea un iterador que se adueña (toma pertenencia) de cada filosofo. Necesitamos hacer esto para poder pasar los filósofos a nuestros hilos. Luego tomamos ese iterador y llamamos `map` en el, método que toma un closure como argumento y llama dicho closure en cada uno de los elementos a la vez.
 
 ```rust,ignore
     thread::spawn(move || {
@@ -431,7 +434,7 @@ struct Filosofo {
 }
 
 impl Filosofo {
-    fn new(name: &str, izquierda: usize, derecha: usize) -> Filosofo {
+    fn new(nombre: &str, izquierda: usize, derecha: usize) -> Filosofo {
         Filosofo {
             nombre: nombre.to_string(),
             izquierda: izquierda,
@@ -486,7 +489,7 @@ fn main() {
 }
 ```
 
-Muchos cambios! Sin embrago, con esta iteración, hemos obtenido un programa funcional.
+Muchos cambios! Sin embargo, con esta iteración, hemos obtenido un programa funcional.
 Veamos los detalles:
 
 ```rust,ignore
@@ -506,7 +509,7 @@ struct Filosofo {
 }
 ```
 
-Vamos a necesitar agregar dos campos mas a nuestra estrutura `Filosofo`. Cada filosofo tendra dos tenedores: el de la izquierda, y el de la derecha. Usaremos el tipo `usize` para indicarlos, debido a que este es el tipo con el cual se indexan los vectores. Estos dos valores serán indices en los `tenedores` que nuestra `Mesa` posee.
+Vamos a necesitar agregar dos campos mas a nuestra estructura `Filosofo`. Cada filosofo tendrá dos tenedores: el de la izquierda, y el de la derecha. Usaremos el tipo `usize` para indicarlos, debido a que este es el tipo con el cual se indexan los vectores. Estos dos valores serán indices en los `tenedores` que nuestra `Mesa` posee.
 
 
 ```rust,ignore
@@ -519,7 +522,7 @@ fn new(nombre: &str, izquierda: usize, derecha: usize) -> Filosofo {
 }
 ```
 
-Ahora necesitamos construir esos valores `izquierda` y `derecha`, de manera que podamos agregaremos a `new()`.
+Ahora necesitamos construir esos valores `izquierda` y `derecha`, de manera que podamos agregarlos a `new()`.
 
 
 ```rust,ignore
@@ -541,9 +544,9 @@ La llamada a `lock()` puede fallar, y si lo hace, queremos terminar abruptamente
 
 [poison]: ../std/sync/struct.Mutex.html#poisoning
 
-Otra cosa extraña acerca de esta lineas: hemos nombrado los resultados `_izquierda` and `_derecha`. Que hay con ese sub-guion? Bueno, en realidad no planeamos _usar_ el valor dentro del bloqueo. Solo queremos adquirirlo. A consecuencia de esto Rust nos advertira que nunca usamos el valor. A través del uso del sub-guion le decimos a Rust que es lo que quisimos, de esa manera no generara la advertencia. 
+Otra cosa extraña acerca de esta lineas: hemos nombrado los resultados `_izquierda` and `_derecha`. Que hay con ese sub-guion? Bueno, en realidad no planeamos _usar_ el valor dentro del bloqueo. Solo queremos adquirirlo. A consecuencia, Rust nos advertirá que nunca usamos el valor. A través del uso del sub-guion le decimos a Rust que es lo que quisimos, de esa manera no generara la advertencia.
 
-Que acerca de soltar el bloqueo, Bueno, esto ocurrirá cuando `_izquierda` y `_derecha` salgan de ámbito, automáticamente. 
+Que acerca de soltar el bloqueo?, Bueno, esto ocurrirá cuando `_izquierda` y `_derecha` salgan de ámbito, automáticamente.
 
 ```rust,ignore
     let mesa = Arc::new(Mesa { tenedores: vec![
@@ -555,7 +558,7 @@ Que acerca de soltar el bloqueo, Bueno, esto ocurrirá cuando `_izquierda` y `_d
     ]});
 ```
 
-A continuacion, en `main()`, creamos una nueva `Mesa` y la envolvemos en un `Arc<T>`. ‘arc’ proviene de ‘atomic reference count’ (cuenta de referencias atómica),necesitamos compartir nuestra `Mesa` entre multiples hilos. A media que la compartimos, la cuenta de referencias subirá, y cuando cada hilo termine, ira bajando.
+A continuación, en `main()`, creamos una nueva `Mesa` y la envolvemos en un `Arc<T>`. ‘arc’ proviene de ‘atomic reference count’ (cuenta de referencias atómica), necesitamos compartir nuestra `Mesa` entre multiples hilos. A media que la compartimos, la cuenta de referencias subirá, y cuando cada hilo termine, ira bajando.
 
 ```rust,ignore
 let filosofos = vec![
@@ -567,11 +570,11 @@ let filosofos = vec![
 ];
 ```
 
-Necesitamos pasar nuestros valores `izquierda` and `derecha` a los constructores de nuestros `Filosofo`s. Pero hay un detalle mas aquí, y es _muy_ importante. Si observas al patron, es conocítente hasta el final,  Monsieur Foucaultdebe tener `4, 0` como argumentos, pero en vez de esto tiene `0, 4`. Esto es lo que previene deadlocks, en efecto: uno de los filósofos es zurdo! Esa es una forma de resolver el problema, y en mi opinion, es la mas simple.
+Necesitamos pasar nuestros valores `izquierda` and `derecha` a los constructores de nuestros `Filosofo`s. Pero hay un detalle mas aquí, y es _muy_ importante. Si observas al patrón, es consistente hasta el final,  Monsieur Foucault debe tener `4, 0` como argumentos, pero en vez de esto tiene `0, 4`. Esto es lo que previene deadlocks, en efecto: uno de los filósofos es zurdo! Esa es una forma de resolver el problema, y en mi opinion, es la mas simple.
 
 ```rust,ignore
 let handles: Vec<_> = filosofos.into_iter().map(|f| {
-    let table = mesa.clone();
+    let mesa = mesa.clone();
 
     thread::spawn(move || {
         f.comer(&mesa);
@@ -579,9 +582,9 @@ let handles: Vec<_> = filosofos.into_iter().map(|f| {
 }).collect();
 ```
 
-Finalmente, dentro de nuestro ciclo `map()`/`collect()`, llamamos `mesa.clone()`. El método `clone()` en `Arc<T>` es lo que incrementa la cuenta de referencias, y cuando sale de ámbito, decrementa la cuenta. Notaras que podemos introducir una nueva variable  `table`, y esta sobre escribirá (shadow) la anterior. Esto es frecuentemente usado de manera tal de no tener que inventar dos nombres únicos. 
+Finalmente, dentro de nuestro ciclo `map()`/`collect()`, llamamos `mesa.clone()`. El método `clone()` en `Arc<T>` es lo que incrementa la cuenta de referencias, y cuando sale de ámbito, la decrementa. Notaras que podemos introducir una nueva variable `mesa`, y esta sobre escribirá (shadow) la anterior. Esto es frecuentemente usado de manera tal de no tener que inventar dos nombres únicos.
 
-Con todo esto, nuestro programa funciona! Solo dos filosofo pueden comer en un momento dado y en consecuencia tendrás salida que lucirá así:
+Con todo esto, nuestro programa funciona! Solo dos filosofo pueden comer en un momento dado y en consecuencia tendrás salida se vera así:
 
 
 ```text
