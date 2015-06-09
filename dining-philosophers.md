@@ -1,4 +1,4 @@
-## Filósofos Cenando
+## La Cena de los Filósofos
 
 Para nuestro segundo proyecto, echemos un vistazo a un problema clásico de concurrencia. Se llama ‘La cena de los filósofos’. Fue originalmente concebido por Dijkstra en 1965, pero nosotros usaremos una version ligeramente adaptada de [este paper][paper] por Tony Hoare en 1985. 
 
