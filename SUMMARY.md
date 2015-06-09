@@ -1,4 +1,4 @@
-# Tabla de Contenidos
+# Summary
 
 * [Introducción](README.md)
 * [Primeros Pasos](getting-started.md)
@@ -9,6 +9,7 @@
    * [Juego de Adivinanzas](guessing-game.md)
    * [La Cena de los Filósofos](dining-philosophers.md)
    * [Rust Dentro de Otros Lenguajes](rust-inside-other-languages.md)
+   * Filosofos Cenando
 * [Rust Efectivo](effective-rust.md)
    * [La Pila y el Monticulo](the-stack-and-the-heap.md)
    * [Pruebas](testing.md)
