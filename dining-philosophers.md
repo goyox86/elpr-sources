@@ -596,7 +596,7 @@ Judith Butler esta comiendo.
 Karl Marx esta comiendo.
 Judith Butler ha finalizado de comer.
 Michel Foucault esta comiendo.
-Karl Marx is done eating.
+Karl Marx ha finalizado de comer.
 Michel Foucault ha finalizado de comer.
 ```
 
