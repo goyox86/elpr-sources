@@ -34,7 +34,7 @@ Los archivos fuente de los cuales este libro es generado pueden ser encontrados 
 
 Es Rust un lenguaje en el cual estarías interesado? Examinemos unos pequeños ejemplo de código que demuestran algunas de sus fortalezas.
 
-El concepto principal que hace único a Rust es llamado ‘pertenencia’. Considera este pequeño ejemplo:
+El concepto principal que hace único a Rust es llamado ‘pertenencia’ (‘ownership’). Considera este pequeño ejemplo:
 
 ```rust
 fn main() {
