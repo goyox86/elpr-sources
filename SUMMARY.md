@@ -7,7 +7,6 @@
    * [Hola, Cargo!](hello-cargo.md)
 * [Aprende Rust](learn-rust.md)
    * [Juego de Adivinanzas](guessing-game.md)
-   * [Filosofos Cenando](dining-philosophers.md)
    * [Rust Dentro de Otros Lenguajes](rust-inside-other-languages.md)
    * [La Cena de los Filósofos](dining-philosophers.md)
 * [Rust Efectivo](effective-rust.md)
