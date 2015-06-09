@@ -1,4 +1,4 @@
-# Summary
+# Tabla de Contenidos
 
 * [Introducción](README.md)
 * [Primeros Pasos](getting-started.md)
