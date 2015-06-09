@@ -213,7 +213,7 @@ Emma Goldman ha finalizado de comer.
 Michel Foucault ha finalizado de comer.
 ```
 
-Muy fácil, todos han terminado de comer! Pero hemos implementado el problema real todavía, así que aun no terminamos!
+Muy fácil, todos han terminado de comer! Pero no hemos implementado el problema real todavía, así que aun no terminamos!
 
 A continuación, no solo queremos solo finalicen de comer, sino que efectivamente coman. He aquí la siguiente versión: 
 
