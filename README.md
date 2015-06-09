@@ -10,7 +10,7 @@ Rust es un lenguaje de programación de sistemas enfocado en tres objetivos: seg
 * [Primeros Pasos][gs] - Configura tu maquina para el desarrollo en Rust.
 * [Aprende Rust][lr] - Aprende programación en Rust a través de pequeños proyectos.
 * [Rust Efectivo][er] - Conceptos de alto nivel para escribir excelente código Rust.
-* [Sintaxis and Semantica][ss] - Cada pieza de Rust, dividida en pequenos pedazos.
+* [Sintaxis y Semantica][ss] - Cada pieza de Rust, dividida en pequenos pedazos.
 * [Rust Nocturno][nr] - Características todavía no disponibles en builds estables.
 * [Glosario][gl] - Referencia de los términos usados en el libro.
 * [Investigación Académica][ar] - Literatura que influencio Rust.
