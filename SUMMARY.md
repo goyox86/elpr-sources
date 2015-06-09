@@ -59,6 +59,7 @@
    * [Macros](macros.md)
    * [Apuntadores Planos](raw-pointers.md)
    * [`unsafe`](unsafe.md)
+* [Filosofos Cenando](dining-philosophers.md)
 * [Rust Nocturno](nightly-rust.md)
    * [Plugins de Compilador](compiler-plugins.md)
    * [Ensamblador en Linea](inline-assembly.md)
