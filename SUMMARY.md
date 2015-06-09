@@ -9,7 +9,7 @@
    * [Juego de Adivinanzas](guessing-game.md)
    * [La Cena de los Filósofos](dining-philosophers.md)
    * [Rust Dentro de Otros Lenguajes](rust-inside-other-languages.md)
-   * [Filosofos Cenando](dinning-philosophers.md)
+   * [Filosofos Cenando](dining-philosophers.md)
 * [Rust Efectivo](effective-rust.md)
    * [La Pila y el Monticulo](the-stack-and-the-heap.md)
    * [Pruebas](testing.md)
