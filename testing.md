@@ -316,7 +316,7 @@ Finalmente echemos un vistazo a esa tercera sección: pruebas de documentación.
 
 Nada es mejor que documentación con ejemplos. Nada es peor que ejemplos que no funcionan, debido a que el código a cambiado desde que la documentación fue escrita. Respecto a esto, Rust soporta la ejecución automática de los ejemplos presentes en tu documentación. He aquí un `src/lib.rs` pulido con ejemplos:
 
-```rust
+```rust,ignore
 //! El crate `sumador` proporciona funciones que suman números a otros números.
 //!
 //! # Examples
