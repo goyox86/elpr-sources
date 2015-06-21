@@ -317,24 +317,24 @@ Finalmente echemos un vistazo a esa tercera sección: pruebas de documentación.
 Nada es mejor que documentación con ejemplos. Nada es peor que ejemplos que no funcionan, debido a que el código a cambiado desde que la documentación fue escrita. Respecto a esto, Rust soporta la ejecución automática de los ejemplos presentes en tu documentación. He aquí un `src/lib.rs` pulido con ejemplos:
 
 ```rust,ignore
-//! El crate `sumador` proporciona funciones que suman números a otros números.
+//! The `adder` crate provides functions that add numbers to other numbers.
 //!
 //! # Examples
 //!
 //! ```
-//! assert_eq!(4, sumador::suma_dos(2));
+//! assert_eq!(4, adder::add_two(2));
 //! ```
 
-/// Esta función agrega dos a su argumento.
+/// This function adds two to its argument.
 ///
 /// # Examples
 ///
 /// ```
-/// use sumador::suma_dos;
+/// use adder::add_two;
 ///
-/// assert_eq!(4, suma_dos(2));
+/// assert_eq!(4, add_two(2));
 /// ```
-pub fn suma_dos(a: i32) -> i32 {
+pub fn add_two(a: i32) -> i32 {
     a + 2
 }
 
@@ -344,7 +344,7 @@ mod tests {
 
     #[test]
     fn it_works() {
-        assert_eq!(4, suma_dos(2));
+        assert_eq!(4, add_two(2));
     }
 }
 ```
