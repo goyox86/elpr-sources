@@ -1,6 +1,6 @@
 # Pruebas
 
-> Probar programas puede ser una forma efectiva de mostrar la presencia de bugs, pero es una desesperanzadamente inadecuada para mostrar su ausencia.
+> Probar programas puede ser una forma efectiva de mostrar la presencia de bugs, pero es desesperanzadamente inadecuada para mostrar su ausencia.
 > Edsger W. Dijkstra, "The Humble Programmer" (1972)
 
 Hablaremos acerca de como probar código Rust. De lo que no estaremos hablando es acerca de la manera correcta de probar código Rust. Hay muchas escuelas de pensamiento en relación a la forma correcta e incorrecta de escribir pruebas. Todos esos enfoques usan las mismas herramientas básicas, en esta sección te mostraremos la sintaxis para hacer uso de ellas.
