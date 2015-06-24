@@ -27,23 +27,23 @@ pub fn new(value: T) -> Rc<T> {
 }
 ```
 
-El código anterior genera documentación que luce [como esta][rc-new](versión en ingles). He dejado la implementación por fuera, con un comentario regular en su lugar. Esa es la primera cosa a resaltar acerca de esta anotación: usa `///`, en vez de `//`. El slash triple indica que es un comentario de documentación.
+El código anterior genera documentación que luce como [esta][rc-new](ingles). He dejado la implementación por fuera, con un comentario regular en su lugar. Esa es la primera cosa a resaltar acerca de esta anotación: usa `///`, en vez de `//`. El slash triple indica que es un comentario de documentación.
 
-Los comentarios de documentación son escritos en formato Markdown.
+Los comentarios de documentación están escritos en formato Markdown.
 
-Rust mantiene un registro de esos comentarios, registro que usa al momento de generar la documentación. Esto es importante cuando se documentan cosas como enumeraciones (enums):
+Rust mantiene un registro de dichos comentarios, registro que usa al momento de generar la documentación. Esto es importante cuando se documentan cosas como enumeraciones (enums):
 
 ```rust
 /// El tipo `Option`. Vea [la documentación a nivel de modulo](../) para mas información.
 enum Option<T> {
     /// Ningún valor
-    None,
+    None
     /// Algún valor `T`
     Some(T),
 }
 ```
 
-Lo anterior funciona, pero esto no:
+Lo anterior funciona, pero esto, no:
 
 ```rust,ignore
 /// El tipo `Option`. Vea [la documentación a nivel de modulo](../) para mas información.
@@ -53,7 +53,7 @@ enum Option<T> {
 }
 ```
 
-Obtendras un error:
+Obtendrás un error:
 
 ```text
 hola.rs:4:1: 4:2 error: expected ident, found `}`
@@ -84,7 +84,7 @@ La primera linea de un comentario de documentación debe ser un resumen corto de
 # fn foo() {}
 ```
 
-Nuestro ejemplo original solo tenia una linea de resumen, pero hubiésemos tenido mas cosas que decir, pudimos haber agregado mas explicación en un párrafo nuevo.
+Nuestro ejemplo original solo tenia una linea de resumen, pero si hubiésemos tenido mas cosas que decir, pudimos haber agregado mas explicación en un párrafo nuevo.
 
 #### Secciones especiales
 
@@ -100,7 +100,7 @@ A continuación están las secciones especiales. Estas son indicadas con una cab
 # fn foo() {}
 ```
 
-Malos e irrecuperables usos de una función (e.j. errores de programación) en Rust son usualmente indicados por pánicos (panics), los cuales matan el hilo actual como mínimo. Si tu función posee un contrato no trivial como este, que es detectado/impuesto por pánicos, documentarlo es muy importante.
+Malos e irrecuperables usos de una función (e.j. Errores de programación) en Rust son usualmente indicados por pánicos (panics), los cuales matan el hilo actual como mínimo. Si tu función posee un contrato no trivial como este, que es detectado/impuesto por pánicos, documentarlo es muy importante.
 
 ```rust
 /// # Failures
@@ -127,7 +127,7 @@ Si tu función es `unsafe` (insegura), deberías explicar cuales son las invaria
 # fn foo() {}
 ```
 
-Tercero, `Examples`, incluye uno o mas ejemplos del uso de tu función o método, y tus usuarios te querrán por ello. Estos ejemplos van dentro de anotaciones de bloques de código, de los cuales hablaremos en un momento, estos pueden tener mas de una sección:
+Tercero, `Examples`, incluye uno o mas ejemplos del uso de tu función o método, y tus usuarios te querrán. Estos ejemplos van dentro de anotaciones de bloques de código, de los cuales hablaremos en un momento, pueden tener mas de una sección:
 
 
 ```rust
@@ -162,7 +162,7 @@ Para escribir alguna código Rust en un comentario, usa los graves triples:
 # fn foo() {}
 ```
 
-Si quieres código que no es Rust, puedes agregar una anotación:
+Si quieres código que no sea Rust, puedes agregar una anotación:
 
 ```rust
 /// ```c
@@ -173,8 +173,7 @@ Si quieres código que no es Rust, puedes agregar una anotación:
 
 La sintaxis de esta sección sera resaltada de acuerdo al lenguaje que estés mostrando. Si solo estas mostrando texto plano, usa `text`.
 
-Aca, es importante elegir la anotación correcta, debido a que `rustdoc` la usa de una manera interesante: Puede ser usada para probar tus ejemplos, de tal manera que no se vuelvan obsoletos con el tiempo. Si tienes algún código C pero `rustdoc` piensa que es Rust, es porque olvidaste la anotación, `rustdoc` se quejara al momento de tratar de generar la documentación.
-
+Acá, es importante elegir la anotación correcta, debido a que `rustdoc` la usa de una manera interesante: Puede ser usada para probar tus ejemplos, de tal manera que no se vuelvan obsoletos con el tiempo. Si tienes algún código C pero `rustdoc` piensa que es Rust, es porque olvidaste la anotación, `rustdoc` se quejara al momento de tratar de generar la documentación.
 
 ## Documentación como pruebas
 
@@ -187,7 +186,7 @@ Discutamos nuestra documentación de ejemplo:
 # fn foo() {}
 ```
 
-Notaras que no necesitas una `fn main()` o algo mas. `rustdoc` agregara un main() automaticamente alrededor de tu código, y en el lugar correcto. Por ejemplo:
+Notaras que no necesitas una `fn main()` o algo mas. `rustdoc` agregara un main() automáticamente alrededor de tu código, y en el lugar correcto. Por ejemplo:
 
 ```rust
 /// ```
@@ -198,7 +197,7 @@ Notaras que no necesitas una `fn main()` o algo mas. `rustdoc` agregara un main(
 # fn foo() {}
 ```
 
-Se convertira en la prueba:
+Se convertirá en la prueba:
 
 ```rust
 fn main() {
@@ -221,7 +220,7 @@ Algunas veces, todo esto no es suficiente. Por ejemplo, todos estos ejemplos de 
 # fn foo() {}
 ```
 
-luce diferente a la salida:
+Luce diferente a la salida:
 
 ```rust
 /// Algo de documentación.
@@ -236,7 +235,7 @@ let y = 6;
 println!("{}", x + y);
 ```
 
-He aqui una explicación, renderizada:
+He aquí una explicación, renderizada:
 
 Primero, asignamos a `x` el valor de cinco:
 
@@ -294,7 +293,6 @@ Al repetir todas las partes del ejemplo, puedes asegurarte que tu ejemplo aun co
 
 He aquí un ejemplo de la documentación a una macro:
 
-
 ```rust
 /// Panic con un mensaje proporcionado a menos que la expression sea evaluada a true.
 ///
@@ -322,14 +320,13 @@ macro_rules! panic_unless {
 
 Notaras tres cosas: necesitamos agregar nuestro propia linea `extern crate`, de tal manera que podamos agregar el atributo `#[macro_use]`. Segundo, necesitaremos agregar nuestra propia `main()`. Finalmente, un uso juicioso de `#`  para comentar esas dos cosas, de manera que nos se muestren en la salida.
 
-
 ### Ejecutando pruebas de documentación
 
 Para correr las pruebas puedes:
 
 ```bash
 $ rustdoc --test ruta/a/mi/crate/root.rs
-# o
+# ó
 $ cargo test
 ```
 
@@ -344,8 +341,7 @@ Hay unas pocas anotaciones mas que son útiles para ayudar a `rustdoc` a hacer l
 # fn foo() {}
 ```
 
-La directiva `ignore` le dice a Rust que ignore el codigo. Esta es la forma que casi nunca querrás, pues es la mas genérica. En su lugar, considera el anotar con `text` de no ser codigo, o usar  `#`s para obtener un ejemplo funcional que solo muestra la parte que te interesa.
-
+La directiva `ignore` le dice a Rust que ignore el codigo. Esta es la forma que casi nunca querrás, pues es la mas genérica. En su lugar, considera el anotar con `text` de no ser codigo, o usar `#`s para obtener un ejemplo funcional que solo muestra la parte que te interesa.
 
 ```rust
 /// ```should_panic
@@ -367,11 +363,9 @@ La directiva `ignore` le dice a Rust que ignore el codigo. Esta es la forma que 
 
 El atributo `no_run` compilara tu código, pero no lo ejecutara. Esto es importante para ejemplos como "He aquí como iniciar un servicio de red," el cual debes asegurarte que compile, pero podría causar un ciclo infinito!
 
+### Documentando módulos
 
-### Documentando modulos
-
-Rust posee otro tipo de comentario de documentación, `//!`. Este comentario no documenta el siguiente item, este comenta el item que encierra. En otras palabras:
-
+Rust posee otro tipo de comentario de documentación, `//!`. Este comentario no documenta el siguiente item, este comenta el item que lo encierra. En otras palabras:
 
 ```rust
 mod foo {
@@ -383,13 +377,12 @@ mod foo {
 }
 ```
 
-Es aquí en donde veras `//!` usado mas a menudo: para documentación de móduloss. Si tienes un modulo en `foo.rs`, frecuentemente al a abrir su código veras esto:
-
+Es aquí en donde veras `//!` usado mas a menudo: para documentación de módulos. Si tienes un modulo en `foo.rs`, frecuentemente al a abrir su código veras esto:
 
 ```rust
 //! Un modulo para usar `foo`s.
 //!
-//! El modulo `foo` contiene un monotone de funcionalidad bla bla bla
+//! El modulo `foo` contiene un monton de funcionalidad bla bla bla
 ```
 
 ### Estilo de comentarios de documentación
@@ -399,12 +392,11 @@ Echa un vistazo a el [RFC 505][rfc505] para un listado completo de convenciones 
 
 [rfc505]: https://github.com/rust-lang/rfcs/blob/master/text/0505-api-comment-conventions.md
 
-## Otra documentacion
+## Otra documentación
 
 Todo este comportamiento funciona en archivos no Rust también. Debido a que los comentarios son escritos en Markdown, frecuentemente son archivos `.md`.
 
 Cuando escribes documentación en archivos Markdown, no necesitas prefijar la documentación con comentarios. Por ejemplo:
-
 
 ```rust
 /// # Examples
@@ -444,7 +436,6 @@ Esta linea `%` deber estar ubicada en la primera linea del archivo.
 
 A un nivel mas profundo, los comentarios de documentación son otra forma de escribir atributos de documentación:
 
-
 ```rust
 /// this
 # fn foo() {}
@@ -453,7 +444,7 @@ A un nivel mas profundo, los comentarios de documentación son otra forma de esc
 # fn bar() {}
 ```
 
-are the same, as are these:
+son lo mismo que estos:
 
 ```rust
 //! this
@@ -461,12 +452,12 @@ are the same, as are these:
 #![doc="/// this"]
 ```
 
-You won't often see this attribute used for writing documentation, but it
-can be useful when changing some options, or when writing a macro.
+No veras frecuentemente este atributo siendo usado para escribir documentación, pero puede ser util cuando se esten cambiando ciertas opciones, o escribiendo una macro.
+
 
 ### Re-exports
 
-`rustdoc` will show the documentation for a public re-export in both places:
+`rustdoc` mostrara la documentación para un re-export publico en ambos lugares:
 
 ```ignore
 extern crate foo;
@@ -474,11 +465,9 @@ extern crate foo;
 pub use foo::bar;
 ```
 
-This will create documentation for bar both inside the documentation for the
-crate `foo`, as well as the documentation for your crate. It will use the same
-documentation in both places.
+Lo anterior creara documentación para bar dentro de la documentación para el crate `foo`, así como la documentación para tu crate. Sera la misma documentación en ambos lugares.
 
-This behavior can be suppressed with `no_inline`:
+Este comportamiento puede ser suprimido con `no_inline`:
 
 ```ignore
 extern crate foo;
@@ -487,10 +476,9 @@ extern crate foo;
 pub use foo::bar;
 ```
 
-### Controlling HTML
+### Controlando HTML
 
-You can control a few aspects of the HTML that `rustdoc` generates through the
-`#![doc]` version of the attribute:
+Puedes controlar algunos aspectos de el HTML que `rustdoc` genera a través de la versión `#![doc]` del atributo:
 
 ```rust
 #![doc(html_logo_url = "http://www.rust-lang.org/logos/rust-logo-128x128-blk-v2.png",
@@ -498,24 +486,21 @@ You can control a few aspects of the HTML that `rustdoc` generates through the
        html_root_url = "http://doc.rust-lang.org/")]
 ```
 
-This sets a few different options, with a logo, favicon, and a root URL.
+Esto configura unas pocas opciones, con un logo, favicon, y URL raíz.
 
-## Generation options
+## Opciones de generación
 
-`rustdoc` also contains a few other options on the command line, for further customization:
+`rustdoc` también contiene unas pocas opciones en la linea de comandos, para mas personalización:
 
-- `--html-in-header FILE`: includes the contents of FILE at the end of the
-  `<head>...</head>` section.
-- `--html-before-content FILE`: includes the contents of FILE directly after
-  `<body>`, before the rendered content (including the search bar).
-- `--html-after-content FILE`: includes the contents of FILE after all the rendered content.
+- `--html-in-header FILE`: incluye el contenido de FILE al final de la sección `<head>...</head>`.
+- `--html-before-content FILE`: incluye el contenido de FILE después de `<body>`, antes del contenido renderizado (incluyendo la barra de búsqueda).
+- `--html-after-content FILE`: incluye el contenido de FILE después de todo el contenido renderizado.
 
-## Security note
+## Nota de seguridad
 
-The Markdown in documentation comments is placed without processing into
-the final webpage. Be careful with literal HTML:
+El Markdown en los comentarios de documentación es puesto sin procesar en la pagina final. Se cuidadoso con HTML literal:
 
-```rust
+``rust
 /// <script>alert(document.cookie)</script>
 # fn foo() {}
 ```
