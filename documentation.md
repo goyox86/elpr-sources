@@ -1,4 +1,4 @@
-# Documentación
+% Documentación
 
 La documentación es una parte importante de cualquier proyecto de software y un ciudadano de primera clase en Rust. Hablemos acerca de las herramientas que Rust te proporciona para documentar tus proyectos.
 
