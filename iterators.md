@@ -112,84 +112,62 @@ match mayores_a_cuarento_y_dos {
 }
 ```
 
-`find` takes a closure, and works on a reference to each element of an
-iterator. This closure returns `true` if the element is the element we're
-looking for, and `false` otherwise. Because we might not find a matching
-element, `find` returns an `Option` rather than the element itself.
+`find` recibe un closure, y trabaja en una referencia a cada elemento de un iterador. Este closure retorna `true` si el elemento es el que estamos buscando y `false` de lo contrario. Debido a que podriamos no encontrar un elemento que satisfaga nuestro criterio, `find` retorna un `Option` en lugar de un elemento.
 
-Another important consumer is `fold`. Here's what it looks like:
+Otro consumidor importante es `fold`. Luce de esta manera:
+
 
 ```rust
-let sum = (1..4).fold(0, |sum, x| sum + x);
+let suma = (1..4).fold(0, |suma, x| suma + x);
 ```
 
-`fold()` is a consumer that looks like this:
-`fold(base, |accumulator, element| ...)`. It takes two arguments: the first
-is an element called the *base*. The second is a closure that itself takes two
-arguments: the first is called the *accumulator*, and the second is an
-*element*. Upon each iteration, the closure is called, and the result is the
-value of the accumulator on the next iteration. On the first iteration, the
-base is the value of the accumulator.
+`fold(base, |accumulator, element| ...)`. Toma dos argumentos: el primero es un elemento llamado *base*. El segundo es un closure que a su vez toma dos argumentos: el primero es llamado el *acumulador*, y el segundo es un *elemento*. En cada iteracion, el closure es llamado, y el resultado es usado como el valor del acumulador en la siguiente iteracion. En la primera iteracion, la base es el valor del acumulador.
 
-Okay, that's a bit confusing. Let's examine the values of all of these things
-in this iterator:
+Bien, eso  es un poco confuso. Examinemos los valores de todas esas cosas en este iterador:
 
-| base | accumulator | element | closure result |
-|------|-------------|---------|----------------|
-| 0    | 0           | 1       | 1              |
-| 0    | 1           | 2       | 3              |
-| 0    | 3           | 3       | 6              |
 
-We called `fold()` with these arguments:
+| base | acumulador | elemento | resultado del closure |
+|------|------------|----------|-----------------------|
+| 0    | 0          | 1        | 1                     |
+| 0    | 1          | 2        | 3                     |
+| 0    | 3          | 3        | 6                     |
+
+
+Hemos llamado a `fold()` con estos argumentos:
 
 ```rust
 # (1..4)
-.fold(0, |sum, x| sum + x);
+.fold(0, |suma, x| suma + x);
 ```
 
-So, `0` is our base, `sum` is our accumulator, and `x` is our element.  On the
-first iteration, we set `sum` to `0`, and `x` is the first element of `nums`,
-`1`. We then add `sum` and `x`, which gives us `0 + 1 = 1`. On the second
-iteration, that value becomes our accumulator, `sum`, and the element is
-the second element of the array, `2`. `1 + 2 = 3`, and so that becomes
-the value of the accumulator for the last iteration. On that iteration,
-`x` is the last element, `3`, and `3 + 3 = 6`, which is our final
-result for our sum. `1 + 2 + 3 = 6`, and that's the result we got.
+Entonces, `0` es nuestra base, `suma` es nuestro acumulador, y `x` es nuestro elemento. En la primera iteracion, asignamos `sum` a `0` y `x` es el primer elemento de nuestro rango, `1`. Despues sumamos `sum` y `x` lo que nos da `0 + 1 = 1`. En la segunda iteracion, ese valor se convierte en el valor de nuestro acumulador, `sum`, y el elemento es el segundo elemento del rango, `2`. `1 + 2 = 3` y de igual manera se convierte en el valor del acumulador para la ultima iteracion. En esa iteracion, `x` es el ultimmo elemento, `3`, y `3 + 3 = 6`, el cual es nurstro resultado final para nuestro `suma`. `1 + 2 + 3 = 6`, y ese es el rsultado que obtenemos.
 
-Whew. `fold` can be a bit strange the first few times you see it, but once it
-clicks, you can use it all over the place. Any time you have a list of things,
-and you want a single result, `fold` is appropriate.
+When. `fold` puede ser un poco extrano las primeras veces que lo ves, pero una vez hace click, puedes usarlo en todos lados. Cada vez que tengas una lista de cosas, y necesites un unico reultado, `fold` es apropiado.
 
-Consumers are important due to one additional property of iterators we haven't
-talked about yet: laziness. Let's talk some more about iterators, and you'll
-see why consumers matter.
+Los consumidores son importantes debido a una propiedad adicional de los iteradores de la que no hemos hablado todavia: pereza (laziness). Hablemos mas acerca de los iteradores y veras porque los consumidores son importantes.
 
-## Iterators
+## Iteradores
 
-As we've said before, an iterator is something that we can call the
-`.next()` method on repeatedly, and it gives us a sequence of things.
-Because you need to call the method, this means that iterators
-can be *lazy* and not generate all of the values upfront. This code,
-for example, does not actually generate the numbers `1-99`, instead
-creating a value that merely represents the sequence:
+Como hemos dicho antes, un iterador es algo en lo que podemos llamar el metodo `.next()` repetidamente, y este nos devuelve una secuencia de elementos. Debido a que necesitamos llamar a el metodo, esto se traduce en que los iteradores pueden ser *perezosos* y no generar todos los valores por adelantado. Este codigo, por ejemplo, no genera los numeros `1-99`. En su lugar crea un valor que representa la secuencia:
 
 ```rust
 let nums = 1..100;
 ```
 
-Since we didn't do anything with the range, it didn't generate the sequence.
-Let's add the consumer:
+Debido a que no hicimos nada con el rango, este no genero la secuencia. Agreguemos un consumidor:
+
 
 ```rust
 let nums = (1..100).collect::<Vec<i32>>();
 ```
 
+Ahora `collect()` requerira que el rango provea algunos numeros, y en consecuencia este tendra que llevar a cabo la labor de generar la secuencia.
+
 Now, `collect()` will require that the range gives it some numbers, and so
 it will do the work of generating the sequence.
 
-Ranges are one of two basic iterators that you'll see. The other is `iter()`.
-`iter()` can turn a vector into a simple iterator that gives you each element
-in turn:
+Los rangos son una de las dos formas basicas de iteradores que veras. La otra es `iter()`. `iter()` puede transformar un vector en un iterador simple que te da un elemento a la vez:
+
 
 ```rust
 let nums = vec![1, 2, 3];
@@ -199,25 +177,19 @@ for num in nums.iter() {
 }
 ```
 
-These two basic iterators should serve you well. There are some more
-advanced iterators, including ones that are infinite.
+Estos dos iteratores basicos deberian servirte bien. Existen iteradores mas avanzados, incluyendo aquellos que son infinitos.
 
-That's enough about iterators. Iterator adapters are the last concept
-we need to talk about with regards to iterators. Let's get to it!
+Eso es suficiente acerca de los iteradores, los adaptadores de iteradores son el ultimo concepto a el cual debemos hacer mencion en relacion a los iteradores. Hagamoslo!
 
-## Iterator adapters
+## Adaptadores de iterador
 
-*Iterator adapters* take an iterator and modify it somehow, producing
-a new iterator. The simplest one is called `map`:
+Los *adaptadores de iteradores* toman un iterador y lo modifican de alguna manera, produciendo un nuevo iterador. El mas simple es llamado `map`:
 
 ```rust,ignore
 (1..100).map(|x| x + 1);
 ```
 
-`map` is called upon another iterator, and produces a new iterator where each
-element reference has the closure it's been given as an argument called on it.
-So this would give us the numbers from `2-100`. Well, almost! If you
-compile the example, you'll get a warning:
+`map` es llamado en otro iterador, `map` produce un iterador nuevo en el que cada referencia a un elemento posee el closure que se ha proporcido como argumento. Entonces esto nos dara los numeros `2-100`, Bueno, casi! Si compilas el ejemplo, obtendras una advertencia:
 
 ```text
 warning: unused result which must be used: iterator adaptors are lazy and
@@ -226,20 +198,13 @@ warning: unused result which must be used: iterator adaptors are lazy and
  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
-Laziness strikes again! That closure will never execute. This example
-doesn't print any numbers:
+La pereza ataca de nuevo! Ese closure nunca se ejecutara. Este ejemplo no imprime ningun numero:
 
 ```rust,ignore
 (1..100).map(|x| println!("{}", x));
 ```
 
-If you are trying to execute a closure on an iterator for its side effects,
-just use `for` instead.
-
-There are tons of interesting iterator adapters. `take(n)` will return an
-iterator over the next `n` elements of the original iterator. Note that this
-has no side effect on the original iterator. Let's try it out with our infinite
-iterator from before:
+Si estas intentanto ejecutar un closure en un iterador para obtener sus efectos colaterales (side-effects) usa un `for`.
 
 ```rust
 for i in (1..).take(5) {
@@ -247,7 +212,7 @@ for i in (1..).take(5) {
 }
 ```
 
-This will print
+Esto imprimira:
 
 ```text
 1
@@ -257,9 +222,7 @@ This will print
 5
 ```
 
-`filter()` is an adapter that takes a closure as an argument. This closure
-returns `true` or `false`. The new iterator `filter()` produces
-only the elements that that closure returns `true` for:
+`filter()` es un adaptador que toma un closure como argumento. Dicho closure retorna `true` o `false`. El nuevo iterador que `filter()` produce solo elementos para los que el closure retorna `true`:
 
 ```rust
 for i in (1..100).filter(|&x| x % 2 == 0) {
@@ -267,14 +230,7 @@ for i in (1..100).filter(|&x| x % 2 == 0) {
 }
 ```
 
-This will print all of the even numbers between one and a hundred.
-(Note that because `filter` doesn't consume the elements that are
-being iterated over, it is passed a reference to each element, and
-thus the filter predicate uses the `&x` pattern to extract the integer
-itself.)
-
-You can chain all three things together: start with an iterator, adapt it
-a few times, and then consume the result. Check it out:
+Esto imprimira todos los numeros pares entre uno y cien. (Nota que debido a que `filter` no consume los elementos que estan siendo iterados, a este se le pasa una referencia a cada elemento, es por ello que el predicado usa el patron `&x` para extraer el entero en si mismo.)
 
 ```rust
 (1..)
@@ -284,11 +240,7 @@ a few times, and then consume the result. Check it out:
     .collect::<Vec<i32>>();
 ```
 
-This will give you a vector containing `6`, `12`, `18`, `24`, and `30`.
+Lo anterior te dara un vector conteniendo `6`, `12`, `18`, `24`, y `30`.
 
-This is just a small taste of what iterators, iterator adapters, and consumers
-can help you with. There are a number of really useful iterators, and you can
-write your own as well. Iterators provide a safe, efficient way to manipulate
-all kinds of lists. They're a little unusual at first, but if you play with
-them, you'll get hooked. For a full list of the different iterators and
-consumers, check out the [iterator module documentation](../std/iter/index.html).
+
+Esta es una pequena muestra de en lo que los iteradores, adaptadores de iteradores, y consumidores pueden ayudarte. Existen una variedad de iteradores realmente utiles, al igual, puedes escribir tus propios. Los iteradores proporcionan una manera segura y eficiente de manipular todo tipo de listas. Son un poco inusuales a primera vista, pero si juegas un poco con ellos, quedaras enganchado. Para una lista de los diferentes iteradores y consumidores echa un vistazo a la [documentacion del modulo iterator](../std/iter/index.html) (ingles).
