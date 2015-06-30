@@ -28,7 +28,7 @@ Después de leer esta introducción, dependiendo de tu preferencia, querrás lee
 ### Contribuyendo
 
 Los archivos fuente de los cuales este libro es generado pueden ser encontrados en Github:
-[github.com/rust-lang/rust/tree/master/src/doc/trpl](https://github.com/rust-lang/rust/tree/master/src/doc/trpl)
+[github.com/goyox86/elpr](https://github.com/goyox86/elpr)
 
 ## Una breve introducción a Rust
 
