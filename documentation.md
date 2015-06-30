@@ -500,7 +500,7 @@ Esto configura unas pocas opciones, con un logo, favicon, y URL raíz.
 
 El Markdown en los comentarios de documentación es puesto sin procesar en la pagina final. Se cuidadoso con HTML literal:
 
-``rust
+```rust
 /// <script>alert(document.cookie)</script>
 # fn foo() {}
 ```
