@@ -1,4 +1,4 @@
-# Summary
+% Summary
 
 * [Introducción](README.md)
 * [Primeros Pasos](getting-started.md)
@@ -71,4 +71,3 @@
    * [Constantes Asociadas](associated-constants.md)
 * [Glosario](glossary.md)
 * [Investigacion Academica](academic-research.md)
-

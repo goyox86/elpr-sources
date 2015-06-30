@@ -1,4 +1,4 @@
-## Hola, Cargo!
+% Hola, Cargo!
 
 [Cargo][cratesio] es una herramienta que los Rusteros usan como ayuda para administrar sus proyectos Rust. Cargo esta actualmente en estado pre-1.0, y debido a ello es todavía un trabajo en proceso. Sin embargo ya es lo suficientemente bueno para muchos proyectos Rust, y se asume que los proyectos Rust usaran Cargo desde el principio.
 
@@ -47,9 +47,9 @@ authors = [ "Tu nombre <tu@ejemplo.com>" ]
 
 Este archivo esta en formato [TOML][toml]. Dejemos que sea el mismo quien se explique:
 
-> El objetivo de TOML es ser un formato de configuración minimo facil de leer debido a 
+> El objetivo de TOML es ser un formato de configuración minimo facil de leer debido a
 > una semántica obvia. TOML esta diseñado para mapear de forma in-ambigua a una tabla hash.
-> TOML debería ser fácil de convertir en estructuras de datos en una amplia variedad de 
+> TOML debería ser fácil de convertir en estructuras de datos en una amplia variedad de
 > lenguajes.
 
 TOML es muy similar a INI, pero con algunas bondades extra.
@@ -65,7 +65,7 @@ $ ./target/debug/hola_mundo
 Hola, mundo!
 ```
 
-Bam! Construimos nuestro proyecto con `cargo build`, y lo ejecutamos con 
+Bam! Construimos nuestro proyecto con `cargo build`, y lo ejecutamos con
 `./target/debug/hola_mundo`. Podemos hacer los dos pasos en uno con `cargo run`:
 
 ```bash
@@ -98,7 +98,7 @@ version = "0.0.1"
 
 Este archivo es usado por Cargo para llevar el control de las dependencias usadas en tu aplicación. Por ahora, no tenemos ninguna, y esta un poco disperso. Nunca deberías necesitar tocar este archivo por tu cuenta, solo deja a Cargo manejarlo.
 
-Eso es todo! Hemos construido satisfactoriamente `hola_mundo` con Cargo. Aunque nuestro programa sea simple, esta usando gran parte de las herramientas reales que usaras por el resto de tu carrera con Rust. Puedes asumir que para comenzar virtualmente con todo proyecto Rust harás lo siguiente: 
+Eso es todo! Hemos construido satisfactoriamente `hola_mundo` con Cargo. Aunque nuestro programa sea simple, esta usando gran parte de las herramientas reales que usaras por el resto de tu carrera con Rust. Puedes asumir que para comenzar virtualmente con todo proyecto Rust harás lo siguiente:
 
 ```bash
 $ git clone algunaurl.com/foo
@@ -163,4 +163,3 @@ Tienes dos opciones: Sumergirte en un proyecto con ‘[Aprende Rust][learnrust]�
 
 [learnrust]: learn-rust.html
 [syntax]: syntax-and-semantics.html
-

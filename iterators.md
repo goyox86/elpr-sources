@@ -1,4 +1,4 @@
-# Iteradores
+% Iteradores
 
 Hablemos de ciclos.
 

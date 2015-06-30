@@ -1,4 +1,4 @@
-# Pruebas
+% Pruebas
 
 > Probar programas puede ser una forma efectiva de mostrar la presencia de bugs, pero es desesperanzadamente inadecuada para mostrar su ausencia.
 > Edsger W. Dijkstra, "The Humble Programmer" (1972)

@@ -1,4 +1,4 @@
-# La Pila y el Montículo
+% La Pila y el Montículo
 
 Como un lenguaje de sistemas, Rust opera a un bajo nivel. Si provienes de un lenguaje de alto nivel, hay algunos aspectos de los lenguajes de programación de sistemas con los cuales puedas no estar familiarizado. El mas importante es el funcionamiento de la memoria, con la pila y el montículo. Si estas familiarizado con el como lenguajes como C usan asignación desde la pila, este capitulo sera un repaso. Si no lo estas, aprenderás acerca de este concepto general, pero con un enfoque Rustero.
 

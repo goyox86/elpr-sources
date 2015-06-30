@@ -1,1 +1,1 @@
-# `const` y `static`
+% `const` y `static`

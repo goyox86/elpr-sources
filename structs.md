@@ -1,1 +1,1 @@
-# Estructuras
+% Estructuras

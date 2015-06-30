@@ -1,1 +1,1 @@
-# No stdlib
+% No stdlib

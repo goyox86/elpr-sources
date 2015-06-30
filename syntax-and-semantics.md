@@ -1,1 +1,1 @@
-# Sintaxis y Semántica
+% Sintaxis y Semántica

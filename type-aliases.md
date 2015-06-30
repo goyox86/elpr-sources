@@ -1,1 +1,1 @@
-# alias `type`
+% alias `type`

@@ -1,4 +1,4 @@
-# Juego de Adivinanzas
+% Juego de Adivinanzas
 
 Para nuestro primer proyecto, implementaremos un problema clásico de programación para principiantes: un juego de adivinanzas. Como funciona el juego: Nuestro programa generara un numero entero aleatorio entre uno y cien. Nos pedira que introduzcamos una corazonada. Despues de haber proporcionado nuestro numero, este nos dirá si estuvimos muy por debajo y muy por encima. Una vez que adivinemos el numero correcto, nos felicitara. Suena bien?
 
@@ -809,4 +809,3 @@ fn main() {
 En este punto, has terminado satisfactoriamente el juego de las adivinanza! Felicitaciones!
 
 Este primer proyecto te enseno un montón: `let`, `match`, metodos, funciones asociadas, usar crates externos, y mas. Nuestro siguiente proyecto demostrara aun mas.
-

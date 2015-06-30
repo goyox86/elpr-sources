@@ -1,4 +1,4 @@
-## El Lenguage de Programacion Rust
+% El Lenguage de Programacion Rust
 
 Bienvenido! Este libro te ensenara acerca del [Lenguage de Programacion Rust][rust].
 Rust es un lenguaje de programacion de sistemas enfocado en tres objetivos: seguridad, velocidad y concurrencia. Rust logra estos objetivos sin tener un recolector de basura, haciendolo util para un numero de casos de uso para los cuales otros lenguajes no son tan buenos: embebir en otros lenguajes, programas con requeriminetos especificos de tiempo y espacio, escritura de codigo de bajo nivel, como controladores de dispositivo y sistemas operativos. Rust mejora por sobre los lenguajes actuales en este nicho a traves de un numero de chequeos en tiempo de compilacion que no incurren ninguna penalidad en tiempo de ejecucion, eliminando al mismo tiempo las condiciones de carrera. Rust tambien implementa 'abstraciones con cero costo', abstracciones que se sienten como las de un lenguaje de alto nivel. Aun asi, Rust permite control preciso tal y como un lenguaje de bajo nivel lo haria.
@@ -48,7 +48,7 @@ Hemos usado `mut` para hacer `x` mutable: En Rust las variable son immutables po
 
 Es importate mencionar que no necesitamos una anotacion de tipos aqui: si bien Rust es estaticamente tipado, no necesitamos anotar el tipo de forma explicita. Rust posee inferencia de tipos para balancear el poder de el tipado estatico con la verbosidad de las anotaciones de tipos.
 
-Rust prefiere asignacion en la pila que asignacion en el monticulo: `x` es puesto directamente en la pila. Sin embargo, el tipo `Vec<T>` asigna espacio para los elementos del vector en el monticulo. Si no estas familiarizado con esta distincion puedes ignorarla por ahora o echar un vistazo [‘La Pila y el Monticulo’][heap]. Rust como un lenguaje de programacion de sistemas, te da la habilidad de controlar como la memoria es asignada, pero como estamos comenzando no es tan relevante. 
+Rust prefiere asignacion en la pila que asignacion en el monticulo: `x` es puesto directamente en la pila. Sin embargo, el tipo `Vec<T>` asigna espacio para los elementos del vector en el monticulo. Si no estas familiarizado con esta distincion puedes ignorarla por ahora o echar un vistazo [‘La Pila y el Monticulo’][heap]. Rust como un lenguaje de programacion de sistemas, te da la habilidad de controlar como la memoria es asignada, pero como estamos comenzando no es tan relevante.
 
 [var]: variable-bindings.html
 [macro]: macros.html
@@ -134,4 +134,3 @@ fn main() {
 Con el par adicional de llaves hemos creado un ambito interno. `y` saldra de ambito antes que llamemos a `push()`, entonces no hay problema.
 
 Este concepto de pertenencia no es solo bueno para prevenir punteros colgantes, sino un conjunto entero de problemas, como invalidacion de iteradores, concurrencia y mas.
-

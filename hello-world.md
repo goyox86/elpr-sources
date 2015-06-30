@@ -1,4 +1,4 @@
-## Hola, mundo!
+% Hola, mundo!
 
 Ahora que has instalado Rust, escribamos tu primer programa. Es tradición que tu primer programa en cualquier lenguaje sea uno que imprima el texto “Hola, mundo!” a la pantalla. Lo bueno de comenzar con un programa tan simple es que verificas no solo que el compilador esta instalado, sino que esta funcionando. Imprimir información a la pantalla es una cosa muy común.
 
@@ -68,7 +68,7 @@ A continuación, `"Hola, mundo!"` es una cadena de caracteres. Las cadenas de ca
 
 [allocation]: the-stack-and-the-heap.html
 
-Finalmente, la linea termina con un punto y coma  (`;`). Rust es un lenguaje orientado a expresiones, lo que significa que la mayoría de las cosas son expresiones, en vez de sentencias. El `;` se usa para indicar que la expresión ha terminado,  y que la siguiente esta lista para comenzar. La mayoría de las lineas de código en Rust terminan con un `;`. 
+Finalmente, la linea termina con un punto y coma  (`;`). Rust es un lenguaje orientado a expresiones, lo que significa que la mayoría de las cosas son expresiones, en vez de sentencias. El `;` se usa para indicar que la expresión ha terminado,  y que la siguiente esta lista para comenzar. La mayoría de las lineas de código en Rust terminan con un `;`.
 
 Finalmente, compilar y ejecutar nuestro programa. Podemos compilar con nuestro compilador `rustc` pasandole el nombre de nuestro archivo de código fuente:
 
@@ -106,4 +106,3 @@ Si provienes de un lenguaje dinámico como Ruby, Pyhton o Javascript, probableme
 Felicitaciones, Has escrito oficialmente un programa Rust. Eso te convierte en un programador Rust! Bienvenido. 🎊🎉👍
 
 A continuación me gustaría presentarte otra herramienta, Cargo, el cual es usado para escribir programas Rust para el mundo real. Solo usar `rustc` esta bien para cosas simples, pero a medida que tu proyecto crece, necesitaras algo que te ayude a administrar todas las opciones que este tiene, así como hacer fácil compartir el codigo con otras personas y proyectos.
-

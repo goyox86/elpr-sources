@@ -1,1 +1,1 @@
-# Rasgos
+% Rasgos

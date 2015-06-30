@@ -1,4 +1,4 @@
-# Compilación Condicional
+% Compilación Condicional
 
 Rust posee un atributo especial, `#[cfg]`, que te permite compilar código basado en una opción proporcionada al compilador. Tiene dos formas:
 
@@ -83,4 +83,3 @@ if cfg!(target_os = "macos") || cfg!(target_os = "ios") {
 [compilerplugins]: compiler-plugins.html
 
 Estos serán reemplazado por `true` o `false` en tiempo de compilación, dependiendo en las opciones de la configuración.
-

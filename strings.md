@@ -1,1 +1,1 @@
-# Cadenas de Caracteres
+% Cadenas de Caracteres

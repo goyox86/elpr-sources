@@ -1,1 +1,1 @@
-# Conversión entre tipos
+% Conversión entre tipos

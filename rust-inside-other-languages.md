@@ -1,4 +1,4 @@
-# Rust Dentro de Otros Lenguajes
+% Rust Dentro de Otros Lenguajes
 
 Para nuestro tercer proyecto, elegiremos algo que demuestra una de las mayores fortalezas de Rust: la ausencia de un entorno de ejecución.
 
@@ -96,7 +96,7 @@ src/lib.rs:8                 x += 1
              ...
 src/lib.rs:6:17: 6:22 warning: variable `x` is assigned to, but never used, #[warn(unused_variables)] on by default
 src/lib.rs:6             let mut x = 0;
-                             ^~~~~ 
+                             ^~~~~
 ```
 
 La primera advertencia es debido es a consecuencia de estar construyendo una biblioteca. Si tuviéramos una prueba para esta función, la advertencia desaparecería. Pero por ahora nunca es llamada.
@@ -279,4 +279,3 @@ En my sistema, este ejemplo toma unos rápidos `0.092` segundos.
 # Conclusion
 
 Como puedes ver, las bases de hacer FFI son _muy_ fáciles. Por supuesto hay mucho mas que podríamos hacer aquí. Echa un vistazo al capitulo [FFI][ffi] para mas detalles.
-

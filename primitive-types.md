@@ -1,1 +1,1 @@
-# Tipos Primitivos
+% Tipos Primitivos

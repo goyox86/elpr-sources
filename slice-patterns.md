@@ -1,1 +1,1 @@
-# Patrones de Slice
+% Patrones de Slice

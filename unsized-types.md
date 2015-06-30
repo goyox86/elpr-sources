@@ -1,1 +1,1 @@
-# Tipos sin Tamaño
+% Tipos sin Tamaño

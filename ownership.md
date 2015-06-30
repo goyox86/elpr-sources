@@ -1,1 +1,1 @@
-# Pertenencia
+% Pertenencia

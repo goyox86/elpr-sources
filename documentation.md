@@ -504,4 +504,3 @@ El Markdown en los comentarios de documentación es puesto sin procesar en la pa
 /// <script>alert(document.cookie)</script>
 # fn foo() {}
 ```
-

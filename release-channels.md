@@ -1,1 +1,1 @@
-# Canales de Distribución
+% Canales de Distribución

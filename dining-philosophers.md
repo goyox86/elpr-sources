@@ -1,22 +1,22 @@
-## La Cena de los Filósofos
+% La Cena de los Filósofos
 
-Para nuestro segundo proyecto, echemos un vistazo a un problema clásico de concurrencia. Se llama ‘La cena de los filósofos’. Fue originalmente concebido por Dijkstra en 1965, pero nosotros usaremos una version ligeramente adaptada de [este paper][paper] por Tony Hoare en 1985. 
+Para nuestro segundo proyecto, echemos un vistazo a un problema clásico de concurrencia. Se llama ‘La cena de los filósofos’. Fue originalmente concebido por Dijkstra en 1965, pero nosotros usaremos una version ligeramente adaptada de [este paper][paper] por Tony Hoare en 1985.
 
 [paper]: http://www.usingcsp.com/cspbook.pdf
 
-> En tiempos ancestrales, un filántropo adinerado preparo una universidad para alojar a cinco 
-> filósofos eminentes. Cada filósofo tenia una habitación en la cual podía desempeñar su 
+> En tiempos ancestrales, un filántropo adinerado preparo una universidad para alojar a cinco
+> filósofos eminentes. Cada filósofo tenia una habitación en la cual podía desempeñar su
 > actividad profesional del pensamiento: también había un comedor en común, amoblado con una
-> mesa circular, rodeada por cinco sillas, cada una identificada con el nombre del filosofo que 
-> se sentaba en ella. Los filósofos se sentaban en sentido anti-horario alrededor de la mesa. A la 
-> izquierda de cada filósofo yacía un tenedor dorado, y en el centro un tazón de espagueti, el 
-> cual era constantemente rellenado. Se esperaba que un filósofo empleara la mayoría de su 
-> tiempo pensando; pero cuando se sintieran con hambre, se dirigiera a el comedor tomara el 
-> tenedor que estaba a su izquierda y lo sumieran en el espagueti. Pero tal era naturaleza 
-> enredada del espagueti que un segundo tenedor era requerido para llevarlo a la boca. 
-> El filósofo por ende tenia que también tomar el tenedor a su derecha. Cuando terminaban 
-> debían bajar ambos tenedores, levantarse de la silla y continuar pensando. Por supuesto, 
-> un tenedor puede ser usado por un solo filósofo a la vez. Si otro filósofo lo desea, 
+> mesa circular, rodeada por cinco sillas, cada una identificada con el nombre del filosofo que
+> se sentaba en ella. Los filósofos se sentaban en sentido anti-horario alrededor de la mesa. A la
+> izquierda de cada filósofo yacía un tenedor dorado, y en el centro un tazón de espagueti, el
+> cual era constantemente rellenado. Se esperaba que un filósofo empleara la mayoría de su
+> tiempo pensando; pero cuando se sintieran con hambre, se dirigiera a el comedor tomara el
+> tenedor que estaba a su izquierda y lo sumieran en el espagueti. Pero tal era naturaleza
+> enredada del espagueti que un segundo tenedor era requerido para llevarlo a la boca.
+> El filósofo por ende tenia que también tomar el tenedor a su derecha. Cuando terminaban
+> debían bajar ambos tenedores, levantarse de la silla y continuar pensando. Por supuesto,
+> un tenedor puede ser usado por un solo filósofo a la vez. Si otro filósofo lo desea,
 > tiene que esperar hasta que el tenedor este disponible nuevamente.
 
 Este problema clásico exhibe algunos elementos de la concurrencia. La razón de ello es que es una solución efectivamente difícil de implementar: una implementación simple puede generar un deadlock. Por ejemplo, consideremos un algoritmo simple que podría resolver este problema:
@@ -79,7 +79,7 @@ impl Filosofo {
 }
 ```
 
-Este bloque `impl` nos permite definir cosas en estructuras `Filosofo`. En este caso estamos definiendo una ‘función asociada’ llamada `new`. La primera linea luce así: 
+Este bloque `impl` nos permite definir cosas en estructuras `Filosofo`. En este caso estamos definiendo una ‘función asociada’ llamada `new`. La primera linea luce así:
 
 ```rust
 # struct Filosofo {
@@ -94,7 +94,7 @@ fn new(nombre: &str) -> Filosofo {
 # }
 ```
 
-Recibimos un argumento, `nombre`, de tipo `&str`. Una referencia a otra cadena de caracteres. Esta retorna una instancia de nuestra estructura `Filosofo`. 
+Recibimos un argumento, `nombre`, de tipo `&str`. Una referencia a otra cadena de caracteres. Esta retorna una instancia de nuestra estructura `Filosofo`.
 
 ```rust
 # struct Filosofo {
@@ -215,7 +215,7 @@ Michel Foucault ha finalizado de comer.
 
 Muy fácil, todos han terminado de comer! Pero no hemos implementado el problema real todavía, así que aun no terminamos!
 
-A continuación, no solo queremos solo finalicen de comer, sino que efectivamente coman. He aquí la siguiente versión: 
+A continuación, no solo queremos solo finalicen de comer, sino que efectivamente coman. He aquí la siguiente versión:
 
 
 ```rust
@@ -388,7 +388,7 @@ for h in handles {
 }
 ```
 
-Al final de `main()`, iteramos a través de los handles llamando `join()` en ellos, lo cual bloquea la ejecución hasta que el hilo haya completado su ejecución. Esto asegura que el hilo complete su ejecución antes que el programa termine. 
+Al final de `main()`, iteramos a través de los handles llamando `join()` en ellos, lo cual bloquea la ejecución hasta que el hilo haya completado su ejecución. Esto asegura que el hilo complete su ejecución antes que el programa termine.
 
 Si ejecutas este programa, veras que los filósofos comen sin orden!
 Tenemos multi-hilos!
@@ -538,7 +538,7 @@ fn comer(&self, mesa: &Mesa) {
 }
 ```
 
-Tenemos dos nuevas lineas, también hemos agregado un argumento, `mesa`. Accedemos a la lista de tenedores de la `Mesa`, y después usamos `self.izquierda` y `self.derecha` para acceder al tenedor en un indice en particular. Eso nos da acceso al `Mutex` en ese indice, en donde llamamos `lock()`. Si el mutex esta siendo accedido actualmente por alguien mas, nos bloquearemos hasta que este disponible. 
+Tenemos dos nuevas lineas, también hemos agregado un argumento, `mesa`. Accedemos a la lista de tenedores de la `Mesa`, y después usamos `self.izquierda` y `self.derecha` para acceder al tenedor en un indice en particular. Eso nos da acceso al `Mutex` en ese indice, en donde llamamos `lock()`. Si el mutex esta siendo accedido actualmente por alguien mas, nos bloquearemos hasta que este disponible.
 
 La llamada a `lock()` puede fallar, y si lo hace, queremos terminar abruptamente. En este caso el error que puede ocurrir es que el mutex este [‘envenenado’][poison] (‘poisoned’), que es lo que ocurre cuando el hilo hace pánico mientras el mantiene el bloqueo. Debido a que esto no debería ocurrir, simplemente usamos `unwrap()`.
 
@@ -601,5 +601,3 @@ Michel Foucault ha finalizado de comer.
 ```
 
 Felicitaciones! Haz implementado un problema clásico de concurrencia en Rust.
-
-

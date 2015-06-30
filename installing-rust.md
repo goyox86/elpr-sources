@@ -1,4 +1,4 @@
-## Instalando Rust
+% Instalando Rust
 
 El primer paso para usar Rust es instalarlo! Existen un numero de maneras para instalar Rust, pero la mas fácil es usar el script `rustup`. Si estas en Linux o una Mac, todo lo que necesitas hacer es (sin escribir los `$`s, solo indican el inicio de cada comando):
 
@@ -70,6 +70,5 @@ Si no, hay un numero de lugares en los que puedes obtener ayuda. El mas fácil e
 
 [irc]: irc://irc.mozilla.org/#rust
 [mibbit]: http://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust
-[users]: http://users.rust-lang.org/ 
+[users]: http://users.rust-lang.org/
 [stackoverflow]: http://stackoverflow.com/questions/tagged/rust
-

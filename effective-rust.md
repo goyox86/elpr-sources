@@ -1,4 +1,4 @@
-# Rust Efectivo
+% Rust Efectivo
 
 Entonces, haz aprendido como escribir algo de código Rust. Pero hay una diferencia entre escribir *cualquier* código Rust y escribir *buen* código Rust.
 

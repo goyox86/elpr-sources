@@ -1,1 +1,1 @@
-# Tipos Asociados
+% Tipos Asociados

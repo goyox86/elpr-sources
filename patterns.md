@@ -1,1 +1,1 @@
-# Patrones
+% Patrones

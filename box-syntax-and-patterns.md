@@ -1,1 +1,1 @@
-# Sintaxis de Cajas y Patrones
+% Sintaxis de Cajas y Patrones

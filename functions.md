@@ -1,1 +1,1 @@
-# Funciones
+% Funciones
