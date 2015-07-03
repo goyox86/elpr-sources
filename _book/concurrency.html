@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Concurrencia</title>
+
+    <link rel="stylesheet" type="text/css" href="rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a  href='README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a  href='getting-started.html'><b>2.</b> Primeros Pasos</a>
+<ul class='section'>
+<li><a  href='installing-rust.html'><b>2.1.</b> Instalando Rust</a>
+</li>
+<li><a  href='hello-world.html'><b>2.2.</b> Hola, mundo!</a>
+</li>
+<li><a  href='hello-cargo.html'><b>2.3.</b> Hola, Cargo!</a>
+</li>
+</ul>
+</li>
+<li><a  href='learn-rust.html'><b>3.</b> Aprende Rust</a>
+<ul class='section'>
+<li><a  href='guessing-game.html'><b>3.1.</b> El Juego de las Adivinanzas</a>
+</li>
+<li><a  href='dining-philosophers.html'><b>3.2.</b> La Cena de los Filósofos</a>
+</li>
+<li><a  href='rust-inside-other-languages.html'><b>3.3.</b> Rust dentro de otros Lenguajes</a>
+</li>
+</ul>
+</li>
+<li><a  href='effective-rust.html'><b>4.</b> Rust Efectivo</a>
+<ul class='section'>
+<li><a  href='the-stack-and-the-heap.html'><b>4.1.</b> La Pila y el Monticulo</a>
+</li>
+<li><a  href='testing.html'><b>4.2.</b> Pruebas</a>
+</li>
+<li><a  href='conditional-compilation.html'><b>4.3.</b> Compilacion Condicional</a>
+</li>
+<li><a  href='documentation.html'><b>4.4.</b> Documentacion</a>
+</li>
+<li><a  href='iterators.html'><b>4.5.</b> Iteradores</a>
+</li>
+<li><a class='active' href='concurrency.html'><b>4.6.</b> Concurrencia</a>
+</li>
+<li><a  href='error-handling.html'><b>4.7.</b> Manejo de Errores</a>
+</li>
+<li><a  href='ffi.html'><b>4.8.</b> FFI</a>
+</li>
+<li><a  href='borrow-and-asref.html'><b>4.9.</b> Borrow y AsRef</a>
+</li>
+<li><a  href='release-channels.html'><b>4.10.</b> Canales de Distribucion</a>
+</li>
+</ul>
+</li>
+<li><a  href='syntax-and-semantics.html'><b>5.</b> Sintaxis y Semantica</a>
+<ul class='section'>
+<li><a  href='variable-bindings.html'><b>5.1.</b> Variables</a>
+</li>
+<li><a  href='functions.html'><b>5.2.</b> Funciones</a>
+</li>
+<li><a  href='primitive-types.html'><b>5.3.</b> Tipos Primitivos</a>
+</li>
+<li><a  href='comments.html'><b>5.4.</b> Comentarios</a>
+</li>
+<li><a  href='if.html'><b>5.5.</b> if</a>
+</li>
+<li><a  href='for-loops.html'><b>5.6.</b> Ciclos for</a>
+</li>
+<li><a  href='while-loops.html'><b>5.7.</b> Ciclos while</a>
+</li>
+<li><a  href='ownership.html'><b>5.8.</b> Pertenencia</a>
+</li>
+<li><a  href='references-and-borrowing.html'><b>5.9.</b> Referencias y Prestamo</a>
+</li>
+<li><a  href='lifetimes.html'><b>5.10.</b> Tiempos de Vida</a>
+</li>
+<li><a  href='mutability.html'><b>5.11.</b> Mutabilidad</a>
+</li>
+<li><a  href='structs.html'><b>5.12.</b> Estructuras</a>
+</li>
+<li><a  href='enums.html'><b>5.13.</b> Enumeraciones</a>
+</li>
+<li><a  href='match.html'><b>5.14.</b> Match</a>
+</li>
+<li><a  href='patterns.html'><b>5.15.</b> Patrones</a>
+</li>
+<li><a  href='method-syntax.html'><b>5.16.</b> Sintaxis de Metodos</a>
+</li>
+<li><a  href='vectors.html'><b>5.17.</b> Vectores</a>
+</li>
+<li><a  href='strings.html'><b>5.18.</b> Cadenas de Caracteres</a>
+</li>
+<li><a  href='generics.html'><b>5.19.</b> Genericos</a>
+</li>
+<li><a  href='traits.html'><b>5.20.</b> Rasgos</a>
+</li>
+<li><a  href='drop.html'><b>5.21.</b> Drop</a>
+</li>
+<li><a  href='if-let.html'><b>5.22.</b> if let</a>
+</li>
+<li><a  href='trait-objects.html'><b>5.23.</b> Objetos de Razgo</a>
+</li>
+<li><a  href='closures.html'><b>5.24.</b> Closures</a>
+</li>
+<li><a  href='ufcs.html'><b>5.25.</b> Sintaxis de Llamada a Funciones Universal</a>
+</li>
+<li><a  href='crates-and-modules.html'><b>5.26.</b> Crates y Modulos</a>
+</li>
+<li><a  href='const-and-static.html'><b>5.27.</b> `const` y `static`</a>
+</li>
+<li><a  href='attributes.html'><b>5.28.</b> Atributos</a>
+</li>
+<li><a  href='type-aliases.html'><b>5.29.</b> Alias `type`</a>
+</li>
+<li><a  href='casting-between-types.html'><b>5.30.</b> Conversion entre Tipos</a>
+</li>
+<li><a  href='associated-types.html'><b>5.31.</b> Tipos Asociados</a>
+</li>
+<li><a  href='unsized-types.html'><b>5.32.</b> Tipos sin Tamano</a>
+</li>
+<li><a  href='operators-and-overloading.html'><b>5.33.</b> Operadores y Sobrecarga</a>
+</li>
+<li><a  href='deref-coercions.html'><b>5.34.</b> Coerciones Deref</a>
+</li>
+<li><a  href='macros.html'><b>5.35.</b> Macros</a>
+</li>
+<li><a  href='raw-pointers.html'><b>5.36.</b> Apuntadores Planos</a>
+</li>
+<li><a  href='unsafe.html'><b>5.37.</b> `unsafe`</a>
+</li>
+</ul>
+</li>
+<li><a  href='nightly-rust.html'><b>6.</b> Rust Nocturno</a>
+<ul class='section'>
+<li><a  href='compiler-plugins.html'><b>6.1.</b> Plugins del Compilador</a>
+</li>
+<li><a  href='inline-assembly.html'><b>6.2.</b> Ensamblador Inline</a>
+</li>
+<li><a  href='no-stdlib.html'><b>6.3.</b> No stdlib</a>
+</li>
+<li><a  href='intrinsics.html'><b>6.4.</b> Intrinsecos</a>
+</li>
+<li><a  href='lang-items.html'><b>6.5.</b> Items de Lenguaje</a>
+</li>
+<li><a  href='link-args.html'><b>6.6.</b> Argumentos de Enlace</a>
+</li>
+<li><a  href='benchmark-tests.html'><b>6.7.</b> Pruebas de Rendimiento</a>
+</li>
+<li><a  href='box-syntax-and-patterns.html'><b>6.8.</b> Sintaxis Box y Patones</a>
+</li>
+<li><a  href='slice-patterns.html'><b>6.9.</b> Patrones Slice</a>
+</li>
+<li><a  href='associated-constants.html'><b>6.10.</b> Constantes Asociadas</a>
+</li>
+</ul>
+</li>
+<li><a  href='glossary.html'><b>7.</b> Glosario</a>
+</li>
+<li><a  href='academic-research.html'><b>8.</b> Inverstigacion Academica</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Concurrencia</h1>
+    <p>La concurrencia y el paralelismo son dos tópicos increíblemente importantes en las ciencias de la computación, también son un tópico caliente en la industria hoy en día. Las computadoras cada vez poseen mas y mas núcleos, aun así, todavía algunos desarrolladores no están preparados para utilizarnos completamente.</p>
+
+<p>La seguridad en el manejo de memoria de Rust también aplica a su historia de concurrencia. Incluso los programas concurrentes deben ser seguros en el manejo de memoria, sin condiciones de carrera. El sistema de tipos de Rust esta a la altura del desafío, y te dota de poderosas vías para razonar acerca de código concurrente en tiempo de compilación.</p>
+
+<p>Antes de que hablemos de las características de concurrencia que vienen con Rust, es importante entender algo: Rust es de bajo nivel, suficientemente bajo al punto que todas estas facilidades están implementadas en la biblioteca estándar. Esto significa que si no te gusta algún aspecto de la manera en la que Rust maneja la concurrencia, puedes implementar una forma alternativa de hacerlo. <a href="https://github.com/carllerche/mio">mio</a> es un vivo ejemplo de este principio en acción.</p>
+
+<h2 id="bases:-send-y-sync" class='section-header'><a
+                           href="#bases:-send-y-sync">Bases: <code>Send</code> y <code>Sync</code></a></h2>
+<p>La concurrencia es algo sobre lo que es difícil razonar. En Rust tenemos un poderoso, sistema de tipos estático que nos ayuda a razonar acerca de nuestro código. Como tal, Rust nos provee de dos traits para ayudarnos a darle sentido a código que pueda posiblemente ser concurrente.</p>
+
+<h3 id="send" class='section-header'><a
+                           href="#send"><code>Send</code></a></h3>
+<p>El primer trait del cual hablaremos es <a href="../std/marker/trait.Send.html"><code>Send</code></a> (ingles). Cuando un tipo <code>T</code> implementa <code>Send</code>, le indica al compilador que algo de este tipo puede transferir la pertenencia entre hilos de forma segura.</p>
+
+<p>Esto es importante para hacer cumplir ciertas restricciones. Por ejemplo si tenemos un canal, conectando dos hilos, deberíamos querer transferir algunos datos a el otro hilo través del canal. Por lo tanto, nos aseguramos de que <code>Send</code> haya sido implementado para ese tipo.</p>
+
+<p>De manera opuesta, si estamos envolviendo una biblioteca con FFI que no es threadsafe, no deberíamos querer implementar <code>Send</code>, de manera tal que el compilador nos ayude a asegurarnos que esta no pueda abandonar el hilo actual.</p>
+
+<h3 id="sync" class='section-header'><a
+                           href="#sync"><code>Sync</code></a></h3>
+<p>El segundo de estos traits es llamado <a href="../std/marker/trait.Sync.html"><code>Sync</code></a> (ingles). Cuando un tipo <code>T</code> implementa <code>Sync</code>, le indica al el compilador que algo de este tipo no tiene posibilidad de introducir inseguridad en memoria cuando es usado de manera concurrente por multiples hilos de ejecución.</p>
+
+<p>Por ejemplo, compartir data inmutable con una cuenta de referencias atómica es threadsafe. Rust provee dicho tipo, <code>Arc&lt;T&gt;</code>, el cual implementa <code>Sync</code>, y es por ello que es seguro de compartir entre hilos.</p>
+
+<p>Estos dos traits te permiten usar el sistema de tipos para hacer garantías fuertes acerca de las propiedades de tu código bajo concurrencia. En primer lugar, antes de demostrar porque, necesitamos aprender como crear un programa concurrente en Rust!</p>
+
+<h2 id="hilos" class='section-header'><a
+                           href="#hilos">Hilos</a></h2>
+<p>La biblioteca estándar de Rust provee una biblioteca para el manejo de hilos, que te permite ejecutar código rust de forma paralela. He aqui un ejemplo basico del uso de <code>std::thread</code>:</p>
+<span class='rusttest'>use std::thread;
+
+fn main() {
+    thread::spawn(|| {
+        println!(&quot;Hola desde un hilo!&quot;);
+    });
+}
+</span><pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='op'>||</span> {
+        <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hola desde un hilo!&quot;</span>);
+    });
+}
+</pre>
+
+<p>El método <code>thread::spawn()</code> acepta un closure como argumento, closure que es ejecutado en un nuevo hilo. <code>thread::spawn()</code> retorna un handle a el nuevo hilo, que puede ser usado para esperar a que el hilo finalice y luego extraer su resultado:</p>
+<span class='rusttest'>use std::thread;
+
+fn main() {
+    let handle = thread::spawn(|| {
+        &quot;Hola desde un hilo!&quot;
+    });
+
+    println!(&quot;{}&quot;, handle.join().unwrap());
+}
+</span><pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>handle</span> <span class='op'>=</span> <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='op'>||</span> {
+        <span class='string'>&quot;Hola desde un hilo!&quot;</span>
+    });
+
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>handle</span>.<span class='ident'>join</span>().<span class='ident'>unwrap</span>());
+}
+</pre>
+
+<p>Muchos lenguajes poseen la habilidad de ejecutar hilos, pero es salvajemente inseguro. Existen libros enteros acerca de como prevenir los errores que ocurren como consecuencia de compartir estado mutable. Rust ayuda con su sistema de tipos, previniendo condiciones de carrera en tiempo de compilación. Hablemos acerca de como efectivamente puedes compartir cosas entre hilos.</p>
+
+<h2 id="estado-mutable-compartido-seguro" class='section-header'><a
+                           href="#estado-mutable-compartido-seguro">Estado Mutable Compartido Seguro</a></h2>
+<p>Debido a el sistema de tipos de Rust, tenemos un concepto que suena como una mentira: &quot;estado mutable compartido seguro&quot;. Muchos programadores concuerdan en que el estado mutable compartido es muy, muy malo.</p>
+
+<p>Alguien dijo alguna vez:</p>
+
+<blockquote>
+<p>El estado mutable compartido es la raíz de toda maldad. La mayoría de los lenguajes intentan lidiar con este problema a través de la parte &#39;mutable&#39;, pero Rust lo enfrenta resolviendo la parte &#39;compartida&#39;.</p>
+</blockquote>
+
+<p>La misma pertenencia que previene el uso incorrecto de apuntadores también ayuda a eliminar las condiciones de carrera, uno de los peores bugs relacionados con concurrencia.</p>
+
+<p>Como ejemplo, un programa Rust que tendría una condición de carrera en muchos lenguajes. En Rust no compilaría:</p>
+<span class='rusttest'>use std::thread;
+
+fn main() {
+    let mut data = vec![1u32, 2, 3];
+
+    for i in 0..3 {
+        thread::spawn(move || {
+            data[i] += 1;
+        });
+    }
+
+    thread::sleep_ms(50);
+}
+</span><pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>data</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1u32</span>, <span class='number'>2</span>, <span class='number'>3</span>];
+
+    <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='number'>3</span> {
+        <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='kw'>move</span> <span class='op'>||</span> {
+            <span class='ident'>data</span>[<span class='ident'>i</span>] <span class='op'>+=</span> <span class='number'>1</span>;
+        });
+    }
+
+    <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>(<span class='number'>50</span>);
+}
+</pre>
+
+<p>Lo anterior produce un error:</p>
+
+<pre><code class="language-text">8:17 error: capture of moved value: `data`
+        data[i] += 1;
+        ^~~~
+</code></pre>
+
+<p>En este caso, sabemos que nuestro código <em>deberia</em> ser seguro, pero Rust no esta seguro de ello. En realidad no es seguro, si tuviéramos una referencia a <code>data</code> en cada hilo, y el hilo toma pertenencia de la referencia, tendríamos tres dueños! Eso esta mal. Podemos arreglar esto a través del uso del tipo <code>Arc&lt;T&gt;</code>, un apuntador con conteo atómico de referencias. La parte &#39;atómico&#39; significa que es seguro compartirlo entre hilos.</p>
+
+<p><code>Arc&lt;T&gt;</code> asume una propiedad mas acerca de su contenido para asegurarse que es seguro compartirlo entre hilos: asume que su contenido es <code>Sync</code>. Pero en nuestro caso, queremos mutar el valor. Necesitamos un tipo que pueda asegurarse que solo una persona a la vez pueda mutar lo que este dentro. Para eso, podemos usar el tipo <code>Mutex&lt;T&gt;</code>. He aquí la segunda version de nuestro código.  Aun no funciona, pero por una razón diferente:</p>
+<span class='rusttest'>use std::thread;
+use std::sync::Mutex;
+
+fn main() {
+    let mut data = Mutex::new(vec![1u32, 2, 3]);
+
+    for i in 0..3 {
+        let data = data.lock().unwrap();
+        thread::spawn(move || {
+            data[i] += 1;
+        });
+    }
+
+    thread::sleep_ms(50);
+}
+</span><pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::<span class='ident'>Mutex</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>data</span> <span class='op'>=</span> <span class='ident'>Mutex</span>::<span class='ident'>new</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1u32</span>, <span class='number'>2</span>, <span class='number'>3</span>]);
+
+    <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='number'>3</span> {
+        <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> <span class='ident'>data</span>.<span class='ident'>lock</span>().<span class='ident'>unwrap</span>();
+        <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='kw'>move</span> <span class='op'>||</span> {
+            <span class='ident'>data</span>[<span class='ident'>i</span>] <span class='op'>+=</span> <span class='number'>1</span>;
+        });
+    }
+
+    <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>(<span class='number'>50</span>);
+}
+</pre>
+
+<p>He aqui el error:</p>
+
+<pre><code class="language-text">&lt;anon&gt;:9:9: 9:22 error: the trait `core::marker::Send` is not implemented for the type `std::sync::mutex::MutexGuard&lt;&#39;_, collections::vec::Vec&lt;u32&gt;&gt;` [E0277]
+&lt;anon&gt;:11         thread::spawn(move || {
+                  ^~~~~~~~~~~~~
+&lt;anon&gt;:9:9: 9:22 note: `std::sync::mutex::MutexGuard&lt;&#39;_, collections::vec::Vec&lt;u32&gt;&gt;` cannot be sent between threads safely
+&lt;anon&gt;:11         thread::spawn(move || {
+                  ^~~~~~~~~~~~~
+</code></pre>
+
+<p>Lo ves, <a href="../std/sync/struct.Mutex.html"><code>Mutex</code></a> posee un metodo <a href="../std/sync/struct.Mutex.html#method.lock"><code>lock</code></a> que posee esta firma:</p>
+<span class='rusttest'>fn main() {
+    fn lock(&amp;self) -&gt; LockResult&lt;MutexGuard&lt;T&gt;&gt;
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>fn</span> <span class='ident'>lock</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>LockResult</span><span class='op'>&lt;</span><span class='ident'>MutexGuard</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;&gt;</span>
+</pre>
+
+<p>Debido a que <code>Send</code> no esta implementado para <code>MutexGuard&lt;T&gt;</code>, no podemos transferir el <code>MutexGuard&lt;T&gt;</code> entre hilos, lo que se traduce en el error.</p>
+
+<p>Podemos usar <code>Arc&lt;T&gt;</code> para corregir el error. He aqui la version funcional:</p>
+<span class='rusttest'>use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let data = Arc::new(Mutex::new(vec![1u32, 2, 3]));
+
+    for i in 0..3 {
+        let data = data.clone();
+        thread::spawn(move || {
+            let mut data = data.lock().unwrap();
+            data[i] += 1;
+        });
+    }
+
+    thread::sleep_ms(50);
+}
+</span><pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::{<span class='ident'>Arc</span>, <span class='ident'>Mutex</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> <span class='ident'>Arc</span>::<span class='ident'>new</span>(<span class='ident'>Mutex</span>::<span class='ident'>new</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='number'>1u32</span>, <span class='number'>2</span>, <span class='number'>3</span>]));
+
+    <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='number'>3</span> {
+        <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> <span class='ident'>data</span>.<span class='ident'>clone</span>();
+        <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='kw'>move</span> <span class='op'>||</span> {
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>data</span> <span class='op'>=</span> <span class='ident'>data</span>.<span class='ident'>lock</span>().<span class='ident'>unwrap</span>();
+            <span class='ident'>data</span>[<span class='ident'>i</span>] <span class='op'>+=</span> <span class='number'>1</span>;
+        });
+    }
+
+    <span class='ident'>thread</span>::<span class='ident'>sleep_ms</span>(<span class='number'>50</span>);
+}
+</pre>
+
+<p>Ahora llamamos <code>clone()</code> en nuestro <code>Arc</code>, lo cual incrementa el contador interno. Este handle es entonces movido dentro del nuevo hilo. Examinemos el cuerpo del hilo mas de cerca:</p>
+<span class='rusttest'>use std::sync::{Arc, Mutex};
+use std::thread;
+fn main() {
+    let data = Arc::new(Mutex::new(vec![1u32, 2, 3]));
+    for i in 0..3 {
+        let data = data.clone();
+thread::spawn(move || {
+    let mut data = data.lock().unwrap();
+    data[i] += 1;
+});
+    }
+    thread::sleep_ms(50);
+}
+</span><pre class='rust rust-example-rendered'>
+<span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='kw'>move</span> <span class='op'>||</span> {
+    <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>data</span> <span class='op'>=</span> <span class='ident'>data</span>.<span class='ident'>lock</span>().<span class='ident'>unwrap</span>();
+    <span class='ident'>data</span>[<span class='ident'>i</span>] <span class='op'>+=</span> <span class='number'>1</span>;
+});
+</pre>
+
+<p>Primero, llamamos <code>lock()</code>, lo cual obtiene el bloqueo de exclusion mutua. Debido a que esta operación puede fallar, este método retorna un <code>Result&lt;T, E&gt;</code>, y debido a que esto es solo un ejemplo, hacemos <code>unwrap()</code> en el para obtener una referencia a la data. Código real tendría un manejo de errores mas robusto en este lugar. Somos libres de mutarlo, puesto que tenemos el bloqueo.</p>
+
+<p>Por ultimo, mientras que los hilos se ejecutan, esperamos por la culminación de un temporizador corto. Esto no es ideal: pudimos haber escogido un tiempo razonable para esperar pero lo mas probable es que esperemos mas de lo necesario, o no lo suficiente, dependiendo de cuanto tiempo los hilos toman para terminar la computación cuando el programa corre.</p>
+
+<p>Una alternativa mas precisa a el temporizador seria el uso de uno de los mecanismos proporcionados por la biblioteca estándar de Rust para la sincronización entre hilos. Hablemos de ellos: los canales.</p>
+
+<h2 id="canales" class='section-header'><a
+                           href="#canales">Canales</a></h2>
+<p>He aquí una version nuestro código que usa canales para la sincronización, en lugar de esperar por un tiempo especifico:</p>
+<span class='rusttest'>use std::sync::{Arc, Mutex};
+use std::thread;
+use std::sync::mpsc;
+
+fn main() {
+    let data = Arc::new(Mutex::new(0u32));
+
+    let (tx, rx) = mpsc::channel();
+
+    for _ in 0..10 {
+        let (data, tx) = (data.clone(), tx.clone());
+
+        thread::spawn(move || {
+            let mut data = data.lock().unwrap();
+            *data += 1;
+
+            tx.send(());
+        });
+    }
+
+    for _ in 0..10 {
+        rx.recv();
+    }
+}
+</span><pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::{<span class='ident'>Arc</span>, <span class='ident'>Mutex</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::<span class='ident'>mpsc</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> <span class='ident'>Arc</span>::<span class='ident'>new</span>(<span class='ident'>Mutex</span>::<span class='ident'>new</span>(<span class='number'>0u32</span>));
+
+    <span class='kw'>let</span> (<span class='ident'>tx</span>, <span class='ident'>rx</span>) <span class='op'>=</span> <span class='ident'>mpsc</span>::<span class='ident'>channel</span>();
+
+    <span class='kw'>for</span> _ <span class='kw'>in</span> <span class='number'>0</span>..<span class='number'>10</span> {
+        <span class='kw'>let</span> (<span class='ident'>data</span>, <span class='ident'>tx</span>) <span class='op'>=</span> (<span class='ident'>data</span>.<span class='ident'>clone</span>(), <span class='ident'>tx</span>.<span class='ident'>clone</span>());
+
+        <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='kw'>move</span> <span class='op'>||</span> {
+            <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>data</span> <span class='op'>=</span> <span class='ident'>data</span>.<span class='ident'>lock</span>().<span class='ident'>unwrap</span>();
+            <span class='op'>*</span><span class='ident'>data</span> <span class='op'>+=</span> <span class='number'>1</span>;
+
+            <span class='ident'>tx</span>.<span class='ident'>send</span>(());
+        });
+    }
+
+    <span class='kw'>for</span> _ <span class='kw'>in</span> <span class='number'>0</span>..<span class='number'>10</span> {
+        <span class='ident'>rx</span>.<span class='ident'>recv</span>();
+    }
+}
+</pre>
+
+<p>Hacemos uso del método <code>mpsc::channel()</code> para construir un canal nuevo. Enviamos (a través de <code>send</code>) un simple <code>()</code> a través del canal, y luego esperamos por el regreso diez de ellos.</p>
+
+<p>Mientras que este canal esta solo enviando una senal genérica, podemos enviar cualquier data que sea <code>Send</code> a través del canal!</p>
+<span class='rusttest'>use std::thread;
+use std::sync::mpsc;
+
+fn main() {
+    let (tx, rx) = mpsc::channel();
+
+    for _ in 0..10 {
+        let tx = tx.clone();
+
+        thread::spawn(move || {
+            let respuesta = 42u32;
+
+            tx.send(respuesta);
+        });
+    }
+
+   rx.recv().ok().expect(&quot;No se ha podido recibir la respuesta&quot;);
+}
+</span><pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::<span class='ident'>mpsc</span>;
+
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='kw'>let</span> (<span class='ident'>tx</span>, <span class='ident'>rx</span>) <span class='op'>=</span> <span class='ident'>mpsc</span>::<span class='ident'>channel</span>();
+
+    <span class='kw'>for</span> _ <span class='kw'>in</span> <span class='number'>0</span>..<span class='number'>10</span> {
+        <span class='kw'>let</span> <span class='ident'>tx</span> <span class='op'>=</span> <span class='ident'>tx</span>.<span class='ident'>clone</span>();
+
+        <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='kw'>move</span> <span class='op'>||</span> {
+            <span class='kw'>let</span> <span class='ident'>respuesta</span> <span class='op'>=</span> <span class='number'>42u32</span>;
+
+            <span class='ident'>tx</span>.<span class='ident'>send</span>(<span class='ident'>respuesta</span>);
+        });
+    }
+
+   <span class='ident'>rx</span>.<span class='ident'>recv</span>().<span class='ident'>ok</span>().<span class='ident'>expect</span>(<span class='string'>&quot;No se ha podido recibir la respuesta&quot;</span>);
+}
+</pre>
+
+<p>Un <code>u32</code> es <code>Send</code> porque podemos hacer una copia de el. Entonces creamos un hilo, y le solicitamos que calcule la respuesta, este luego nos envía la respuesta de regreso (usando <code>send()</code>) a través del canal.</p>
+
+<h2 id="panicos" class='section-header'><a
+                           href="#panicos">Panicos</a></h2>
+<p>Un <code>panic!</code> causara la finalización abrupta (crash) del hilo de ejecución actual. Puedes usar los hilos de Rust como un mecanismo de aislamiento sencillo:</p>
+<span class='rusttest'>fn main() {
+    use std::thread;
+    
+    let resultado = thread::spawn(move || {
+        panic!(&quot;ups!&quot;);
+    }).join();
+    
+    assert!(resultado.is_err());
+    
+}</span><pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>thread</span>;
+
+<span class='kw'>let</span> <span class='ident'>resultado</span> <span class='op'>=</span> <span class='ident'>thread</span>::<span class='ident'>spawn</span>(<span class='kw'>move</span> <span class='op'>||</span> {
+    <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;ups!&quot;</span>);
+}).<span class='ident'>join</span>();
+
+<span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>resultado</span>.<span class='ident'>is_err</span>());
+</pre>
+
+<p>Nuestro <code>Thread</code> nos devuelve un <code>Result</code>, el cual nos permite chequear si el hilo ha hecho pánico o no.</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "http://play.rust-lang.org";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value.split('/').pop() === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+<script type="text/javascript" src="playpen.js"></script>
+</div></div>
+
+
+</body>
+</html>

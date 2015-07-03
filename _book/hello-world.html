@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Hola, mundo!</title>
+
+    <link rel="stylesheet" type="text/css" href="rust-book.css">
+
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    <div id="nav">
+                <button id="toggle-nav">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </button>
+              </div>
+<div id='toc' class='mobile-hidden'>
+<ul class='chapter'>
+<li><a  href='README.html'><b>1.</b> Introduction</a>
+</li>
+<li><a  href='getting-started.html'><b>2.</b> Primeros Pasos</a>
+<ul class='section'>
+<li><a  href='installing-rust.html'><b>2.1.</b> Instalando Rust</a>
+</li>
+<li><a class='active' href='hello-world.html'><b>2.2.</b> Hola, mundo!</a>
+</li>
+<li><a  href='hello-cargo.html'><b>2.3.</b> Hola, Cargo!</a>
+</li>
+</ul>
+</li>
+<li><a  href='learn-rust.html'><b>3.</b> Aprende Rust</a>
+<ul class='section'>
+<li><a  href='guessing-game.html'><b>3.1.</b> El Juego de las Adivinanzas</a>
+</li>
+<li><a  href='dining-philosophers.html'><b>3.2.</b> La Cena de los Filósofos</a>
+</li>
+<li><a  href='rust-inside-other-languages.html'><b>3.3.</b> Rust dentro de otros Lenguajes</a>
+</li>
+</ul>
+</li>
+<li><a  href='effective-rust.html'><b>4.</b> Rust Efectivo</a>
+<ul class='section'>
+<li><a  href='the-stack-and-the-heap.html'><b>4.1.</b> La Pila y el Monticulo</a>
+</li>
+<li><a  href='testing.html'><b>4.2.</b> Pruebas</a>
+</li>
+<li><a  href='conditional-compilation.html'><b>4.3.</b> Compilacion Condicional</a>
+</li>
+<li><a  href='documentation.html'><b>4.4.</b> Documentacion</a>
+</li>
+<li><a  href='iterators.html'><b>4.5.</b> Iteradores</a>
+</li>
+<li><a  href='concurrency.html'><b>4.6.</b> Concurrencia</a>
+</li>
+<li><a  href='error-handling.html'><b>4.7.</b> Manejo de Errores</a>
+</li>
+<li><a  href='ffi.html'><b>4.8.</b> FFI</a>
+</li>
+<li><a  href='borrow-and-asref.html'><b>4.9.</b> Borrow y AsRef</a>
+</li>
+<li><a  href='release-channels.html'><b>4.10.</b> Canales de Distribucion</a>
+</li>
+</ul>
+</li>
+<li><a  href='syntax-and-semantics.html'><b>5.</b> Sintaxis y Semantica</a>
+<ul class='section'>
+<li><a  href='variable-bindings.html'><b>5.1.</b> Variables</a>
+</li>
+<li><a  href='functions.html'><b>5.2.</b> Funciones</a>
+</li>
+<li><a  href='primitive-types.html'><b>5.3.</b> Tipos Primitivos</a>
+</li>
+<li><a  href='comments.html'><b>5.4.</b> Comentarios</a>
+</li>
+<li><a  href='if.html'><b>5.5.</b> if</a>
+</li>
+<li><a  href='for-loops.html'><b>5.6.</b> Ciclos for</a>
+</li>
+<li><a  href='while-loops.html'><b>5.7.</b> Ciclos while</a>
+</li>
+<li><a  href='ownership.html'><b>5.8.</b> Pertenencia</a>
+</li>
+<li><a  href='references-and-borrowing.html'><b>5.9.</b> Referencias y Prestamo</a>
+</li>
+<li><a  href='lifetimes.html'><b>5.10.</b> Tiempos de Vida</a>
+</li>
+<li><a  href='mutability.html'><b>5.11.</b> Mutabilidad</a>
+</li>
+<li><a  href='structs.html'><b>5.12.</b> Estructuras</a>
+</li>
+<li><a  href='enums.html'><b>5.13.</b> Enumeraciones</a>
+</li>
+<li><a  href='match.html'><b>5.14.</b> Match</a>
+</li>
+<li><a  href='patterns.html'><b>5.15.</b> Patrones</a>
+</li>
+<li><a  href='method-syntax.html'><b>5.16.</b> Sintaxis de Metodos</a>
+</li>
+<li><a  href='vectors.html'><b>5.17.</b> Vectores</a>
+</li>
+<li><a  href='strings.html'><b>5.18.</b> Cadenas de Caracteres</a>
+</li>
+<li><a  href='generics.html'><b>5.19.</b> Genericos</a>
+</li>
+<li><a  href='traits.html'><b>5.20.</b> Rasgos</a>
+</li>
+<li><a  href='drop.html'><b>5.21.</b> Drop</a>
+</li>
+<li><a  href='if-let.html'><b>5.22.</b> if let</a>
+</li>
+<li><a  href='trait-objects.html'><b>5.23.</b> Objetos de Razgo</a>
+</li>
+<li><a  href='closures.html'><b>5.24.</b> Closures</a>
+</li>
+<li><a  href='ufcs.html'><b>5.25.</b> Sintaxis de Llamada a Funciones Universal</a>
+</li>
+<li><a  href='crates-and-modules.html'><b>5.26.</b> Crates y Modulos</a>
+</li>
+<li><a  href='const-and-static.html'><b>5.27.</b> `const` y `static`</a>
+</li>
+<li><a  href='attributes.html'><b>5.28.</b> Atributos</a>
+</li>
+<li><a  href='type-aliases.html'><b>5.29.</b> Alias `type`</a>
+</li>
+<li><a  href='casting-between-types.html'><b>5.30.</b> Conversion entre Tipos</a>
+</li>
+<li><a  href='associated-types.html'><b>5.31.</b> Tipos Asociados</a>
+</li>
+<li><a  href='unsized-types.html'><b>5.32.</b> Tipos sin Tamano</a>
+</li>
+<li><a  href='operators-and-overloading.html'><b>5.33.</b> Operadores y Sobrecarga</a>
+</li>
+<li><a  href='deref-coercions.html'><b>5.34.</b> Coerciones Deref</a>
+</li>
+<li><a  href='macros.html'><b>5.35.</b> Macros</a>
+</li>
+<li><a  href='raw-pointers.html'><b>5.36.</b> Apuntadores Planos</a>
+</li>
+<li><a  href='unsafe.html'><b>5.37.</b> `unsafe`</a>
+</li>
+</ul>
+</li>
+<li><a  href='nightly-rust.html'><b>6.</b> Rust Nocturno</a>
+<ul class='section'>
+<li><a  href='compiler-plugins.html'><b>6.1.</b> Plugins del Compilador</a>
+</li>
+<li><a  href='inline-assembly.html'><b>6.2.</b> Ensamblador Inline</a>
+</li>
+<li><a  href='no-stdlib.html'><b>6.3.</b> No stdlib</a>
+</li>
+<li><a  href='intrinsics.html'><b>6.4.</b> Intrinsecos</a>
+</li>
+<li><a  href='lang-items.html'><b>6.5.</b> Items de Lenguaje</a>
+</li>
+<li><a  href='link-args.html'><b>6.6.</b> Argumentos de Enlace</a>
+</li>
+<li><a  href='benchmark-tests.html'><b>6.7.</b> Pruebas de Rendimiento</a>
+</li>
+<li><a  href='box-syntax-and-patterns.html'><b>6.8.</b> Sintaxis Box y Patones</a>
+</li>
+<li><a  href='slice-patterns.html'><b>6.9.</b> Patrones Slice</a>
+</li>
+<li><a  href='associated-constants.html'><b>6.10.</b> Constantes Asociadas</a>
+</li>
+</ul>
+</li>
+<li><a  href='glossary.html'><b>7.</b> Glosario</a>
+</li>
+<li><a  href='academic-research.html'><b>8.</b> Inverstigacion Academica</a>
+</li>
+</ul>
+</div>
+<div id='page-wrapper'>
+<div id='page'>
+
+
+    <h1 class="title">Hola, mundo!</h1>
+    <p>Ahora que has instalado Rust, escribamos tu primer programa. Es tradición que tu primer programa en cualquier lenguaje sea uno que imprima el texto “Hola, mundo!” a la pantalla. Lo bueno de comenzar con un programa tan simple es que verificas no solo que el compilador esta instalado, sino que esta funcionando. Imprimir información a la pantalla es una cosa muy común.</p>
+
+<p>La primera cosa que debemos hacer es crear un archivo en donde poner nuestro código. A mi me gusta crear un directorio <code>proyectos</code> en mi directorio de usuario y mantener todos mis proyectos allí. A Rust no le importa donde el código reside.</p>
+
+<p>Esto lleva en cuestión a otro asunto que debemos aclarar: esta guía asumirá que posees una familiaridad básica con la linea de comandos. Rust no demanda nada con respecto a tus herramientas de edición o donde vive tu código. Si prefieres un IDE a la interfaz de linea de comandos, probablemente deberías echar un vistazo a <a href="https://github.com/oakes/SolidOak">SolidOak</a>, o donde sea que los plugins esten para tu IDE favorito. Existen un numero de extensiones de calidad variada en desarrollo por la comunidad. El equipo detrás de Rust también publica <a href="https://github.com/rust-lang/rust/blob/master/src/etc/CONFIGS.md">plugins para varios editores</a>. Configurar tu editor o IDE escapa del los objetivos de este tutorial, chequea la documentación para tu configuración en especifico.</p>
+
+<p>Dicho esto, creemos un directorio en nuestro directorio de proyectos.</p>
+
+<pre><code class="language-bash">$ mkdir ~/proyectos
+$ cd ~/proyectos
+$ mkdir hola_mundo
+$ cd hola_mundo
+</code></pre>
+
+<p>Si estas en Windows y no estas usando PowerShell, el <code>~</code> podría no funcionar. Consulta la documentacion especifica para tu terminal para mayor detalle.</p>
+
+<p>Creemos un nuevo archivo de código fuente. Llamaremos <code>main.rs</code> a nuestro archivo. Los archivos Rust terminan con la extensión <code>.rs</code>. Si estas usando mas de una palabra en tu nombre de archivo, usa un subguion: <code>hola_mundo.rs</code> en vez de <code>holamundo.rs</code>.</p>
+
+<p>Ahora que tienes tu archivo abierto escribe esto en el:</p>
+<span class='rusttest'>fn main() {
+    println!(&quot;Hola, mundo!&quot;);
+}
+</span><pre class='rust rust-example-rendered'>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hola, mundo!&quot;</span>);
+}
+</pre>
+
+<p>Guarda los cambios en el archivo,  y escribe lo siguiente en la ventana de tu terminal:</p>
+
+<pre><code class="language-bash">$ rustc main.rs
+$ ./main # o main.exe en Windows
+Hola, mundo!
+</code></pre>
+
+<p>Exito! Ahora veamos que ha pasado en detalle.</p>
+<span class='rusttest'>fn main() {
+
+}
+</span><pre class='rust rust-example-rendered'>
+<span class='kw'>fn</span> <span class='ident'>main</span>() {
+
+}
+</pre>
+
+<p>Estas lineas definen una <em>funcion</em> en Rust. La función <code>main</code> es especial: es el principio de todo programa Rust. La primera linea dice: &quot;Estoy declarando una función llamada <code>main</code> la cual no recibe argumentos y no retorna nada.&quot; Si existieran argumentos, estos irían dentro de paréntesis (<code>(</code> and <code>)</code>), y debido a que no estamos retornando nada de esta función, podemos omitir el tipo de retorno completamente. Llegaremos a esto mas adelante.</p>
+
+<p>También notaras que la función  esta envuelta en llaves (<code>{</code> and <code>}</code>). Rust requiere dichas llaves delimitando todos los cuerpos de función. Es también considerado buen estilo colocar la llave de apertura en la misma linea de la declaración de la función, con un espacio intermedio.</p>
+
+<p>Lo siguiente es esta linea:</p>
+<span class='rusttest'>fn main() {
+        println!(&quot;Hola, mundo!&quot;);
+    
+}</span><pre class='rust rust-example-rendered'>
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;Hola, mundo!&quot;</span>);
+</pre>
+
+<p>Esta linea hace todo el trabajo en nuestro pequeño programa. Hay un numero de detalles que son importantes aquí. El primero es que esta identado con cuatro espacios, no tabulaciones. Por favor configura tu editor a insertar cuatro espacios con la tecla tab. Proveemos algunos <a href="https://github.com/rust-lang/rust/tree/master/src/etc/CONFIGS.md">configuraciones de ejemplo para varios editores</a>.</p>
+
+<p>El segundo punto es la parte <code>println!()</code>. Esto es llamar a una macro Rust <a href="macros.html">macro</a>, que es como se hace metaprogramación en Rust. Si esto fuese en cambio una función, luciria asi: <code>println()</code>.  Para nuestros efectos, no necesitamos preocuparnos acerca de esta diferencia. Solo saber que algunas veces veras <code>!</code>, y que esto significa que estas llamando a una macro en vez de una función normal. Rust implementa <code>println!</code> como una macro en vez de como una función por buenas razones, pero eso es un tópico avanzado. Una ultima cosa por mencionar: Las macros en Rust son diferentes de las macros en C, si las has usado. No estes asustado de usar macros. Llegaremos a los detalles eventualmente, por ahora simplemente debes confiar en nosotros.</p>
+
+<p>A continuación, <code>&quot;Hola, mundo!&quot;</code> es una cadena de caracteres. Las cadenas de caracteres son un tópico sorprendentemente complejo en lenguajes de programación de sistemas, y esta concretamente es una cadena de carateres ‘asiganda staticamente’. Si te gustaria leer acerca de asignacion de memoria, echa un vistazo a <a href="the-stack-and-the-heap.html">la  pila y el montículo</a>, pero por ahora no necesitas hacerlo si lo no deseas. Pasamos esta cadena de caracteres como un argumento a <code>println!</code> quien a su vez imprime la cadena de caracteres a la pantalla. Facil!</p>
+
+<p>Finalmente, la linea termina con un punto y coma  (<code>;</code>). Rust es un lenguaje orientado a expresiones, lo que significa que la mayoría de las cosas son expresiones, en vez de sentencias. El <code>;</code> se usa para indicar que la expresión ha terminado,  y que la siguiente esta lista para comenzar. La mayoría de las lineas de código en Rust terminan con un <code>;</code>.</p>
+
+<p>Finalmente, compilar y ejecutar nuestro programa. Podemos compilar con nuestro compilador <code>rustc</code> pasandole el nombre de nuestro archivo de código fuente:</p>
+
+<pre><code class="language-bash">$ rustc main.rs
+</code></pre>
+
+<p>Esto es similar a <code>gcc</code> or <code>clang</code>, si provienes de C o C++. Rust emitira un binario ejecutable. Puedes verlo con <code>ls</code>:</p>
+
+<pre><code class="language-bash">$ ls
+main  main.rs
+</code></pre>
+
+<p>O en Windows:</p>
+
+<pre><code class="language-bash">$ dir
+main.exe  main.rs
+</code></pre>
+
+<p>Hay dos archivos: nuestro código fuente, con la extensión <code>.rs</code>, y el ejecutable (<code>main.exe</code> en Windows, <code>main</code> en los demás)</p>
+
+<pre><code class="language-bash">$ ./main  # o main.exe en Windows
+</code></pre>
+
+<p>Lo anterior imprime nuestro texto <code>Hola, mundo!</code> a nuestra terminal.</p>
+
+<p>Si provienes de un lenguaje dinámico como Ruby, Pyhton o Javascript, probablemente no estés acostumbrado a ver estos dos pasos como separados. Rust es un lenguaje compilado, lo cual significa que puedes compilar tu programa, darselo a alguien mas, y este no necesita tener Rust instalado. Si les das a alguien un archivo <code>.rb</code> o <code>.py</code> o <code>.js</code>, este necesita tener una implementación de Ruby/Python/JavaScript, pero solo necesitas un comando para ambos, compilar y ejecutar tu programa. Todo es acerca de balance entre ventajas/desventajas en el diseño de lenguajes, y Rust ha elegido.</p>
+
+<p>Felicitaciones, Has escrito oficialmente un programa Rust. Eso te convierte en un programador Rust! Bienvenido. 🎊🎉👍</p>
+
+<p>A continuación me gustaría presentarte otra herramienta, Cargo, el cual es usado para escribir programas Rust para el mundo real. Solo usar <code>rustc</code> esta bien para cosas simples, pero a medida que tu proyecto crece, necesitaras algo que te ayude a administrar todas las opciones que este tiene, así como hacer fácil compartir el codigo con otras personas y proyectos.</p>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "http://play.rust-lang.org";
+    </script>
+    
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("toggle-nav").onclick = toggleNav;
+  function toggleNav() {
+    var toc = document.getElementById("toc");
+    var pagewrapper = document.getElementById("page-wrapper");
+    toggleClass(toc, "mobile-hidden");
+    toggleClass(pagewrapper, "mobile-hidden");
+  };
+
+  function toggleClass(el, className) {
+     // from http://youmightnotneedjquery.com/
+     if (el.classList) {
+       el.classList.toggle(className);
+     } else {
+       var classes = el.className.split(' ');
+       var existingIndex = classes.indexOf(className);
+
+       if (existingIndex >= 0) {
+         classes.splice(existingIndex, 1);
+       } else {
+         classes.push(className);
+       }
+
+       el.className = classes.join(' ');
+     }
+  }
+
+  // The below code is used to add prev and next navigation links to the bottom
+  // of each of the sections.
+  // It works by extracting the current page based on the url and iterates over
+  // the menu links until it finds the menu item for the current page. We then
+  // create a copy of the preceding and following menu links and add the
+  // correct css class and insert them into the bottom of the page.
+  var toc = document.getElementById('toc').getElementsByTagName('a');
+  var href = document.location.pathname.split('/').pop();
+  if (href === 'index.html' || href === '') {
+    href = 'README.html';
+  }
+
+  for (var i = 0; i < toc.length; i++) {
+    if (toc[i].attributes['href'].value.split('/').pop() === href) {
+      var nav = document.createElement('p');
+      if (i > 0) {
+        var prevNode = toc[i-1].cloneNode(true);
+        prevNode.className = 'left';
+        nav.appendChild(prevNode);
+      }
+      if (i < toc.length - 1) {
+        var nextNode = toc[i+1].cloneNode(true);
+        nextNode.className = 'right';
+        nav.appendChild(nextNode);
+      }
+      document.getElementById('page').appendChild(nav);
+      break;
+    }
+  }
+
+});
+</script>
+<script type="text/javascript" src="playpen.js"></script>
+</div></div>
+
+
+</body>
+</html>
