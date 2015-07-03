@@ -25,6 +25,6 @@ task publish: :build do
     g.commit "Release #{Time.now}"
     g.push(g.remote("origin"), GH_PAGES_BRANCH)
   rescue Git::GitExecuteError => e
-    puts "There was a Git error or simply no changes to be "
+    puts "There was a Git error or there are no changes"
   end
 end
