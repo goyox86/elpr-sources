@@ -183,21 +183,18 @@ thread::spawn(move || {
 
 Primero, llamamos `lock()`, lo cual obtiene el bloqueo de exclusion mutua. Debido a que esta operación puede fallar, este método retorna un `Result<T, E>`, y debido a que esto es solo un ejemplo, hacemos `unwrap()` en el para obtener una referencia a la data. Código real tendría un manejo de errores mas robusto en este lugar. Somos libres de mutarlo, puesto que tenemos el bloqueo.
 
-Por ultimo, mientras que los hilos esta corriendo, usamos un temporizador corto.
-Lastly, while the threads are running, we wait on a short timer. But
-this is not ideal: we may have picked a reasonable amount of time to
-wait but it's more likely we'll either be waiting longer than
-necessary or not long enough, depending on just how much time the
-threads actually take to finish computing when the program runs.
+Por ultimo, mientras que los hilos esta corriendo, esperamos por un la culminación de un temporizador corto. Esto no es ideal: pudimos haber escogido un tiempo razonable para esperar pero lo mas probable es que esperemos mas de lo necesario, o no lo suficiente, dependiendo de cuanto tiempo los hilos toman para terminar la computación cuando el programa corre.
+
+Una alternativa mas precisa a el temporizador seria el uso de uno de los mecanismos proporcionados por la biblioteca estándar de Rust para la sincronización entre hilos. Hablemos de ellos: canales.
 
 A more precise alternative to the timer would be to use one of the
 mechanisms provided by the Rust standard library for synchronizing
 threads with each other. Let's talk about one of them: channels.
 
-## Channels
+## Canales
 
-Here's a version of our code that uses channels for synchronization, rather
-than waiting for a specific time:
+He aquí una version nuestro código que usa canales para la sincronización, en lugar de esperar por un tiempo especifico:
+
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -226,11 +223,10 @@ fn main() {
 }
 ```
 
-We use the `mpsc::channel()` method to construct a new channel. We just `send`
-a simple `()` down the channel, and then wait for ten of them to come back.
+Hacemos uso del método `mpsc::channel()` para construir un canal nuevo. Enviamos (a través de `send`) un simple `()` a  través del canal, y luego esperamos por el regreso diez de ellos.
 
-While this channel is just sending a generic signal, we can send any data that
-is `Send` over the channel!
+Mientras que este canal esta solo enviando una penal generosa, podemos enviar cualquier data que sea `Send` a través del canal!
+
 
 ```rust
 use std::thread;
@@ -243,34 +239,34 @@ fn main() {
         let tx = tx.clone();
 
         thread::spawn(move || {
-            let answer = 42u32;
+            let respuesta = 42u32;
 
-            tx.send(answer);
+            tx.send(respuesta);
         });
     }
 
-   rx.recv().ok().expect("Could not receive answer");
+   rx.recv().ok().expect("No se ha podido recibir la respuesta");
 }
 ```
 
+Un `u32` es `Send` porque podemos hacer una copia de el. Entonces creamos un hilo, y le solicitamos que calcule la respuesta, y este luego nos envía la respuesta (usando `send()`) a través del canal.
 A `u32` is `Send` because we can make a copy. So we create a thread, ask it to calculate
 the answer, and then it `send()`s us the answer over the channel.
 
 
-## Panics
+## Panicos
 
-A `panic!` will crash the currently executing thread. You can use Rust's
-threads as a simple isolation mechanism:
+Un `panic!` causara la finalización abrupta (crash) del hilo de ejecución actual. Puedes usar los hilos de Rust como un mecanismo de aislamiento sencillo:
+
 
 ```rust
 use std::thread;
 
-let result = thread::spawn(move || {
-    panic!("oops!");
+let resultado = thread::spawn(move || {
+    panic!("ups!");
 }).join();
 
-assert!(result.is_err());
+assert!(resultado.is_err());
 ```
 
-Our `Thread` gives us a `Result` back, which allows us to check if the thread
-has panicked or not.
+Nuestro `Thread` nos devuelve un `Result`, el cual nos permite chequear si el hilo ha hecho pánico o no.
