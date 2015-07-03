@@ -1,20 +1,22 @@
 % Concurrencia
 
-La concurrencia y el paralelismo son dos tópicos increíblemente importantes en las ciencias de la computación, también son un tópico caliente en la industria hoy en día. Las computadoras cada vez poseen mas y mas núcleos, aun así, todavia algunos desarrolladores no están preparados para utilizarnos completamente.
+La concurrencia y el paralelismo son dos tópicos increíblemente importantes en las ciencias de la computación, también son un tópico caliente en la industria hoy en día. Las computadoras cada vez poseen mas y mas núcleos, aun así, todavía algunos desarrolladores no están preparados para utilizarnos completamente.
 
-La seguridad en el manejo de memoria de Rust también aplica a su historia de concurrencia. Incluso programas concurrentes deben ser seguros en el manejo de memoria, sin tener condiciones de carrera. El sistema de tipos de Rust esta a la altura del desafío, y te dota de poderosas vías para razonar acerca de código concurrente en tiempo de compilación.
+La seguridad en el manejo de memoria de Rust también aplica a su historia de concurrencia. Incluso los programas concurrentes deben ser seguros en el manejo de memoria, sin condiciones de carrera. El sistema de tipos de Rust esta a la altura del desafío, y te dota de poderosas vías para razonar acerca de código concurrente en tiempo de compilación.
 
-Antes de que hablemos de las características de concurrencia que vienen con Rust, es importante entender algo: Rust es de bajo nivel, suficientemente bajo al punto que todas estas facilidades están implementadas en la biblioteca estándar. Esto significa que si no te gusta alguna aspecto de la manera en la que Rust maneja la concurrencia, puedes implementar una forma alternativa de hacerlo. [mio](https://github.com/carllerche/mio) es un vivo ejemplo de este principio en acción.
+Antes de que hablemos de las características de concurrencia que vienen con Rust, es importante entender algo: Rust es de bajo nivel, suficientemente bajo al punto que todas estas facilidades están implementadas en la biblioteca estándar. Esto significa que si no te gusta algún aspecto de la manera en la que Rust maneja la concurrencia, puedes implementar una forma alternativa de hacerlo. [mio](https://github.com/carllerche/mio) es un vivo ejemplo de este principio en acción.
+
 
 ## Bases: `Send` y `Sync`
 
-La concurrencia es algo sobre lo que es difícil razonar. En Rust tenemos un poderoso, sistema de tipos estáticos que nos ayuda a razonar acerca de nuestro código. Como tal, Rust nos provee de dos traits para ayudarnos a darle sentido a código que pueda posiblemente ser concurrente.
+La concurrencia es algo sobre lo que es difícil razonar. En Rust tenemos un poderoso, sistema de tipos estático que nos ayuda a razonar acerca de nuestro código. Como tal, Rust nos provee de dos traits para ayudarnos a darle sentido a código que pueda posiblemente ser concurrente.
+
 
 ### `Send`
 
-El primer trait del cual hablaremos es [`Send`](../std/marker/trait.Send.html) (ingles). Cuando un tipo `T` implementa `Send`, esto indica al compilador que algo de este tipo puede transferir la pertenencia entre hilos de forma segura.
+El primer trait del cual hablaremos es [`Send`](../std/marker/trait.Send.html) (ingles). Cuando un tipo `T` implementa `Send`, le indica al compilador que algo de este tipo puede transferir la pertenencia entre hilos de forma segura.
 
-Eso es importante para hacer cumplir ciertas restricciones. Por ejemplo si tenemos un canal, conectando dos hilos, deberíamos querer transferir algunos datos a el otro hilo  través del canal. Por lo tanto, nos aseguramos de que `Send` haya sido implementado para ese tipo.
+Esto es importante para hacer cumplir ciertas restricciones. Por ejemplo si tenemos un canal, conectando dos hilos, deberíamos querer transferir algunos datos a el otro hilo través del canal. Por lo tanto, nos aseguramos de que `Send` haya sido implementado para ese tipo.
 
 De manera opuesta, si estamos envolviendo una biblioteca con FFI que no es threadsafe, no deberíamos querer implementar `Send`, de manera tal que el compilador nos ayude a asegurarnos que esta no pueda abandonar el hilo actual.
 
@@ -22,11 +24,12 @@ De manera opuesta, si estamos envolviendo una biblioteca con FFI que no es threa
 ### `Sync`
 
 
-El segundo de estos tras es llamado [`Sync`](../std/marker/trait.Sync.html) (ingles). Cuando un tipo `T` implementa `Sync`, indica al el compilador que algo de este tipo no tiene posibilidad de introducir inseguridad en memoria cuando es usado de manera concurrente por multiples hilos de ejecución.
+El segundo de estos traits es llamado [`Sync`](../std/marker/trait.Sync.html) (ingles). Cuando un tipo `T` implementa `Sync`, le indica al el compilador que algo de este tipo no tiene posibilidad de introducir inseguridad en memoria cuando es usado de manera concurrente por multiples hilos de ejecución.
 
-Por ejemplo, compartir data inmutable con una cuenta de referencias atómica es threadsafe. Rust provee un tipo así, `Arc<T>`, el cual implementa `Sync`, ese por ello que es seguro de compartir entre hilos.
+Por ejemplo, compartir data inmutable con una cuenta de referencias atómica es threadsafe. Rust provee dicho tipo, `Arc<T>`, el cual implementa `Sync`, y es por ello que es seguro de compartir entre hilos.
 
-Estos dos traits te permiten usar el sistemas de tipos para hacer garantías fuertes acerca de las propiedades de tu código bajo concurrencia. En primer lugar, antes de demostrar porque, necesitamos aprender como crear un programa concurrente en Rust!
+Estos dos traits te permiten usar el sistema de tipos para hacer garantías fuertes acerca de las propiedades de tu código bajo concurrencia. En primer lugar, antes de demostrar porque, necesitamos aprender como crear un programa concurrente en Rust!
+
 
 ## Hilos
 
@@ -42,11 +45,7 @@ fn main() {
 }
 ```
 
-El método `thread::spawn()` acepta un closure como argumento, closure que es ejecutado en un nuevo hilo. Este retorna un handle a el nuevo hilo, el cual puede ser usado para esperar a que el hilo hilo finalice y extraer su resultado:
-
-The `thread::spawn()` method accepts a closure, which is executed in a
-new thread. It returns a handle to the thread, that can be used to
-wait for the child thread to finish and extract its result:
+El método `thread::spawn()` acepta un closure como argumento, closure que es ejecutado en un nuevo hilo. `thread::spawn()` retorna un handle a el nuevo hilo, que puede ser usado para esperar a que el hilo finalice y luego extraer su resultado:
 
 ```rust
 use std::thread;
@@ -60,12 +59,12 @@ fn main() {
 }
 ```
 
-Muchos lenguajes poseen la habilidad de ejecutar hilos, pero es salvajemente inseguro. Existen libros enteros acerca de como prevenir los errores que ocurren de compartir estado mutable. Rust ayuda con su sistema de tipos, previniendo condiciones de carrera en tiempo de compilación. Hablemos acerca de como efectivamente puedes compartir cosas entre hilos.
+Muchos lenguajes poseen la habilidad de ejecutar hilos, pero es salvajemente inseguro. Existen libros enteros acerca de como prevenir los errores que ocurren como consecuencia de compartir estado mutable. Rust ayuda con su sistema de tipos, previniendo condiciones de carrera en tiempo de compilación. Hablemos acerca de como efectivamente puedes compartir cosas entre hilos.
 
 
 ## Estado Mutable Compartido Seguro
 
-Debido a el sistema de tipos de Rust,  tenemos un concepto que suena como una mentira: "estado mutable compartido seguro". Muchos programadores concuerdan en que el estado mutable compartido es muy, muy malo.
+Debido a el sistema de tipos de Rust, tenemos un concepto que suena como una mentira: "estado mutable compartido seguro". Muchos programadores concuerdan en que el estado mutable compartido es muy, muy malo.
 
 Alguien dijo alguna vez:
 
@@ -99,9 +98,9 @@ Lo anterior produce un error:
         ^~~~
 ```
 
-En este caso, sabemos que nuestro código *deberia* ser seguro, pero Rust no esta seguro. En realidad no es seguro, si tuviéramos una referencia a  `data` en cada hilo, y el hilo toma pertenencia de la referencia, tendríamos tres duenos! Eso esta mal. Podemos arreglar esto a través del uso del tipo `Arc<T>`, un apuntador con conteo atómico de referencias. La parte 'atómico' significa que es seguro compartirlo entre hilos.
+En este caso, sabemos que nuestro código *deberia* ser seguro, pero Rust no esta seguro de ello. En realidad no es seguro, si tuviéramos una referencia a `data` en cada hilo, y el hilo toma pertenencia de la referencia, tendríamos tres dueños! Eso esta mal. Podemos arreglar esto a través del uso del tipo `Arc<T>`, un apuntador con conteo atómico de referencias. La parte 'atómico' significa que es seguro compartirlo entre hilos.
 
-`Arc<T>` asume una propiedad mas acerca de su contenido para asegurarse que es seguro compartirlo entre hilos: asume que su contenido es `Sync`. Pero en nuestro caso, queremos mutar el valor. Necesitamos un tipo que pueda asegurarse que solo una persona al la vez pueda mutar lo que este dentro. Para eso, podemos usar el tipo `Mutex<T>`. He aquí la segunda version de nuestro código.  Aun no funciona, pero por una razón diferente:
+`Arc<T>` asume una propiedad mas acerca de su contenido para asegurarse que es seguro compartirlo entre hilos: asume que su contenido es `Sync`. Pero en nuestro caso, queremos mutar el valor. Necesitamos un tipo que pueda asegurarse que solo una persona a la vez pueda mutar lo que este dentro. Para eso, podemos usar el tipo `Mutex<T>`. He aquí la segunda version de nuestro código.  Aun no funciona, pero por una razón diferente:
 
 
 ```ignore
@@ -162,7 +161,7 @@ fn main() {
 }
 ```
 
-Ahora llamamos `clone()` en nuestro `Arc`, lo cual incremente el contador interno. Este handle es entonces movido dentro del nuevo hilo. Examinemos el cuerpo del hilo mas de cerca:
+Ahora llamamos `clone()` en nuestro `Arc`, lo cual incrementa el contador interno. Este handle es entonces movido dentro del nuevo hilo. Examinemos el cuerpo del hilo mas de cerca:
 
 
 ```rust
@@ -183,13 +182,9 @@ thread::spawn(move || {
 
 Primero, llamamos `lock()`, lo cual obtiene el bloqueo de exclusion mutua. Debido a que esta operación puede fallar, este método retorna un `Result<T, E>`, y debido a que esto es solo un ejemplo, hacemos `unwrap()` en el para obtener una referencia a la data. Código real tendría un manejo de errores mas robusto en este lugar. Somos libres de mutarlo, puesto que tenemos el bloqueo.
 
-Por ultimo, mientras que los hilos esta corriendo, esperamos por un la culminación de un temporizador corto. Esto no es ideal: pudimos haber escogido un tiempo razonable para esperar pero lo mas probable es que esperemos mas de lo necesario, o no lo suficiente, dependiendo de cuanto tiempo los hilos toman para terminar la computación cuando el programa corre.
+Por ultimo, mientras que los hilos se ejecutan, esperamos por la culminación de un temporizador corto. Esto no es ideal: pudimos haber escogido un tiempo razonable para esperar pero lo mas probable es que esperemos mas de lo necesario, o no lo suficiente, dependiendo de cuanto tiempo los hilos toman para terminar la computación cuando el programa corre.
 
-Una alternativa mas precisa a el temporizador seria el uso de uno de los mecanismos proporcionados por la biblioteca estándar de Rust para la sincronización entre hilos. Hablemos de ellos: canales.
-
-A more precise alternative to the timer would be to use one of the
-mechanisms provided by the Rust standard library for synchronizing
-threads with each other. Let's talk about one of them: channels.
+Una alternativa mas precisa a el temporizador seria el uso de uno de los mecanismos proporcionados por la biblioteca estándar de Rust para la sincronización entre hilos. Hablemos de ellos: los canales.
 
 ## Canales
 
@@ -223,9 +218,9 @@ fn main() {
 }
 ```
 
-Hacemos uso del método `mpsc::channel()` para construir un canal nuevo. Enviamos (a través de `send`) un simple `()` a  través del canal, y luego esperamos por el regreso diez de ellos.
+Hacemos uso del método `mpsc::channel()` para construir un canal nuevo. Enviamos (a través de `send`) un simple `()` a través del canal, y luego esperamos por el regreso diez de ellos.
 
-Mientras que este canal esta solo enviando una penal generosa, podemos enviar cualquier data que sea `Send` a través del canal!
+Mientras que este canal esta solo enviando una senal genérica, podemos enviar cualquier data que sea `Send` a través del canal!
 
 
 ```rust
@@ -249,9 +244,7 @@ fn main() {
 }
 ```
 
-Un `u32` es `Send` porque podemos hacer una copia de el. Entonces creamos un hilo, y le solicitamos que calcule la respuesta, y este luego nos envía la respuesta (usando `send()`) a través del canal.
-A `u32` is `Send` because we can make a copy. So we create a thread, ask it to calculate
-the answer, and then it `send()`s us the answer over the channel.
+Un `u32` es `Send` porque podemos hacer una copia de el. Entonces creamos un hilo, y le solicitamos que calcule la respuesta, este luego nos envía la respuesta de regreso (usando `send()`) a través del canal.
 
 
 ## Panicos
