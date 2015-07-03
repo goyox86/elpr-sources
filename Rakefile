@@ -11,6 +11,7 @@ task default: %w[build]
 desc "Uses rustbook to build the HTML and copies it into the #{ELPR_REPO_PATH}"
 task :build do
   Kernel.exec RUSTBOOK_CMD
+  FileUtils.cp_r "css/.", ELPR_REPO_PATH
   FileUtils.cp_r "_book/.", ELPR_REPO_PATH
 end
 

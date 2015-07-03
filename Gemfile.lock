@@ -10,6 +10,3 @@ PLATFORMS
 DEPENDENCIES
   git
   rake
-
-BUNDLED WITH
-   1.10.3

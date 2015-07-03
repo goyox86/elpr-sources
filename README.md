@@ -28,7 +28,7 @@ Después de leer esta introducción, dependiendo de tu preferencia, querrás lee
 ### Contribuyendo
 
 Los archivos fuente de los cuales este libro es generado pueden ser encontrados en Github:
-[github.com/goyox86/elpr](https://github.com/goyox86/elpr)
+[github.com/goyox86/elpr](https://github.com/goyox86/elpr-sources)
 
 ## Una breve introducción a Rust
 
