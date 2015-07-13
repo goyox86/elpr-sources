@@ -3,13 +3,13 @@
 > Los planes mejor establecidos por ratones y hombres a menudo se tuercen.
 > "Tae a Moose", Robert Burns
 
-Al unas veces, las cosas simplemente salen mal. Es importante tener un plan para cuando lo inevitable suceda. Rust posee un soporte rico para el manejo de errores que podrían (seamos honestos: ocurrirán) ocurrir en tus programas.
+Algunas veces, las cosas simplemente salen mal. Es importante tener un plan para cuando lo inevitable suceda. Rust posee un soporte rico para el manejo de errores que podrían (seamos honestos: ocurrirán) ocurrir en tus programas.
 
-Existen dos tipos de errores que pueden ocurrir en tus programas: fallas, y pánicos. Hablaremos de las diferencias entre estos dos, y luego discutiremos como como manejar cada uno. Después discutiremos como transformar fallas en pánicos.
+Existen dos tipos de errores que pueden ocurrir en tus programas: fallas y pánicos. Hablaremos de las diferencias entre los dos, y luego discutiremos como manejar cada uno. Después discutiremos como promover fallas a pánicos.
 
 # Falla vs. Pánico
 
-Rust usa dos términos para diferenciar entre las dos formas de error: falla, y pánico. Una *falla* es un error del cual nos podemos recuperar de alguna forma. Un *pánico* es un error irrecuperable.
+Rust usa dos términos para diferenciar entre las dos formas de error: falla, y pánico. Una *falla* es un error del cual nos podemos recuperar de alguna manera. Un *pánico* es un error irrecuperable.
 
 Que queremos decir con "recuperar"? Bueno, en la mayoría de los casos, la posibilidad de un error es esperada. Por ejemplo, considera la función `parse`:
 
@@ -18,13 +18,13 @@ Que queremos decir con "recuperar"? Bueno, en la mayoría de los casos, la posib
 "5".parse();
 ```
 
-Este método convierte una cadena de caracteres en otro tipo. Pero debido a que es una cadena de caracteres, no se puede estar seguro de que la conversion efectivamente tenga éxito. Por ejemplo, a que debería ser convertido esto?:
+Este método convierte una cadena de caracteres a otro tipo. Pero debido a que es una cadena de caracteres, no se puede estar seguro de que la conversion efectivamente tenga éxito. Por ejemplo, a que debería ser convertido esto?:
 
 ```ignore
 "hola5mundo".parse();
 ```
 
-Esto no funcionara. Sabemos que esta función solo tendrá éxito para algunas entradas. Es un comportamiento esperado. Llamamos a este error una *falla*.
+Lo anterior no funciona. Sabemos que el método `parse()` solo tendrá éxito para algunas entradas. Es un comportamiento esperado. Es por ello que llamamos a este error una *falla*.
 
 Por otro lado, algunas veces, hay errores que son inesperados, o de los cuales no nos podemos recuperar. Un ejemplo clásico es un `assert!`:
 
@@ -37,12 +37,14 @@ Usamos `assert!` para declarar que algo es cierto (true). Si la declaración no 
 
 
 ```rust,ignore
+use Evento::NuevoLanzamiento;
+
 enum Evento {
     NuevoLanzamiento,
 }
 
 fn probabilidad(_: &Evento) -> f64 {
-    // la implementacióncion real seria mas compleja, por supuesto
+    // la implementación real seria mas compleja, por supuesto
     0.95
 }
 
@@ -58,7 +60,7 @@ fn probabilidad_descriptiva(evento: Evento) -> &'static str {
 }
 
 fn main() {
-    std::io::println(probabilidad_descriptiva(NuevoLanzamiento));
+     println!("{}", probabilidad_descriptiva(NuevoLanzamiento));
 }
 ```
 
@@ -77,13 +79,13 @@ enum Evento {
     NuevoLanzamiento,
 }
 
-fn probability(_: &Event) -> f64 {
+fn probabilidad(_: &Evento) -> f64 {
     // la implementación real seria mas compleja, por supuesto
     0.95
 }
 
 fn probabilidad_descriptiva(evento: Evento) -> &'static str {
-    match probabilidad_descriptiva(&evento) {
+    match probabilidad(&evento) {
         1.00 => "cierto",
         0.00 => "imposible",
         0.00 ... 0.25 => "muy poco probable",
@@ -99,12 +101,12 @@ fn main() {
 }
 ```
 
-Nunca deberíamos alcanzar nunca el caso `_`, debido a esto hacemos uso de la macro para indicarlo. `unreachable!()` produce un tipo diferente de error que `Result`. Rust llama a ese tipo de errores *pánicos*.
+Nunca deberíamos alcanzar el caso `_`, debido a esto hacemos uso de la macro para indicarlo. `unreachable!()` produce un tipo diferente de error que `Result`. Rust llama a ese tipo de errores *pánicos*.
 
 
 # Manejando errores con `Option` y `Result`
 
-La manera mas simple de indicar que una función puede fallar es usando el tipo `Option<T>`. Por ejemplo, el método find en las cadenas de caracteres intenta localizar un patron en la cadena, retorna un `Option`:
+La manera mas simple de indicar que una función puede fallar es usando el tipo `Option<T>`. Por ejemplo, el método find en las cadenas de caracteres intenta localizar un patrón en la cadena, retorna un `Option`:
 
 
 ```rust
@@ -114,7 +116,7 @@ assert_eq!(s.find('f'), Some(0));
 assert_eq!(s.find('z'), None);
 ```
 
-Esto es apropiado para casos simples, pero no nos da mucha información en el caso de una falla. Que tal si quisiéramos saber el *porque* la función fallo? Para ello, podemos usar el tipo `Result<T, E>`. Que luce así:
+Esto es apropiado para casos simples, pero no nos da mucha información en el caso de una falla. Que tal si quisiéramos saber el *porque* la función falló? Para ello, podemos usar el tipo `Result<T, E>`. Que luce así:
 
 
 ```rust
@@ -124,7 +126,7 @@ enum Result<T, E> {
 }
 ```
 
-Esta enum es proporcionada por Rust, es por ello que no necesitas definirla si deseas hacer uso de ella en tu código. La variante `Ok(T)` representa éxito, y la variante `Err(E)` representa una falla. Retornar un `Result` en lugar de un `Option` es recomendable para la mayoría de los casos no triviales:
+Esta enum es proporcionada por Rust, es por ello que no necesitas definirla si deseas hacer uso de ella. La variante `Ok(T)` representa éxito, y la variante `Err(E)` representa una falla. Retornar un `Result` en lugar de un `Option` es recomendable para la mayoría de los casos no triviales:
 
 He aquí un ejemplo del uso de `Result`:
 
@@ -147,14 +149,16 @@ fn parsear_version(cabecera: &[u8]) -> Result<Version, ErrorParseo> {
     }
 }
 
-let version = parsear_version(&[1, 2, 3, 4]);
-match version {
+fn main() {
+	let version = parsear_version(&[1, 2, 3, 4]);
+	match version {
     Ok(v) => {
-        println!("trabajando con la version: {:?}", v);
+      println!("trabajando con la version: {:?}", v);
     }
     Err(e) => {
-        println!("error parseando cebecera: {:?}", e);
+      println!("error parseando cebecera: {:?}", e);
     }
+	}
 }
 ```
 
@@ -164,7 +168,7 @@ El trait [`Debug`](../std/fmt/trait.Debug.html) es el que nos permite imprimir e
 
 # Errores no recuperables con `panic!`
 
-En el caso de un error inesperado del cual no se pueda recuperara, la macro `panic!` induce un pánico. Dicho pánico terminara abruptamente el hilo actual de ejecución, y proporcionará un error:
+En el caso de un error inesperado del cual no se pueda recuperar, la macro `panic!` se utiliza para inducir un pánico. Dicho pánico terminara abruptamente el hilo actual de ejecución proporcionando un mensaje de error:
 
 ```rust,ignore
 panic!("boom");
@@ -182,7 +186,7 @@ Debido a que estas situaciones son relativamente raras, usa los pánicos con mod
 
 # Promoviendo fallas a pánicos
 
-En ciertas circunstancias, aun sabiendo que una función puede fallar, podríamos querer tratar la falla como un pánico. Por ejemplo, `io::stdin().read_line(&mut buffer)` retorna un `Result<usize>`, cuando hay un error leyendo la linea. Esto nos permite manejar y posiblemente recuperar en caso de error.
+En ciertas circunstancias, aun sabiendo que una función puede fallar, podríamos querer tratar la falla como un pánico. Por ejemplo, `io::stdin().read_line(&mut buffer)` retorna un `Result<usize>`, cuando hay un error leyendo la linea. Esto nos permite manejar y posiblemente recuperarnos en caso de error.
 
 Si no queremos manejar el error, y en su lugar simplemente abortar el programa, podemos usar el método `unwrap()`:
 
@@ -190,7 +194,7 @@ Si no queremos manejar el error, y en su lugar simplemente abortar el programa, 
 io::stdin().read_line(&mut buffer).unwrap();
 ```
 
-`unwrap()` hara un pánico (`panic!`) si el `Result` es `Err`. Esto básicamente dice "Dame el valor, y si algo sale mal, simplemente aborta la ejecución". Esto es menos confiable que hacer match en el error y tratar de recuperarnos, pero al mismo tiempo es significativamente mas corto. Algunas veces, la terminación abrupta es apropiada.
+`unwrap()` hará un pánico (`panic!`) si el `Result` es `Err`. Esto básicamente dice "Dame el valor, y si algo sale mal, simplemente aborta la ejecución". Esto es menos confiable que hacer match en el error y tratar de recuperarnos, pero al mismo tiempo es significativamente mas corto. Algunas veces, la terminación abrupta es apropiada.
 
 Hay una manera que de hacer lo anterior que es un poco mejor que `unwrap()`:
 
@@ -198,8 +202,8 @@ Hay una manera que de hacer lo anterior que es un poco mejor que `unwrap()`:
 ```rust,ignore
 let mut bufer = String::new();
 let bytes_leidos = io::stdin().read_line(&mut bufer)
-                                .ok()
-                                .expect("Fallo al leer linea");
+                      .ok()
+                      .expect("Fallo al leer linea");
 ```
 
 `ok()` convierte el `Result` en un `Option`, y `expect()` hace lo mismo que `unwrap()`, pero recibe un mensaje como argumento. Este mensaje es pasado a el `panic!` subyacente, proporcionando un mejor mensaje de error.
@@ -209,7 +213,7 @@ let bytes_leidos = io::stdin().read_line(&mut bufer)
 
 Cuando escribimos código que llama a muchas funciones que retornan el tipo `Result`, el manejo de errores se puede tornar tedioso. La macro `try!` esconde algo de el código repetitivo correspondiente a la propagación de errores en la pila de llamadas.
 
-Este reemplaza:
+`try!` reemplaza:
 
 ```rust
 use std::fs::File;
@@ -239,7 +243,7 @@ fn escribir_info(info: &Info) -> io::Result<()> {
 }
 ```
 
-Con esto:
+Con:
 
 ```rust
 use std::fs::File;
@@ -253,11 +257,11 @@ struct Info {
 }
 
 fn escribir_info(info: &Info) -> io::Result<()> {
-    let mut file = File::create("mis_mejores_amigos.txt").unwrap();
+    let mut archivo = File::create("mis_mejores_amigos.txt").unwrap();
 
-    try!(writeln!(&mut archivo, "nombre: {}", info.name));
-    try!(writeln!(&mut archivo, "edad: {}", info.age));
-    try!(writeln!(&mut archivo, "grado: {}", info.rating));
+    try!(writeln!(&mut archivo, "nombre: {}", info.nombre));
+    try!(writeln!(&mut archivo, "edad: {}", info.edad));
+    try!(writeln!(&mut archivo, "grado: {}", info.grado));
 
     return Ok(());
 }
