@@ -70,16 +70,16 @@ Envolver las funciones que esperan bufers involucra el uso de el modulo `slice::
 # use libc::{c_int, size_t};
 # unsafe fn snappy_validate_compressed_buffer(_: *const u8, _: size_t) -> c_int { 0 }
 # fn main() {}
-pub fn validate_compressed_buffer(src: &[u8]) -> bool {
+pub fn validar_buffer_comprimido(src: &[u8]) -> bool {
     unsafe {
         snappy_validate_compressed_buffer(src.as_ptr(), src.len() as size_t) == 0
     }
 }
 ```
 
-La función envoltorio `validate_compressed_buffer` hace uso de un bloque `unsafe`, pero hace la garantía de que llamarla es segura para todas las entradas a través de la exclusion del `unsafe` de la firma de la función.
+La función envoltorio `validar_buffer_comprimido` hace uso de un bloque `unsafe`, pero hace la garantía de que llamarla es segura para todas las entradas a través de la exclusion del `unsafe` de la firma de la función.
 
-Las funciones  `snappy_compress` y `snappy_uncompress` son mas complejas, debido a que un bufe tienen que ser asignado para mantener la salida.
+Las funciones  `snappy_compress` y `snappy_uncompress` son mas complejas, debido a que un bufer tiene que ser asignado para mantener la salida.
 
 La función `snappy_max_compressed_length` puede ser usada para asignar un vector con la capacidad maxima requerida para almacenar la salida comprimida. El vector entonces puede ser pasado a la función `snappy_compress` como un parámetro de salida. Un parámetro de salida es también pasado para obtener la longitud real después de la compresión para asignar la longitud.
 
@@ -92,23 +92,23 @@ La función `snappy_max_compressed_length` puede ser usada para asignar un vecto
 #                           d: *mut size_t) -> c_int { 0 }
 # unsafe fn snappy_max_compressed_length(a: size_t) -> size_t { a }
 # fn main() {}
-pub fn compress(src: &[u8]) -> Vec<u8> {
+pub fn comprimir(orig: &[u8]) -> Vec<u8> {
     unsafe {
-        let srclen = src.len() as size_t;
-        let psrc = src.as_ptr();
+        let long_orig = orig.len() as size_t;
+        let porig = orig.as_ptr();
 
-        let mut dstlen = snappy_max_compressed_length(srclen);
-        let mut dst = Vec::with_capacity(dstlen as usize);
-        let pdst = dst.as_mut_ptr();
+        let mut long_dest = snappy_max_compressed_length(long_orig);
+        let mut dest = Vec::with_capacity(long_dest as usize);
+        let pdest = dest.as_mut_ptr();
 
-        snappy_compress(psrc, srclen, pdst, &mut dstlen);
-        dst.set_len(dstlen as usize);
-        dst
+        snappy_compress(porig, long_orig, pdest, &mut long_dest);
+        dest.set_len(long_dest as usize);
+        dest
     }
 }
 ```
 
-La decompression es similar, debido a que snappy almacena la longitud descomprimida como parte del formato de compresión y `snappy_uncompressed_length` obtendrá el tamaño exacto del bufer requerido.
+La descompresion es similar, debido a que snappy almacena la longitud descomprimida como parte del formato de compresión y `snappy_uncompressed_length` obtendrá el tamaño exacto del bufer requerido.
 
 
 ```rust
@@ -123,20 +123,20 @@ La decompression es similar, debido a que snappy almacena la longitud descomprim
 #                                      compressed_length: size_t,
 #                                      result: *mut size_t) -> c_int { 0 }
 # fn main() {}
-pub fn uncompress(src: &[u8]) -> Option<Vec<u8>> {
+pub fn uncompress(orig: &[u8]) -> Option<Vec<u8>> {
     unsafe {
-        let srclen = src.len() as size_t;
-        let psrc = src.as_ptr();
+        let long_orig = orig.len() as size_t;
+        let porig = orig.as_ptr();
 
-        let mut dstlen: size_t = 0;
-        snappy_uncompressed_length(psrc, srclen, &mut dstlen);
+        let mut long_dest: size_t = 0;
+        snappy_uncompressed_length(porig, long_orig, &mut long_dest);
 
-        let mut dst = Vec::with_capacity(dstlen as usize);
-        let pdst = dst.as_mut_ptr();
+        let mut dest = Vec::with_capacity(long_dest as usize);
+        let pdest = dest.as_mut_ptr();
 
-        if snappy_uncompress(psrc, srclen, pdst, &mut dstlen) == 0 {
-            dst.set_len(dstlen as usize);
-            Some(dst)
+        if snappy_uncompress(porig, long_orig, pdest, &mut long_dest) == 0 {
+            dest.set_len(long_dest as usize);
+            Some(dest)
         } else {
             None // SNAPPY_INVALID_INPUT
         }
@@ -146,13 +146,11 @@ pub fn uncompress(src: &[u8]) -> Option<Vec<u8>> {
 
 Como referencia, los ejemplos usados aquí están disponibles también como una [biblioteca en Github](https://github.com/thestinger/rust-snappy).
 
-
 # Destructores
 
 La bibliotecas externas usualmente transfieren la pertenencia de los recursos a el código llamador. Cuando esto ocurre, debemos usar los destructores de Rust para proveer seguridad y la garantía de la liberación de dichos recursos (especialmente en el caso de un pánico).
 
 Para mas información acerca de los destructores, echa un vistazo a la sección del [trait Drop](../std/ops/trait.Drop.html).
-
 
 # Callbacks desde código C a funciones Rust
 
@@ -166,19 +164,19 @@ Código Rust:
 
 ```no_run
 extern fn callback(a: i32) {
-    println!("I'm called from C with value {0}", a);
+    println!("He sido llamado desde C con el valor {0}", a);
 }
 
 #[link(name = "extlib")]
 extern {
-   fn register_callback(cb: extern fn(i32)) -> i32;
-   fn trigger_callback();
+   fn registrar_callback(cb: extern fn(i32)) -> i32;
+   fn disparar_callback();
 }
 
 fn main() {
     unsafe {
-        register_callback(callback);
-        trigger_callback(); // Triggers the callback
+        registrar_callback(callback);
+        disparar_callback(); // Dispara el callback
     }
 }
 ```
@@ -186,21 +184,20 @@ fn main() {
 Código C:
 
 ```c
-typedef void (*rust_callback)(int32_t);
-rust_callback cb;
+typedef void (*callback_rust)(int32_t);
+callback_rust cb;
 
-int32_t register_callback(rust_callback callback) {
+int32_t registrar_callback(callback_rust callback) {
     cb = callback;
     return 1;
 }
 
-void trigger_callback() {
-  cb(7); // Will call callback(7) in Rust
+void disparar_callback() {
+  cb(7); // Llamara a callback(7) en Rust
 }
 ```
 
-En este ejemplo el `main()` de Rust llamara a `trigger_callback()` en C, que a su vez llamara de vuelta a `callback()` en Rust.
-
+En este ejemplo el `main()` de Rust llamara a `disparar_callback()` en C, que a su vez llamara de vuelta a `callback()` en Rust.
 
 ## Apuntando callbacks a objetos Rust
 
@@ -212,33 +209,33 @@ Código Rust:
 
 ```no_run
 #[repr(C)]
-struct RustObject {
+struct ObjetoRust {
     a: i32,
-    // other members
+    // otros miembros
 }
 
-extern "C" fn callback(target: *mut RustObject, a: i32) {
-    println!("I'm called from C with value {0}", a);
+extern "C" fn callback(objetivo: *mut ObjetoRust, a: i32) {
+    println!("He sido llamado desde C con el valor {0}", a);
     unsafe {
-        // Update the value in RustObject with the value received from the callback
-        (*target).a = a;
+        // Actualiza el valor en ObjetoRust con el valor recibido desde el callback
+        (*objetivo).a = a;
     }
 }
 
 #[link(name = "extlib")]
 extern {
-   fn register_callback(target: *mut RustObject,
-                        cb: extern fn(*mut RustObject, i32)) -> i32;
-   fn trigger_callback();
+   fn registrar_callback(objetivo: *mut ObjetoRust,
+                        cb: extern fn(*mut ObjetoRust, i32)) -> i32;
+   fn disparar_callback();
 }
 
 fn main() {
-    // Create the object that will be referenced in the callback
-    let mut rust_object = Box::new(RustObject { a: 5 });
+    // Creando el objeto que sera referenciado en el callback
+    let mut objeto_rust = Box::new(ObjetoRust { a: 5 });
 
     unsafe {
-        register_callback(&mut *rust_object, callback);
-        trigger_callback();
+        registrar_callback(&mut *objeto_rust, callback);
+        disparar_callback();
     }
 }
 ```
@@ -246,18 +243,18 @@ fn main() {
 Código C:
 
 ```c
-typedef void (*rust_callback)(void*, int32_t);
-void* cb_target;
-rust_callback cb;
+typedef void (*callback_rust)(void*, int32_t);
+void* objetivo_cb;
+callback_rust cb;
 
-int32_t register_callback(void* callback_target, rust_callback callback) {
-    cb_target = callback_target;
+int32_t registrar_callback(void* objetivo_callback, callback_rust callback) {
+    objetivo_cb = objetivo_callback;
     cb = callback;
     return 1;
 }
 
-void trigger_callback() {
-  cb(cb_target, 7); // Will call callback(&rustObject, 7) in Rust
+void disparar_callback() {
+  cb(objetivo_cb, 7); // Llamare a callback(&ObjetoRust, 7) in Rust
 }
 ```
 
@@ -323,13 +320,12 @@ extern {
 }
 
 fn main() {
-    println!("You have readline version {} installed.",
+    println!("Tienes la version {} de readline.",
              rl_readline_version as i32);
 }
 ```
 
 Alternativamente, podrías necesitar alterar estado global proporcionado por una interfaz foránea. Para hacer esto, los estáticos pueden ser declarados con `mut` con la finalidad de poder mutarlos.
-
 
 ```no_run
 # #![feature(libc)]
@@ -356,7 +352,6 @@ fn main() {
 ```
 
 Nota que toda la interacción con un `static mut` es insegura, ambos lectura y escritura. Lidiar con estado global mutable requiere de un gran cuidado.
-
 
 # Convenciones de llamadas foráneas
 
@@ -409,8 +404,8 @@ Podrías querer compilar código Rust de modo que permita ser llamado desde C. E
 
 ```rust
 #[no_mangle]
-pub extern fn hello_rust() -> *const u8 {
-    "Hello, world!\0".as_ptr()
+pub extern fn hola_rust() -> *const u8 {
+    "Hola, mundo!\0".as_ptr()
 }
 # fn main() {}
 ```
