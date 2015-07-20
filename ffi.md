@@ -123,7 +123,7 @@ La descompresion es similar, debido a que snappy almacena la longitud descomprim
 #                                      compressed_length: size_t,
 #                                      result: *mut size_t) -> c_int { 0 }
 # fn main() {}
-pub fn uncompress(orig: &[u8]) -> Option<Vec<u8>> {
+pub fn descomprimir(orig: &[u8]) -> Option<Vec<u8>> {
     unsafe {
         let long_orig = orig.len() as size_t;
         let porig = orig.as_ptr();
