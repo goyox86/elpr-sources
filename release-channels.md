@@ -20,9 +20,9 @@ Este proceso ocurre en paralelo. Cada seis semanas, en el mismo día el nocturno
 
 Generalmente hablando, a menos que tengas una razón especifica, deberías usar el canal de distribución estable. Esos releases tienen como objetivo una audiencia general.
 
-Sin embargo, dependiendo de tu interés en Rust, podrias escoger el nocturno. El balance es el siguiente: en el canal nocturno, puedes hacer uso de nuevas características de Rust. Sin embargo, las características inestables están sujetas al cambio, y es por ello que cualquier nocturno tiene la posibilidad de romper tu código. Si usas el release estable, no tienes acceso a características experimentales, pero el siguiente release de Rust no causara problemas significativos a causa de cambios.
+Sin embargo, dependiendo de tu interés en Rust, podrías escoger el nocturno. El balance es el siguiente: en el canal nocturno, puedes hacer uso de nuevas características de Rust. Sin embargo, las características inestables están sujetas al cambio, y es por ello que cualquier nocturno tiene la posibilidad de romper tu código. Si usas el release estable, no tienes acceso a características experimentales, pero el siguiente release de Rust no causara problemas significativos a causa de cambios.
 
-# Ayudando a el ecosistema a travis de CI
+# Ayudando a el ecosistema a traves de CI
 
 Que hay acerca de beta? Nosotros recomendamos a todos los usuarios Rust que usan el canal de distribución estable a que también prueben en sus sistemas de integración continua con el canal beta. Esto ayudara a advertir al equipo en caso de que exista una regresión accidental.
 
