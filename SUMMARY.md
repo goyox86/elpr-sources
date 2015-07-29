@@ -20,7 +20,7 @@
     * [Borrow y AsRef](borrow-and-asref.md)
     * [Canales de Distribucion](release-channels.md)
 * [Sintaxis y Semantica](syntax-and-semantics.md)
-    * [Variables](variable-bindings.md)
+    * [Enlaces a Variables](variable-bindings.md)
     * [Funciones](functions.md)
     * [Tipos Primitivos](primitive-types.md)
     * [Comentarios](comments.md)
