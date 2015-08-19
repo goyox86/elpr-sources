@@ -1,10 +1,10 @@
 % if
 
-El enfoque de Rust con relacion a `if` no es particularmente complejo, pero es mas similar a el `if` que encontraras en lenguajes con tipificado dinamico que al de los lenguajes de sistemas tradicionales. Hablemos un poco acerca de este, para estar seguros de que entiendas todos los matices.
+El enfoque de Rust con relación a `if` no es particularmente complejo, pero es mas similar a el `if` que encontraras en lenguajes con tipificado dinámico que al de los lenguajes de sistemas tradicionales. Hablemos un poco acerca de este, para estar seguros de que entiendas todos los matices.
 
-`if` es una forma especfifiva de a un concepto mas general, el ‘branch’ (rama). El nombre proviene de ua rama en un arbol: es un punto de desicion, en el cual dependiendo de una opcion, multiples camin9os pueden ser tomados.
+`if` es una forma especifica de a un concepto mas general, el ‘branch’ (rama). El nombre proviene de una rama en un árbol: es un punto de decisión, en el cual dependiendo de una opción, multiples caminos pueden ser tomados.
 
-En el cvaso de `if`, hay una sola eleccion que conduce a dos caminos:
+En el caso de `if`, hay una sola elección que conduce a dos caminos:
 
 ```rust
 let x = 5;
@@ -14,7 +14,7 @@ if x == 5 {
 }
 ```
 
-De haber cambiado el valor de `x` a algo diferente, esta linea no hubiese sido impresa. Para ser mas especificios, si la expresion despues del `if` es evaluada a `true`, entonces el bloque de codigo es ejecutado. Si es `false`, dicho bloque no es invocado.
+De haber cambiado el valor de `x` a algo diferente, esta linea no hubiese sido impresa. Para ser mas especifico, si la expresión después del `if` es evaluada a `true`, entonces el bloque de código es ejecutado. Si es `false`, dicho bloque no se invoca.
 
 Si deseas que algo ocurra en el caso de `false`, debes hacer uso de un `else`:
 
@@ -42,7 +42,7 @@ if x == 5 {
 }
 ```
 
-Todo esto es bien estandar. Sin embargo, tambien puedes hacer esto:
+Todo esto es bien estándar. Sin embargo, también puedes hacer esto:
 
 ```rust
 let x = 5;
@@ -54,7 +54,7 @@ let y = if x == 5 {
 }; // y: i32
 ```
 
-Lo cual podemos (y probablemente debamos) escribir asi:
+Lo cual podemos (y probablemente deberiamos) escribir así:
 
 ```rust
 let x = 5;
@@ -62,4 +62,4 @@ let x = 5;
 let y = if x == 5 { 10 } else { 15 }; // y: i32
 ```
 
-Esto funciona porque `if` es una expresion. El valor de la expresion es el valor de la ultima expresion en el bloque que haya sido seleccionado. Un `if` sin un `else` siempre rresulta en `()` como valor.
+Esto funciona porque `if` es una expresión. El valor de la expresión es el valor de la ultima expresión en el bloque que haya sido seleccionado. Un `if` sin un `else` siempre resulta en `()` como valor.
