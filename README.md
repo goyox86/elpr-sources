@@ -15,7 +15,7 @@ Rust es un lenguaje de programación de sistemas enfocado en tres objetivos: seg
 * [Glosario][gl] - Referencia de los términos usados en el libro.
 * [Investigación Académica][ar] - Literatura que influencio Rust.
 
-[gs]: getting-started.md
+[gs]: getting-started.html
 [lr]: learn-rust.html
 [er]: effective-rust.html
 [ss]: syntax-and-semantics.html
