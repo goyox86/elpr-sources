@@ -1,1 +1,0 @@
-% ciclos for
