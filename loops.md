@@ -1,10 +1,10 @@
 % Ciclos
 
-Rust actualmente provee tres enfoques para realizar actividad iterativa. Son: `loop`, `while` y `for`. Cada uno de esto enfoques tiene su propio juego de usos.
+Rust actualmente provee tres enfoques para realizar actividad iterativa. `loop`, `while` y `for`. Cada uno de dichos enfoques tiene sus propios usos.
 
 ## loop
 
-El ciclo infinito `loop` es el cilo mas simple disponible en Rust. A traves del uso de la palabra reservada `loop`, Rust proporciona una forma de iterar indefinidamente hasta que alguna sentencia de terminacion sea alcanzada. El `loop` infinito de Rust luce asi:
+El ciclo infinito `loop` es el ciclo mas simple disponible en Rust. A traves del uso de la palabra reservada `loop`, Rust proporciona una forma de iterar indefinidamente hasta que alguna sentencia de terminación sea alcanzada. El `loop` infinito de Rust luce así:
 
 
 ```rust,ignore
@@ -15,7 +15,7 @@ loop {
 
 ## while
 
-Rust tambien tiene un ciclo `while`. Luce asi:
+Rust también tiene un ciclo `while`. Luce de esta manera:
 
 ```rust
 let mut x = 5; // mut x: i32
@@ -32,26 +32,26 @@ while !completado {
 }
 ```
 
-Los ciclos `while` son la eleccion correcta cuando no estas seguro acerca de cuentas veces necesitas iterar.
+Los ciclos `while` son la elección correcta cuando no estas seguro acerca de cuantas veces necesitas iterar.
 
-De necesitar un ciclo infinito, podrias estar tentado a escribir lo siguiente:
+De necesitar un ciclo infinito, podrías sentirte tentado a escribir algo como esto:
 
 ```rust,ignore
 while true {
 ```
 
-Sin embargo, `loop` es por lejos mejor en este caso:
+Sin embargo, `loop` es por lejos, el mejor para este caso:
 
 ```rust,ignore
 loop {
 ```
 
-El analisis de flujo de control trata esta construccion de manera diferente que a un `while true`, debido a que sabemos que iteraremos siempre. En general, mientras mas informacion le proporcionemos al compilador, este podra desempenarse mejor en relacion a seguridad y generacion de codigo, es por ello que siempre deberias preferir `loop` cuando tengas planeado iterar de manera indefinida.
+El análisis de flujo de control de Rust trata esta construcción de manera diferente que a un `while true`, debido a que sabemos que iteraremos por siempre. En general, mientras mas información le proporcionemos al compilador, este podría desempeñarse mejor en relación a la seguridad y generación de código, es por ello que siempre deberías preferir `loop` cuando tengas planeado iterar de manera indefinida.
 
 
 ## for
 
-El ciclo `for` es usado para iterar un numero particular de veces. Los ciclos `for` de Rust, sin embergo, trabajan de manera diferente a los de otros lenguajes de programacion de sistemas. El `for` de Rust no luce como este ciclo `for` con “estilo-C”
+El ciclo `for` es usado para iterar un numero particular de veces. Los ciclos `for` de Rust, sin embargo, trabajan de manera diferente a los de otros lenguajes de programación de sistemas. El `for` de Rust no luce como este ciclo `for` al “estilo C”
 
 
 ```c
@@ -60,7 +60,7 @@ for (x = 0; x < 10; x++) {
 }
 ```
 
-En su lugar, el ciclo `for` de Rust luce asi:
+En su lugar, el ciclo `for` de Rust luce así:
 
 ```rust
 for x in 0..10 {
@@ -68,25 +68,25 @@ for x in 0..10 {
 }
 ```
 
-En terminos ligeramente mas abstractos:
+En términos ligeramente mas abstractos:
 
 ```ignore
 for var in expresion {
-    codigo
+    código
 }
 ```
 
-La expresion es un [iterador][iterator].  El iterador retorna una serie de elementos. Cada elemento es una iteracion del ciclo. Ese valor es a su vez asignado a el nombre `var`, el cual es valido en el cuerpo del ciclo. Una vez que el ciclo ha terminado, el siguiente valor es obtenido del iterador, e iteramos una vez mas. Cuando no hay mas valores, el ciclo `for` ha terminado.
+La expresión es un [iterador][iterator].  El iterador retorna una serie de elementos. Cada elemento es una iteración del ciclo. Ese valor es a su vez asignado a el nombre `var`, el cual es valido en el cuerpo del ciclo. Una vez que el ciclo ha terminado, el siguiente valor es obtenido del iterador, y se itera una vez mas. Cuando no hay mas valores, el ciclo `for` termina.
 
 [iterator]: iterators.html
 
-En nuestro ejemplo, `0..10` es una expresion que toma una posicion de inico y una de fin, y devuelve un iterador por sobre esos vallores. El limite superior es eclusivo, entonces, nuestro loop imprimira de `0` hasta `9`, no `10`.
+En nuestro ejemplo, `0..10` es una expresión que toma una posición de inicio y una de fin, y devuelve un iterador por sobre esos valores. El limite superior es exclusivo, entonces, nuestro loop imprimirá de `0` hasta `9`, no `10`.
 
-Rut no posee el ciclo `for` al esticlo C a proposito. Controlar manualmente cada elemento del ciclo es compricado y propenso a errores, incluso para programadores C experimentados.
+Rut no posee el ciclo `for` al estilo de C, a proposito. Controlar manualmente cada elemento del ciclo es complicado y propenso a errores, incluso para programadores C experimentados.
 
 ### Enumerate
 
-Cuando necesitas llevar registro de cuantas veces has iterado, pudes usar la funcion `.enumerate()`.
+Cuando necesitas llevar registro de cuantas veces has iterado, puedes usar la función `.enumerate()`.
 
 #### En rangos:
 
@@ -106,14 +106,14 @@ i = 3 y j = 8
 i = 4 y j = 9
 ```
 
-No olvides colocar los parentesis alredor del rango.
+No olvides colocar los paréntesis alrededor del rango.
 
 #### En iteradores:
 
 ```rust
 # let lineas = "hola\nmundo".lines();
-for (numerolinea, linea) in lineas.enumerate() {
-    println!("{}: {}", numerolinea, linea);
+for (numero_linea, linea) in lineas.enumerate() {
+    println!("{}: {}", numero_linea, linea);
 }
 ```
 
@@ -126,7 +126,7 @@ Outputs:
 3: Contenido de la linea cuatro
 ```
 
-## Finalizando la itracion de manera temprana
+## Finalizando la iteración de manera temprana
 
 Echemos un vistazo a ese ciclo `while` que vimos con anterioridad:
 
@@ -146,9 +146,9 @@ while !completado {
 }
 ```
 
-Necesitabamos mantener un binding a variable `mut`, `completado`, para saber cuando debiamos salir del ciclo. Rust posee dos palabras clave para ayudarnos a modificar la iteracion: `break` y `continue`.
+Necesitamos mantener un binding a variable `mut`, `completado`, para saber cuando debíamos salir del ciclo. Rust posee dos palabras clave para ayudarnos a modificar el proceso de iteración: `break` y `continue`.
 
-En este caso, podemos escribir el ciclo de una mejor forma con un `break`:
+En este caso, podemos escribir el ciclo de una mejor forma con `break`:
 
 ```rust
 let mut x = 5;
@@ -162,9 +162,9 @@ loop {
 }
 ```
 
-Ahora iteramos de manera indefinida con `loop` y usamos `break` para romper el ciclo de manera temprana. Usar un `return` explicito tambien servira para terminar el ciclo de manera temprana.
+Ahora iteramos de manera indefinida con `loop` y usamos `break` para romper el ciclo de manera temprana. Usar un `return` explícito también sirve para la terminación temprana del ciclo.
 
-`continue` es similar, pero en lugar de terminar el ciclo, nos hace ir a la siguiente iteracion. Lo siguiente imprimira los numnero impares:
+`continue` es similar, pero en lugar de terminar el ciclo, nos hace ir a la siguiente iteración. Lo siguiente imprimirá los numeros impares:
 
 ```rust
 for x in 0..10 {
@@ -176,7 +176,7 @@ for x in 0..10 {
 
 ## Etiquetas loop
 
-Tambien podrias encontras situaciones en las cuales tengas ciclos anidados y necesites especificar a cual de los ciclos pertenecen tus sentencias `break` o `continue`. Como en la mayoria de los lenguajes, por defecto un `break` o `continue` aplicara a el ciclo mas interno. En el caso de que desearas aplicar un `break` o `continue` para alguno de los ciclos externos, puedes usar etiquetas para especificar a cual ciclo aplica la sentencia `break` o `continue`. Lo siguiente solo imprimira cuando ambos `x` y `y` sean impares:
+También podrías encontrar situaciones en las cuales tengas ciclos anidados y necesites especificar a cual de los ciclos pertenecen tus sentencias `break` o `continue`. Como en la mayoría de los lenguajes, por defecto un `break` o `continue` aplica a el ciclo mas interno. En el caso de que desearas aplicar un `break` o `continue` para alguno de los ciclos externos, puedes usar etiquetas para especificar a cual ciclo aplica la sentencia `break` o `continue`. Lo siguiente solo imprimirá cuando ambos `x` y `y` sean impares:
 
 
 ```rust
