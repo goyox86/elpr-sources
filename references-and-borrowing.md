@@ -126,23 +126,17 @@ Primero, cualquier prestamo debe vivir en un ambito no mayor al de el dueno. Seg
 * una o mas referencias (`&T`) a un recurso,
 * exactamente una referencia mutable (`&mut T`).
 
-Posiblemente notes que esto es muy similar, pero no exactamente lo mismo, a la definicion de una condicion de carrera:
+Posiblemente notes que esto es muy similar, pero no exactamente igual, a la definicion de una condicion de carrera:
 
+> Hay una ‘condicion de carrera’ cuando dos o mas apuntadores acceden a la misma locacion en memoria al mismo tiempo, en donde al menos uno esta escribiendo, y las operaciones no estan sincronizadas.
 
-> There is a ‘data race’ when two or more pointers access the same memory
-> location at the same time, where at least one of them is writing, and the
-> operations are not synchronized.
+Con las referencias, puedes tener cuantas desees, debido a que ninguna de ellas esta escribiendo. Si estas escribiendo, y necesitas dos o mas apuntadores a la misma memoria, puedes tener solo un `&mut` a la vez. Es asi como Rust previene las condiciones de carrera en tiempo de compilacion: obtendremos errores si rompemos las reglas.
 
-With references, you may have as many as you’d like, since none of them are
-writing. If you are writing, you need two or more pointers to the same memory,
-and you can only have one `&mut` at a time. This is how Rust prevents data
-races at compile time: we’ll get errors if we break the rules.
+Con esto en mente, consideremos nuestro ejemplo otra vez.
 
-With this in mind, let’s consider our example again.
+## Pensando en ambitos
 
-## Thinking in scopes
-
-Here’s the code:
+He aqui el codigo:
 
 ```rust,ignore
 let mut x = 5;
@@ -153,7 +147,7 @@ let y = &mut x;
 println!("{}", x);
 ```
 
-This code gives us this error:
+El codigo anterior genera el siguiente error:
 
 ```text
 error: cannot borrow `x` as immutable because it is also borrowed as mutable
@@ -161,9 +155,8 @@ error: cannot borrow `x` as immutable because it is also borrowed as mutable
                    ^
 ```
 
-This is because we’ve violated the rules: we have a `&mut T` pointing to `x`,
-and so we aren’t allowed to create any `&T`s. One or the other. The note
-hints at how to think about this problem:
+Esto es debido a que hemos vilado las reglas:  tenemos un `&mut T` apuntando a `x`, y en consecuencia no tenemos permitido crear ningun `&T`s. Una cosa u otra. La nota apunta a como pensar acerca de este problema:
+
 
 ```text
 note: previous borrow ends here
@@ -173,50 +166,47 @@ fn main() {
 ^
 ```
 
-In other words, the mutable borrow is held through the rest of our example. What
-we want is for the mutable borrow to end _before_ we try to call `println!` and
-make an immutable borrow. In Rust, borrowing is tied to the scope that the
-borrow is valid for. And our scopes look like this:
+En otras palabras, el prestamo mutable es mantenido a lo largo de el resto de nuestro ejemplo. Lo que queremos es que nuestro prestamo mutable termine _antes_ que intentemos llamar a `println!` y hagamos un prestamo inmutable. En Rust, el prestamo esta asociado al ambito en el cual el prestamo es valido. Nuestros ambitos lucen asi:
+
 
 ```rust,ignore
 let mut x = 5;
 
-let y = &mut x;    // -+ &mut borrow of x starts here
+let y = &mut x;    // -+ prestamo &mut de x comienza aqui
                    //  |
 *y += 1;           //  |
                    //  |
-println!("{}", x); // -+ - try to borrow x here
-                   // -+ &mut borrow of x ends here
+println!("{}", x); // -+ - intento de tomar prestado x aqui
+                   // -+ prestamo &mut de x termina aqui
 ```
 
-The scopes conflict: we can’t make an `&x` while `y` is in scope.
+Los ambitos entran en conflicto: no podemos crear un `&x` mientras `y` esta en ambito.
 
-So when we add the curly braces:
+Entonces cuando agregamos llaves:
 
 ```rust
 let mut x = 5;
 
-{                   
-    let y = &mut x; // -+ &mut borrow starts here
+{
+    let y = &mut x; // -+ prestamo &mut de x comienza aqui
     *y += 1;        //  |
-}                   // -+ ... and ends here
+}                   // -+ ... y termina aqui
 
-println!("{}", x);  // <- try to borrow x here
+println!("{}", x);  // <- intento de tomar prestado x aqui
 ```
 
-There’s no problem. Our mutable borrow goes out of scope before we create an
-immutable one. But scope is the key to seeing how long a borrow lasts for.
+No hay problema. Nuestro prestamo mutable sale de ambito antes de que creemos un prestamo inmutable. El ambito es clave para ver cuanto dura el prestamo.
 
-## Issues borrowing prevents
+## Problemas que el prestamo previene
+
+Porque tenemos estas reglas restrictivas? Bueno, como lo notamos, estas reglas previenen condiciones de carrera. Que tipos de problemas causan las condiciones de carrera? Aca unos pocos.
 
 Why have these restrictive rules? Well, as we noted, these rules prevent data
 races. What kinds of issues do data races cause? Here’s a few.
 
-### Iterator invalidation
+### Invalidacion de Iteradores
 
-One example is ‘iterator invalidation’, which happens when you try to mutate a
-collection that you’re iterating over. Rust’s borrow checker prevents this from
-happening:
+Un ejemplo es la ‘invalidacion de iteradores’, que ocuure cuando tratas de mutar una collecion mientras estas iterando sobre ella. El comprobador de prestamos de Rust evita que esto ocurra:
 
 ```rust
 let mut v = vec![1, 2, 3];
@@ -226,9 +216,7 @@ for i in &v {
 }
 ```
 
-This prints out one through three. As we iterate through the vectors, we’re
-only given references to the elements. And `v` is itself borrowed as immutable,
-which means we can’t change it while we’re iterating:
+Lo anterior imprime desde uno hasta tres. A medida que iteramos los vectores, solo se nos proporcionan referencias a los elementos. `v` en si mismo es tomado prestado de manera inmutable, lo que se traduce en que no podamos cambiarlo mientras lo iteramos:
 
 ```rust,ignore
 let mut v = vec![1, 2, 3];
@@ -239,7 +227,7 @@ for i in &v {
 }
 ```
 
-Here’s the error:
+He aqui el error:
 
 ```text
 error: cannot borrow `v` as mutable because it is also borrowed as immutable
@@ -257,15 +245,13 @@ for i in &v {
 ^
 ```
 
-We can’t modify `v` because it’s borrowed by the loop.
+No podemos modificar `v` debido a que esta tomado prestado por el ciclo.
 
-### use after free
+### uso despues de liberado (use after free)
 
-References must not live longer than the resource they refer to. Rust will
-check the scopes of your references to ensure that this is true.
+Las referencias no deben vivir por mas tiempo que el recurso al cual ellas hacen referencia. Rust chequeara los ambitos de tus referencias para asegurarse de que esto sea cierto.
 
-If Rust didn’t check this property, we could accidentally use a reference
-which was invalid. For example:
+Si Rust no verificara esta proiedad, podiramos accidentalmente usar una referencia invalida. Por ejemplo:
 
 ```rust,ignore
 let y: &i32;
@@ -277,7 +263,7 @@ let y: &i32;
 println!("{}", y);
 ```
 
-We get this error:
+Obtenemos el siguiente error:
 
 ```text
 error: `x` does not live long enough
@@ -298,14 +284,9 @@ statement 0 at 4:18
 }
 ```
 
-In other words, `y` is only valid for the scope where `x` exists. As soon as
-`x` goes away, it becomes invalid to refer to it. As such, the error says that
-the borrow ‘doesn’t live long enough’ because it’s not valid for the right
-amount of time.
+En otras palabras, `y` es valido solo para el ambito en donde `x` existe. Tan pronto como `x` se va, se hace invalido hacerle referencia. Es por ello que el error dice que el prestamo, ‘ no vive lo suficiente’ (‘doesn’t live long enough’) puesto a que no es valido por la cantidad de tiempo correcto.
 
-The same problem occurs when the reference is declared _before_ the variable it
-refers to. This is because resources within the same scope are freed in the
-opposite order they were declared:
+El mismo problema ocurre cuando la referencia es declarada _antes_ de la variable a la cual hace referencia. Esto es debido a que los recursos dentro del mismo ambito son liberados en orden opuesto al orden en el que fueron declarados:
 
 ```rust,ignore
 let y: &i32;
@@ -315,7 +296,7 @@ y = &x;
 println!("{}", y);
 ```
 
-We get this error:
+Obtenemos este error:
 
 ```text
 error: `x` does not live long enough
@@ -338,6 +319,8 @@ statement 1 at 3:14
     println!("{}", y);
 }
 ```
+
+En el ejemplo anterior, `y` es declarada antes que `x`, singificando que `y` vive mas que `x`, lo cual no esta permitido.
 
 In the above example, `y` is declared before `x`, meaning that `y` lives longer
 than `x`, which is not allowed.
