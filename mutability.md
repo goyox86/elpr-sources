@@ -1,6 +1,6 @@
 % Mutabilidad
 
-Multabilidad, es la habilidad que una cosa posee para ser cambiada, funciona un poco diferente en Rust que en otros lenguajes. El primer aspecto de la mutabilidad es que no esta habilitada por defecto:
+Mutabilidad, es la habilidad que una cosa posee para ser cambiada, funciona un poco diferente en Rust que en otros lenguajes. El primer aspecto de la mutabilidad es que no esta habilitada por defecto:
 
 ```rust,ignore
 let x = 5;
@@ -21,7 +21,6 @@ Esto es un enlace a variable mutable. Cuando un enlace a variable es mutable, si
 
 Si deseas cambiar a que apunta el enlace a variable, necesitaras una [referencia mutable][mr]:
 
-
 ```rust
 let mut x = 5;
 let y = &mut x;
@@ -29,7 +28,7 @@ let y = &mut x;
 
 [mr]: references-and-borrowing.html
 
-`y` es un enlace a variable inmutable a una referencia mutable, lo que significa que no puedes asociar `y` a otra cosa (`y = &mut z`), pero puedes mutar lo que sea a lo que `y` esta asociado (`*y = 5`).
+`y` es un enlace a variable inmutable a una referencia mutable, lo que significa que no puedes asociar `y` a otra cosa (`y = &mut z`), pero puedes mutar lo que sea a lo que `y` esta asociado (`*y = 5`). Una diferencia muy sutil.
 
 Por supuesto, si necesitas ambas cosas:
 
@@ -40,7 +39,7 @@ let mut y = &mut x;
 
 Ahora `y` puede ser asociado a otro valor, y el valor que esta referenciando puede ser cambiado.
 
-Es importante notar que `mut` es parte de una [patron][pattern], de manera tal que puedas hacer cosas como:
+Es importante notar que `mut` es parte de un [patron][pattern], de manera tal que puedas hacer cosas como:
 
 
 ```rust
@@ -54,7 +53,7 @@ fn foo(mut x: i32) {
 
 # Mutabilidad Interior vs. Mutabilidad Exterior
 
-Sin embargo, cuando decimos que algo es ‘immutable’ en Rust, esto no significa que no se le pueda cambiar: lo que decimos es que algo tiene ‘mutabilidad exterior’. Considera, por ejemplo, [`Arc<T>`][arc]:
+Sin embargo, cuando decimos que algo es ‘immutable’ en Rust, esto no significa que no pueda ser cambiado: lo que decimos es que algo tiene ‘mutabilidad exterior’. Considera, por ejemplo, [`Arc<T>`][arc]:
 
 ```rust
 use std::sync::Arc;
@@ -65,11 +64,11 @@ let y = x.clone();
 
 [arc]: ../std/sync/struct.Arc.html
 
-Cuando llamamos a `clone()`, el `Arc<T>` necesita actualizar el contador de referencias. A pesar de que no hemos usado ningun `mut` aqui, `x` es un enlace inmutable, tampoco tomamos `&mut 5` u otra cosa. Entoces, que esta pasando?
+Cuando llamamos a `clone()`, el `Arc<T>` necesita actualizar el contador de referencias. A pesar de que no hemos usado ningún `mut` aquí, `x` es un enlace inmutable, tampoco tomamos `&mut 5` o alguna mas. Entonces, que esta pasando?
 
-Para entender esto, debemos volver al nucleo de la filosofia que guia a Rust, seguridad en el manejo de memoria, y el mecanismo a traves del cual Rust la garantiza, el sistema de [pertenencia][ownership], y mas especificamente, el [prestamo][borrowing]:
+Para entender esto, debemos volver al núcleo de la filosofía que guía a Rust, seguridad en el manejo de memoria, y el mecanismo a través del cual Rust la garantiza, el sistema de [pertenencia][ownership], y mas específicamente, el [préstamo][borrowing]:
 
-> Puedes tener uno u otro de estos dos tipos de pretamo, pero no los dos al mismo tiempo:
+> Puedes tener uno u otro de estos dos tipos de prestamo, pero no los dos al mismo tiempo:
 >
 > * una o mas referencias (`&T`) a un recurso,
 > * exactamente una referencia mutable (`&mut T`).
@@ -77,7 +76,7 @@ Para entender esto, debemos volver al nucleo de la filosofia que guia a Rust, se
 [ownership]: ownership.html
 [borrowing]: references-and-borrowing.html#borrowing
 
-Entonces, esa es la definicion real de ‘immutabilidad’: es seguro tener dos apuntadores? En el caso de `Arc<T>`’s, si: la mutacion esta completamente contenida dentro de la estructura en si misma. No esta disponible al usuario. Por esta razon, retorna `&T` con `clone()`. Si proporcionase `&mut T`s, eso seria un problema.
+Entonces, esa es la definición real de ‘inmutabilidad’: es seguro tener dos apuntadores? En el caso de `Arc<T>`’s, si: la mutación esta completamente contenida dentro de la estructura en si misma. No esta disponible al usuario. Por esta razón, retorna `clone()` `&T`s. Si proporcionase `&mut T`s, seria un problema.
 
 Otros tipos como los del modulo [`std::cell`][stdcell], poseen lo opuesto: mutabilidad interior. Por ejemplo:
 
@@ -103,11 +102,11 @@ let z = x.borrow_mut();
 # (y, z);
 ```
 
-Esto, en efecto, hara panico en tiempo de ejecucion. Esto es lo que `RefCell` hace: aplica las reglas de prestamo de Rust en tiempo de ejecucion, y hace `panic!`os si las reglas son violadas. Lo anterior nos permite acercarnos a otro aspecto de las reglas de mutabilidad de Rust. Hablemos acerca de ello primero.
+Esto, en efecto, hará pánico en tiempo de ejecución. Esto es lo que `RefCell` hace: aplica las reglas de préstamo de Rust en tiempo de ejecución, y hace `panic!`os si dichas reglas son violadas. Lo anterior nos permite acercarnos a otro aspecto de las reglas de mutabilidad de Rust. Hablemos acerca de ello primero.
 
 ## Mutabilidad a nivel de campos
 
-La mutabilidad es una propiedad de un prestamo (`&mut`) o un enlace a variable (`let mut`). Esto se traduce en que, por ejemplo, no puedes tener un [`struct`][struct] con algunos campos mutables y otros inmutables:
+La mutabilidad es una propiedad de un préstamo (`&mut`) o un enlace a variable (`let mut`). Esto se traduce en que, por ejemplo, no puedes tener un [`struct`][struct] con algunos campos mutables y otros inmutables:
 
 ```rust,ignore
 struct Punto {
@@ -154,4 +153,4 @@ println!("y: {:?}", punto.y);
 
 [cell]: ../std/cell/struct.Cell.html
 
-Esto imprimira `y: Cell { value: 7 }`. Hemos actualizado `y` de manera satisfactoria.
+Esto imprimirá `y: Cell { value: 7 }`. Hemos actualizado `y` de manera satisfactoria.
