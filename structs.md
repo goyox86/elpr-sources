@@ -153,7 +153,7 @@ println!("la longitud es {} pulgadas", longitud_enteros);
 
 Como notaras, puedes extraer el entero contenido con un `let` de destructuración, justo como en las tuplas regulares. En este caso, el `let Pulgadas(longitud_enteros)` asigna `10` a `longitud_enteros`.
 
-# Estructuras tipo-unitario (Unit-like structs)
+# Estructuras tipo-unitario (unit-like structs)
 
 Puedes definir una `struct` sin ningún miembro:
 
