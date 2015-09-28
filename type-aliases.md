@@ -14,7 +14,7 @@ type Name = String;
 let x: Nombre = "Hola".to_string();
 ```
 
-Sin embargo, nota, que este es un _alias_, no un nuevo tipo. En otras palabras, debido a que Rust es fuertemente tipificado, podrias esperar que una comparacion entre dos tipos diferentes falle:
+Sin embargo, nota, que es un _alias_, no un nuevo tipo. En otras palabras, debido a que Rust es fuertemente tipificado, podrías esperar que una comparación entre dos tipos diferentes falle:
 
 ```rust,ignore
 let x: i32 = 5;
@@ -25,7 +25,7 @@ if x == y {
 }
 ```
 
-lo anterior produce:
+lo anterior, produce:
 
 ```text
 error: mismatched types:
@@ -37,7 +37,7 @@ error: mismatched types:
              ^
 ```
 
-Pero, si tuvieramos un alias:
+Pero, si tuviéramos un alias:
 
 ```rust
 type Num = i32;
@@ -50,9 +50,9 @@ if x == y {
 }
 ```
 
-Compilaria sin errores. Valores de un tipo `Num` son lo mismo que un valor de tipo `i32`, en todos los aspectos.
+Compilaría sin errores. Valores de un tipo `Num` son lo mismo que un valor de tipo `i32`, en todos los aspectos.
 
-Puedes tambien hacer uso de alias de tipos en genericos:
+Puedes también hacer uso de alias de tipos en genéricos:
 
 ```rust
 use std::result;
@@ -65,6 +65,6 @@ enum ErrorConcreto {
 type Result<T> = result::Result<T, ErrorConcreto>;
 ```
 
-El codigo anterior, crea una version especializada de el tipo `Result`, la cual posee siempre un `ErrorConcreto` para la parte `E` de `Result<T, E>`. Esta practica es usada comunmente en la biblioteca estandar para la creacion de errores personalizados para cada sub-seccion. Por ejemplo, [io::Result][ioresult].
+El código anterior, crea una version especializada de el tipo `Result`, la cual posee siempre un `ErrorConcreto` para la parte `E` de `Result<T, E>`. Esta practica es usada comúnmente en la biblioteca estándar para la creación de errores personalizados para cada sub-seccion. Por ejemplo, [io::Result][ioresult].
 
 [ioresult]: ../std/io/type.Result.html
