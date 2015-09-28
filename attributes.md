@@ -1,13 +1,13 @@
 % Atributos
 
-Las declaraciones pueden ser anotadas con ‘atributos’ en Rust. Los atributos lucen asi:
+Las declaraciones pueden ser anotadas con ‘atributos’ en Rust. Los atributos lucen así:
 
 ```rust
 #[test]
 # fn foo() {}
 ```
 
-o asi:
+o de esta manera:
 
 ```rust
 # mod foo {
@@ -15,7 +15,7 @@ o asi:
 # }
 ```
 
-La diferencia entre los dos es el `!`, que cambia a que aplica el atributo:
+La diferencia entre los dos es el `!`, que cambia a que cosa aplica el atributo:
 
 ```rust,ignore
 #[foo]
@@ -26,23 +26,23 @@ mod bar {
 }
 ```
 
-El atributo `#[foo]` aplica a el siguente item, que es la declaracion del `struct`. El atributo `#![bar]` aplica a el item que lo encierra, la declaracion `mod`. De resto, son lo mismo. Ambos cambian de alguna forma el significado de el item al cual estan asociados.
+El atributo `#[foo]` aplica a el siguiente item, que es la declaración del `struct`. El atributo `#![bar]` aplica a el item que lo encierra, la declaración `mod`. De resto, son lo mismo. Ambos cambian de alguna forma el significado de el item al cual están asociados.
 
-Por ejemplo, considera una funcion como esta:
+Por ejemplo, considera una función como esta:
 
 ```rust
 #[test]
-fn check() {
+fn comprobar() {
     assert_eq!(2, 1 + 1);
 }
 ```
 
-Esta marcado con `#[test]`. Esto singifica que es especial: cuando ejecutes las [pruebas][tests], esta funcion sera ejecutada. Cuando compilas normalmente, no sera incluida ni siquiera . La funcion es ahora una funcion de prueba.
+Esta marcado con `#[test]`. Esto significa que es especial: cuando ejecutes las [pruebas][tests], esta función sera ejecutada. Cuando compilas normalmente, no sera incluida ni siquiera. La función es ahora una función de prueba.
 
 
 [tests]: testing.html
 
-Los atributos pueden tener tambien data adicional:
+Los atributos pueden tener también data adicional:
 
 ```rust
 #[inline(always)]
