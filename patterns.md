@@ -1,11 +1,11 @@
 % Patrones
 
-Los patrones son bastante comunes en Rust. Los usamos en [enlaces a variable][bindings], [sentencias match][match], y otros casos. Embarquemonos en un tour torbellino acerca de todas las cosas que los patrones son capaces de hacer!
+Los patrones son bastante comunes en Rust. Los usamos en [enlaces a variable][bindings], [sentencias match][match], y otros casos. Embarquemonos en un tour torbellino por todas las cosas que los patrones son capaces de hacer!
 
 [bindings]: variable-bindings.html
 [match]: match.html
 
-Un repaso rapido: puedes probar patrones contra literales directamente, y `_` actua como un caso `cualquiera`:
+Un repaso rápido: puedes probar patrones contra literales directamente, y `_` actúa como un caso `cualquiera`:
 
 ```rust
 let x = 1;
@@ -70,7 +70,7 @@ match origen {
 }
 ```
 
-Si solo nos importan algunos valores, no tenemos que darles nombres a todos:
+Si solo nos importan algunos valores, no tenemos que darle nombres a todos:
 
 ```rust
 struct Punto {
@@ -87,7 +87,7 @@ match origen {
 
 Esto imprime `x es 0`.
 
-Puedes hacer este tipo de match en cualquier miembro, no solo el primero:
+Puedes hacer este tipo de pruebas en cualquier miembro, no solo el primero:
 
 ```rust
 struct Punto {
@@ -113,33 +113,33 @@ Este comportamiento de ‘destructuracion’ funciona en cualquier tipo de datos
 
 Puedes usar `_` en un patron para ignorar tanto el tipo como el valor.
 
-Por ejemplo, he aqui un `match` ccontra un `Result<T, E>`:
+Por ejemplo, he aquí un `match` contra un `Result<T, E>`:
 
 
 ```rust
 # let algun_valor: Result<i32, &'static str> = Err("Hubo un error");
 match algun_valor {
     Ok(valor) => println!("valor obtenido: {}", valor),
-    Err(_) => println!("un error ha ocurrido"),
+    Err(_) => println!("ha ocurrido un error"),
 }
 ```
 
 En el primer brazo, enlazamos el valor dentro de la variante `Ok` a la variable `valor`. Pero en el brazo `Err` usamos `_` para ignorar el error especifico, y solo imprimir un mensaje de error general.
 
-`_` es valido en cualquier patron que crea un enlace a variable. Este puede ser util para ignorar porciones de una estructura mas grande:
+`_` es valido en cualquier patron que cree un enlace a variable. También puede ser util para ignorar porciones de una estructura mas grande:
 
 ```rust
 fn coordenada() -> (i32, i32, i32) {
-    // generar y retornar algun tipo de tupla de tres elementos
+    // generar y retornar algún tipo de tupla de tres elementos
 # (1, 2, 3)
 }
 
 let (x, _, z) = coordenada();
 ```
 
-Aqui, asociamos el el primer y ultimo elemento de la tupla a `x` y `z` respectivamente, ignorando el elemento de la mitad.
+Aquí, asociamos ambos el primer y ultimo elemento de la tupla a `x` y `z` respectivamente, ignorando el elemento de la mitad.
 
-Similarmente, puedes usar `..` en un patron para ignorar multiples valores.
+Similarmente, puedes usar `..` en un patrón para ignorar multiples valores.
 
 
 ```rust
@@ -152,7 +152,7 @@ let x = TuplaOpcional::Valor(5, -2, 3);
 
 match x {
     TuplaOpcional::Valor(..) => println!("Tupla obtenida!"),
-    TuplaOpcional::Faltante => println!("Mala suerte."),
+    TuplaOpcional::Faltante => println!("Sin suerte."),
 }
 ```
 
@@ -170,11 +170,11 @@ match x {
 }
 ```
 
-Imrime `Referencia a 5 obtenida`.
+Imprime `Referencia a 5 obtenida`.
 
 [ref]: references-and-borrowing.html
 
-Aca, la `r` dentro del `match` posee el tipo `&i32`. En otras palabras la palabra reservada `ref` _crea_ una referencia, para ser usada dentro del patron. Si necesitas una referencia mutable `ref mut` funcionara de la misma manera:
+Acá, la `r` dentro del `match` posee el tipo `&i32`. En otras palabras la palabra reservada `ref` _crea_ una referencia, para ser usada dentro del patrón. Si necesitas una referencia mutable `ref mut` funcionara de la misma manera:
 
 ```rust
 let mut x = 5;
@@ -200,7 +200,7 @@ match x {
 
 Esto imprime `uno al cinco`.
 
-Los rangos son unsador mayormente con enteros y `chars`s:
+Los rangos son usados mayormente con enteros y `chars`s:
 
 ```rust
 let x = '💅';
@@ -243,9 +243,9 @@ match x {
 }
 ```
 
-Este codigo imrime `Some("Steve")`: hemos asociado el `nombre` interno a `a`.
+Dicho código imprime `Some("Steve")`: hemos asociado el `nombre` interno a `a`.
 
-Si usas `@` con `|`, necesitas asegurarte de que el nombre este asociado en cada parte del patron:
+Si usas `@` con `|`, necesitas asegurarte de que el nombre sea asociado en cada parte del patron:
 
 ```rust
 let x = 5;
@@ -261,21 +261,21 @@ match x {
 Puedes introducir `guardias match` (‘match guards’) con `if`:
 
 ```rust
-enum IntOpcional {
+enum EnteroOpcional {
     Valor(i32),
     Faltante,
 }
 
-let x = IntOpcional::Value(5);
+let x = EnteroOpcional::Value(5);
 
 match x {
-    IntOpcional::Valor(i) if i > 5 => println!("Int mayor a cinco obtenido!"),
-    IntOpcional::Valor(..) => println!("Int obtenido!"),
-    IntOpcional::Faltante => println!("Sin suerte."),
+    EnteroOpcional::Valor(i) if i > 5 => println!("Entero mayor a cinco obtenido!"),
+    EnteroOpcional::Valor(..) => println!("Entero obtenido!"),
+    EnteroOpcional::Faltante => println!("Sin suerte."),
 }
 ```
 
-This prints `Int obtenido!"`.
+Esto imprime `Entero obtenido!"`.
 
 Si estas usando `if` con multiples patrones, el `if` aplica a ambos lados:
 
@@ -289,13 +289,13 @@ match x {
 }
 ```
 
-Lo anterior imprime `no`, debido a que el `if` aplica a el `4 | 5` completp, y no solo al `5`. En otras palabras, la precedencia del `if` se comporta asi:
+Lo anterior imprime `no`, debido a que el `if` aplica a el `4 | 5` completo, y no solo al `5`. En otras palabras, la precedencia del `if` se comporta de la siguiente manera:
 
 ```text
 (4 | 5) if y => ...
 ```
 
-y no asi:
+y no así:
 
 ```text
 4 | (5 if y) => ...
@@ -303,7 +303,7 @@ y no asi:
 
 # Mezcla y Match
 
-Uff! Eso fue un monton de formas diferentes para probar cosas, y todas pueden ser mezcladas y probadas, dependiendo de los que estes haciendo:
+Uff! Eso fue un montón de formas diferentes para probar cosas, y todas pueden ser mezcladas y probadas, dependiendo de los que estés haciendo:
 
 ```rust,ignore
 match x {
