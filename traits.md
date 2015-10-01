@@ -1,8 +1,8 @@
 % Traits
 
-Un trait es una facilidad del lenguaje que le dice al compilador de Rust acerca de la funcionalidad que un tipo debe proveer.
+Un trait es una facilidad del lenguaje que le indica compilador de Rust acerca de la funcionalidad que un tipo debe proveer.
 
-Recuerdas la palabra reservada `impl`, usada para llamar una funcion con la [sintaxis de metodos][methodsyntax]?
+Recuerdas la palabra reservada `impl`?, usada para llamar a una función con la [sintaxis de métodos][methodsyntax]?
 
 ```rust
 struct Circulo {
@@ -20,7 +20,7 @@ impl Circulo {
 
 [methodsyntax]: method-syntax.html
 
-Los traits son similares, excepto que definimos un trait con solo la firma de metodo y luego implementamos el trait pata esa estructura. Asi:
+Los traits son similares, excepto que definimos un trait con solo la firma de método y luego implementamos el trait para la estructura. Así:
 
 ```rust
 struct Circulo {
@@ -42,9 +42,9 @@ impl TieneArea for Circulo {
 
 Como puedes ver, el bloque `trait` luce muy similar a el bloque `impl`, pero no definimos un bloque, solo la firma de tipos. Cuando implementamos un trait, usamos `impl Trait for Item`, en vez de solo `impl Item`.
 
-## Limites trait para funciones genericas
+## Limites trait para funciones genéricas
 
-Los traits son utiles porque permiten a un tipo hacer ciertas promesas acerca de su comportamiento. La funciones genericas pueden explotar esto para restringir los tipos que aceptan. Considera esta funcion, la cual no compila:
+Los traits son útiles porque permiten a un tipo hacer ciertas promesas acerca de su comportamiento. La funciones genéricas pueden explotar esto para restringir los tipos que aceptan. Considera esta función, la cual no compila:
 
 ```rust,ignore
 fn imrimir_area<T>(figura: T) {
@@ -58,7 +58,7 @@ Rust se queja:
 error: no method named `area` found for type `T` in the current scope
 ```
 
-Debido a que `T` puede ser de cualquier tipo, no podemos estar seguros que iplementa el metodo `area`. Pero podemos agregar una ‘restriccion de trait’ a nuestro `T` generico, asegurandonos de que lo implemente:
+Debido a que `T` puede ser de cualquier tipo, no podemos estar seguros que implementa el método `area`. Pero podemos agregar una ‘restricción de trait’ a nuestro `T` genérico, asegurándonos de que lo implemente:
 
 ```rust
 # trait TieneArea {
@@ -69,9 +69,9 @@ fn imrimir_area<T: TieneArea>(shape: T) {
 }
 ```
 
-La sintaxis `<T: HasArea>` se traduce en “cualquier tipo que implemente el trait `TieneArea`.”. A consecuencia de que los traits definen firmas de tipos de funcion, podemos estar seguros que cualquier tipo que implemente `TieneArea` tendra un metodo `.area()`.
+La sintaxis `<T: TieneArea>` se traduce en “cualquier tipo que implemente el trait `TieneArea`.”. A consecuencia de que los traits definen firmas de tipos de función, podemos estar seguros que cualquier tipo que implemente `TieneArea` tendrá un método `.area()`.
 
-He aqui un ejemplo extendido de como esto funciona:
+He aquí un ejemplo extendido de como esto funciona:
 
 ```rust
 trait TieneArea {
@@ -131,21 +131,21 @@ Esta figura tiene un area de 3.141593
 Esta figura tiene un area de 1
 ```
 
-Como puedes ver, `imrimir_area` ahora es generica, pero tambien asegura que hallamos porporcionado los tipos correctos. Si pasamos un tipo incorrecto:
+Como puedes ver, `imrimir_area` ahora es genérica, pero también asegura que hallamos proporcionado los tipos correctos. Si pasamos un tipo incorrecto:
 
 ```rust,ignore
 imrimir_area(5);
 ```
 
-Obetenemos un error en tiempo de compilacion:
+Obtenemos un error en tiempo de compilación:
 
 ```text
 error: the trait `TieneArea` is not implemented for the type `_` [E0277]
 ```
 
-## Limites de tratit para estructuras genericas
+## Limites de trait para estructuras genericas
 
-Tus estructuras genericas pueden beneficiarse tambien de las restricciones de trait. Todo lo que necesitas es agregar la restriccion cuando declaras los tipos de parametros. A continuacion un nuevo tipo `Rectangulo<T>` y su operacion `es_cuadrado`:
+Tus estructuras genéricas pueden beneficiarse también de las restricciones de trait. Todo lo que necesitas es agregar la restricción cuando declaras los parámetros de tipos. A continuación un nuevo tipo `Rectangulo<T>` y su operación `es_cuadrado`:
 
 ```rust
 struct Rectangulo<T> {
@@ -182,18 +182,18 @@ fn main() {
 impl<T: PartialEq> Rectangulo<T> { ... }
 ```
 
-Ahora, un rectangulo puede ser definido en funcion de cualquier tipo que pueda ser comparado por igualdad.
+Ahora, un rectángulo puede ser definido en función de cualquier tipo que pueda ser comparado por igualdad.
 
 
 [PartialEq]: ../core/cmp/trait.PartialEq.html
 
-Hemos definido una nueva estructura `Rectangulo` que acepta numeros de cualquier precision, objetos de cualquier tipo siempre y cuando puedan ser comparados por igualdad. Podriamos hacer lo mismo para nuestras estructuras `TieneArea`, `Cuadrado` y `Circulo`? Si, pero estas necesitan multiplicacion, y para trabajar con eso necesitamos saber mas de los [traits de operador][operators-and-overloading].
+Hemos definido una nueva estructura `Rectangulo` que acepta números de cualquier precision, objetos de cualquier tipo siempre y cuando puedan ser comparados por igualdad. Podríamos hacer lo mismo para nuestras estructuras `TieneArea`, `Cuadrado` y `Circulo`? Si, pero estas necesitan multiplicación, y para trabajar con eso necesitamos saber mas de los [traits de operadores][operators-and-overloading].
 
 [operators-and-overloading]: operators-and-overloading.html
 
-# Reglas para la implementacion de traits
+# Reglas para la implementación de traits
 
-Hasta ahora, solo hemos agregado implementaciones de traits a estructuras, pero puedes implementar cualquier trait para cualquier tipo. Tecnicamente, _podriamos_ implementar `TieneArea` para `i32`:
+Hasta ahora, solo hemos agregado implementaciones de traits a estructuras, pero puedes implementar cualquier trait para cualquier tipo. Técnicamente, _podriamos_ implementar `TieneArea` para `i32`:
 
 ```rust
 trait TieneArea {
@@ -211,9 +211,9 @@ impl TieneArea for i32 {
 5.area();
 ```
 
-Se considera pobre estilo implementar metodos en eso tipos primitivos, aun cuando es posible.
+Se considera pobre estilo implementar métodos en esos tipos primitivos, aun cuando es posible.
 
-Esto puede lucir como el viejo oeste, pero hay dos restricciones acerca de la implementacion de traits que previenen que las cosas se slagan de las manos. La primera es que si el trait no esta definido en tu ambito, no aplica. He aqui un ejemplo: la biblioteca estandar provee un trait [`Write`][write] que agrega funcionalidad extra a los `File`s, que posibilita la E/S de archivos. Por defecto, un `File` no tendria sus metodos:
+Esto puede lucir como el viejo oeste, pero hay dos restricciones acerca de la implementación de traits que previenen que las cosas se salgan de control. La primera es que si el trait no esta definido en tu ámbito, no aplica. He aquí un ejemplo: la biblioteca estándar provee un trait [`Write`][write] que agrega funcionalidad extra a los `File`s, posibilitando la E/S de archivos. Por defecto, un `File` no tendría sus métodos:
 
 [write]: ../std/io/trait.Write.html
 
@@ -232,7 +232,7 @@ let resultado = f.write(buf);
                ^~~~~~~~~~
 ```
 
-Necesitamos hacer `use` del trait `Write` primero:
+Necesitamos primero hacer `use` del trait `Write`:
 
 ```rust,ignore
 use std::io::Write;
@@ -245,17 +245,17 @@ let resultado = f.write(buf);
 
 Lo anterior compilara sin errores.
 
-Esto significa que incluso si alguien hace algo malo como agregar metodos a `i32`, no te afectara, a menos que hagas `use` de ese trait.
+Esto significa que incluso si alguien hace algo malo como agregar métodos a `i32`, no te afectara, a menos que hagas `use` de ese trait.
 
-Hay una restriccion mas acerca de la implementacion de traits: uno de los dos bien sea el trait o el tipo para el cual estas escribiendo la `impl`, debe ser definido por ti. Entonces, podriamos implementar el trait `TieneArea` para el tipo `i32`, puesto que `TieneArea` esta en nustro codigo. Pero si intentaramos implementar `ToString`, un trait proporcionado por Rust para `i32`, no podriamos, debido a que ni el trait o el tipo estan en nuestro codigo.
+Hay una restricción mas acerca de la implementación de traits: uno de los dos bien sea el trait o el tipo para el cual estas escribiendo la `impl`, debe ser definido por ti. Entonces, podríamos implementar el trait `TieneArea` para el tipo `i32`, puesto que `TieneArea` esta en nuestro código. Pero si intentáramos implementar `ToString`, un trait proporcionado por Rust para `i32`, no podríamos, debido a que ni el trait o el tipo están en nuestro código.
 
-Una ultima cosa acerca de los traits: las funciones genericas con un limite de trait usan ‘monomorfizacion’ (‘monomorphization’) (mono: uno, morfos: forma), y po ello son depachadas estaticamente. Que significa esto? ECha un vistazo a el capitulo acerca de [objetos trait][to] para mas detalles.
+Una ultima cosa acerca de los traits: las funciones genéricas con un limite de trait usan ‘monomorfizacion’ (‘monomorphization’) (mono: uno, morfos: forma), y por ello son despachadas estáticamente. Que significa esto? Echa un vistazo a el capitulo acerca de [objetos trait][to] para mas detalles.
 
 [to]: trait-objects.html
 
 # Multiples limites de trait
 
-Has visto que puedes limitar un parametro de tipo generico con un trait:
+Has visto que puedes limitar un parámetro de tipo genérico con un trait:
 
 ```rust
 fn foo<T: Clone>(x: T) {
@@ -278,7 +278,7 @@ fn foo<T: Clone + Debug>(x: T) {
 
 # La clausula where
 
-Escribir funciones con solo unos pocos tipos genericos y un pequeno numero de limites de trait no es tan feo, pero a medida que el numero se incrementa, la sintaxis se vuelve un poco extrana:
+Escribir funciones con solo unos pocos tipos genéricos y un pequeño numero de limites de trait no es tan feo, pero a medida que el numero se incrementa, la sintaxis se vuelve un poco extraña:
 
 ```rust
 use std::fmt::Debug;
@@ -290,9 +290,9 @@ fn foo<T: Clone, K: Clone + Debug>(x: T, y: K) {
 }
 ```
 
-El nombre de la funcion esta lejos a la izquierda, y la lista de parametros esta lejos a la derecha. Los limites de trait se interponen en la mitad.
+El nombre de la función esta lejos a la izquierda, y la lista de parámetros esta lejos a la derecha. Los limites de trait se interponen en la mitad.
 
-Rust tiene una solucion, y se llama ‘clausula `where`’:
+Rust tiene una solución, y se llama ‘clausula `where`’:
 
 ```rust
 use std::fmt::Debug;
@@ -315,7 +315,7 @@ fn main() {
 }
 ```
 
-`foo()` usa la sintaxis demostrada previamente, y `bar()` usa una clausula `where`. Todo lo que necesitas es dejar los limites por fuera cuando definas tus parametros de tipo y luego agregar un `where` despues de la lista de parametros. Para listas mas largas, espcios en blanco pueden ser anadidos:
+`foo()` usa la sintaxis demostrada previamente, y `bar()` usa una clausula `where`. Todo lo que necesitas es dejar los limites por fuera cuando definas tus parámetros de tipo y luego agregar un `where` después de la lista de parámetros. Para listas mas largas, espacios en blanco pueden ser agregados:
 
 ```rust
 use std::fmt::Debug;
@@ -332,7 +332,7 @@ fn bar<T, K>(x: T, y: K)
 
 Dicha flexibilidad puede agregar claridad en situaciones complejas.
 
-La clausula `where` es tambien mas poderosa que la sintaxis mas simple. Por ejemplo:
+La clausula `where` es también mas poderosa que la sintaxis mas simple. Por ejemplo:
 
 ```rust
 trait ConvertirA<Salida> {
@@ -350,17 +350,17 @@ fn normal<T: ConvertirA<i64>>(x: &T) -> i64 {
 
 // puede ser llamada con T == i64
 fn inversa<T>() -> T
-        // this is using ConvertTo as if it were "ConvertTo<i64>"
+        // pesto es user ConvertirA como si fuera "ConvertirA<i64>"
         where i32: ConvertirA<T> {
     42.convertir()
 }
 ```
 
-Lo anterior demuestra una caracteristica adicional de `where`: permite limites en los que el lado izquierdo es un tipo arbitrario (`i32` en este casoa), no solo un simple parametro de tipo (como `T`).
+Lo anterior demuestra una característica adicional de `where`: permite limites en los que el lado izquierdo es un tipo arbitrario (`i32` en este caso), no solo un simple parámetro de tipo (como `T`).
 
 # Metodos por defecto
 
-Si ya sabes como un implementador tipico definira un metodo, puedes permitir a tu trait porporcionar uno por defecto:
+Si ya sabes como un implementador típico definirá un método, puedes permitir a tu trait proporcionar uno método por defecto:
 
 ```rust
 trait Foo {
@@ -370,7 +370,7 @@ trait Foo {
 }
 ```
 
-Los implementadores de el trait `Foo` necesitan implementar `es_valido()`, pero no necesitan implementar `es_invalido()`. Lo obtendran por defecto. Tambien pueden sobreescribir la implementacion por defecto si lo desean:
+Los implementadores del trait `Foo` necesitan implementar `es_valido()`, pero no necesitan implementar `es_invalido()`. Lo obtendrán por defecto. También pueden sobreescribir la implementación por defecto si lo desean:
 
 ```rust
 # trait Foo {
@@ -422,7 +422,7 @@ trait FooBar : Foo {
 }
 ```
 
-Los implementadores de `FooBar` deben tambien implementar `Foo`, de esta manera:
+Los implementadores de `FooBar` deben también implementar `Foo`, de esta manera:
 
 ```rust
 # trait Foo {
