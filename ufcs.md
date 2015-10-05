@@ -1,6 +1,6 @@
-% Sintaxis Universal de Llamadas a Funcion
+% Sintaxis Universal de Llamadas a Función
 
-Algunas veces, las funciones pueden tener los mismos nombres. Considera el siguiente codigo:
+Algunas veces, varias funciones pueden nombres iguales. Considera el siguiente código:
 
 ```rust
 trait Foo {
@@ -41,7 +41,7 @@ note: candidate #2 is defined in an impl of the trait `main::Bar` for the type
 
 ```
 
-Necesitamos una forma de eliminar la ambiguedad. Esta caracteristica es denominada ‘sintaxis universal de llamadas a funcion’, y luce asi:
+Necesitamos una forma de eliminar la ambigüedad. Esta característica es denominada ‘sintaxis universal de llamadas a función’, y luce así:
 
 
 ```rust
@@ -63,29 +63,26 @@ Foo::f(&b);
 Bar::f(&b);
 ```
 
-Analicemoslo por partes.
+Analicémoslo por partes.
 
 ```rust,ignore
 Foo::
 Bar::
 ```
 
-Esas mitades de las invocaciones son los tipos de los dos traits: `Foo` y `Bar`. Lo anterior es respoinsable de la eliminacion de la ambiguedad entre las dos llamadas: Rust llama la funcion del trait que usaste.
-
+Dichas mitades de invocacion son los tipos de los traits: `Foo` y `Bar`. Lo anterior es responsable de la eliminación de la ambigüedad entre las dos llamadas: Rust llama la función del trait que nombraste.
 
 ```rust,ignore
 f(&b)
 ```
 
-Cuando llamamos un metodo de la forma `b.f()` usando la [sintaxis de metodos][methodsyntax], Rust automaticamente tomara prestado a `b` si `f()` recibe a `&self`. En este caso, Rust no lo hara. Espor ello que debemos pasar a &b de manera explicita.
+Cuando llamamos un método de la forma `b.f()` usando la [sintaxis de métodos][methodsyntax], Rust automáticamente tomara prestado a `b` si `f()` recibe a `&self`. En este caso, Rust no puede hacerlo. Es por ello que debemos pasar a `&b` de manera explicita.
 
 [methodsyntax]: method-syntax.html
 
 # Usando <>
 
-La forma de SULF de la cual acabamos de hablar:
-
-The form of UFCS we just talked about:
+La forma de SULF de la que acabamos de hablar:
 
 ```rust,ignore
 Trait::metodo(args);
@@ -97,9 +94,9 @@ Es una version corta. Existe una version expandida que puede ser necesaria en al
 <Tipo as Trait>::metodo(args);
 ```
 
-La sintaxis `<>::` es una forma de proporcionar una pista de tipos. El tipo va dentro de los `<>`s. En este caso es `Type as Trait` indicando que deseamos llamar a la version `Trait` de `metodo` aqui. La seccion `as Trait` es opcional de no ser ambigua. Lo mismo con los `<>`s, de alli la version mas corta.
+La sintaxis `<>::` es una forma de proporcionar una pista de tipos. El tipo va dentro de los `<>`s. En este caso es `Type as Trait` indicando que deseamos llamar a la version `Trait` de `metodo`. La sección `as Trait` es opcional de no ser ambigua. Lo mismo con los `<>`s, de allí proviene version mas corta.
 
-Aca esta un ejemplo del uso de la forma mas larga.
+Acá un ejemplo del uso de la forma mas larga.
 
 ```rust
 trait Foo {
@@ -118,4 +115,4 @@ impl Foo for Bar {
 }
 ```
 
-Lo anterior llamara el metodo `clone` en el trait `Clone`, en vez de la version `clone` de `Foo`.
+Lo anterior llamara el metodo `clone` en el trait `Clone`, en vez de la version `clone` del trait `Foo`.
