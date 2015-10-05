@@ -43,7 +43,7 @@
     * [if let](if-let.md)
     * [Objetos Trait](trait-objects.md)
     * [Closures](closures.md)
-    * [Sintaxis de Llamada a Funciones Universal](ufcs.md)
+    * [Sintaxis Universal  de Llamada a Funciones](ufcs.md)
     * [Crates y Modulos](crates-and-modules.md)
     * [`const` y `static`](const-and-static.md)
     * [Atributos](attributes.md)
