@@ -1,6 +1,6 @@
 % Sintaxis Universal de Llamadas a Función
 
-Algunas veces, varias funciones pueden nombres iguales. Considera el siguiente código:
+Algunas veces, varias funciones pueden tener el mismo nombre. Considera el siguiente código:
 
 ```rust
 trait Foo {
