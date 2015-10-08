@@ -1,6 +1,6 @@
 % Operadores y Sobrecarga
 
-Rust permite una forma limitada de sobrecarga de operadores. Existen ciertos operadores que pueden ser sobrecargados. Para soportar un operador particular entre tipos, hay un trait en especifico que puedes implementar, el cual sobracarga el operador.
+Rust permite una forma limitada de sobrecarga de operadores. Existen ciertos operadores que pueden ser sobrecargados. Para soportar un operador particular entre tipos, hay un trait en especifico que puedes implementar, el cual sobrecarga el operador.
 
 Por ejemplo, el operador `+` puede ser sobrecargado con el trait `Add`:
 
@@ -33,11 +33,11 @@ fn main() {
 
 En `main`, podemos hacer uso de `+` en nuestros dos `Puntos`s, puesto que hemos implementado `Add<Output=Punto>` para `Punto`.
 
-Existe un numero de operadores que pueden ser sobrecargados de esta manera, y todos sus traits asociados viven en el modulo [`std::ops`][stdops]. Echa un vistazo a la documentacion para una lista completa.
+Existe un numero de operadores que pueden ser sobrecargados de esta manera, y todos sus traits asociados viven en el modulo [`std::ops`][stdops]. Echa un vistazo a la documentación para una lista completa.
 
 [stdops]: ../std/ops/index.html
 
-Implementar dihcos traits sigue un patron. Analicemos a [`Add`][add] con mas detalle:
+Implementar dichos traits sigue un patron. Analicemos a [`Add`][add] con mas detalle:
 
 ```rust
 # mod foo {
@@ -51,7 +51,7 @@ pub trait Add<RHS = Self> {
 
 [add]: ../std/ops/trait.Add.html
 
-Hay en total tres tipos involucrados aqui: El tipo para el cual estas implementado `Add`, `RHS` (de right hand side), que por defector es `Self`, y `Output`. Para una expresion `let z = x + y`, `x` es el tipo `Self`, `y` es el `RHS`, y `z` es el tipo `Self::Output`.
+Hay en total tres tipos involucrados aqui: El tipo para el cual estas implementado `Add`, `RHS` (de right hand side), que por defecto es `Self`, y `Output`. Para una expresion `let z = x + y`, `x` es el tipo `Self`, `y` es el `RHS`, y `z` es el tipo `Self::Output`.
 
 ```rust
 # struct Punto;
@@ -75,7 +75,7 @@ let x: f64 = p + 2i32;
 
 # Usando los traits de operador en estructuras genericas
 
-Ahora que sabemos como estan definidos los traits de operador, podemos definir nuestro trait `TieneArea` y nuestra estructura `Cuadrado` del [capitulo de traits][traits] de manera mas generica:
+Ahora que sabemos como están definidos los traits de operador, podemos definir nuestro trait `TieneArea` y nuestra estructura `Cuadrado` del [capitulo de traits][traits] de una forma mas genérica:
 
 [traits]: traits.html
 
@@ -110,11 +110,11 @@ fn main() {
 }
 ```
 
-Para `TieneArea` y `Cuadrado`, solo declaramos un parametro de tipo `T` y reemplazamos `f64`. El bloque `impl` necesita mas modificaciones:
+Para `TieneArea` y `Cuadrado`, solo declaramos un parametro de tipo `T` y reemplazamos el `f64`. El bloque `impl` necesita mas modificaciones:
 
 ```ignore
 impl<T> TieneArea<T> for Cuadrado<T>
         where T: Mul<Output=T> + Copy { ... }
 ```
 
-El metodo `area` requiere que podamos multiplicar los lados, es por ello que declaramos que `T` debe implementar `std::ops::Mul`. Como `Add`, mencionado anteriormente, `Mul` toma un parametro `Output`: debido a que sabemos que los numeros no cambian de tipo cuando son multiplicados, tambien lo definimos como `T`. `T` debe tambien soportar copiado, de manera que Rust no trate de mover `sell.lado` a el valor de retorno.
+El método `area` requiere que podamos multiplicar los lados, es por ello que declaramos que `T` debe implementar `std::ops::Mul`. Como `Add`, mencionado anteriormente, `Mul` toma un parámetro `Output`: debido a que sabemos que los números no cambian de tipo cuando son multiplicados, también lo definimos como `T`. `T` también debe soportar copiado, de manera que Rust no trate de mover `self.lado` a el valor de retorno.
