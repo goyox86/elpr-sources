@@ -1,4 +1,4 @@
-% Conversion Entre Tipos
+% Conversión Entre Tipos
 
 Rust, con su foco en seguridad, proporciona dos formas diferentes de conversión entre tipos. La primera, `as`, es para conversión segura. En contraste, `transmute` permite conversion arbitraria, y es una de las características mas peligrosas de Rust!
 
@@ -69,4 +69,4 @@ error: transmute called on types with different sizes: [u8; 4] (32 bits) to u64
 (64 bits)
 ```
 
-Dicho esto, estás sólo en esto!
+Dicho esto, estás por tu cuenta!
