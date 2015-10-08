@@ -7,7 +7,7 @@ require "fileutils"
 
 ELPR_REPO_PATH = File.expand_path(File.dirname(__FILE__)) + "/../elpr"
 GH_PAGES_BRANCH = "gh-pages"
-RUSTBOOK_CMD = "./bin/rustbook build ."
+RUSTBOOK_CMD = "multirust run nightly rustbook build ."
 
 desc "Uses rustbook to build the HTML and copies it into the #{ELPR_REPO_PATH}"
 task :build do
