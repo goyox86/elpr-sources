@@ -1,4 +1,4 @@
-% Sintaxis de Metodos
+% Sintaxis de Métodos
 
 Las funciones son geniales, pero si deseas llamar bastantes en alguna data, puede tornarse incomodo. Considera este código:
 

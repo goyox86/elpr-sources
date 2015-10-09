@@ -34,7 +34,7 @@
     * [Enumeraciones](enums.md)
     * [Match](match.md)
     * [Patrones](patterns.md)
-    * [Sintaxis de Metodos](method-syntax.md)
+    * [Sintaxis de Métodos](method-syntax.md)
     * [Vectores](vectors.md)
     * [Cadenas de Caracteres](strings.md)
     * [Genericos](generics.md)
