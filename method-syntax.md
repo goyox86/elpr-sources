@@ -1,4 +1,4 @@
-% Sintaxis de Métodos
+% Sintaxis de Métowdos
 
 Las funciones son geniales, pero si deseas llamar bastantes en alguna data, puede tornarse incomodo. Considera este código:
 
@@ -41,7 +41,7 @@ Lo anterior imprimira `12.566371`.
 
 Hemos construido una `struct` representando a un circulo. Después escribimos un bloque `impl` y dentro de el, definimos un método, `area`.
 
-Los métodos reciben un primer parámetro especial, del cual existen tres variantes: `self`, `&self`, and `&mut self`. Puedes pensar acerca de este primer parámetro como el `foo` en `foo.bar()`. Las tres variantes corresponden a los tres tipos de cosas que `foo` podría ser: `self` si es solo un valor en la pila, `&self` si es una referencia y `&mut self` si es una referencia mutable. Debido a que proporcionamos el parámetro `&self` a `area`, podemos usarlo justo como cualquier otro. Como conocemos que es un `Circulo`, podemos acceder a `radio` como lo haríamos con cualquier otra `struct`.
+Los métodos reciben un primer parámetro especial, del cual existen tres variantes: `self`, `&self`, y `&mut self`. Puedes pensar acerca de este primer parámetro como el `foo` en `foo.bar()`. Las tres variantes corresponden a los tres tipos de cosas que `foo` podría ser: `self` si es solo un valor en la pila, `&self` si es una referencia y `&mut self` si es una referencia mutable. Debido a que proporcionamos el parámetro `&self` a `area`, podemos usarlo justo como cualquier otro. Como conocemos que es un `Circulo`, podemos acceder a `radio` como lo haríamos con cualquier otra `struct`.
 
 Deberíamos usar por defecto `&self`, así como preferir también el préstamo por encima de la toma de pertenencia y recibir referencias inmutables en vez de mutables, en lo posible. He aquí un ejemplo de las tres variantes:
 
