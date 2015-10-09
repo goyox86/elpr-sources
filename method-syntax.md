@@ -1,4 +1,4 @@
-% Sintaxis de Métowdos
+% Sintaxis de Métodos
 
 Las funciones son geniales, pero si deseas llamar bastantes en alguna data, puede tornarse incomodo. Considera este código:
 
@@ -14,7 +14,7 @@ foo.bar().baz();
 
 Por suerte, como habrás podido deducir de la pregunta anterior, por supuesto que podemos! Rust provee la habilidad de usar la denominada ‘sintaxis de llamada a métodos’ (‘method call syntax’) a través de la palabra reservada  `impl`.
 
-# Llamadas a metodos
+# Llamadas a métodos
 
 Así funcionan:
 
@@ -67,7 +67,7 @@ impl Circle {
 }
 ```
 
-# Llamadas a metodo en cadena
+# Llamadas a métodos en cadena
 
 Entonces, ahora sabemos como llamar a un método, como `foo.bar()`. Pero que hay acerca de nuestro ejemplo original, `foo.bar().baz()`? Se denomina ‘encadenamiento de métodos’ (‘method chaining’). Veamos un ejemplo:
 
@@ -136,9 +136,9 @@ fn main() {
 
 Esta ‘función asociada’ construye un nuevo `Circulo`. Nota que las funciones asociadas son llamadas con la sintaxis `Struct::funcion()`, en lugar de `ref.metodo()`. Otros lenguajes llaman a las funciones asociadas ‘métodos estáticos’
 
-# El patron Constructor (Builder)
+# El patrón Constructor (Builder)
 
-Digamos que queremos que nuestros usuarios puedan crear `Circulo`s, pero solo les permitiremos dar valores a las propiedades que sean relevantes para ellos. De lo contrario, los atributos `x` y `y` serán `0.0`, y el radio sera `1.0`. Rust no posee sobrecarga de métodos, argumentos con nombre o argumentos variables. Se emplea el patron builder en su lugar. Dicho patron luce asi:
+Digamos que queremos que nuestros usuarios puedan crear `Circulo`s, pero solo les permitiremos dar valores a las propiedades que sean relevantes para ellos. De lo contrario, los atributos `x` y `y` serán `0.0`, y el radio sera `1.0`. Rust no posee sobrecarga de métodos, argumentos con nombre o argumentos variables. Se emplea el patron builder en su lugar. Dicho patron luce así:
 
 ```rust
 struct Circulo {
