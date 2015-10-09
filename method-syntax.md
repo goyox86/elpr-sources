@@ -1,22 +1,22 @@
 % Sintaxis de Metodos
 
-Las funciones son geniales, pero si deseas llamar bastantes en alguna data, puede tornarse incomodo. Considera este codigo:
+Las funciones son geniales, pero si deseas llamar bastantes en alguna data, puede tornarse incomodo. Considera este código:
 
 ```rust,ignore
 baz(bar(foo));
 ```
 
-Pudieramos leer esto de izquierda a derecha, veriamos entonces ‘baz bar foo’. Pero ese no es el orden en el cual las funciones son llamadas, el orden de hecho, es de adentro hacia afuera: ‘foo bar baz’. No seria excelente si pudieramos hacerlo:
+Pudiéramos leer esto de izquierda a derecha, veríamos entonces ‘baz bar foo’. Pero ese no es el orden en el cual las funciones son llamadas, el orden de hecho, es de adentro hacia afuera: ‘foo bar baz’. No seria excelente si pudiéramos hacerlo:
 
 ```rust,ignore
 foo.bar().baz();
 ```
 
-Por suerte, como habras podido deducir de la pregunta anteror, por supuesto que podemos! Rust provee la habilidad de usasr la denominada ‘sintaxis de llamada a metodos’ (‘method call syntax’) a traves de la palabra reservada  `impl`.
+Por suerte, como habrás podido deducir de la pregunta anterior, por supuesto que podemos! Rust provee la habilidad de usar la denominada ‘sintaxis de llamada a métodos’ (‘method call syntax’) a través de la palabra reservada  `impl`.
 
 # Llamadas a metodos
 
-Asi funcionan:
+Así funcionan:
 
 ```rust
 struct Circulo {
@@ -39,12 +39,11 @@ fn main() {
 
 Lo anterior imprimira `12.566371`.
 
+Hemos construido una `struct` representando a un circulo. Después escribimos un bloque `impl` y dentro de el, definimos un método, `area`.
 
-Hemos construido una `struct` representando a un circulo. Despues escribimos un bloque `impl` y dentro de el, definimos un metodo, `area`.
+Los métodos reciben un primer parámetro especial, del cual existen tres variantes: `self`, `&self`, and `&mut self`. Puedes pensar acerca de este primer parámetro como el `foo` en `foo.bar()`. Las tres variantes corresponden a los tres tipos de cosas que `foo` podría ser: `self` si es solo un valor en la pila, `&self` si es una referencia y `&mut self` si es una referencia mutable. Debido a que proporcionamos el parámetro `&self` a `area`, podemos usarlo justo como cualquier otro. Como conocemos que es un `Circulo`, podemos acceder a `radio` como lo haríamos con cualquier otra `struct`.
 
-Los metodos reciben un primer parametro especial, de el cual existen tres variantes: `self`, `&self`, and `&mut self`. Puedes pensar acerca de este primer parametro como el `foo` en `foo.bar()`. Las tres variantes corresponden a los tres tipos de cosas que `foo` podria ser:  `self` si es solo un valor en la pila, `&self` si es una referencia y and `&mut self` si es una referencia mutable. Debido a que proporcionamos el parametro `&self` a `area`, podemos usarlos justo como cualquier otro parametro. Como conocemos que es un `Circulo`, poedmos acceder a  `radio` como lo hariamos con cualquier otra `struct`.
-
-Deberiamos usar por defecto `&self`, y deberias preferir el prestamo por encima de la toma de pertenencia, asi como recibir referencias inmutables en vez de mutables. He aqui un ejemplo de las tres variantes:
+Deberíamos usar por defecto `&self`, así como preferir también el préstamo por encima de la toma de pertenencia y recibir referencias inmutables en vez de mutables, en lo posible. He aquí un ejemplo de las tres variantes:
 
 ```rust
 struct Circulo {
@@ -70,7 +69,7 @@ impl Circle {
 
 # Llamadas a metodo en cadena
 
-Entonces, ahora sabemos como llamar a un metodo, como `foo.bar()`. Pero que hay acerca de nuestro ejemplo original, `foo.bar().baz()`? Esto se denomina ‘encadenamiento de metodos’ (‘method chaining’). Veamos un ejemplo:
+Entonces, ahora sabemos como llamar a un método, como `foo.bar()`. Pero que hay acerca de nuestro ejemplo original, `foo.bar().baz()`? Se denomina ‘encadenamiento de métodos’ (‘method chaining’). Veamos un ejemplo:
 
 ```rust
 struct Circulo {
@@ -85,7 +84,7 @@ impl Circulo {
     }
 
     fn agrandar(&self, incremento: f64) -> Circulo {
-        Circle { x: self.x, y: self.y, radio: self.radio + incremento }
+        Circulo { x: self.x, y: self.y, radio: self.radio + incremento }
     }
 }
 
@@ -107,11 +106,11 @@ fn agrandar(&self, incremento: f64) -> Circulo {
 # Circulo } }
 ```
 
-Solo decimos que retornamos un `Circulo`. Con este metodo, podemos agrandar un nuevo `Circulo` a un tamano arbitrario.
+Solo decimos que retornamos un `Circulo`. Con este método, podemos agrandar un nuevo `Circulo` a un tamaño arbitrario.
 
 # Funciones asociadas
 
-Puedes tambien definir funciones asociadas que no tomen un parametro `self`. He aqui el patron muy comun en codigo Rust:
+Puedes también definir funciones asociadas que no tomen el parámetro `self`. He aquí un patron muy común en código Rust:
 
 ```rust
 struct Circulo {
@@ -135,11 +134,11 @@ fn main() {
 }
 ```
 
-Esta ‘funcion asociada’ construye un nuevo `Circulo` para nosotros. Nota que las funciones asociadas son llamadas con la sintaxis `Struct::funcion()`, en lugar de `ref.method()`. Algunos otros lenguajes llaman a las funciones asociadas ‘metodos estaticos’
+Esta ‘función asociada’ construye un nuevo `Circulo`. Nota que las funciones asociadas son llamadas con la sintaxis `Struct::funcion()`, en lugar de `ref.metodo()`. Otros lenguajes llaman a las funciones asociadas ‘métodos estáticos’
 
 # El patron Constructor (Builder)
 
-Digamos que queremos que nuestrios usuarios puedan crear `Circulo`s, pero solo les permitiremos dar valores a las propiedades que sean relevantes para ellos. De lo contrario, los atributos `x` y `y` seran `0.0`, y el radio sera `1.0`. Rust no posee sobracarga de metodos, argumentos con nombre, o argumentos variables. Empleamos el patron builder en su  lugar. Dicho patron luce asi:
+Digamos que queremos que nuestros usuarios puedan crear `Circulo`s, pero solo les permitiremos dar valores a las propiedades que sean relevantes para ellos. De lo contrario, los atributos `x` y `y` serán `0.0`, y el radio sera `1.0`. Rust no posee sobrecarga de métodos, argumentos con nombre o argumentos variables. Se emplea el patron builder en su lugar. Dicho patron luce asi:
 
 ```rust
 struct Circulo {
@@ -198,4 +197,4 @@ fn main() {
 }
 ```
 
-Lo que hemos hecho es crear otra `struct`, `ConstructorCirculo`. Hemos definido nuestros metodos builder en ella. Tambien hemos definido nuestrio metodo `area()` en `Circulo`. Hemos anadido otro metodo en `ConstructorCirculo`: `finalizar()`. Este metodo crea nuestro `Circulo` desde el builder. Ahora, hemos usado el sistema de tipos para aplicar nuestros intereses: podemos usar los metodos en `ConstructorCirculo` para crear `Circulo`s en la forma que decidamos.
+Lo que hemos hecho es crear otra `struct`, `ConstructorCirculo`. Hemos definido nuestros métodos constructores en ella. También hemos definido nuestro método `area()` en `Circulo`. Hemos agregado otro método en `ConstructorCirculo`: `finalizar()`. Este método crea nuestro `Circulo` desde el constructor. Ahora, hemos usado el sistema de tipos para hacer valer nuestros intereses: podemos usar los métodos en `ConstructorCirculo` para crear `Circulo`s en la forma que decidamos.
