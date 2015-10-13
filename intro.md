@@ -12,7 +12,7 @@ Aún así, Rust permite control preciso tal y como un lenguaje de bajo nivel lo 
 
 [rust]: http://rust-lang.org
 
-“El Lenguaje de Programaciónn Rust” está dividido en siete secciones. Esta introducción es la primera. Después de esta:
+“El Lenguaje de Programación Rust” está dividido en siete secciones. Esta introducción es la primera. Después de esta:
 
 * [Primeros Pasos][gs] - Configura tu máquina para el desarrollo en Rust.
 * [Aprende Rust][lr] - Aprende programación en Rust a través de pequeños proyectos.
