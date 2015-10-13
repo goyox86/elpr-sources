@@ -1,1 +1,1 @@
-% Intrinsecos
+% Intrínsecos
