@@ -1,10 +1,10 @@
 % Objetos Trait
 
-Cuando el codigo involucra polimorfismo, es necesario un mecanismo para determinar cual version especifica debe ser ejecutada. Dicho mecanismo es denominado `despacho`. Hay dos formas mayores de despacho: despacho estatico y despacho dinamico. Si bien es cierto que Rust prefiere el despacho estatico, tambien soporta despacho dinamico a traves de un mecanismo llamado ‘objetos trait’.
+Cuando el código involucra polimorfismo, es necesario un mecanismo para determinar que versión especifica debe ser ejecutada. Dicho mecanismo es denominado `despacho`. Hay dos formas mayores de despacho: despacho estático y despacho dinámico. Si bien es cierto que Rust prefiere el despacho estático, también soporta despacho dinámico a través de un mecanismo llamado ‘objetos trait’.
 
 ## Bases
 
-Por el resto de este capitulo, necesitaremos un trait y algunas implementaciones. Creemos uno simple, `Foo`. `Foo` posee un solo metodo que retorna un `String`.
+Por el resto de este capitulo, necesitaremos un trait y algunas implementaciones. Creemos uno simple, `Foo`. `Foo` posee un solo método que retorna un `String`.
 
 ```rust
 trait Foo {
@@ -12,7 +12,7 @@ trait Foo {
 }
 ```
 
-Tambien implementaremos este trait para `u8` y `String`:
+También implementaremos este trait para `u8` y `String`:
 
 ```rust
 # trait Foo { fn metodo(&self) -> String; }
@@ -25,9 +25,9 @@ impl Foo for String {
 }
 ```
 
-## Despacho estatico
+## Despacho estático
 
-Podemos usar el trait para llevar a cabo despacho estatico con limites de trait:
+Podemos usar el trait para efectuar despacho estático mediante el uso de limites de trait:
 
 ```rust
 # trait Foo { fn metodo(&self) -> String; }
@@ -46,7 +46,7 @@ fn main() {
 }
 ```
 
-Rust utiliza ‘monomorfizacion’ para efectuar despacho estatico en este codigo. Lo que significa que creara una version especial de `hacer_algo()` para ambos `u8` y `String`, reemplazando luego los lugares de llamada con invocaciones a dichas funciones especializadas. En otras palabras, Rust genera algo como esto:
+Rust utiliza ‘monomorfizacion’ para el despacho estático en este código. Lo que significa que creara una versión especial de `hacer_algo()` para ambos `u8` y `String`, reemplazando luego los lugares de llamada con invocaciones a estas funciones especializadas. En otras palabras, Rust genera algo así:
 
 ```rust
 # trait Foo { fn metodo(&self) -> String; }
@@ -69,24 +69,23 @@ fn main() {
 }
 ```
 
-Lo anterior posee ua gran ventaja: el despacho estatico permite que las llamadas a funcion puedan ser insertadas en linea debido a que el receptor es conocido en tiempo de compilacion, y la insercion en linea es clave para una buena optimizacion. El despacho estatico es rapido, pero viene con una desventaja: ‘codigo inflado’ (‘code bloat’), a consecuencia de las repetidas copias de la misma funcion en el binario, una para cada tipo.
+Lo anterior posee una gran ventaja: el despacho estático permite que las llamadas a función puedan ser insertadas en linea debido a que el receptor es conocido en tiempo de compilación, y la inserción en linea es clave para una buena optimizacion. El despacho estático es rápido, pero viene con una desventaja: ‘código inflado’ (‘code bloat’), a consecuencia de las repetidas copias de la misma función que son insertadas en el binario, una para cada tipo.
 
-Ademas, los compiladores no son perfectos y pueden “optimizar” codigo haciendolo mas lento. Por ejemplo, funciones insertadas en linea de manera ansiosa inflaran la cache de instrucciones (y el cache gobierna todo a nuestro alrededor). Es por ello que `#[inline]` y `#[inline(always)]` deben ser usadas con cautela, y una razon por la cual usar despacho dinamico es algunas veces mas eficiente.
+Ademas, los compiladores no son perfectos y pueden “optimizar” código haciendolo mas lento. Por ejemplo, funciones insertadas en linea de manera ansiosa inflaran la cache de instrucciones (y el cache gobierna todo a nuestro alrededor). Es por ello que `#[inline]` y `#[inline(always)]` deben ser usadas con cautela, y una razón por la cual usar despacho dinámico es algunas veces mas eficiente.
 
-Sin embargo, el caso comun es que el despacho estatico es el mas eficiente, y uno puede tener una delgada funcion envoltorio despachada estaticamente que efectuando despacho dinamico, pero no vice versa, es decir; las llamadas estaticas
-son mas flexibles. Es por esto que la biblioteca estandar intenta ser despachada dinamicamente en donde sea posible.
+Sin embargo, el caso común es que el despacho estático sea mas eficiente. Uno puede tener una delgada función envoltorio despachada de manera estática efectuando despacho dinámico, pero no vice versa, es decir; las llamadas estáticas son mas flexibles. Es por esto que la biblioteca estándar intenta ser despachada dinámicamente siempre y cuando sea posible.
 
-## Despacho dinamico
+## Despacho dinámico
 
-Rust proporciona despacho dinamico a traves de una facilidad denominada ‘objetos trait’. Los objetos trait, como `&Foo` o `Box<Foo>`, son valores normales que almacenan un valor de *cualquier* tipo que implementa el trait determinado, en donde el tipo preciso solo puede ser determinado en tiempo de ejecucion.
+Rust proporciona despacho dinámico a través de una facilidad denominada ‘objetos trait’. Los objetos trait, como `&Foo` o `Box<Foo>`, son valores normales que almacenan un valor de *cualquier* tipo que implementa el trait determinado, en donde el tipo preciso solo puede ser determinado en tiempo de ejecución.
 
-Un objeto trait puede ser obtenido de un apuntador a un tipo concreto que implemente el trait *convirtiendolo* (e.j. `&x as &Foo`) o aplicandole *coercion* (e.j. usando `&x` como un argumento a una funcion que recibe `&Foo`).
+Un objeto trait puede ser obtenido de un apuntador a un tipo concreto que implemente el trait *convirtiéndolo* (e.j. `&x as &Foo`) o aplicándole *coercion* (e.j. usando `&x` como un argumento a una función que recibe `&Foo`).
 
-Esas coerciones y conversiones tambien funcionan para apuntadores como `&mut T` a `&mut Foo` y `Box<T>` a `Box<Foo>`, pero eso es todo hasta el momento. Las coerciones y conversiones son identicas.
+Esas coerciones y conversiones también funcionan para apuntadores como `&mut T` a `&mut Foo` y `Box<T>` a `Box<Foo>`, pero eso es todo hasta el momento. Las coerciones y conversiones son idénticas.
 
-Esta operacion puede ser vista como el ‘borrado’ del conocimiento del compilador acerca del tipo especifico del apuntador, y es por ello que los objetos trais son a veces referidos como `borrado de tipos`.
+Esta operación puede ser vista como el ‘borrado’ del conocimiento del compilador acerca del tipo especifico del apuntador, y es por ello que los objetos traits son a veces referidos como `borrado de tipos`.
 
-Volviendo a el ejemplo anterior, podemos usar el mismo trait para llevar a cabo despacho dinamico con conversion de objetos trait:
+Volviendo a el ejemplo anterior, podemos usar el mismo trait para llevar a cabo despacho dinámico con conversión de objetos trait:
 
 ```rust
 # trait Foo { fn metodo(&self) -> String; }
@@ -120,23 +119,23 @@ fn main() {
 }
 ```
 
-Una funcion que recibe un objeto trait no es especializada para cada uno de los tipos que implementan `Foo`: solo una copia es generada, resultando algunas veces (pero no siempre) en menos inflado de codigo. Sin embargo, el despacho dinamico viene con el costo de requerir llamadas mas lentas a funciones virtuales, y efectivamente inhibiendo cualquier posibilidad de la insercion en linea y las optimizaciones relacionadas.
+Una función que recibe un objeto trait no es especializada para cada uno de los tipos que implementan `Foo`: solo una copia es generada, resultando algunas veces (pero no siempre) en menos inflación de código. Sin embargo, el despacho dinámico viene con el costo de requerir las llamadas mas lentas a funciones virtuales, efectivamente inhibiendo cualquier posibilidad de inserción en linea y las optimizaciones relacionadas.
 
 ### Porque apuntadores?
 
-Rust no coloca cosas detras de apuntadores por defecto, a diferencia de muchos lenguajes administrados, lo que se traduce en que los tipos tengan diferentes tamanos. Conocer el tamano de un valor en tiempo de compilacion es importante para cosas como pasarlo como argumento a una funcion, moverlo en la pila y asignarle (y deasignarle) espacio en el monticulo para su almacenamiento.
+Rust, a diferencia de muchos lenguajes administrados, no coloca cosas detrás de apuntadores por defecto, lo que se traduce en que los tipos tengan diferentes tamaños. Conocer el tamaño de un valor en tiempo de compilación es importante para cosas como: pasarlo como argumento a una función, moverlo en la pila y asignarle (y deasignarle) espacio en el montículo para su almacenamiento.
 
-Para `Foo`, necesitariamos tener un valor que podria ser mas pequeno que un `String` (24 bytes) o un `u8` (1 byte), asi como cualquier otro tipo que pueda implementar `Foo` en crates dependientes (cualquier numero de bytes). No hay forma de garantizar que este ultimo punto pueda funcionar si los valores son almacenados sin un apuntador, puesto que esos otros tipos pueden ser arbritrariamente grandes.
+Para `Foo`, necesitaríamos tener un valor que podría ser mas pequeño que un `String` (24 bytes) o un `u8` (1 byte), así como cualquier otro tipo que pueda implementar `Foo` en crates dependientes (cualquier numero de bytes). No hay forma de garantizar que este ultimo caso pueda funcionar si los valores no son almacenados en un apuntador, puesto que esos otros tipos pueden ser de tamaño arbitrario.
 
-Colocar el valor detras de un apuntador significa que el tamano del valor no es relevante cuando estemos lanzando un objeto trait por los alrededores, solo el tamano del apuntador en si mismo.
+Colocar el valor detrás de un apuntador significa que el tamaño del valor no es relevante cuando estemos lanzando un objeto trait por los alrededores, solo el tamaño del apuntador en si mismo.
 
-### Representacion
+### Representación
 
-Los metodos del trait pueden ser llamados en un objeto trait a traves de un registro de apuntadores a funcion tradicionalmente llamado ‘vtable’ (creado y administrado por el compilador).
+Los métodos del trait pueden ser llamados en un objeto trait a través de un registro de apuntadores a función tradicionalmente llamado ‘vtable’ (creado y administrado por el compilador).
 
-Los objetos trait son simples y complicados al mismo tiempo: su representation y distribucion es bastante directa, pero existen algunos mensajes de error un poco raros y algunos comportamientos sopresivos por descubrir.
+Los objetos trait son simples y complejos al mismo tiempo: su representation y distribución es bastante directa, pero existen algunos mensajes de error un poco raros y algunos comportamientos sorpresivos por descubrir.
 
-Comencemos por lo mas simple, la representacion de un objeto trait en tiempo de ejecucion. El modulo `std::raw` contiene structs con distrubiciones que son igual de complicadas que las de los tipos integrados, [incluyendo los objetos trait][stdraw]:
+Comencemos por lo mas simple, la representación de un objeto trait en tiempo de ejecución. El modulo `std::raw` contiene structs con distribuciones que son igual de complicadas que las de los tipos integrados, [incluyendo los objetos trait][stdraw]:
 
 ```rust
 # mod foo {
@@ -151,9 +150,9 @@ pub struct TraitObject {
 
 Eso es, un trait object como `&Foo` consiste de un apuntador ‘data’ y un apuntador ‘vtable’.
 
-El apuntador data apunta hacia la data (de un tipo desconocido `T`) que guarda el objeto trait, y el vtable pointer apunta a la vtable (table de metodos virtuales’) (‘virtual method table’) correspondiente a la implementacion de `Foo` para `T`
+El apuntador data apunta hacia los datos (de un tipo desconocido `T`) que guarda el objeto trait, y el vtable pointer apunta a la vtable (table de metodos virtuales’) (‘virtual method table’) correspondiente a la implementación de `Foo` para `T`.
 
-Una vtable es esencialmente una struct de apuntadores a funcion, apuntando al segmento concreto de codigo maquina para cada implementacion de metodo. Una llamada a metodo como `objeto_trait.metodo()` retornara el apuntador correcto desde la vtable y luego hara una llamada dinamica de este. Por ejemplo:
+Una vtable es esencialmente una struct de apuntadores a función, apuntando al segmento concreto de código maquina para cada implementación de metodo. Una llamada a metodo como `objeto_trait.metodo()` retornara el apuntador correcto desde la vtable y luego hará una llamada dinámica de este. Por ejemplo:
 
 ```rust,ignore
 struct FooVtable {
@@ -166,19 +165,19 @@ struct FooVtable {
 // u8:
 
 fn llamar_metodo_en_u8(x: *const ()) -> String {
-    // el compilador garantiza que esta funcion solo sea llamada
+    // el compilador garantiza que esta función solo sea llamada
     // con `x` apuntando a un u8
     let byte: &u8 = unsafe { &*(x as *const u8) };
 
     byte.metodo()
 }
 
-static Foo_para_vtable_u8: FooVtable = FooVtable {
+static Foo_vtable_para_u8: FooVtable = FooVtable {
     destructor: /* magia del compilador */,
     tamano: 1,
     alineacion: 1,
 
-    // conversion a a un apuntador a funcion
+    // conversion a a un apuntador a función
     metodo: llamar_metodo_en_u8 as fn(*const ()) -> String,
 };
 
@@ -186,14 +185,14 @@ static Foo_para_vtable_u8: FooVtable = FooVtable {
 // String:
 
 fn llamar_metodo_en_String(x: *const ()) -> String {
-    // el compilador garantiza que esta funcion solo sea llamada
+    // el compilador garantiza que esta función solo sea llamada
     // con `x` apuntando a un String
     let string: &String = unsafe { &*(x as *const String) };
 
     string.metodo()
 }
 
-static Foo_para_vtable_String: FooVtable = FooVtable {
+static Foo_vtable_para_String: FooVtable = FooVtable {
     destructor: /* magia del compilador */,
     // valores para una computadora de 64 bits, dividelos por la mitad para una de 32
     tamano: 24,
@@ -203,9 +202,9 @@ static Foo_para_vtable_String: FooVtable = FooVtable {
 };
 ```
 
-El campo `destructor` en cada vtable apunta a una funcion que limipiara todos los recursos del tipo de la vtable: para `u8` es trivial, pero para `String` liberara memoria. Esto es necesario para aduenarse de objetos trait como `Box<Foo>`, que necesitan limpiar ambos la allocacion `Box` asi como el tipo interno cuando salgan de ambito. Los campos `tamano` y `alineacion` almacenan el tamano del tipo borrado, y sus requerimientos de alineacion; estos son esencialmente no usados por el momento puesto que la informacion es embebida en el destructor, pero sera usada en el futuro, a medida que los objetos trait son hechos progresivamente mas flexibles.
+El campo `destructor` en cada vtable apunta a una función que limpiara todos los recursos del tipo de la vtable: para `u8` es trivial, pero para `String` liberara memoria. Esto es necesario para adueñarse de objetos trait como `Box<Foo>`, que necesitan limpiar ambos la asignación `Box` así como el tipo interno cuando salgan de ámbito. Los campos `tamano` y `alineacion` almacenan el tamaño del tipo borrado, y sus requerimientos de alineación; estos son esencialmente no usados por el momento puesto que la información es embebida en el destructor, pero sera usada en el futuro, a medida que los objetos trait sean progresivamente hechos mas flexibles.
 
-Supongase que tenemos algunos valores que implementen `Foo`. La forma explicita de construccion y uso de objetos trait `Foo` puede lucir un poco como (ignorando las incongruencias entre tipos: son apuntadores de cualquier manera):
+Supongamos que tenemos algunos valores que implementen `Foo`. La forma explicita de construcción y uso de objetos trait `Foo` puede lucir un poco como (ignorando las incongruencias entre tipos: son apuntadores de cualquier manera):
 
 ```rust,ignore
 let a: String = "foo".to_string();
@@ -216,7 +215,7 @@ let b = TraitObject {
     // almacena los datos
     data: &a,
     // almacena los metodos
-    vtable: &Foo_para_vtable_String
+    vtable: &Foo_vtable_para_String
 };
 
 // let y: &Foo = x;
@@ -224,7 +223,7 @@ let y = TraitObject {
     // almacena los datos
     data: &x,
     // almacena los metodos
-    vtable: &Foo_para_vtable_u8
+    vtable: &Foo_vtable_para_u8
 };
 
 // b.metodo();
@@ -254,14 +253,14 @@ let o = &v as &Clone;
         ^~
 ```
 
-El error dice que `Clone` no es ‘seguro para objetos’ (‘object-safe’). Solo los traits que son seguros para objetos pueden ser usados en la creacion de objetos trait. Un trait es seguro para objetos si ambas condiciones son verdaderas:
+El error dice que `Clone` no es ‘seguro para objetos’ (‘object-safe’). Solo los traits que son seguros para objetos pueden ser usados en la creación de objetos trait. Un trait es seguro para objetos si ambas condiciones son verdaderas:
 
 * el trait no requiere que `Self: Sized`
-* toddos sus metodos son seguros para objetos
+* todos sus métodos son seguros para objetos
 
 Entonces, que hace a un metodo seguro para objetos? Cada metodo debe requerir que `Self: Sized` o todas de las siguientes:
 
-* must not have any type parameters
-* must not use `Self`
+* no debe tener ninguna parámetro de tipo
+* no debe usar `Self`
 
-Uff! Como podemos ver, casi todas estas reglas hablan acerca de `Self`. Una buena intuicion es “exceptuando circunstancias especiales, si tu metodo de trait usa `Self`, no es seguro para objetos.”
+Uff! Como podemos ver, casi todas estas reglas hablan acerca de `Self`. Una buena intuición seria “exceptuando circunstancias especiales, si tu metodo de trait usa `Self`, no es seguro para objetos.”
