@@ -84,7 +84,7 @@ fn main() {
 }
 ```
 
-¡Hay un monton aqui! Tratemos de ir a través de ello, pieza por pieza.
+¡Hay un monton aquí! Tratemos de ir a través de ello, pieza por pieza.
 
 ```rust,ignore
 use std::io;
@@ -130,7 +130,7 @@ let foo = bar;
 
 [let]: variable-bindings.html
 
-Esto creará una nueva variable llamada `foo`, y la enlazará al valor `bar`. En muchos lenguajes, esto es llamado una 
+Esto creará una nueva variable llamada `foo` y la enlazará al valor `bar`. En muchos lenguajes, esto es llamado una 
 ‘variable’ pero las variables de Rust tienen un par de trucos bajo la manga.
 
 Por ejemplo, son [immutables][immutable] por defecto. Es por ello que nuestro ejemplo usa `mut`: esto hace un binding 
@@ -138,7 +138,7 @@ mutable, en vez de inmutable. `let` no sólo toma un nombre del lado izquierdo, 
 Usaremos los patrones un poco más tarde. Es suficiente por ahora usar:
 
 ```rust
-let foo = 5; // inmutable.
+let foo = 5; // inmutable
 let mut bar = 5; // mutable
 ```
 
@@ -211,7 +211,8 @@ debido a que debe de agregar la entrada del usuario, éste necesita ser mutable.
 
 [references]: references-and-borrowing.html
 
-Todavía no hemos terminado con esta línea. Si bien es una sola línea de texto, es sólo la primera parte de una línea lógica de código completa:
+Todavía no hemos terminado con esta línea. Si bien es una sola línea de texto, es sólo la primera parte de una línea 
+lógica de código completa:
 
 ```rust,ignore
         .ok()
@@ -299,11 +300,15 @@ Tu corazonada fue: 6
 
 # Generando un número secreto
 
-A continuación necesitamos generar un número secreto. Rust todavía no incluye una funcionalidad de números aleatorios en la biblioteca estándar. Sin embargo, el equipo de Rust provee un [crate `rand`][randcrate]. Un ‘crate’ es un paquete de código Rust. Nosotros hemos estado construyendo un ‘crate binaro’, el cual es un ejecutable. `rand` es un ‘crate biblioteca’, que contiene código a ser usado por otros programas.
+A continuación necesitamos generar un número secreto. Rust todavía no incluye una funcionalidad de números aleatorios en 
+la biblioteca estándar. Sin embargo, el equipo de Rust provee un [crate `rand`][randcrate]. Un ‘crate’ es un paquete de 
+código Rust. Nosotros hemos estado construyendo un ‘crate binaro’, el cual es un ejecutable. `rand` es un ‘crate biblioteca’, 
+que contiene código a ser usado por otros programas.
 
 [randcrate]: https://crates.io/crates/rand
 
-Usar crates externos es donde Cargo realmente brilla. Antes que podamos escribir código que haga uso de `rand`, debemos modificar nuestro archivo `Cargo.toml`. Abrelo, y agrega estas líneas al final:
+Usando crates externos es donde Cargo realmente brilla. Antes de que podamos escribir código que haga uso de `rand`, 
+debemos modificar nuestro archivo `Cargo.toml`. Ábrelo y agrega estas líneas al final:
 
 ```toml
 [dependencies]
@@ -311,7 +316,11 @@ Usar crates externos es donde Cargo realmente brilla. Antes que podamos escribir
 rand="0.3.0"
 ```
 
-La sección `[dependencies]` de `Cargo.toml` es como la sección `[package]`: todo lo que le sigue es parte de ella, hasta que la siguiente sección comience. Cargo usa la sección de dependencias para saber en cuales crates externos dependemos, asi como las versiones requeridas. En este caso hemos usado la versión `0.3.0`. Cargo entiende [Versionado Semantico][semver], que es un estándar para las escritura de números de versión. Si quisieramos usar la ultima versión> podriamos haber usado `*` o un rango de versiones. La [documentación de Cargo][cargodoc]  contiene más detalles.
+La sección `[dependencies]` de `Cargo.toml` es como la sección `[package]`: todo lo que le sigue es parte de ella, hasta 
+que la siguiente sección comience. Cargo usa la sección de dependencias para saber de cuáles crates externos dependemos, 
+así como las versiones requeridas. En este caso hemos usado la versión `0.3.0`. Cargo entiende [Versionado Semantico][semver], 
+que es un estándar para las escritura de números de versión. Si quisieramos usar la ultima versión podríamos haber 
+usado `*` o un rango de versiones. La [documentación de Cargo][cargodoc] contiene más detalles.
 
 [semver]: http://semver.org
 [cargodoc]: http://doc.crates.io/crates-io.html
@@ -328,14 +337,19 @@ $ cargo build
    Compiling adivinanzas v0.1.0 (file:///home/tu/proyectos/adivinanzas)
 ```
 
-(Podrias ver versiones diferentes, por supuesto.)
+(Podrías ver versiones diferentes, por supuesto.)
 
-Un montón de salida más! Ahora que tenemos una dependencia externa, Cargo descarga del registro las ultimas versiones de todo, lo cual puede copiar datos desde [Crates.io][cratesio]. Crates.io es donde las personas del ecosistema Rust publican sus proyectos open source para que otros los usen.
+¡Un montón de salida más! Ahora que tenemos una dependencia externa, Cargo descarga del registro las ultimas versiones 
+de todo, lo cual puede copiar datos desde [Crates.io][cratesio]. Crates.io es donde las personas del ecosistema Rust 
+publican sus proyectos open source para que otros los usen.
 
 
 [cratesio]: https://crates.io
 
-Después de actualizar el registro, Cargo chequea nuestras dependencias (en `[dependencies]`) y las descarga de no tenerlas todavía. En este caso sólo dijimos que queriamos depender en `rand`, y también obtuvimos una copia de `libc`. Esto es debido a que `rand` depende a su vez de `libc` para funcionar. Después de descargar las dependencias, Cargo las compila, para después compilar nuestro código.
+Después de actualizar el registro, Cargo chequea nuestras dependencias (en `[dependencies]`) y las descarga de no 
+tenerlas todavía. En este caso sólo dijímos que queríamos depender de `rand` y también obtuvimos una copia de `libc`. 
+Esto es debido a que `rand` depende a su vez de `libc` para funcionar. Después de descargar las dependencias, Cargo las 
+compila, para después compilar nuestro código.
 
 Si ejecutamos  `cargo build`, obtendremos una salida diferente:
 
@@ -344,7 +358,9 @@ Si ejecutamos  `cargo build`, obtendremos una salida diferente:
 $ cargo build
 ```
 
-Asi es, no hay salida! Cargo sabe que nuestro proyecto ha sido construido, asi como todas sus dependencias, asi que no nay razón para hacer todo el proceso otra vez. Sin nada que hacer, simplemente termina la ejecución. Si abrimos `src/main.rs` otra vez, hacemos un cambio trivial, salvamos los cambios, solamente veriamos una línea:
+Así es, ¡no hay salida! Cargo sabe que nuestro proyecto ha sido construido, así como todas sus dependencias, por lo que 
+no nay razón para hacer todo el proceso otra vez. Sin nada que hacer, simplemente termina la ejecución. Si abrimos 
+`src/main.rs` otra vez, hacemos un cambio trivial y guardamos los cambios, solamente veríamos una línea:
 
 
 ```bash
@@ -352,19 +368,34 @@ $ cargo build
     Compiling adivinanzas v0.1.0 (file:///home/tu/proyectos/adivinanzas)
 ```
 
-Entonces, le hemos dicho a Cargo que queriamos cualquier versión `0.3.x` de `rand`, y este descargo la ultima versión para el momento de la escritura de este tutorial, `v0.3.8`. Pero que pasa cuando la siguiente versión `v0.3.9` sea publicada con un importante bugfix? Si bien recibir bugfixes es importante, que pasa si `0.3.9` contiene una regresión> que rompe nuestro código?
+Entonces, le hemos dicho a Cargo que queríamos cualquier versión `0.3.x` de `rand` y éste descargo la última versión 
+para el momento de la escritura de este tutorial, `v0.3.8`. Pero ¿qué pasa cuando la versión `v0.3.9` sea publicada con 
+un importante bugfix? Si bien recibir bugfixes es importante, ¿qué pasa si `0.3.9` contiene una regresión que rompe nuestro 
+código?
 
-La respuesta a este problema es el archivo `Cargo.lock`, archivo que encontraras en tu directorio de proyecto. Cuando construyes tu proyecto por primera vez, cargo determina todas las versiones que coinciden con tus criterios y las escribe en el archivo `Cargo.lock`. Cuando construyes tu proyecto en el futuro, Cargo notara que un archivo `Cargo.lock` existe, y usara las versiones especificadas en el mismo, en vez de hacer todo el trabajo de determinar las versiones otra vez. Esto te permite tener una construcción reproducible de manera automatica. En otras palabras, nos quedaremos en `0.3.8` hasta que subamos de versión> de manera explicita, de igual manera lo hará la gente con la que hemos compartido nuestro código, gracias al archivo `Cargo.lock`.
+La respuesta a este problema es el archivo `Cargo.lock`, archivo que encontrarás en tu directorio de proyecto. Cuando 
+construyes tu proyecto por primera vez, cargo determina todas las versiones que coinciden con tus criterios y las escribe 
+en el archivo `Cargo.lock`. Cuando construyes tu proyecto en el futuro, Cargo notará que un archivo `Cargo.lock` existe
+y usará las versiones especificadas en el mismo, en vez de hacer todo el trabajo de determinar las versiones otra vez. 
+Esto te permite tener una construcción reproducible de manera automática. En otras palabras, nos quedaremos en `0.3.8` 
+hasta que subamos de versión de manera explicita, de igual manera lo hará la gente con la que hemos compartido nuestro 
+código, gracias al archivo `Cargo.lock`.
 
-Pero que pasa cuando _queremos_ usar `v0.3.9`? Cargo posee otro comando, `update`, que se traduce en ‘ignora el bloqueo y determina todas las ultimás versiones que coincidan con lo que hemos especficado. De funcionar esto, escribe esas versiones al archivo de bloqueo `Cargo.lock`’. Pero, por defecto, Cargo sólo buscara versiones mayores a `0.3.0`
-y menores a `0.4.0`. Si queremos movernos a `0.4.x`, necesitariamos actualizar el archivo `Cargo.toml` directamente. Cuando lo hacemos, la siguente vez que ejecutemos `cargo build`, Cargo actualizara el indice y re-evaluara nuestros requerimentos acerca de `rand`.
+Pero ¿qué pasa cuando _queremos_ usar `v0.3.9`? Cargo posee otro comando, `update`, que se traduce en ‘ignora el bloqueo 
+y determina todas las últimas versiones que coincidan con lo que hemos especficado. De funcionar esto, escribe esas 
+versiones al archivo de bloqueo `Cargo.lock`’. Pero, por defecto, Cargo sólo buscara versiones mayores a `0.3.0`
+y menores a `0.4.0`. Si queremos movernos a `0.4.x`, necesitaríamos actualizar el archivo `Cargo.toml` directamente. 
+Cuando lo hacemos, la siguente vez que ejecutemos `cargo build`, Cargo actualizará el índice y re-evaluará nuestros 
+requerimentos acerca de `rand`.
 
-Hay mucho más que decir acerca de [Cargo][doccargo] y [su ecosistema][doccratesio], pero por ahora, eso es todo lo que necesitamos saber. Cargo hace realmente fácil reusar bibliotecas, y los Rusteros tienden a escribir proyectos pequenos los cuales estan construidos por un conjunto de paquetes más pequeños.
+Hay mucho más que decir acerca de [Cargo][doccargo] y [su ecosistema][doccratesio], pero por ahora, eso es todo lo que 
+necesitamos saber. Cargo hace realmente fácil reusar bibliotecas y los Rusteros tienden a escribir proyectos pequeños,
+los cuales están construidos por un conjunto de paquetes más pequeños.
 
 [doccargo]: http://doc.crates.io
 [doccratesio]: http://doc.crates.io/crates-io.html
 
-Hagamos _uso_ ahora de `rand`. He aqui nuestro siguiente paso:
+Hagamos _uso_ ahora de `rand`. He aquí nuestro siguiente paso:
 
 ```rust,ignore
 extern crate rand;
@@ -391,9 +422,15 @@ fn main() {
 }
 ```
 
-La primera cosa que hemos hecho es cambiar la primera línea. Ahora dice `extern crate rand`. Debido a que declaramos `rand` en nuestra sección `[dependencies]`, podemos usar `extern crate` para hacerle saber a Rust que estaremos haciendo uso de `rand`. Esto es equivalente a un `use rand;`, de manera que podamos hacer uso de lo que sea dentro del crate `rand` a través del prefijo `rand::`.
+La primera cosa que hemos hecho es cambiar la primera línea. Ahora dice `extern crate rand`. Debido a que declaramos 
+`rand` en nuestra sección `[dependencies]`, podemos usar `extern crate` para hacerle saber a Rust que estaremos haciendo 
+uso de `rand`. Esto es equivalente a un `use rand;`, de manera que podamos hacer uso de lo que sea dentro del crate 
+`rand` a través del prefijo `rand::`.
 
-Después, hemos agregado otra línea `use`: `use rand::Rng`. En unos momentos estaremos haciendo uso de un método, y esto requiere que `Rng` este disponible para que funcione. La idea basica es la siguiente: los métodos estan dentro de algo llamado ‘traits’ (Rasgos), y para que el método funcione necesita que el trait este disponible. Para mayores detalles dirigete a la sección [Rasgos][traits] (Traits).
+Después, hemos agregado otra línea `use`: `use rand::Rng`. En unos momentos estaremos haciendo uso de un método y esto 
+requiere que `Rng` este disponible para que funcione. La idea básica es la siguiente: los métodos estan dentro de algo 
+llamado ‘traits’ (Rasgos) y para que el método funcione, necesita que el trait esté disponible. Para mayores detalles 
+dirígete a la sección [Rasgos][traits] (Traits).
 
 [traits]: traits.html
 
@@ -406,11 +443,17 @@ Hay dos líneas más en el medio:
     println!("El número secreto es: {}", numero_secreto);
 ```
 
-Hacemos uso de la función `rand::thread_rng()` para obtener una copia del generador de números aleatorios, el cual es local al [hilo][concurrency] de ejecución en el cual estamos. Debido a que hemos hecho disponible a `rand::Rng` a través de `use rand::Rng`, este tiene un método `gen_range()` disponible. Este método acepta dos argumentos, y genera un número aleatorio entre estos. Es inclusivo en el limite inferior, pero es exclusivo en el limite superior, por eso necesitamos `1` y `101` para obtener un número entre uno y cien.
+Hacemos uso de la función `rand::thread_rng()` para obtener una copia del generador de números aleatorios, el cual es 
+local al [hilo][concurrency] de ejecución en el cual estamos. Debido a que hemos hecho disponible a `rand::Rng` a través 
+de `use rand::Rng`, este tiene un método `gen_range()` disponible. Este método acepta dos argumentos y genera un número 
+aleatorio entre estos. Es inclusivo en el limite inferior pero es exclusivo en el limite superior, por eso necesitamos 
+`1` y `101` para obtener un número entre uno y cien.
 
 [concurrency]: concurrency.html
 
-La segunda línea sólo imprime el número secreto. Esto es útil mietras desarrollamos nuestro programa, de manera tal que podamos probarlo. Estaremos eliminando esta línea para la versión> final. No es un juego si imprime la respuesta justo cuando lo inicias!
+La segunda línea sólo imprime el número secreto. Esto es útil mietras desarrollamos nuestro programa, de manera tal que 
+podamos probarlo. Estaremos eliminando esta línea para la versión final. ¡No es un juego si imprime la respuesta justo 
+cuando lo inicias!
 
 Trata de ejecutar el programa unas pocas veces:
 
@@ -432,11 +475,12 @@ Por favor introduce tu corazonada:
 Tu corazonada fue: 5
 ```
 
-Gradioso! A continuación: comparemos nuestra adivinanza con el número secreto.
+¡Gradioso! A continuación: comparemos nuestra adivinanza con el número secreto.
 
 # Comparando adivinanzas
 
-Ahora que tenemos entrada del usuario, comparemos la adivinanza con nuestro número secreto. He aqui nuestro siguiente paso, aunque todavia no funciona completamente:
+Ahora que tenemos entrada del usuario, comparemos la adivinanza con nuestro número secreto. He aquí nuestro siguiente 
+paso, aunque todavia no funciona completamente:
 
 ```rust,ignore
 extern crate rand;
@@ -470,7 +514,8 @@ fn main() {
 }
 ```
 
-Algunas piezas acá. La primera es otro `use`.  Hemos hecho disponible un tipo llamado `std::cmp::Ordering`. Después, cinco nuevas líneas al fondo que lo usan:
+Algunas piezas acá. La primera es otro `use`.  Hemos hecho disponible un tipo llamado `std::cmp::Ordering`. Después, 
+cinco nuevas líneas al fondo que lo usan:
 
 
 ```rust,ignore
@@ -481,7 +526,10 @@ match corazonada.cmp(&numero_secreto) {
 }
 ```
 
-El método `cmp()` puede ser llamado an cualquier cosa que pueda ser comparada, este toma una referencia a la cosa con la cual quieras comparar. Retorna el tipo `Ordering` que hicimos disponible anteriormente. Hemos usado una sentencia [`match`][match] para determinar exactamente que tipo de `Ordering` es. `Ordering` es un [`enum`][enum], abreviación para ‘enumeration’, las cuales lucen de la siguiente manera:
+El método `cmp()` puede ser llamado en cualquier cosa que pueda ser comparada, este toma una referencia a la cosa con 
+la cual quieras comparar. Retorna el tipo `Ordering` que hicimos disponible anteriormente. Hemos usado una sentencia 
+[`match`][match] para determinar exactamente qué tipo de `Ordering` es. `Ordering` es un [`enum`][enum], abreviación para 
+‘enumeration’, las cuales lucen de la siguiente manera:
 
 
 ```rust
@@ -495,10 +543,12 @@ enum Foo {
 [enum]: enums.html
 
 
-Con esta definición, cualquier cosa de tipo `Foo` puede ser bien sea un `Foo::Bar` o un `Foo::Baz`. Usamos el `::` para indicar el espacio de nombres para una variante `enum` en particular.
+Con esta definición, cualquier cosa de tipo `Foo` puede ser bien sea un `Foo::Bar` o un `Foo::Baz`. Usamos el `::` para 
+indicar el espacio de nombres para una variante `enum` en particular.
 
 La enum [`Ordering`][ordering] tiene tres posibles variantes:  `Less`, `Equal`,
-and `Greater` (menor, igual y mayor respectivamente). La sentencia `match` toma un valor de un tipo, y te permite crear un ‘brazo’ para cada valor posible. Debido a que tenemos tres posibles tipos de `Ordering`, tenemos tres brazos:
+and `Greater` (menor, igual y mayor respectivamente). La sentencia `match` toma un valor de un tipo y te permite crear 
+un ‘brazo’ para cada valor posible. Debido a que tenemos tres posibles tipos de `Ordering`, tenemos tres brazos:
 
 
 ```rust,ignore
@@ -511,8 +561,8 @@ match guess.cmp(&secret_number) {
 
 [ordering]: ../std/cmp/enum.Ordering.html
 
-Si es `Less`, imprimimos `Too small!`, si es `Greater`, `Too big!`, y si es
-`Equal`, `¡Haz ganado!`. `match` es realmente util, y es usado con fercuencia en Rust.
+Si es `Less`, imprimimos `¡Muy pequeño!`, si es `Greater`, `¡Muy grande!` y si es
+`Equal`, `¡Haz ganado!`. `match` es realmente útil y es usado con frecuencia en Rust.
 
 Anteriormente mencione que todavia no funciona. Pongamoslo a prueba:
 
@@ -531,7 +581,14 @@ error: aborting due to previous error
 Could not compile `adivinanzas`.
 ```
 
-Oops! Un gran error. Lo principal en el es que tenemos ‘tipos incompatibles’ (‘mismatched types’). Rust posee un fuerte, sistema de tipos estatico. Sin embargo, también tiene inferencia de tipos. Cuando escribimos  `let corazonada = String::new()`, Rust fue capaz de inferir que `corazonada` debia ser un `String`, y por ello no nos hizo escribir el tipo. Con nuestro `numero_secreto`, hay un número de tipos que pueden tener un valor entre uno y cien: `i32`, un número de treinta y dos bits, `u32`, un número sin signo de treinta y dos bits, o `i64` un número de sesenta y cuatro bits u otros. Hasta ahora, eso no ha importado, debido a que Rust por defecto usa `i32`. Sin embargo, en este caso, Rust no sabe como comparar `corazonada` con `numero_secreto`. Ambos necesitan ser del mismo tipo. A la final, queremos convertir el `String` que leimos como entrada en un tipo real de número, para efectos de la comparación. Podemos hacer eso con tres líneas más. He aqui nuestro nuevo programa:
+¡Oops! Un gran error. Lo principal en él es que tenemos ‘tipos incompatibles’ (‘mismatched types’). Rust posee un fuerte 
+sistema de tipos estático. Sin embargo, también tiene inferencia de tipos. Cuando escribimos `let corazonada = String::new()`, 
+Rust fue capaz de inferir que `corazonada` debia ser un `String` y por ello no nos hizo escribir el tipo. Con nuestro 
+`numero_secreto` hay un número de tipos que pueden tener un valor entre uno y cien: `i32`, un número de treinta y dos bits, 
+`u32`, un número sin signo de treinta y dos bits o `i64` un número de sesenta y cuatro bits u otros. Hasta ahora, eso no 
+ha importado debido a que Rust por defecto usa `i32`. Sin embargo, en este caso, Rust no sabe cómo comparar `corazonada` 
+con `numero_secreto`. Ambos necesitan ser del mismo tipo. Al final, queremos convertir el `String` que leímos como entrada 
+en un tipo real de número, para efectos de la comparación. Podemos hacer eso con tres líneas más. He aquí nuestro nuevo programa:
 
 ```rust,ignore
 extern crate rand;
@@ -557,7 +614,7 @@ fn main() {
 
     let corazonada: u32 = corazonada.trim().parse()
         .ok()
-        .expect("Por favor introduce un número!");
+        .expect("¡Por favor introduce un número!");
 
     println!("Tu corazonada fue: {}", corazonada);
 
@@ -577,9 +634,10 @@ Las tres nuevas líneas:
         .expect("Por favor introduce un número!");
 ```
 
-Espera un momento, pensé que ya teniamos una `corazonada`? La tenemos, pero
-Rust nos permite sobreescribir (‘shadow’) la `corazonada` previa con una nueva.
-Esto es usado con frecuencia en esta misma situación, en donde `corazonada` es un `String`, pero queremos convertirlo a un `u32`. Este shadowing nos permite reusar el nombre `corazonada` en vez de forzarnos a idear dos nombres únicos como `corazonada_str` y `corazonada`, u otros.
+Espera un momento, pensé que ya teniamos una `corazonada`. Y la tenemos, pero Rust nos permite sobreescribir
+la `corazonada` previa con una nueva (‘shadowing’). Esto es usado con frecuencia en esta misma situación, en donde 
+`corazonada` es un `String` pero queremos convertirlo a un `u32`. Este shadowing nos permite reusar el nombre 
+`corazonada` en vez de forzarnos a idear dos nombres únicos como `corazonada_str` y `corazonada`, u otros.
 
 Estamos asociando `corazonada` a una expresión que luce como algo que escribimos anteriormente:
 
@@ -587,15 +645,27 @@ Estamos asociando `corazonada` a una expresión que luce como algo que escribimo
 guess.trim().parse()
 ```
 
-Seguido por una invocación a `ok().expect()`. Aquí `corazonada` hace referencia a la vieja versión, la que era un `String` que contenía nuestra entrada de usuario en ella. El método `trim()` en los `String`s elimina cualquier espacio en blanco al principio y al final de nuestras cadenas de caracteres. Esto es importante, debido a que tuvimos que presionar la tecla ‘retorno’ para satisfacer a `read_line()`. Esto significa que si escribimos `5` y presionamos ‘retorno’ `corazonada` luce como así: `5\n`. El `\n` representa ‘nueva línea’ (‘newline’), la tecla enter. `trim()` se deshace de esto, dejando nuestra cadena de caracteres sólo con el `5`. El [método `parse()` en las cadenas caracteres][parse] parsea una cadena de caracteres en algún tipo de número. Debido a que puede parsear una variedad de números, debemos darle a Rust una pista del tipo exacto de número que deseamos. De ahí la parte `let corazonada: u32`. Los dos puntos (`:`)  después de `corazonada` le dicen a Rust que vamos a anotar el tipo. `u32` es un entero sin signo de treinta y dos bits. Rust posee [una variedad de tipos número integrados][number], pero nosotros hemos escojido `u32`.  Es una buena opción por defecto para un número positivo pequeño.
+Seguido por una invocación a `ok().expect()`. Aquí `corazonada` hace referencia a la vieja versión, la que era un `String` 
+que contenía nuestra entrada de usuario en ella. El método `trim()` en los `String`s elimina cualquier espacio en blanco 
+al principio y al final de nuestras cadenas de caracteres. Esto es importante debido a que tuvimos que presionar la tecla 
+‘retorno’ para satisfacer a `read_line()`. Esto significa que si escribimos `5` y presionamos ‘retorno’ `corazonada` 
+luce así: `5\n`. El `\n` representa ‘nueva línea’ (‘newline’), la tecla enter. `trim()` se deshace de esto, dejando 
+nuestra cadena de caracteres sólo con el `5`. El [método `parse()` en las cadenas caracteres][parse] parsea una cadena 
+de caracteres en algún tipo de número. Debido a que puede parsear una variedad de números, debemos darle a Rust una 
+pista del tipo exacto de número que deseamos. De ahí la parte `let corazonada: u32`. Los dos puntos (`:`)  después de 
+`corazonada` le dicen a Rust que vamos a anotar el tipo. `u32` es un entero sin signo de treinta y dos bits. Rust posee 
+[una variedad de tipos número integrados][number], pero nosotros hemos escojido `u32`. Es una buena opción por defecto 
+para un número positivo pequeño.
 
 [parse]: ../std/primitive.str.html#method.parse
 [number]: primitive-types.html#numeric-types
 
-Al igual que `read_line()`, nuestra llamada a `parse()` podria causar un error. Que tal si nuestra cadena de caracteres contiene `Aߑ���?` No habría  forma de convertir eso en un número. Es por ello que haremos lo mismo que hicimos con `read_line()`: usar los métodos `ok()` y `expect()` para terminar abruptamente si hay algun error.
+Al igual que `read_line()`, nuestra llamada a `parse()` podría causar un error. ¿Qué tal si nuestra cadena de caracteres 
+contiene `Aߑ���?` No habría  forma de convertir eso en un número. Es por ello que haremos lo mismo que hicimos con `read_line()`: 
+usar los métodos `ok()` y `expect()` para terminar abruptamente si hay algún error.
 
 
-Probemos nuestro programa!
+¡Probemos nuestro programa!
 
 ```bash
 $ cargo run
@@ -609,13 +679,15 @@ Tu corazonada fue: 76
 ¡Muy grande!
 ```
 
-Excelente! Puedes ver que incluso he agregado espacios antes de mi intento, y aún así el programa determino que intente 76. Ejecuta el programa unas pocas veces, y verifica que adivinar el número funciona, asi como intentar un número muy pequeno.
+¡Excelente! Puedes ver que incluso he agregado espacios antes de mi intento y aún así el programa determinó que intente 76. 
+Ejecuta el programa unas pocas veces y verifica que adivinar el número funciona, así como intentar un número muy pequeño.
 
-Ahora tenemos la mayoria del juego funcionando, pero sólo podemos intentar adivinar una vez. Tratemos de cambiar eso agregando ciclos!
+Ahora tenemos la mayoria del juego funcionando, pero sólo podemos intentar adivinar una vez. ¡Tratemos de cambiar eso 
+agregando ciclos!
 
 # Iteración
 
-La palabra clave `loop` nos proporciona un ciclo infinito. Agreguemosla:
+La palabra clave `loop` nos proporciona un ciclo infinito. Agreguémosla:
 
 ¡Adivina el número!
 El número secreto es: 58
@@ -662,7 +734,8 @@ fn main() {
 }
 ```
 
-Pruebalo. Pero espera, no acabamos de agregar un ciclo infinito? Sip. Recuerdas nuestra discusión acerca de `parse()`? Si damos una respuesta no numérica, retornaremos (`return`) y finalizaremos la ejecución. Observa:
+Pruébalo. Pero espera, ¿no acabamos de agregar un ciclo infinito? Sip. ¿Recuerdas nuestra discusión acerca de `parse()`? 
+Si damos una respuesta no numérica, retornaremos (`return`) y finalizaremos la ejecución. Observa:
 
 ```bash
 $ cargo run
@@ -687,7 +760,8 @@ quit
 thread '<main>' panicked at 'Please type a number!'
 ```
 
-Ja! `quit` en efecto termina la ejecución. Asi como cualquier otra entrada que no sea un número. Bueno, esto es suboptimo por decir lo menos. Primero salgamos cuando ganemos:
+¡Ja! `quit` en efecto termina la ejecución. Así como cualquier otra entrada que no sea un número. Bueno, esto es subóptimo 
+por decir lo menos. Primero salgamos cuando ganemos:
 
 ```rust,ignore
 extern crate rand;
@@ -730,7 +804,10 @@ fn main() {
 }
 ```
 
-Al agregar la línea `break` después del "¡Haz ganado!", romperemos el ciclo cuando ganemos. Salir del ciclo también significa salir del programa, debido a que es la ultima cosa en `main()`. Sólo nos queda una sola mejora por hacer: cuando alguien introduzca un valor no numérico, no queremos terminar la ejecución, queremos simplemente ignorarlo. Podemos hacerlo de la siguiente manera:
+Al agregar la línea `break` después del "¡Haz ganado!", romperemos el ciclo cuando ganemos. Salir del ciclo también significa 
+salir del programa, debido a que es la ultima cosa en `main()`. Sólo nos queda una sola mejora por hacer: cuando alguien 
+introduzca un valor no numérico, no queremos terminar la ejecución, queremos simplemente ignorarlo. Podemos hacerlo de la 
+siguiente manera:
 
 
 ```rust,ignore
@@ -784,9 +861,15 @@ let corazonada: u32 = match corazonada.trim().parse() {
 };
 ```
 
-Es asi como pasamos de ‘terminar abruptamente en un error’ a ‘efectivamente manejar el error’, a través del cambio de `ok().expect()` a una sentencia `match`. El `Result` retornado por `parse()` es un enum justo como `Ordering`, pero en este caso cada variante tiene data asociada: `Ok` es exito, y `Err` es una falla. Cada uno contiene más información: el entero parseado en el caso exitoso, o un tipo de error. En este caso hacemos `match` en`Ok(num)`, el cual asigna el valor interno del `Ok` a el nombre `num`, y seguidamente retorna en el lado derecho. En el caso de `Err`, no nos importa que tipo de error es, es por ello que usamos `_` en lugar de un nombre. Esto ignora el error y `continue` nos mueve a la siguiente iteración del ciclo (`loop`).
+Es así como pasamos de ‘terminar abruptamente en un error’ a ‘efectivamente manejar el error’, a través del cambio de 
+`ok().expect()` a una sentencia `match`. El `Result` retornado por `parse()` es un enum justo como `Ordering`, pero en 
+éste caso cada variante tiene datos asociados: `Ok` es éxito y `Err` es una falla. Cada uno contiene más información: 
+el entero parseado en el caso exitoso o un tipo de error en el caso de fallo. En este caso hacemos `match` en`Ok(num)`, 
+el cual asigna el valor interno del `Ok` al nombre `num` y seguidamente retorna en el lado derecho. En el caso de `Err`, 
+no nos importa qué tipo de error es, por ello usamos `_` en lugar de un nombre. Esto ignora el error y `continue` nos 
+mueve a la siguiente iteración del ciclo (`loop`).
 
-Ahora deberiamos estar bien! Probemos:
+¡Ahora deberíamos estar bien! Probemos:
 
 ```bash
 $ cargo run
@@ -810,7 +893,8 @@ Tu corazonada fue: 61
 ¡Haz ganado!
 ```
 
-Genial! Con una ultima mejora, finalizamos el juego de las advinanzas. Te imaginas cual es? Es correcto, no queremos imprimir el número secreto. Era bueno para las pruebas, pero arruina nuestro juego. He aqui nuestro código fuente final:
+¡Genial! Con una última mejora finalizamos el juego de las advinanzas. ¿Te imaginas cuál es? Es correcto, no queremos 
+imprimir el número secreto. Era bueno para las pruebas, pero arruina nuestro juego. He aquí nuestro código fuente final:
 
 ```rust,ignore
 extern crate rand;
@@ -852,8 +936,9 @@ fn main() {
 }
 ```
 
-# Completado!
+# ¡Completado!
 
-En este punto, has terminado satisfactoriamente el juego de las adivinanza! Felicitaciones!
+En éste punto has terminado satisfactoriamente el juego de las adivinanza, ¡Felicitaciones!
 
-Este primer proyecto te enseno un montón: `let`, `match`, métodos, funciones asociadas, usar crates externos, y más. Nuestro siguiente proyecto demostrara aún más.
+Éste primer proyecto te enseñó un montón: `let`, `match`, métodos, funciones asociadas, usar crates externos y más. 
+Nuestro siguiente proyecto demostrara aún más.
