@@ -7,8 +7,8 @@ de tipo tienen límites de traits y las funciones sobrecargadas deben pertenecer
 un trait particular.
 
 Esta estructura significa que las principales abstracciones en Rust poseen un
-poderoso mecanismo de chequeo en tiempo de compilacion. Pero, el precio es una flexibilidad reducida.
-Si se identifica visualmente un patrón de código repetido, podría ser dificil o
+poderoso mecanismo de chequeo en tiempo de compilación. Pero, el precio es una flexibilidad reducida.
+Si se identifica visualmente un patrón de código repetido, podría ser difícil o
 tedioso expresar ese patrón como una función genérica, un trait, o
 cualquier otro elemento de la semántica de Rust.
 
@@ -24,11 +24,11 @@ función ordinaria, una macro bien hecha se puede utilizar sin
 entender detalles de implementación. Sin embargo, puede ser difícil diseñar una
 macro con un buen comportamiento! Además, los errores de compilación en código de
 macros son más difíciles de entender, porque describen problemas en el código
-expandido, no a nivel del codigo funete que usan los desarrolladores.
+expandido, no a nivel del código fuente que usan los desarrolladores.
 
 Estos inconvenientes hacen de las macros una "herramienta de último recurso". Lo anterior no
 quiere decir que las macros son malas; forman parte de Rust porque a veces son necesarias
-para código conciso y abstracto. Simplemente manten en cuenta este equilibrio.
+para código conciso y abstracto. Simplemente mantén en cuenta este equilibrio.
 
 # Definiendo una macro
 
@@ -43,7 +43,7 @@ let x: Vec<u32> = vec![1, 2, 3];
 ```
 
 Esto no puede ser una función ordinaria, porque acepta cualquier número de
-argumentos. Pero podemos imaginarlo como abreviacion sintáctica para
+argumentos. Pero podemos imaginarlo como una abreviación sintáctica para
 
 ```rust
 let x: Vec<u32> = {
@@ -79,7 +79,7 @@ macro_rules! vec {
 # }
 ```
 
-¡Whoa!, un monton de sintaxis nueva. Examinemoslo parte por parte.
+¡Whoa!, un montón de sintaxis nueva. Examinémoslo parte por parte.
 
 ```ignore
 macro_rules! vec { ... }
@@ -92,15 +92,15 @@ exclamación, por ejemplo, `vec!`. Este signo de exclamación es
 parte de la sintaxis de invocación y sirve para distinguir una
 macro de una función ordinaria.
 
-## Conicidencia de patrones
+## Coincidencia de patrones
 
-La macro se define a través de una serie de reglas, las cuales son casos de coincidencia de patrones. Anteriomente vimos
+Una macro se define a través de una serie de reglas, las cuales son casos de coincidencia de patrones. Anteriormente vimos
 
 ```ignore
 ( $( $x:expr ),* ) => { ... };
 ```
 
-Lo anteriror es similar a un brazo de una expresión `match`, pero las pruebas para coincidencia
+Esto es similar a un brazo de una expresión `match`, pero las pruebas para coincidencia
 ocurren sobre los árboles de sintaxis Rust en tiempo de compilación. El punto y coma es opcional en el caso
 final (aquí, el único caso). El "patrón" en el lado izquierdo del `=>` es
 conocido como un 'matcher'. Los matchers tienen [su propia pequeño gramática] dentro
@@ -187,7 +187,7 @@ expresión con varias sentencias, entre ellas enlaces a variable, utilizamos un
 bloque. Si la macro se expande a una sola expresión, no necesitas dicha
 capa extra de llaves.
 
-Hay que tener tambien en cuenta que nunca *declaramos* que la macro produce una expresión. De
+Hay que tener también en cuenta que nunca *declaramos* que la macro produce una expresión. De
 hecho, esto no se determina hasta que usamos la macro como una expresión. Con
 cuidado, se puede escribir una macro cuya expansión funcione en varios
 contextos. Por ejemplo, la abreviatura de un tipo de datos podría ser válida
@@ -283,17 +283,17 @@ expresión de Rust.
 })
 ```
 
-He aqui un caso de uso que va terriblemente mal:
+He aquí un caso de uso que va terriblemente mal:
 
 ```text
-const char *estado = "reticulante acanaladuras";
+const char *estado = "estrías reticuladas";
 LOG(estado)
 ```
 
 Lo anterior se expande a
 
 ```text
-const char *estado = "reticulante acanaladuras";
+const char *estado = "estrías reticuladas";
 int estado = obtener_estado_log();
 if (estado > 0) {
     printf("log(%d): %s\n", estado, estado);
@@ -318,12 +318,12 @@ macro_rules! log {
 }
 
 fn main() {
-    let estado: &str = "reticulante acanaladuras";
+    let estado: &str = "estrías reticuladas";
     log!(estado);
 }
 ```
 
-Esta version funciona porque Rust tiene un [sistema de macros
+Esta versión funciona porque Rust tiene un [sistema de macros
 higiénico][]. Cada expansión de macro ocurre en un "contexto de
 sintaxis" distinto, y cada variable está asociada con el
 contexto de sintaxis donde fue introducida. Es como si la
@@ -379,7 +379,7 @@ fn main() {
 # Macros recursivas
 
 La expansión de una macro puede incluir más invocaciones a macro, incluyendo
-invocaciones de la misma macro a ser expandida. Estas macros recursivas son
+invocaciones de la misma macro que esta siendo expandida. Estas macros recursivas son
 útiles para el procesamiento de entrada con estructura de árbol, como se
 ilustra en esta (simplista) taquigrafía HTML:
 
@@ -419,7 +419,7 @@ fn main() {
 
 Para ver los resultados de las macros en expansión, ejecuta
 `rustc --pretty expanded`. La salida representa todo un crate, por lo que también
-puede alimentar de nuevo a `rustc`, que a su vez producira mejores mensajes de
+puede alimentar de nuevo a `rustc`, que a su vez producirá mejores mensajes de
 error que la compilación inicial. Es importante destacar que la salida de `--pretty
 expanded` puede tener un significado diferente si varias variables del mismo
 nombre (pero diferentes contextos sintácticos) están en juego en el mismo
@@ -430,14 +430,14 @@ contextos de sintaxis.
 macros. Por ahora, son inestables y requieren puertas de características (feature gates).
 
 * `log_syntax!(...)` imprimirá sus argumentos en la salida estándar, en tiempo
-  de compilación, y se "expandira" a nada.
+  de compilación, y se "expandirá" a nada.
 
 * `trace_macros!(true)` habilitara un mensaje compilador cada vez que una macro es
   expandida. Use `trace_macros!(false)` adelante en la expansión para apagarlo.
 
-# Mas informacion
+# Mas información
 
 El [capitulo avanzado de macros][] entra en mas detalles acerca de la sintaxis de macros.
-Tambien describe como compartir macros entre diferentes crates y modulos.
+También describe como compartir macros entre diferentes crates y módulos.
 
 [capitulo avanzado de macros]: advanced-macros.html
