@@ -1,6 +1,6 @@
 % Tipos Asociados
 
-Los tipos asociados son una poderosa parte de el sistema de tipos de Rust. Estan relacionados a la idea de ‘familiad de tipos’, en otras palabras, la agrupacion de multiples tipos. Esa descripcion es una poco abstracta, es mejor que nos adentremos de una vez en un ejemplo. Si quieres escribir un trait `Grafo`, tienes dos tipos por encima de los cuales debes ser generico: el tipo de los nodos y el tipo de los vertices. Podrias escribir un trait, `Grafo<N, V>` como este:
+Los tipos asociados son una parte poderosa del sistema de tipos de Rust. Se relacionan con la idea de una ‘familia de tipos’, en otras palabras, la agrupación de multiples tipos. Esa descripción es una poco abstracta, es mejor que nos adentremos de una vez en un ejemplo. Si queremos escribir un trait `Grafo`, tenemos dos tipos por encima de los cuales debemos ser genéricos: el tipo de los nodos y el tipo de los vertices. Podríamos escribir un trait, `Grafo<N, V>` como este:
 
 ```rust
 trait Grafo<N, V> {
@@ -10,13 +10,13 @@ trait Grafo<N, V> {
 }
 ```
 
-Si bien esto de alguna manera funciona, termina siendo un poco raro. Por ejemplo, cualquier funcion que quiera recibir un `Grafo` como parametro ahora _tambien_ necesita ser generica por sobre los tipos `N`odo y `V`ertice:
+Si bien esto de alguna manera funciona, termina siendo un poco raro. Por ejemplo, cualquier función que quiera recibir un `Grafo` como parámetro ahora también necesita ser genérica por sobre los tipos `N`odo y `V`ertice:
 
 ```rust,ignore
 fn distancia<N, V, G: Grafo<N, V>>(grafo: &G, inicio: &N, fin: &N) -> u32 { ... }
 ```
 
-Nuestro calculo de la distancia funciona sin tomar en cuenta nuestro tipo `Vertice`, en consecuencia la `V` en esta firma es simplemente una distraccion.
+Nuestro calculo de la distancia funciona sin tomar en cuenta nuestro tipo `Vértice`, en consecuencia la `V` en esta firma es simplemente una distracción.
 
 Lo que realmente queremos expresar es que ciertos tipos `V`ertice y `N`odo vienen juntos para formar cada clase de `Grafo`. Podemos hacer esto con tipos asociados:
 
@@ -37,13 +37,13 @@ Ahora, nuestros clientes pueden abstraerse por encima de un determinado `Grafo`:
 fn distancia<G: Grafo>(grafo: &G, inicio: &G::N, fin: &G::N) -> u32 { ... }
 ```
 
-Sin necesidad de lidiar con el tipo `V`ertice aqui!
+Sin necesidad de lidiar con el tipo `V`ertice!
 
 Echemos un vistazo con mayor detalle a todo esto.
 
 ## Definiendo tipos asociados
 
-Construyamos ese trait `Grafo`. He aqui la definicion:
+Construyamos ese trait `Grafo`. He aquí la definición:
 
 ```rust
 trait Graph {
@@ -57,7 +57,7 @@ trait Graph {
 
 Simple. Los tipos asociados usan la palabra reservada `type`, y van dentro del cuerpo del trait en conjunto con las funciones.
 
-Dichas declaraciones `type` pueden tener lo mismo que las funciones poseen. Por ejemplo si desearamos que nuestro tipo `N` implementase `Display`, de manera que pudiesemos imprimir los nodos, podriamos hacer lo siguiente:
+Dichas declaraciones `type` pueden tener lo mismo que las funciones. Por ejemplo si deseáramos que nuestro tipo `N` implementase `Display`, de manera que pudiésemos imprimir los nodos, podríamos hacer lo siguiente:
 
 ```rust
 use std::fmt;
@@ -73,7 +73,7 @@ trait Grafo {
 
 ## Implementando tipos asociados
 
-Justo como cualquier otro trait, los traits que usan tipos asociados hacen uso de la palabra reservada `impl` para proporcionar implementaciones. A continuacion una implementacion simple de Grafo:
+Justo como cualquier otro trait, los traits que usan tipos asociados hacen uso de la palabra reservada `impl` para proporcionar implementaciones. A continuación una implementación simple de Grafo:
 
 ```rust
 # trait Grafo {
@@ -102,22 +102,22 @@ impl Grafo for MiGrafo {
 }
 ```
 
-Esta tonta implementacion siempre retorna `verdadero` y un `Vec<Vertice>` vacio, pero te da una idea de como se implementa este tipo de traits con tipos asociados. Primero necesitamos tres `struct`s, una para el grafo, uno para el nodo, y una para el vertice. De haber tenido mas sentido usar un tipo diferente, tambien hubiese funcionado, ahora usaremos `struct`s para los tres.
+Esta tonta implementación siempre retorna `true` y un `Vec<Vertice>` vacío, pero te da una idea de como se implementa este tipo de traits con tipos asociados. Primero necesitamos tres `struct`s, una para el grafo, una para el nodo, y una para el vértice. De haber tenido mas sentido usar un tipo diferente, también hubiese funcionado, ahora usaremos `struct`s para los tres.
 
-Lo sigueinte es la linea `impl`, que es identica a la iplementacion de cualquier otro trait.
+Lo siguiente es la linea `impl`, que es idéntica a la implementación de cualquier otro trait.
 
-De aqui en adelante, usamos `=` para definir nuestros tipos asociados. El nombre que el trait usa va del lado izquierdo del `=`, y el tipo en concreto para el  que estamos implementando este trait va del lado derecho. Finalmente, podemos usar tipos concretos en nuestras declaraciones de funcion.
+De aquí en adelante, usamos `=` para definir nuestros tipos asociados. El nombre que el trait usa va del lado izquierdo del `=`, y el tipo en concreto para el  que estamos implementando este trait va del lado derecho. Finalmente, podemos usar tipos concretos en nuestras declaraciones de función.
 
 ## Objetos trait con tipos asociados
 
-Hay otra sintaxis de la cual debemos hablar: objetos trait. Si desearamos crear un objeto trait a partir de un tipo asociado de esta manera:
+Hay otra sintaxis de la cual debemos hablar: objetos trait. Si deseáramos crear un objeto trait a partir de un tipo asociado de esta manera:
 
 ```rust,ignore
 # trait Grafo {
 #     type N;
 #     type V;
 #     fn tiene_vertice(&self, &Self::N, &Self::N) -> bool;
-#     fn vertices(&self, &Self::N) -> Vec<Self::E>;
+#     fn vertices(&self, &Self::N) -> Vec<Self::V>;
 # }
 # struct Nodo;
 # struct Vertice;
@@ -136,7 +136,7 @@ let grafo = MiGrafo;
 let obj = Box::new(grafo) as Box<MiGrafo>;
 ```
 
-Obtendras dos errores:
+Obtendríamos estos dos errores:
 
 ```text
 error: the value of the associated type `V` (from the trait `main::Grafo`) must
@@ -149,15 +149,15 @@ let obj = Box::new(grafo) as Box<Grafo>;
           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ```
 
-We can’t create a trait object like this, because we don’t know the associated
-types. Instead, we can write this:
+No podemos crear objetos trait de esta manera, puesto a que no conocemos los tipos asociados. En su lugar podríamos escribir:
+
 
 ```rust
 # trait Grafo {
 #     type N;
 #     type V;
 #     fn has_edge(&self, &Self::N, &Self::N) -> bool;
-#     fn edges(&self, &Self::N) -> Vec<Self::E>;
+#     fn edges(&self, &Self::N) -> Vec<Self::V>;
 # }
 # struct Nodo;
 # struct Vertice;
@@ -176,4 +176,4 @@ let grafo = MiGrafo;
 let obj = Box::new(grafo) as Box<Grafo<N=Nodo, V=Vertice>>;
 ```
 
-La sintaxis `N=Nodo` nos permite crear un tipo concreto, `Nodo`, para el parametro de tipo `N`. Lo mismo con `V=Vertice`. De no haber propocionado esta restriccion, no hubieramos podido determinar contra cual `impl` deberiamos usar el objeto trait.
+La sintaxis `N=Nodo` nos permite crear un tipo concreto, `Nodo`, para el parámetro de tipo `N`. Lo mismo con `V=Vertice`. De no haber proporcionado esta restricción, no hubiéramos podido determinar contra cual `impl` debe ser usado el objeto trait.
