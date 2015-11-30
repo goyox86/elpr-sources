@@ -66,60 +66,43 @@ En adicion, las siguientes son todas comportamiento indefinido en Rust, y deben 
   * Un valor en un `char` el cual es un susituto o por encima de `char::MAX`.
   * Una secuencia de bytes no-UTF  en un `str`.
 * Unwinding en Rust desde codigo foraneo o unwinding desde Rust a codigo foraneo.
-  code.
 
 [noalias]: http://llvm.org/docs/LangRef.html#noalias
 [undef]: http://llvm.org/docs/LangRef.html#undefined-values
 [aliasing]: http://llvm.org/docs/LangRef.html#pointer-aliasing-rules
 
-# Unsafe Superpowers
+# Superpoderes Unsafe
 
-In both unsafe functions and unsafe blocks, Rust will let you do three things
-that you normally can not do. Just three. Here they are:
+En ambos funciones y bloques unsafe, Rust te permitira hacer tres cosas que normalmente no podrias hacer. Solo tres. Son estas:
 
-1. Access or update a [static mutable variable][static].
-2. Dereference a raw pointer.
-3. Call unsafe functions. This is the most powerful ability.
+1. Acceder o actualizar una [variable mutable estatica][static].
+2. Dereferenciar un apuntador plano.
+3. Llamar a funciones `unsafe`. Esta es la habilidad mas importante.
 
-That’s it. It’s important that `unsafe` does not, for example, ‘turn off the
-borrow checker’. Adding `unsafe` to some random Rust code doesn’t change its
-semantics, it won’t just start accepting anything. But it will let you write
-things that _do_ break some of the rules.
+Eso es todo. Es importante que `unsafe` no, por ejemplo, ‘apaga el comprobador de prestamos’. Agregar `unsafe` a algun codigo al azar no cambia su semantica, no comenzara a aceptar algo. Pero te permitira escribir cosas que _si rompen_ algunas de las reglas.
 
-You will also encounter the `unsafe` keyword when writing bindings to foreign
-(non-Rust) interfaces. You're encouraged to write a safe, native Rust interface
-around the methods provided by the library.
+Tambien encontraras la palabra reservada `unsafe` cuando escribas bindings a interfaces foraneas (no-Rust). Lo mas recomendable es escribir una segura interfaz nativa en Rust alrededor de los metodos proporcionados por la libreria.
 
-Let’s go over the basic three abilities listed, in order.
+Echemos un vistazo a las tres habilidades listadas, en orden.
 
-## Access or update a `static mut`
+## Acceder o actualizar una `static mut`
 
-Rust has a feature called ‘`static mut`’ which allows for mutable global state.
-Doing so can cause a data race, and as such is inherently not safe. For more
-details, see the [static][static] section of the book.
+Rust posee una facilidad denominada ‘`static mut`’ que te permite hacer estado global mutable. Hacerklo puede causar una condicion de carrera, y en consecuencia es inhrerentemente inseguro. Para mayor detalle, dirigete a la seccion [static][static] del libro.
 
 [static]: const-and-static.html#static
 
-## Dereference a raw pointer
+## Dereferenciar un apuntador plano
 
-Raw pointers let you do arbitrary pointer arithmetic, and can cause a number of
-different memory safety and security issues. In some senses, the ability to
-dereference an arbitrary pointer is one of the most dangerous things you can
-do. For more on raw pointers, see [their section of the book][rawpointers].
+Los apuntadores planos te permiten levvar a cabo aritmetica de punteros arbitraria, y pueden causar un numero de problemas de seguridad. En algunos sentidos, la habilidad de dereferenciar un apuntador arbitrario es una de las cosas mas peligrosas que puedes hacer, mas informacion en [su seccion en el libro][rawpointers].
 
 [rawpointers]: raw-pointers.html
 
-## Call unsafe functions
+## Llamar funciones unsafe
 
-This last ability works with both aspects of `unsafe`: you can only call
-functions marked `unsafe` from inside an unsafe block.
+Esta ultima habilidad funciona con ambos aspectos de `unsafe`: puedes solo llamar a funciones marcadas como `unsafe` desde dentro de un bloque unsafe.
 
-This ability is powerful and varied. Rust exposes some [compiler
-intrinsics][intrinsics] as unsafe functions, and some unsafe functions bypass
-safety checks, trading safety for speed.
+Esta habilidad es poderosa y variada. Rust expone algunos [intrinsecos del compilador][intrinsics] como funciones unsafe, y algunas funciones unsafe hacen bypass de algunos chequeos de seguridad, intercambiando seguridad por velocidad.
 
-I’ll repeat again: even though you _can_ do arbitrary things in unsafe blocks
-and functions doesn’t mean you should. The compiler will act as though you’re
-upholding its invariants, so be careful!
+Lo repetire de nuevo: aun cuando _puedes_ hacer cosas arbitrarias en bloques unsafe y funciones no significa que debas hacerlo. El compilador actuara como si tu estuvieses manteniendo las invariantes, asi que se cuidadoso!
 
 [intrinsics]: intrinsics.html
