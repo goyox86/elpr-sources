@@ -222,112 +222,94 @@ fn main() {
 
 La declaracion `extern crate` le informa a Rust que necesitamos compilar y enlazar al crate `frases`. Podemos entonces usar el modulo `frases` aca/ Como mensionamos anteriromente, puedes hacer uso de dos puntos dobles para hacer referencia a los sub-modulos y las funciones dentro de ellos.
 
-(Note: when importing a crate that has dashes in its name "like-this", which is
-not a valid Rust identifier, it will be converted by changing the dashes to
-underscores, so you would write `extern crate like_this;`.)
+Nota: cuando se importa un crate que tiene guiones en su nombre "como-este", lo cual no es un identificador valido en Rust, sera convertido cambiandole los guiones a guiones bajos, asi que escribirias algo como `extern crate como_este;`
 
-Also, Cargo assumes that `src/main.rs` is the crate root of a binary crate,
-rather than a library crate. Our package now has two crates: `src/lib.rs` and
-`src/main.rs`. This pattern is quite common for executable crates: most
-functionality is in a library crate, and the executable crate uses that
-library. This way, other programs can also use the library crate, and it’s also
-a nice separation of concerns.
+Tambien, Cargo assume que `src/main.rs` es la raiz de un crate binario, en lugar de un crate biblioteca. Nuestro paquete ahora tiene dos crate: `src/lib.rs` y `src/main.rs`. Este patronh es muy comun en crates ejecutables: la mayoria de la funcionalidad esta en un crate biblioteca, y el crate ejecutable usa dicha biblioteca. De esta forma, otros programas pueden tambien hacer uso de la biblioteca, y tambien es una buena serparacion de responsabilidades.
 
-This doesn’t quite work yet, though. We get four errors that look similar to
-this:
+Lo anterior todavia no funciona. Obtenemos cuatro errores que lucen similares a estos:
 
 ```bash
 $ cargo build
-   Compiling phrases v0.0.1 (file:///home/you/projects/phrases)
-src/main.rs:4:38: 4:72 error: function `hello` is private
-src/main.rs:4     println!("Hello in English: {}", phrases::english::greetings::hello());
-                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   Compiling frases v0.0.1 (file:///home/tu/proyectos/frases)
+src/main.rs:4:38: 4:72 error: function `hola` is private
+src/main.rs:4     println!("Hola en Ingles: {}", frases::ingles::saludos::hola());
+                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 note: in expansion of format_args!
 <std macros>:2:25: 2:58 note: expansion site
 <std macros>:1:1: 2:62 note: in expansion of print!
 <std macros>:3:1: 3:54 note: expansion site
 <std macros>:1:1: 3:58 note: in expansion of println!
-phrases/src/main.rs:4:5: 4:76 note: expansion site
+frases/src/main.rs:4:5: 4:76 note: expansion site
 ```
 
-By default, everything is private in Rust. Let’s talk about this in some more
-depth.
+Pro defecto todo es privado en Rust. Hablemos de esto con mayor detale.
 
-# Exporting a Public Interface
+# Exportando una Interfaz Publica
 
-Rust allows you to precisely control which aspects of your interface are
-public, and so private is the default. To make things public, you use the `pub`
-keyword. Let’s focus on the `english` module first, so let’s reduce our `src/main.rs`
-to just this:
+Rust te permite controlar de maner precisa cuales aspectos de tu imterfaz son publicos, y por defecto private es el defacto. OPara hacer algo publico, debes hacer uso de la palabra reservada `pub`. Enfoquemonos en el moulo `ingles` primero, para ello, reduzcamos nuestro `src/main.rs` a:
 
 ```rust,ignore
-extern crate phrases;
+extern crate frases;
 
 fn main() {
-    println!("Hello in English: {}", phrases::english::greetings::hello());
-    println!("Goodbye in English: {}", phrases::english::farewells::goodbye());
+    println!("Hola en Ingles: {}", frases::ingles::saludos::hola());
+    println!("Adios en Ingles: {}", frases::ingles::despedidas::adios());
 }
 ```
 
-In our `src/lib.rs`, let’s add `pub` to the `english` module declaration:
+En nuestro `src/lib.rs`, agreguemos `pub` a la declaracion del mopdulo `ingles`:
 
 ```rust,ignore
-pub mod english;
-mod japanese;
+pub mod ingles;
+mod japones;
 ```
 
-And in our `src/english/mod.rs`, let’s make both `pub`:
+Y en nuestro `src/english/mod.rs`, hagamos a ambos `pub`:
 
 ```rust,ignore
-pub mod greetings;
-pub mod farewells;
+pub mod saludos;
+pub mod despedidas;
 ```
 
-In our `src/english/greetings.rs`, let’s add `pub` to our `fn` declaration:
+En nuestro `src/ingles/saludos.rs`, agreguemos `pub` a nuestra declaracion `fn`:
 
 ```rust,ignore
-pub fn hello() -> String {
-    "Hello!".to_string()
+pub fn hola() -> String {
+    "Hola!".to_string()
 }
 ```
 
-And also in `src/english/farewells.rs`:
+Y tambien en `src/ingles/despedidas.rs`:
 
 ```rust,ignore
-pub fn goodbye() -> String {
-    "Goodbye.".to_string()
+pub fn adios() -> String {
+    "Adios.".to_string()
 }
 ```
 
-Now, our crate compiles, albeit with warnings about not using the `japanese`
-functions:
+Ahora, nuestro crate compila, con unos pocos warinigs acerca de no haber usado las funciones en `japones`:
 
 ```bash
 $ cargo run
-   Compiling phrases v0.0.1 (file:///home/you/projects/phrases)
-src/japanese/greetings.rs:1:1: 3:2 warning: function is never used: `hello`, #[warn(dead_code)] on by default
-src/japanese/greetings.rs:1 fn hello() -> String {
-src/japanese/greetings.rs:2     "こんにちは".to_string()
-src/japanese/greetings.rs:3 }
-src/japanese/farewells.rs:1:1: 3:2 warning: function is never used: `goodbye`, #[warn(dead_code)] on by default
-src/japanese/farewells.rs:1 fn goodbye() -> String {
-src/japanese/farewells.rs:2     "さようなら".to_string()
-src/japanese/farewells.rs:3 }
-     Running `target/debug/phrases`
-Hello in English: Hello!
-Goodbye in English: Goodbye.
+   Compiling frases v0.0.1 (file:///home/tu/proyectos/frases)
+src/japones/saludos.rs:1:1: 3:2 warning: function is never used: `hola`, #[warn(dead_code)] on by default
+src/japones/saludos.rs:1 fn hola() -> String {
+src/japones/saludos.rs:2     "こんにちは".to_string()
+src/japones/saludos.rs:3 }
+src/japones/despedidas.rs:1:1: 3:2 warning: function is never used: `adios`, #[warn(dead_code)] on by default
+src/japones/despedidas.rs:1 fn adios() -> String {
+src/japones/despedidas.rs:2     "さようなら".to_string()
+src/japones/despedidas.rs:3 }
+     Running `target/debug/frases`
+Hola en Ingles: Hello!
+Adios en Ingles: Goodbye.
 ```
 
-`pub` also applies to `struct`s and their member fields. In keeping with Rust’s
-tendency toward safety, simply making a `struct` public won't automatically
-make its members public: you must mark the fields individually with `pub`.
+`pub` tambien aplica a las `struct`s y sus cmapos miembro. Y Rust teniendo siempre su tendencia hacia la seguridad, el hacer una `struct` public no hara a sus miembros automaticamente public: debes marcarlos individualmente como `pub`.
 
-Now that our functions are public, we can use them. Great! However, typing out
-`phrases::english::greetings::hello()` is very long and repetitive. Rust has
-another keyword for importing names into the current scope, so that you can
-refer to them with shorter names. Let’s talk about `use`.
+Ahora que nuestras funciones son public, podemos hacer uso de ellas. Grandioso! Sin embargo, escribir `frases::ingles::saludos::hola()` es largo y repetitivo. Rust posee otra palabra reservada para importar nombres en el ambito actual, de manera que puedes hacer referencia a ellos con nombres mas cortos, Hablemos acerca de `use`.
 
-# Importing Modules with `use`
+# Importando Modulos con `use`
 
 Rust has a `use` keyword, which allows us to import names into our local scope.
 Let’s change our `src/main.rs` to look like this:
