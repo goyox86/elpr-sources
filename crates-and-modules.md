@@ -1,14 +1,14 @@
 % Crates y Modulos
 
-Cuando un proyecto comienza a crecer, se considera una buena practica de ingenieria de software dividirlo en un grupo de componentes mas pequenos, uniendolos luego. Tamnieb es importante tener una interfaz bien definida, de manera que una parte de la funcionalidad sea privada, y otra publica. Para facilitar esto, Rust posee un sitema de modulos.
+Cuando un proyecto comienza a crecer, se considera buena practica de ingeniería de software dividirlo en un grupo de componentes mas pequeños que posteriormente serán unidos. También es importante tener una interfaz bien definida, de manera que una parte de la funcionalidad sea privada, y otra publica. Para facilitar esto, Rust posee un sistema de módulos.
 
 # Terminologia basica: Crates y Modulos
 
-Rust posee dos terminos distintos que se relacionan con el sistema de modulos: ‘crate’ y ‘modulo’. Un crate es un sinonimo para ‘bliblioteca’ or ‘paquete’ en otros lenguajes. De ali el nombre “Cargo” del manejador de paquetes de Rust: haces disponibles tus crates a los demas con Cargo.  Los crates pueden producir un ejecutables o una biblioteca, dependiendo del proyecto.
+Rust posee dos términos distintos relacionados con el sistema de módulos: ‘crate’ y ‘modulo’. Un crate es un sinónimo para ‘biblioteca’ or ‘paquete’ en otros lenguajes. De allí el nombre “Cargo” del manejador de paquetes de Rust: haces disponibles tus crates a los demás con Cargo. Los crates pueden producir un ejecutables o una biblioteca, dependiendo del proyecto.
 
-Cada crate posee un *modulo raiz* implicito que contiene el codigo para dicho crate. Puedes definir un arbol de submodiulos bajo el emodulo raiz. Los modulos te permiten particionar tu codigo dentro del crate en si mismo.
+Cada crate posee un *modulo raiz* implícito que contiene el código para dicho crate. Puedes definir un árbol de sub-modulos bajo el módulo raíz. Los módulos te permiten particionar tu codigo dentro del crate.
 
-Como ejemplo, creemos un crate *frases*, que nos proveera varias frases en diferentes idiomas. Para mantener las cosas simples, nos apegaremos a ‘saludos’ y ‘despedidas’ como los dos tipos de frases, asi como Ingles y Japones (日本語) como los dos idiomas en los que dichas frases estaran representados. Usaremos la siguiente distribucion de modulos:
+Como ejemplo, creemos un crate *frases*, que nos proveerá varias frases en diferentes idiomas. Para mantener las cosas simples, nos apegaremos solo a ‘saludos’ y ‘despedidas’ como los dos tipos de frases, así como Ingles y Japonés (日本語) para los dos idiomas en los que las frases estarán representadas. Tendremos la siguiente distribución de módulos:
 
 
 ```text
@@ -24,16 +24,16 @@ Como ejemplo, creemos un crate *frases*, que nos proveera varias frases en difer
 +----------+   |                      +-----------+
                |                  +---|  saludos  |
                |   +-----------+  |   +-----------+
-               +---|  japones  |--+
+               +---|  japonés  |--+
                    +-----------+  |
                                   |   +------------+
                                   +---| despedidas |
                                       +------------+
 ```
 
-En este ejemplo, `frases` es el nombre de nuestro crate. El resto son modulos. Puedes observar que los modulos forman un arbol, partiendo desde la *raiz*, la cual es la raiz del arbol `frases` en si.
+En este ejemplo, `frases` es el nombre de nuestro crate. El resto son módulos. Puedes observar que los módulos forman un árbol, partiendo desde la *raíz*, que a su vez es la raíz del árbol `frases` en si.
 
-Ahora que tenemos un plan, definamos estos modulos en codigo. Para comenzar, generemos un proyecto con Cargo:
+Ahora que tenemos un plan, definamos estos módulos en código. Para comenzar, generemos un proyecto con Cargo:
 
 ```bash
 $ cargo new frases
@@ -52,12 +52,12 @@ $ tree .
 1 directory, 2 files
 ```
 
-`src/lib.rs` es la raiz de nuestro crate, correspondiendo con `frases` en nuestro diagrama anterior.
+`src/lib.rs` es la raíz de nuestro crate, correspondiendo con `frases` en nuestro diagrama anterior.
 above.
 
-# Definiendo Modulos
+# Definiendo Módulos
 
-Para definir cada uno de nuestros modulos, usamos la palabra reservada `mod`. Hagamos que nuestro `src/lib.rs` se vea asi:
+Para definir cada uno de nuestros módulos, usamos la palabra reservada `mod`. Hagamos que nuestro `src/lib.rs` se vea así:
 
 ```rust
 mod ingles {
@@ -77,11 +77,11 @@ mod japones {
 }
 ```
 
-Despues de la palabra reservada `mod` debes proporcionar el nombre de el modulo. Los nombrede de modulo siguen la smismas convenciones que los demas identificadores en Rust: `snake_case_en_minusculas`. El contenido de cada modulos esta delimitado por llaves (`{}`).
+Después de la palabra reservada `mod` debes proporcionar el nombre del modulo. Los nombres de de modulo siguen las mismas convenciones que los demás identificadores en Rust: `snake_case_en_minusculas`. El contenido de cada modulo esta delimitado por llaves (`{}`).
 
-Dentro de un determinado `mod`, puedes declarar sub-`mod`s. Podemos referirnos a los submodulos con una notacion de unos dos puntos dobles (`::`): nuestros cuatrio modulos anidados son `ingles::saludos`, `ingles::despedidas`, `japones::saludos`, and `japones::despedidas`. Debido a que estos sub-modulos estan dentro del espacio de nombres del modulo padre, los nombres no entran en conflicto: `ingles::saludos` y `japones::saludos` son distintos incluso cuando sus nombres son ambos `saludos`.
+Dentro de un determinado `mod`, puedes declarar sub-`mod`s. Podemos referirnos a los sub-modulos con una notación dos puntos dobles (`::`): nuestros cuatro módulos anidados son `ingles::saludos`, `ingles::despedidas`, `japones::saludos`, y `japones::despedidas`. Debido a que estos sub-modulos están dentro del espacio de nombres del modulo padre, los nombres no entran en conflicto: `ingles::saludos` y `japones::saludos` son distintos incluso cuando sus nombres son ambos `saludos`.
 
-Debido a que este crate no posee una funcion `main()`, y se llama `lib.rs`, Cargo construira este crate como una biblioteca:
+Debido a que este crate no posee una función `main()`, y se llama `lib.rs`, Cargo construirá este crate como una biblioteca:
 
 ```bash
 $ cargo build
@@ -90,21 +90,21 @@ $ ls target/debug
 build  deps  examples  libfrases-a7448e02a0468eaa.rlib  native
 ```
 
-`libfrases-hash.rlib` es el crate compilado. Antes de ver como usar este crate desde otro, dividamoslo en multiples archivos.
+`libfrases-hash.rlib` es el crate compilado. Antes de ver como usar este crate desde otro, dividámoslo en multiples archivos.
 
 # Crates con multiple archivos
 
-Si cada crate fuera un solo archivo, dichos archivos serian bastante grandes. Es mas facil dividir los crates en multiples archivos, y Rust soporta esto de dos maneras.
+Si cada crate fuera un solo archivo, dichos archivos serian bastante grandes. Es mas fácil dividir los crates en multiples archivos. Rust soporta esto de dos maneras.
 
-En lugar de declarar un modulo de la siguiente manera:
+En lugar de declarar un modulo así:
 
 ```rust,ignore
 mod ingles {
-    // el contenido del modulo va aqui
+    // el contenido del modulo va aquí
 }
 ```
 
-Podemos declarar nuestro modulo asi:
+Podemos declararlo de esta forma:
 
 ```rust,ignore
 mod ingles;
@@ -112,9 +112,9 @@ mod ingles;
 
 Si hacemos eso, Rust esperara encontrar bien un archivo `ingles.rs` o un archivo `ingles/mod.rs` con el contenido de nuestro modulo.
 
-Nota que todos en estos archivos , no necesitas re-declarar el modulo: ya esto ha sido efectuado con la declaracion incial `mod`.
+Nota que todos en estos archivos, no necesitas re-declarar el modulo: con la declaración inicial `mod` es suficiente.
 
-Usando estas dos tecnicas, podemos partir nuestro crte en dos directorios y siete archivos:
+Usando estas dos técnicas, podemos partir nuestro crate en dos directorios y siete archivos:
 
 ```bash
 $ tree .
@@ -126,7 +126,7 @@ $ tree .
 │   │   ├── despedidas.rs
 │   │   ├── saludos.rs
 │   │   └── mod.rs
-│   ├── japanese
+│   ├── japones
 │   │   ├── despedidas.rs
 │   │   ├── saludos.rs
 │   │   └── mod.rs
@@ -140,23 +140,23 @@ $ tree .
         └── native
 ```
 
-`src/lib.rs` es la raiz de nuestro crate, y luce asi:
+`src/lib.rs` es la raíz de nuestro crate, y luce así:
 
 ```rust,ignore
 mod ingles;
 mod japones;
 ```
 
-Estas dos declaraciones le dicen a Rust que busque bien sea `src/ingles.rs` y `src/japones.rs`, o `src/ingles/mod.rs` y `src/japones/mod.rs`, dependiendo de nuestra preferencia. En este caso, debido a que nuestros modulos poseen submodulos hemos seleccionado la segunda. Ambos `src/ingles/mod.rs` y `src/japones/mod.rs`se ven asi:
+Estas dos declaraciones le dicen a Rust que busque bien sea `src/ingles.rs` y `src/japones.rs`, o `src/ingles/mod.rs` y `src/japones/mod.rs`, dependiendo de nuestra preferencia. En este caso, debido a que nuestros módulos poseen sub-modulos hemos seleccionado la segunda. Ambos `src/ingles/mod.rs` y `src/japones/mod.rs`se ven lucen de esta manera:
 
 ```rust,ignore
 mod saludos;
 mod despedidas;
 ```
 
-De nuevo, estas declaraciones hacen que Rust busque bien sea por `src/ingles/saludos.rs` y `src/japones/saludos.rs` o `src/ingles/despedidas/mod.rs` and `src/japones/despedidas/mod.rs`. Debido a que los submodulos no poseen sus propios submodulos, hemos optado por usar el enfoque `src/ingles/saludos.rs` and `src/japones/despedidas.rs`. Uff!
+De nuevo, estas declaraciones hacen que Rust busque bien sea por `src/ingles/saludos.rs` y `src/japones/saludos.rs` o `src/ingles/despedidas/mod.rs` and `src/japones/despedidas/mod.rs`. Debido a que los sub-modulos no poseen sus propios sub-modulos, hemos optado por usar el enfoque `src/ingles/saludos.rs` and `src/japones/despedidas.rs`. Uff!
 
-Ambos `src/ingles/saludos.rs` y `src/japones/despedidas.rs` estan vacios por el momento. Agreguemos algunas funciones.
+Ambos `src/ingles/saludos.rs` y `src/japones/despedidas.rs` están vacíos por el momento. Agreguemos algunas funciones.
 
 Coloca esto en `src/ingles/saludos.rs`:
 
@@ -182,7 +182,7 @@ fn hello() -> String {
 }
 ```
 
-Por supuesto, puedes copiar y pegar esto desde esta pagina web, o simplemente escribe alguna otra cosa. No es importante que en efecto coloques ‘konnichiwa’ para aprender acerca del sistema de modulos.
+Por supuesto, puedes copiar y pegar el Japones desde esta pagina web, o simplemente escribe alguna otra cosa. No es importante que en efecto coloques ‘konnichiwa’ para aprender acerca del sistema de módulos de Rust.
 
 Coloca lo siguiente en `src/japones/despedidas.rs`:
 
@@ -194,13 +194,13 @@ fn adios() -> String {
 
 (‘Sayōnara’, por si eres curioso.)
 
-Ahora que tenemos algo de funcionalidad en nuestro crate, intentemos usarlos desde otro crate.
+Ahora que tenemos algo de funcionalidad en nuestro crate, intentemos usarlos desde otro.
 
 # Importing External Crates
 
-Ya tenemos un carte biblioteca. Creemos un crate ejecutable que importe y use nuestra biblioteca.
+Ya tenemos un crate biblioteca. Creemos un crate ejecutable que importe y use nuestra biblioteca.
 
-Crea un archivo `src/main.rs` y coloca esto en el (no compilara todavia):
+Crea un archivo `src/main.rs` y coloca esto en el (no compilara todavía):
 
 ```rust,ignore
 extern crate frases;
@@ -214,20 +214,20 @@ fn main() {
 }
 ```
 
-La declaracion `extern crate` le informa a Rust que necesitamos compilar y enlazar al crate `frases`. Podemos entonces usar el modulo `frases` aca/ Como mensionamos anteriromente, puedes hacer uso de dos puntos dobles para hacer referencia a los sub-modulos y las funciones dentro de ellos.
+La declaración `extern crate` le informa a Rust que necesitamos compilar y enlazar al crate `frases`. Podemos entonces usar el modulo `frases` aqui. Como mencionamos anteriormente, puedes hacer uso de dos puntos dobles para hacer referencia a los sub-modulos y las funciones dentro de ellos.
 
-Nota: cuando se importa un crate que tiene guiones en su nombre "como-este", lo cual no es un identificador valido en Rust, sera convertido cambiandole los guiones a guiones bajos, asi que escribirias algo como `extern crate como_este;`
+Nota: cuando se importa un crate que tiene guiones en su nombre "como-este", lo cual no es un identificador valido en Rust, sera convertido cambiándole los guiones a guiones bajos, así que escribirías algo como `extern crate como_este;`
 
-Tambien, Cargo assume que `src/main.rs` es la raiz de un crate binario, en lugar de un crate biblioteca. Nuestro paquete ahora tiene dos crate: `src/lib.rs` y `src/main.rs`. Este patronh es muy comun en crates ejecutables: la mayoria de la funcionalidad esta en un crate biblioteca, y el crate ejecutable usa dicha biblioteca. De esta forma, otros programas pueden tambien hacer uso de la biblioteca, y tambien es una buena serparacion de responsabilidades.
+También, Cargo assume que `src/main.rs` es la raíz de un crate binario, en lugar de un crate biblioteca. Nuestro paquete ahora tiene dos crate: `src/lib.rs` y `src/main.rs`. Este patron es muy común en crates ejecutables: la mayoría de la funcionalidad esta en un crate biblioteca, y el crate ejecutable usa dicha biblioteca. De esta forma, otros programas pueden también hacer uso de la biblioteca, aunado a que ofrece un buena separación de responsabilidades.
 
-Lo anterior todavia no funciona. Obtenemos cuatro errores que lucen similares a estos:
+Lo anterior todavía no funciona. Obtenemos cuatro errores que lucen similares a estos:
 
 ```bash
 $ cargo build
    Compiling frases v0.0.1 (file:///home/tu/proyectos/frases)
 src/main.rs:4:38: 4:72 error: function `hola` is private
 src/main.rs:4     println!("Hola en Ingles: {}", frases::ingles::saludos::hola());
-                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 note: in expansion of format_args!
 <std macros>:2:25: 2:58 note: expansion site
 <std macros>:1:1: 2:62 note: in expansion of print!
@@ -236,11 +236,11 @@ note: in expansion of format_args!
 frases/src/main.rs:4:5: 4:76 note: expansion site
 ```
 
-Pro defecto todo es privado en Rust. Hablemos de esto con mayor detale.
+Por defecto todo es privado en Rust. Hablemos de esto con mayor detalle.
 
 # Exportando una Interfaz Publica
 
-Rust te permite controlar de maner precisa cuales aspectos de tu imterfaz son publicos, y por defecto private es el defacto. OPara hacer algo publico, debes hacer uso de la palabra reservada `pub`. Enfoquemonos en el moulo `ingles` primero, para ello, reduzcamos nuestro `src/main.rs` a:
+Rust te permite controlar de manera precisa cuales aspectos de tu interfaz son públicos, y private es el defacto. Para hacer a algo publico, debes hacer uso de la palabra reservada `pub`. Enfoquemonos primero en el modulo `ingles`, para ello, reduzcamos nuestro `src/main.rs` a:
 
 ```rust,ignore
 extern crate frases;
@@ -251,21 +251,21 @@ fn main() {
 }
 ```
 
-En nuestro `src/lib.rs`, agreguemos `pub` a la declaracion del mopdulo `ingles`:
+En nuestro `src/lib.rs`, agreguemos `pub` a la declaración del modulo `ingles`:
 
 ```rust,ignore
 pub mod ingles;
 mod japones;
 ```
 
-Y en nuestro `src/english/mod.rs`, hagamos a ambos `pub`:
+Y en nuestro `src/ingles/mod.rs`, hagamos a ambos `pub`:
 
 ```rust,ignore
 pub mod saludos;
 pub mod despedidas;
 ```
 
-En nuestro `src/ingles/saludos.rs`, agreguemos `pub` a nuestra declaracion `fn`:
+En nuestro `src/ingles/saludos.rs`, agreguemos `pub` a nuestra declaración `fn`:
 
 ```rust,ignore
 pub fn hola() -> String {
@@ -273,7 +273,7 @@ pub fn hola() -> String {
 }
 ```
 
-Y tambien en `src/ingles/despedidas.rs`:
+Y también en `src/ingles/despedidas.rs`:
 
 ```rust,ignore
 pub fn adios() -> String {
@@ -281,7 +281,7 @@ pub fn adios() -> String {
 }
 ```
 
-Ahora, nuestro crate compila, con unos pocos warinigs acerca de no haber usado las funciones en `japones`:
+Ahora, nuestro crate compila, con unas pocas advertencias acerca de no haber usado las funciones en `japones`:
 
 ```bash
 $ cargo run
@@ -299,13 +299,13 @@ Hola en Ingles: Hello!
 Adios en Ingles: Goodbye.
 ```
 
-`pub` tambien aplica a las `struct`s y sus cmapos miembro. Y Rust teniendo siempre su tendencia hacia la seguridad, el hacer una `struct` public no hara a sus miembros automaticamente public: debes marcarlos individualmente como `pub`.
+`pub` también aplica a las `struct`s y sus campos miembro. Y Rust teniendo siempre su tendencia hacia la seguridad, el hacer una `struct` public no hará a sus miembros public automáticamente: debes marcarlos individualmente como `pub`.
 
-Ahora que nuestras funciones son public, podemos hacer uso de ellas. Grandioso! Sin embargo, escribir `frases::ingles::saludos::hola()` es largo y repetitivo. Rust posee otra palabra reservada para importar nombres en el ambito actual, de manera que puedes hacer referencia a ellos con nombres mas cortos, Hablemos acerca de `use`.
+Ahora que nuestras funciones son public, podemos hacer uso de ellas. Grandioso! Sin embargo, escribir `frases::ingles::saludos::hola()` es largo y repetitivo. Rust posee otra palabra reservada para importar nombres en el ámbito actual, de manera que puedas hacer referencia a ellos con nombres mas cortos, Hablemos acerca de `use`.
 
 # Importando Modulos con `use`
 
-Rust posee una palabra reservada, `use`, que te permite importar nombres en tu ambito locoal. Cambiemos nuestro `src/main.rs` para que luzca de la siguiente manera:
+Rust posee una palabra reservada, `use`, que te permite importar nombres en tu ámbito local. Cambiemos nuestro `src/main.rs` para que luzca de la siguiente manera:
 
 ```rust,ignore
 extern crate frases;
@@ -319,7 +319,7 @@ fn main() {
 }
 ```
 
-Las dos lineas `use` importan cada modulo en el ambito local, de manera tal que podamos referirnos a las funciones con nombres mucho mas cortos. Por convencion, cuando se importan funciones, se considera una buena practica importar el modulo, en lugar de la funcion directamente. En otras palabras, puedes _hacer_ esto:
+Las dos lineas `use` importan cada modulo en el ámbito local, de manera tal que podamos referirnos a las funciones con nombres mucho mas cortos. Por convención, cuando se importan funciones, se considera una buena practica importar el modulo, en lugar de la función directamente. En otras palabras, puedes _hacer_ esto:
 
 ```rust,ignore
 extern crate frases;
@@ -328,12 +328,12 @@ use frases::ingles::saludos::hola;
 use frases::ingles::despedidas::adios;
 
 fn main() {
-  println!("Hola en Ingles: {}", hello());
+  println!("Hola en Ingles: {}", hola());
   println!("Adios en Ingles: {}", adios());
 }
 ```
 
-Pero no es idomatico. Lo anterior tiene significativas probabilidaes de introducir un conflicto de nombres. En nuestro pequeno programa, no es gran cosa, pero a medida que crece, se va convirtiendo en un problema. Si tensmo nombres conflictivos, Rust generara un error de compilacion. Por ejemplo, de haber hecho publicas las funciones de `japones` y haber intentado:
+Pero no es idiomático. Hacerlo de esta forma tiene altas probabilidades de introducir un conflicto de nombres. En nuestro pequeño programa, no es gran cosa, pero a medida que crece, se va convirtiendo en un problema. Si tenemos nombres conflictivos, Rust generara un error de compilación. Por ejemplo, de haber hecho publicas las funciones de `japones` y haber intentado:
 
 ```rust,ignore
 extern crate frases;
@@ -342,12 +342,12 @@ use frases::ingles::saludos::hola;
 use frases::japones::saludos::hola;
 
 fn main() {
-    println!("Hola en Ingles: {}", hello());
-    println!("Hola en Japones: {}", hello());
+    println!("Hola en Ingles: {}", hola());
+    println!("Hola en Japones: {}", hola());
 }
 ```
 
-Rust propircionaria un error en tiempo de compilacion:
+Rust proporcionaría un error en tiempo de compilación:
 
 ```text
    Compiling frases v0.0.1 (file:///home/tu/frases)
@@ -358,7 +358,7 @@ error: aborting due to previous error
 Could not compile `frases`.
 ```
 
-Si estuvieramos importando multiples nombres del mismo modulo, no necesitamos escribirlo dos veces. En lugar de:
+Si estuviéramos importando multiples nombres del mismo modulo, no necesitamos escribirlo dos veces. En lugar de:
 
 ```rust,ignore
 use phrases::ingles::saludos;
@@ -373,14 +373,14 @@ use phrases::ingles::{saludos, despedidas};
 
 ## Re-exportando con `pub use`
 
-No solo usamos `use` para acortar identificadores. Puedes tambien usarlos dentro de tu crate para re-exportar una funcion dentro de optro modulo. Esto te permite presentar una interfaz extrerna que pueda no mapear de directamente a la organizacion interna de tu codigo.
+No solo usamos `use` para acortar identificadores. Puedes también usarlos dentro de tu crate para re-exportar una función dentro de otro modulo. Esto te permite presentar una interfaz externa que necesariamente no mapee de directamente a la organización interna de tu código.
 
-Veamos un ejemplo. modifica tu `src/main.rs`  para que se lea asi:
+Veamos un ejemplo. modifica tu `src/main.rs` para que se lea así:
 
 ```rust,ignore
 extern crate frases;
 
-use frases::ingles::{saludos,despedidas};
+use frases::ingles::{saludos, despedidas};
 use frases::japones;
 
 fn main() {
@@ -399,7 +399,7 @@ pub mod ingles;
 pub mod japones;
 ```
 
-A continuacion, haz las dos funciones publicas, primero en `src/japones/saludos.rs`:
+A continuación, haz las dos funciones publicas, primero en `src/japones/saludos.rs`:
 
 ```rust,ignore
 pub fn hola() -> String {
@@ -415,7 +415,7 @@ pub fn adios() -> String {
 }
 ```
 
-Finalmente, modifica tu `src/japanese/mod.rs` para que se vea asi:
+Finalmente, modifica tu `src/japones/mod.rs` de esta forma:
 
 ```rust,ignore
 pub use self::saludos::hola;
@@ -425,15 +425,15 @@ mod saludos;
 mod despedidas;
 ```
 
-La declaracion `pub use` trae la funcion a el ambito en esta parte de nuestra jerarquia de modulos. Debido que hemos hecho `pub use` dentro de nuestro modulo `japones`, ahora tenemos una funcion `frases::japones::hola()` y una funcion `frases::japones::adios()`, aun cuando el codigo para ellas vive en `frases::japones::saludos::hola()` y frases::japones::despedidas::adios()`.  Nuestra organizacion interna no define nuestra interfaz extrerna.
+La declaración `pub use` trae la función a el ámbito en esta parte de nuestra jerarquía de modulos. Debido que hemos hecho `pub use` dentro de nuestro modulo `japones`, ahora tenemos una función `frases::japones::hola()` y una función `frases::japones::adios()`, aun cuando el código para ellas vive en `frases::japones::saludos::hola()` y frases::japones::despedidas::adios()`. Nuestra organización interna no define nuestra interfaz externa.
 
-Aca tenemos un `pub use` para cada funcion que deseamos traer en el ambito de `japones`. Alternativamente pudimos haber usado la sintaxis alternativa de comodin para incluir todo desde `saludos` en el ambito actual: `pub use self::saludos::*`
+Acá tenemos un `pub use` para cada función que deseamos traer en el ámbito de `japones`. Alternativamente pudimos haber usado la sintaxis alternativa de comodín para incluir todo desde `saludos` en el ámbito actual: `pub use self::saludos::*`
 
-Que hay acerca de el `self`? Bueno, por defecto, las declaraciones `use` son rutas absolutas, partendo desde la raiz de tu crate. `self`, a diferencia, hace esa ruta relativa a tu lugar actual dentro de la jerarquia. Hay una ultima frma especial de usar `use`: puedes usar `use super::` para alcanzar un nivel superior en la jeraquia desde tu posicion actual. Algunas personas gustan ver a `self` como `.` y `super` como `..` como los usados por los shells para mostrar los directorios actual y padre respectivamente.
+Que hay acerca de el `self`? Bueno, por defecto, las declaraciones `use` son rutas absolutas, partiendo desde la raíz de tu crate. `self`, a diferencia, hace esa ruta relativa a tu lugar actual dentro de la jerarquía. Hay una ultima forma especial de usar `use`: puedes usar `use super::` para alcanzar un nivel superior en la jerarquía desde tu posición actual. Algunas personas gustan ver a `self` como `.` y `super` como `..` similarmente los usados por los shells para mostrar los directorios actual y padre respectivamente.
 
-Fuera de `use`, las rutas son relativas: `foo::bar()` se refiere a una funcion dentro de `foo` en relacion a en donde estamos. Si posee un prefijo `::`, como en `::foo::bar()`, entonces se refiere a un `foo` diferente, una ruta absoluta desdela raiz de tu crate.
+Fuera de `use`, las rutas son relativas: `foo::bar()` se refiere a una función dentro de `foo` en relación a en donde estamos. Si posee un prefijo `::`, como en `::foo::bar()`, entonces se refiere a un `foo` diferente, una ruta absoluta desde la raíz de tu crate.
 
-El ultimo codigo que escribimos, compilara y se ejecutara sin problemas:
+El ultimo código que escribimos, compilara y se ejecutara sin problemas:
 
 ```bash
 $ cargo run
@@ -447,7 +447,7 @@ Adios in Japones: さようなら
 
 ## Importes complejos
 
-Rust ofrece un numero de opciones avanzadas que pueden hacer tus sentencias `extern crate` mas compactas y convenientes. He aqui un ejemplo:
+Rust ofrece un numero de opciones avanzadas que pueden hacer tus sentencias `extern crate` mas compactas y convenientes. He aquí un ejemplo:
 
 ```rust,ignore
 extern crate frases as dichos;
@@ -465,18 +465,13 @@ fn main() {
 }
 ```
 
-Que esta pasando aca?
+Que esta pasando?
 
-Primero, ambos `extern crate` y `use` permiten renombrar lo que esta siendo importado. Entonces el crate todavia se llama "frases", pero aqui nos referiremos a el como "dichos". Similarmente, el primer `use` trae el modulo `japones::saludos` desde el crate, pero lo hace disponible a traves del nombre `saludos_ja` en lugar de simplemente `saludos`. Lo anterior puede ayudar a evitar ambiguedad cuando se importan nmbres similares desde distintos lugares.
+Primero, ambos `extern crate` y `use` permiten renombrar lo que esta siendo importado. Entonces el crate todavía se llama "frases", pero aquí nos referiremos a el como "dichos". Similarmente, el primer `use` trae el modulo `japones::saludos` desde el crate, pero lo hace disponible a través del nombre `saludos_ja` en lugar de simplemente `saludos`. Lo anterior puede ayudar a evitar ambigüedad cuando se importan nombres similares desde distintos lugares.
 
-El segundo `use` posee un asterisco para traer _todos_ los simbolos desde el modulo `dichos::japones::despedidas`. Como podras ver mas tarde podemos referirnos al `adios` Japones sin calificadores de modulo. Este tipo de glob debe ser usando con cautela.
+El segundo `use` posee un asterisco para traer _todos_ los símbolos desde el modulo `dichos::japones::despedidas`. Como podrás ver mas tarde podemos referirnos al `adios` Japones sin calificadores de modulo. Este tipo de glob debe ser usando con cautela.
 
-The second `use` statement uses a star glob to bring in _all_ symbols from the
-`sayings::japanese::farewells` module. As you can see we can later refer to
-the Japanese `goodbye` function with no module qualifiers. This kind of glob
-should be used sparingly.
-
-El tercer `use` requiere un poco mas de explicacion. Esta usando "expansion de llaves" para comprimir tres sentencias `use` en una (este tipo de sintaxis puede ser familiar si has excrito scripts del shell de Linux con anterioridad). La forma descomprimida de esta sentencia seria:
+El tercer `use` requiere un poco mas de explicación. Esta usando "expansion de llaves" para comprimir tres sentencias `use` en una (este tipo de sintaxis puede serte familiar si has escrito scripts del shell de Linux). La forma descomprimida de esta sentencia seria:
 
 ```rust,ignore
 use dichos::ingles;
