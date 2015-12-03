@@ -154,13 +154,7 @@ mod saludos;
 mod despedidas;
 ```
 
-De nuevo, estas declaraciones hacen que Rust busque bien sea por `src/ingles/saludos.rs` and `src/japones/saludos.rs` o `src/ingles/despedidas/mod.rs` and `src/japones/despedidas/mod.rs`. Debido a que los submodulos no poseen sus propios submodulos, hemos optado por usar el enfoque `src/ingles/saludos.rs` and `src/japones/despedidas.rs`
-
-Again, these declarations tell Rust to look for either
-`src/english/greetings.rs` and `src/japanese/greetings.rs` or
-`src/english/farewells/mod.rs` and `src/japanese/farewells/mod.rs`. Because
-these sub-modules don’t have their own sub-modules, we’ve chosen to make them
-`src/english/greetings.rs` and `src/japanese/farewells.rs`. Whew!
+De nuevo, estas declaraciones hacen que Rust busque bien sea por `src/ingles/saludos.rs` y `src/japones/saludos.rs` o `src/ingles/despedidas/mod.rs` and `src/japones/despedidas/mod.rs`. Debido a que los submodulos no poseen sus propios submodulos, hemos optado por usar el enfoque `src/ingles/saludos.rs` and `src/japones/despedidas.rs`. Uff!
 
 Ambos `src/ingles/saludos.rs` y `src/japones/despedidas.rs` estan vacios por el momento. Agreguemos algunas funciones.
 
@@ -311,219 +305,183 @@ Ahora que nuestras funciones son public, podemos hacer uso de ellas. Grandioso! 
 
 # Importando Modulos con `use`
 
-Rust has a `use` keyword, which allows us to import names into our local scope.
-Let’s change our `src/main.rs` to look like this:
+Rust posee una palabra reservada, `use`, que te permite importar nombres en tu ambito locoal. Cambiemos nuestro `src/main.rs` para que luzca de la siguiente manera:
 
 ```rust,ignore
-extern crate phrases;
+extern crate frases;
 
-use phrases::english::greetings;
-use phrases::english::farewells;
+use frases::ingles::saludos;
+use frases::ingles::despedidas;
 
 fn main() {
-    println!("Hello in English: {}", greetings::hello());
-    println!("Goodbye in English: {}", farewells::goodbye());
+    println!("Hola en Ingles: {}", saludos::hola());
+    println!("Adios en Ingles: {}", despedidas::adios());
 }
 ```
 
-The two `use` lines import each module into the local scope, so we can refer to
-the functions by a much shorter name. By convention, when importing functions, it’s
-considered best practice to import the module, rather than the function directly. In
-other words, you _can_ do this:
+Las dos lineas `use` importan cada modulo en el ambito local, de manera tal que podamos referirnos a las funciones con nombres mucho mas cortos. Por convencion, cuando se importan funciones, se considera una buena practica importar el modulo, en lugar de la funcion directamente. En otras palabras, puedes _hacer_ esto:
 
 ```rust,ignore
-extern crate phrases;
+extern crate frases;
 
-use phrases::english::greetings::hello;
-use phrases::english::farewells::goodbye;
+use frases::ingles::saludos::hola;
+use frases::ingles::despedidas::adios;
 
 fn main() {
-    println!("Hello in English: {}", hello());
-    println!("Goodbye in English: {}", goodbye());
+  println!("Hola en Ingles: {}", hello());
+  println!("Adios en Ingles: {}", adios());
 }
 ```
 
-But it is not idiomatic. This is significantly more likely to introduce a
-naming conflict. In our short program, it’s not a big deal, but as it grows, it
-becomes a problem. If we have conflicting names, Rust will give a compilation
-error. For example, if we made the `japanese` functions public, and tried to do
-this:
+Pero no es idomatico. Lo anterior tiene significativas probabilidaes de introducir un conflicto de nombres. En nuestro pequeno programa, no es gran cosa, pero a medida que crece, se va convirtiendo en un problema. Si tensmo nombres conflictivos, Rust generara un error de compilacion. Por ejemplo, de haber hecho publicas las funciones de `japones` y haber intentado:
 
 ```rust,ignore
-extern crate phrases;
+extern crate frases;
 
-use phrases::english::greetings::hello;
-use phrases::japanese::greetings::hello;
+use frases::ingles::saludos::hola;
+use frases::japones::saludos::hola;
 
 fn main() {
-    println!("Hello in English: {}", hello());
-    println!("Hello in Japanese: {}", hello());
+    println!("Hola en Ingles: {}", hello());
+    println!("Hola en Japones: {}", hello());
 }
 ```
 
-Rust will give us a compile-time error:
+Rust propircionaria un error en tiempo de compilacion:
 
 ```text
-   Compiling phrases v0.0.1 (file:///home/you/projects/phrases)
-src/main.rs:4:5: 4:40 error: a value named `hello` has already been imported in this module [E0252]
-src/main.rs:4 use phrases::japanese::greetings::hello;
-                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   Compiling frases v0.0.1 (file:///home/tu/frases)
+src/main.rs:4:5: 4:40 error: a value named `hola` has already been imported in this module [E0252]
+src/main.rs:4 use frases::japones::saludos::hola;
+                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 error: aborting due to previous error
-Could not compile `phrases`.
+Could not compile `frases`.
 ```
 
-If we’re importing multiple names from the same module, we don’t have to type it out
-twice. Instead of this:
+Si estuvieramos importando multiples nombres del mismo modulo, no necesitamos escribirlo dos veces. En lugar de:
 
 ```rust,ignore
-use phrases::english::greetings;
-use phrases::english::farewells;
+use phrases::ingles::saludos;
+use phrases::ingles::despedidas;
 ```
 
-We can use this shortcut:
+Podemos usar esta version mas corta:
 
 ```rust,ignore
-use phrases::english::{greetings, farewells};
+use phrases::ingles::{saludos, despedidas};
 ```
 
-## Re-exporting with `pub use`
+## Re-exportando con `pub use`
 
-You don’t just use `use` to shorten identifiers. You can also use it inside of your crate
-to re-export a function inside another module. This allows you to present an external
-interface that may not directly map to your internal code organization.
+No solo usamos `use` para acortar identificadores. Puedes tambien usarlos dentro de tu crate para re-exportar una funcion dentro de optro modulo. Esto te permite presentar una interfaz extrerna que pueda no mapear de directamente a la organizacion interna de tu codigo.
 
-Let’s look at an example. Modify your `src/main.rs` to read like this:
+Veamos un ejemplo. modifica tu `src/main.rs`  para que se lea asi:
 
 ```rust,ignore
-extern crate phrases;
+extern crate frases;
 
-use phrases::english::{greetings,farewells};
-use phrases::japanese;
+use frases::ingles::{saludos,despedidas};
+use frases::japones;
 
 fn main() {
-    println!("Hello in English: {}", greetings::hello());
-    println!("Goodbye in English: {}", farewells::goodbye());
+    println!("Hola en Ingles: {}", saludos::hola());
+    println!("Adios en Ingles: {}", despedidas::adios());
 
-    println!("Hello in Japanese: {}", japanese::hello());
-    println!("Goodbye in Japanese: {}", japanese::goodbye());
+    println!("Hola en Japones: {}", japones::hola());
+    println!("Adios en Japones: {}", japones::adios());
 }
 ```
 
-Then, modify your `src/lib.rs` to make the `japanese` mod public:
+Entonces, modifica tu `src/lib.rs` para hacer el modulo `japones` publico:
 
 ```rust,ignore
-pub mod english;
-pub mod japanese;
+pub mod ingles;
+pub mod japones;
 ```
 
-Next, make the two functions public, first in `src/japanese/greetings.rs`:
+A continuacion, haz las dos funciones publicas, primero en `src/japones/saludos.rs`:
 
 ```rust,ignore
-pub fn hello() -> String {
+pub fn hola() -> String {
     "こんにちは".to_string()
 }
 ```
 
-And then in `src/japanese/farewells.rs`:
+Y luego en `src/japones/despedidas.rs`:
 
 ```rust,ignore
-pub fn goodbye() -> String {
+pub fn adios() -> String {
     "さようなら".to_string()
 }
 ```
 
-Finally, modify your `src/japanese/mod.rs` to read like this:
+Finalmente, modifica tu `src/japanese/mod.rs` para que se vea asi:
 
 ```rust,ignore
-pub use self::greetings::hello;
-pub use self::farewells::goodbye;
+pub use self::saludos::hola;
+pub use self::despedidas::adios;
 
-mod greetings;
-mod farewells;
+mod saludos;
+mod despedidas;
 ```
 
-The `pub use` declaration brings the function into scope at this part of our
-module hierarchy. Because we’ve `pub use`d this inside of our `japanese`
-module, we now have a `phrases::japanese::hello()` function and a
-`phrases::japanese::goodbye()` function, even though the code for them lives in
-`phrases::japanese::greetings::hello()` and
-`phrases::japanese::farewells::goodbye()`. Our internal organization doesn’t
-define our external interface.
+La declaracion `pub use` trae la funcion a el ambito en esta parte de nuestra jerarquia de modulos. Debido que hemos hecho `pub use` dentro de nuestro modulo `japones`, ahora tenemos una funcion `frases::japones::hola()` y una funcion `frases::japones::adios()`, aun cuando el codigo para ellas vive en `frases::japones::saludos::hola()` y frases::japones::despedidas::adios()`.  Nuestra organizacion interna no define nuestra interfaz extrerna.
 
-Here we have a `pub use` for each function we want to bring into the
-`japanese` scope. We could alternatively use the wildcard syntax to include
-everything from `greetings` into the current scope: `pub use self::greetings::*`.
+Aca tenemos un `pub use` para cada funcion que deseamos traer en el ambito de `japones`. Alternativamente pudimos haber usado la sintaxis alternativa de comodin para incluir todo desde `saludos` en el ambito actual: `pub use self::saludos::*`
 
-What about the `self`? Well, by default, `use` declarations are absolute paths,
-starting from your crate root. `self` makes that path relative to your current
-place in the hierarchy instead. There’s one more special form of `use`: you can
-`use super::` to reach one level up the tree from your current location. Some
-people like to think of `self` as `.` and `super` as `..`, from many shells’
-display for the current directory and the parent directory.
+Que hay acerca de el `self`? Bueno, por defecto, las declaraciones `use` son rutas absolutas, partendo desde la raiz de tu crate. `self`, a diferencia, hace esa ruta relativa a tu lugar actual dentro de la jerarquia. Hay una ultima frma especial de usar `use`: puedes usar `use super::` para alcanzar un nivel superior en la jeraquia desde tu posicion actual. Algunas personas gustan ver a `self` como `.` y `super` como `..` como los usados por los shells para mostrar los directorios actual y padre respectivamente.
 
-Outside of `use`, paths are relative: `foo::bar()` refers to a function inside
-of `foo` relative to where we are. If that’s prefixed with `::`, as in
-`::foo::bar()`, it refers to a different `foo`, an absolute path from your
-crate root.
+Fuera de `use`, las rutas son relativas: `foo::bar()` se refiere a una funcion dentro de `foo` en relacion a en donde estamos. Si posee un prefijo `::`, como en `::foo::bar()`, entonces se refiere a un `foo` diferente, una ruta absoluta desdela raiz de tu crate.
 
-This will build and run:
+El ultimo codigo que escribimos, compilara y se ejecutara sin problemas:
 
 ```bash
 $ cargo run
-   Compiling phrases v0.0.1 (file:///home/you/projects/phrases)
-     Running `target/debug/phrases`
-Hello in English: Hello!
-Goodbye in English: Goodbye.
-Hello in Japanese: こんにちは
-Goodbye in Japanese: さようなら
+   Compiling frases v0.0.1 (file:///home/tu/proyectos/frases)
+     Running `target/debug/frases`
+Hola in Ingles: Hello!
+Adios in Ingles: Goodbye.
+Hola in Japones: こんにちは
+Adios in Japones: さようなら
 ```
 
-## Complex imports
+## Importes complejos
 
-Rust offers several advanced options that can add compactness and
-convenience to your `extern crate` and `use` statements. Here is an example:
+Rust ofrece un numero de opciones avanzadas que pueden hacer tus sentencias `extern crate` mas compactas y convenientes. He aqui un ejemplo:
 
 ```rust,ignore
-extern crate phrases as sayings;
+extern crate frases as dichos;
 
-use sayings::japanese::greetings as ja_greetings;
-use sayings::japanese::farewells::*;
-use sayings::english::{self, greetings as en_greetings, farewells as en_farewells};
+use dichos::japones::saludos as saludos_ja;
+use dichos::japones::despedidas::*;
+use dichos::ingles::{self, saludos as saludos_en, despedidas as despedidas_en};
 
 fn main() {
-    println!("Hello in English; {}", en_greetings::hello());
-    println!("And in Japanese: {}", ja_greetings::hello());
-    println!("Goodbye in English: {}", english::farewells::goodbye());
-    println!("Again: {}", en_farewells::goodbye());
-    println!("And in Japanese: {}", goodbye());
+    println!("Hola en Ingles; {}", saludos_en::hola());
+    println!("Y en Japones: {}", saludos_ja::hola());
+    println!("Goodbye in Ingles: {}", ingles::despedidas::adios());
+    println!("Otra vez: {}", despedidas_en::adios());
+    println!("Y en Japones: {}", adios());
 }
 ```
 
-What's going on here?
+Que esta pasando aca?
 
-First, both `extern crate` and `use` allow renaming the thing that is being
-imported. So the crate is still called "phrases", but here we will refer
-to it as "sayings". Similarly, the first `use` statement pulls in the
-`japanese::greetings` module from the crate, but makes it available as
-`ja_greetings` as opposed to simply `greetings`. This can help to avoid
-ambiguity when importing similarly-named items from different places.
+Primero, ambos `extern crate` y `use` permiten renombrar lo que esta siendo importado. Entonces el crate todavia se llama "frases", pero aqui nos referiremos a el como "dichos". Similarmente, el primer `use` trae el modulo `japones::saludos` desde el crate, pero lo hace disponible a traves del nombre `saludos_ja` en lugar de simplemente `saludos`. Lo anterior puede ayudar a evitar ambiguedad cuando se importan nmbres similares desde distintos lugares.
+
+El segundo `use` posee un asterisco para traer _todos_ los simbolos desde el modulo `dichos::japones::despedidas`. Como podras ver mas tarde podemos referirnos al `adios` Japones sin calificadores de modulo. Este tipo de glob debe ser usando con cautela.
 
 The second `use` statement uses a star glob to bring in _all_ symbols from the
 `sayings::japanese::farewells` module. As you can see we can later refer to
 the Japanese `goodbye` function with no module qualifiers. This kind of glob
 should be used sparingly.
 
-The third `use` statement bears more explanation. It's using "brace expansion"
-globbing to compress three `use` statements into one (this sort of syntax
-may be familiar if you've written Linux shell scripts before). The
-uncompressed form of this statement would be:
+El tercer `use` requiere un poco mas de explicacion. Esta usando "expansion de llaves" para comprimir tres sentencias `use` en una (este tipo de sintaxis puede ser familiar si has excrito scripts del shell de Linux con anterioridad). La forma descomprimida de esta sentencia seria:
 
 ```rust,ignore
-use sayings::english;
-use sayings::english::greetings as en_greetings;
-use sayings::english::farewells as en_farewells;
+use dichos::ingles;
+use dichos::ingles::saludos as saludos_en;
+use dichos::ingles::despedidas as despedidas_en;
 ```
 
-As you can see, the curly brackets compress `use` statements for several items
-under the same path, and in this context `self` just refers back to that path.
-Note: The curly brackets cannot be nested or mixed with star globbing.
+Como puedes ver, las llaves comprimen las sentencias `use` para varios items bajo la misma ruta, y en este contexto `self` hace referencia a dicha ruta. Nota: Las llaves no pueden ser anidadas o mezcladas con globbing de asteriscos.
