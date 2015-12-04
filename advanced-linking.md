@@ -1,10 +1,10 @@
 % Enlace Avanzado
 
-Los casos comunes de enlace con Rust han sido cubiertos anteriormente en este libro, pero soportar el rango de posibilidades hechas disponibles por otros lenguajes es importante para Rust para lograr una buena interaccion con bibliotecas nativas.
+Los casos comunes de enlace con Rust han sido cubiertos anteriormente en este libro, pero soportar el rango de posibilidades disponibles en lenguajes es importante para Rust para lograr una buena interacción con bibliotecas nativas.
 
 # Argumentos de enlace
 
-Hay otra forma de decirle a `rustc` como personalizar el enlazado, y es via el atributo `link_args`. Este atributo es aplicado a los bloques `extern` y especifica flags planos que necesitan ser pasados a el enlazador cuando se produce un artefacto. Un ejemplo podria ser:
+Hay otra forma de decirle a `rustc` como personalizar el enlazado, y es via el atributo `link_args`. Este atributo es aplicado a los bloques `extern` y especifica flags planos que necesitan ser pasados a el enlazador cuando se produce un artefacto. Un ejemplo podría ser:
 
 ``` no_run
 #![feature(link_args)]
@@ -14,19 +14,19 @@ extern {}
 # fn main() {}
 ```
 
-Nota que actualmente esta facilidad esta escondida detras la puerta `feature(link_args)` debido a que no es una forma sancionada de efectuar enlazado. Actualmente `rutsc` envuelve a el enlazador del sistema (`gcc` en la mayoria de los sitemas, `link.exe` en MSVC), es por ello que tiene sentido proveer argumentos de linea de comando extra, pero no siempre sera este el caso. En el futuro `rustc` pudiera usar LLVM directamente para enlazar con bibliotecas nativas, y en donde `link_args` no tendria sentido. Puedes lograr el mismo efecto del atributo `link_args` con el argumento `-C link-args` de `rustc`.
+Nota que actualmente esta facilidad esta escondida detrás la puerta `feature(link_args)` debido a que no es una forma sancionada de efectuar enlazado. Actualmente `rutsc` envuelve a el enlazador del sistema (`gcc` en la mayoría de los sistemas, `link.exe` en MSVC), es por ello que tiene sentido proveer argumentos de linea de comando extra, pero no siempre sera este el caso. En el futuro `rustc` pudiera usar LLVM directamente para enlazar con bibliotecas nativas, escenario en donde `link_args` no tendría sentido. Puedes lograr el mismo efecto del atributo `link_args` con el argumento `-C link-args` de `rustc`.
 
-Es latamente recomendado *no* usar este atributo, y en su lugar usar el mas formal `#[link(...)]` en bloques `extern`.
+Es altamente recomendado *no* usar este atributo, y en su lugar usar el mas formal `#[link(...)]` en los bloques `extern`.
 
 # Enlazado estatico
 
-El enlace estatico se refiere a el proceso de crear una salida que contenga todas las bibliotecas requeridas y por lo tanto no requiera que las bibliotecas esten presentes en cada sistema que desees usar tu proyecto compilado. Dependencias puras Rust son enlazadas estaticamente por defecto de manera que puedas usar las bibliotecas y ejecutables creados sin instalar Rust en todos lados. En contraste, las bibliotecas nativas (e.j  `libc` y `libm`) son usualmente enlazadas de manera dinamica, pero es posible cambiar esto y enlazarlas tambien de manera estatica.
+El enlace estático se refiere a el proceso de crear una salida que contenga todas las bibliotecas requeridas y por lo tanto no requiera que las bibliotecas estén instaladas en cada sistema en el que desees usar tu proyecto compilado. La dependencias puras Rust son enlazadas estáticamente por defecto de manera que puedas usar las bibliotecas y ejecutables creados sin instalar Rust en todos lados. En contraste, las bibliotecas nativas (e.j  `libc` y `libm`) son usualmente enlazadas de manera dinámica, pero esto se  puede cambiar y enlazarlas también de manera estática.
 
-El enlace es un topico muy dependiente de plataforma, y el enlazado estatico puede no ser posible en todas las plataformas. Esta seccion asume alguna familiaridad con el enlace en tu plataforma.
+El enlace es un tópico muy dependiente de plataforma, y el enlace estático puede no ser posible en todas las plataformas. Esta sección asume cierta familiaridad con el enlace en tu plataforma.
 
 ## Linux
 
-Por defecto, todos los programas en Linux se enlazaran con la biblioeca `libc` del sistema en conjunto con otro grupo de bibliotecas. Veamos un ejemplo en una maquina linux de 64 bits con GCC y `glibc` (por lejos la `libc` mas comun en Linux):
+Por defecto, todos los programas en Linux se enlazaran con la biblioteca `libc` del sistema en conjunto con otro grupo de bibliotecas. Veamos un ejemplo en una maquina linux de 64 bits con GCC y `glibc` (por lejos la `libc` mas común en Linux):
 
 ``` text
 $ cat example.rs
@@ -43,9 +43,9 @@ $ ldd example
         libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fa817b93000)
 ```
 
-Enlace dinamico en linux puede ser indeseable si deseas usar las facilidades de la nueva biblioteca en sistemas viejos o sistemas destino que no poseen las dependencias requeridas para ejecutar el programa.
+El enlace dinámico en linux puede ser indeseable si deseas usar las facilidades de la nueva biblioteca en sistemas viejos o sistemas destino que no poseen las dependencias requeridas para ejecutar el programa.
 
-El enlace estatico es soportado a traves de una `libc` alternativa, [`musl`](http://www.musl-libc.org). Puedes compilar tu version de Rust con `musl` habilitado e instalarlo en un directorio personalizado con las siguientes instrucciones:
+El enlace estático es soportado a través de una `libc` alternativa, [`musl`](http://www.musl-libc.org). Puedes compilar tu version de Rust con `musl` habilitado e instalarlo en un directorio personalizado con las siguientes instrucciones:
 
 ```text
 $ mkdir musldist
@@ -88,14 +88,14 @@ $ du -h musldist/bin/rustc
 12K     musldist/bin/rustc
 ```
 
-Ahora posees un Rust con `musl` habilitado! Y debido a que lo hemos instalado en un prefijo personalizado necesitamos asegurarnos de que nuestro sistema poueda encontarr los ejecutables y bibliotecas apropiadas cuando tratamos de ejecutarlo:
+Ahora posees un Rust con `musl` habilitado! Y debido a que lo hemos instalado en un prefijo personalizado necesitamos asegurarnos de que nuestro sistema pueda encontrar los ejecutables y bibliotecas apropiadas cuando tratemos de ejecutarlo:
 
 ```text
 $ export PATH=$PREFIX/bin:$PATH
 $ export LD_LIBRARY_PATH=$PREFIX/lib:$LD_LIBRARY_PATH
 ```
 
-Probemoslo!
+Probémoslo!
 
 ```text
 $ echo 'fn main() { println!("Hola!"); panic!("falla"); }' > example.rs
@@ -103,10 +103,10 @@ $ rustc --target=x86_64-unknown-linux-musl example.rs
 $ ldd example
         not a dynamic executable
 $ ./example
-hi!
+Hola!
 thread '<main>' panicked at 'failed', example.rs:1
 ```
 
-Exito! Este binario puede ser copiado a casi cualquier maquina Linux con la misma arquitectura y ser ejecutado sin ningun problema.
+Exito! Este binario puede ser copiado a casi cualquier maquina Linux con la misma arquitectura y ser ejecutado sin ningún problema.
 
-`cargo build` tambien permite la opcion `--target` por medio de la cual deberias puedes construir tus crates normalmente. Sin embargo,  puedes necesitar recompilar tus bibliotecas nativas con `musl` antes de poder enlazar con ellas.
+`cargo build` también permite la opción `--target` por medio de la cual puedes construir tus crates normalmente. Sin embargo, podrías necesitar recompilar tus bibliotecas nativas con `musl` antes de poder enlazar con ellas.
