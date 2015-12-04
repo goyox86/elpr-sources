@@ -1,10 +1,9 @@
 % Intrínsecos
 
-> **Nota**: los intrinsecos por siempre tendran una interfaz inestable, se recomienda
-> usar las interfaces estables de libcore en lugar de intrinsecos directamente.
+> **Nota**: los intrínsecos por siempre tendrán una interfaz inestable, se recomienda
+> usar las interfaces estables de libcore en lugar de intrínsecos directamente.
 
-
-Estas son importadas como si fueren funciones FFI, con el ABI especial `rust-intrinsic`. Por ejemplo, si uno estuviese en un contexto libre, pero desease porder hacer `transmute` entre tipos, y llevar a cabo aritmetica de apuntadores eficiente, uno importria dichas funciones via una declaracion como:
+Estas son importadas como si fuesen funciones FFI, con el ABI especial `rust-intrinsic`. Por ejemplo, si uno estuviese en un contexto libre, pero desease poder hacer `transmute` entre tipos, y llevar a cabo aritmética de apuntadores eficiente, uno importaría dichas funciones via una declaración como:
 
 ```rust
 #![feature(intrinsics)]
@@ -17,4 +16,4 @@ extern "rust-intrinsic" {
 }
 ```
 
-Al igual que cualquier otra funcion FFI, estas son siempre `unsafe`.
+Al igual que cualquier otra función FFI, estas son siempre `unsafe` de llamar.
