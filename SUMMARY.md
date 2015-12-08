@@ -58,7 +58,7 @@
     * [`unsafe`](unsafe.md)
 * [Rust Nocturno](nightly-rust.md)
     * [Plugins del Compilador](compiler-plugins.md)
-    * [Ensamblador Inline](inline-assembly.md)
+    * [Ensamblador en Linea](inline-assembly.md)
     * [No stdlib](no-stdlib.md)
     * [Intrínsecos](intrinsics.md)
     * [Items de Lenguaje](lang-items.md)
