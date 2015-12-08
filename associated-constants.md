@@ -1,6 +1,6 @@
 % Constantes Asociadas
 
-Con el feature `associated_consts`, puedes definir constantes como estas:
+Con el feature `associated_consts`, puedes definir constantes como:
 
 ```rust
 #![feature(associated_consts)]
@@ -18,7 +18,7 @@ fn main() {
 }
 ```
 
-Cualquier implementador de `Foo` tendra que definir `ID`. Sin la definicion:
+Cualquier implementador de `Foo` tendrá que definir `ID`. Sin la definición:
 
 ```rust,ignore
 #![feature(associated_consts)]
@@ -39,7 +39,7 @@ error: not all trait items implemented, missing: `ID` [E0046]
      }
 ```
 
-Un valor por defecto puede tambien ser implementado:
+Un valor por defecto puede también ser implementado:
 
 ```rust
 #![feature(associated_consts)]
@@ -61,9 +61,9 @@ fn main() {
 }
 ```
 
-Como puedes ver, al implementar `Foo`, puedes dejarlo sin implementacion, como con `i32`. Entonces este usara el valor por defecto. Pero, tambien y al igual que como en `i64`, podemos agregar nuestra propia definicion.
+Como puedes ver, al implementar `Foo`, puedes dejarlo sin implementación, como en el caso de `i32`. Entonces este usara el valor por defecto. Pero, también y al igual que como en `i64`, podemos agregar nuestra propia definición.
 
-Las constantes asociadas no necesitan estar asociadas con un trait. Un bloque `impl` para una `struct` o un `enum` son tambien validos:
+Las constantes asociadas no necesitan solo funcionan con traits. Un bloque `impl` para una `struct` o un `enum` es también valido:
 
 ```rust
 #![feature(associated_consts)]
