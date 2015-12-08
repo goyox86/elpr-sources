@@ -63,7 +63,6 @@
     * [Intrínsecos](intrinsics.md)
     * [Items de Lenguaje](lang-items.md)
     * [Enlace Avanzado](advanced-linking.md)
-    * [Argumentos de Enlace](link-args.md)
     * [Pruebas de Rendimiento](benchmark-tests.md)
     * [Sintaxis Box y Patones](box-syntax-and-patterns.md)
     * [Patrones Slice](slice-patterns.md)
