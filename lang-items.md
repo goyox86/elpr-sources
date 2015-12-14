@@ -1,13 +1,13 @@
 % Items de Lenguaje
 
 > **Nota**: los items de lenguaje son normalmente proporcionados por crates en
-> la distribucion Rust, dichos items en si mismos poseen una interfaz inestable.
-Es recomendable usar crates distribuidos oficialmente en lugar de definir tus
-> propios items de lenguaje.
+> la distribución Rust, dichos items en si mismos poseen una interfaz inestable.
+> Es recomendable usar crates distribuidos oficialmente en lugar de definir tus
+> propios.
 
-El compilador `rustc` posee ciertas operaciones plugables, esto es, funcionalidad que no esta escrita de manera definitiva en el lenguaje, al contrario, esta implementada en bibliotecas, con un marcador especial para informar al compilador acerca de su existencia. El marcadoir es el atributo  `#[lang = "..."]` y hay varios valoers diferentes de `...`, e.j. diferentes 'items de lenguaje'.
+El compilador `rustc` posee ciertas operaciones plugables, esto es, funcionalidad que no esta escrita de manera definitiva en el lenguaje, al contrario, esta implementada en bibliotecas, con un marcador especial para informar al compilador acerca de su existencia. Dicho marcador es el atributo  `#[lang = "..."]` y hay varios valores diferentes de `...`, e.j. diferentes 'items de lenguaje'.
 
-Por ejemplo, los apuntadores `Box` requieren dos items de lenguaje, uno para la asignacion de memoria y otro para la liberacion de esta. Un programa libre (sin la biblioteca estandar) que hace uso de la sintaxis `Box` para asignacion dinamica de memoria a traves de `malloc` y `free` luce asi:
+Por ejemplo, los apuntadores `Box` requieren dos items de lenguaje, uno para la asignación de memoria y otro para la liberación. Un programa libre (sin la biblioteca estándar) que hace uso de la sintaxis `Box` para asignación dinámica de memoria a través de `malloc` y `free` luce así:
 
 ```rust
 #![feature(lang_items, box_syntax, start, libc)]
@@ -24,7 +24,7 @@ pub struct Box<T>(*mut T);
 
 #[lang = "exchange_malloc"]
 unsafe fn asignar(tamano: usize, _alineacion: usize) -> *mut u8 {
-    let p = libc::malloc(size as libc::size_t) as *mut u8;
+    let p = libc::malloc(tamano as libc::size_t) as *mut u8;
 
     // malloc fallo
     if p as usize == 0 {
@@ -56,9 +56,9 @@ Nota el uso de `abort`: se asume que el item de lenguaje `exchange_malloc` retor
 
 Otras facilidades proporcionadas por items de lenguaje son:
 
-- operadores sobrecargables via traits: los traits correspondientes a los operadores `==`, `<`,    deferencia (`*`) y `+` (etc.) estan todos marcados con items de lenguaje; esos cuatro en especifico son `eq`, `ord`, `deref` y `add` respectivamente.
+- operadores sobrecargables via traits: los traits correspondientes a los operadores `==`, `<`, deferencia (`*`) y `+` (etc.) están todos marcados con items de lenguaje; esos cuatro en especifico son `eq`, `ord`, `deref` y `add` respectivamente.
 - el unwinding de la pila y fallas generales; los items de lenguaje `eh_personality`, `fail` y `fail_bounds_checks`.
-- los traits en `std::marker` usados para indicar tipos de varias classes;  lang items `send`, `sync` y `copy`.
+- los traits en `std::marker` usados para indicar tipos de varias classes; items de lenguaje `send`, `sync` y `copy`.
 - los tipos marcador e indicadores de varianza encontrados en `std::marker`; items de lenguaje `covariant_type`, `contravariant_lifetime`, etc.
 
-Los items de lenguaje son cargados peresozamente por el compilador; e.j. si alguien no necesita `Box` entonces no hay necesidad de definir funciones para `exchange_malloc` y `exchange_free`. `rustc` emitira un error cunaod un item de lenguaje sea necesario pero no este presente en el crate actual o alguino en el cual este dependa.
+Los items de lenguaje son cargados perezosamente por el compilador; e.j. si alguien no necesita `Box` entonces no hay necesidad de definir funciones para `exchange_malloc` y `exchange_free`. `rustc` emitirá un error cuando un item de lenguaje sea necesario pero no este presente en el crate actual o alguno en el cual este dependa.
