@@ -1,6 +1,6 @@
 %  Sintaxis Box y Patrones
 
-Actualmente la unica forma estable de crear un `Box` es a traves del metodo `Box::new`. Tampoco es posible destructurar un `Box` en un patron match. La palabra reservada inestable `box` puede ser usada para ambos, crear y destructurar un `Box`. Un ejemplo de su uso seria:
+Actualmente la única forma estable de crear un `Box` es a través del método `Box::new`. Tampoco es posible destructurar un `Box` en un patron match. La palabra reservada inestable `box` puede ser usada para ambos, crear y destructurar un `Box`. Un ejemplo de su uso seria:
 
 ```rust
 #![feature(box_syntax, box_patterns)]
@@ -22,11 +22,11 @@ fn main() {
 }
 ```
 
-Nota que estas facilidades estan escondidas actualmente detras de los feture gates `box_syntax` (creacion de boxes) y `box_patterns` (destructuracion y coincidencia de patrones) debido a que la sintaxis podria cambiar en el futuro.
+Nota que estas facilidades están actualmente escondidas detrás de los feature gates `box_syntax` (creación de boxes) y `box_patterns` (destructuracion y coincidencia de patrones) debido a que la sintaxis podría cambiar en el futuro.
 
 # Retornando apuntadores
 
-En muchos lenguajes con apuntadores, podrias retornar un apuntadro desde una funcion con el objetivo de evitar la copia de una estrcutura de datos grande. Por ejemplo:
+En muchos lenguajes con apuntadores, podrías retornar un apuntador desde una función con el objetivo de evitar la copia de una estructura de datos grande. Por ejemplo:
 
 ```rust
 struct GranStruct {
@@ -80,8 +80,8 @@ fn main() {
 }
 ```
 
-Esta forma te dota de felxibilidad sin sacrificar desempeno.
+Esta forma te dota de flexibilidad sin sacrificar desempeno.
 
-Podrias pensar que lo anterior resulta en un desempeno terrible: retornar un valor e inmediatamente ponerlo en un box?! No es este patron lo peor de ambos mundos? Rust es mucho mas inteligente que eso. No hay copiado en este codigo. `main` asigna suficiente espacio para el `box`, pasa un apuntador a esa memoria en `foo` como `x`, y luego `foo` escribe el valor de manera directa dentro del `Box<T>`.
+Podrías pensar que lo anterior resulta en un desempeño terrible: retornar un valor e inmediatamente ponerlo en un box?! No es este patron lo peor de ambos mundos? Rust es mucho mas inteligente que eso. En efecto, no hay copiado en este código. `main` asigna suficiente espacio para el `box`, pasa un apuntador a esa memoria en `foo` como `x`, y luego `foo` escribe el valor de manera directa dentro del `Box<T>`.
 
-Esto es lo suficientemente importante que se merece una repeticion: los apuntadores no son para optimizar valores de retorno en tu codigo. Permite a el llamador decidir como este desea usar tu salida.
+Esto es lo suficientemente importante que se merece una repetición: los apuntadores no son para optimizar valores de retorno en tu código. Permite a el llamador decidir como usar tu salida.
