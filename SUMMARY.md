@@ -64,7 +64,7 @@
     * [Items de Lenguaje](lang-items.md)
     * [Enlace Avanzado](advanced-linking.md)
     * [Pruebas de Rendimiento](benchmark-tests.md)
-    * [Sintaxis Box y Patones](box-syntax-and-patterns.md)
+    * [Sintaxis Box y Patrones](box-syntax-and-patterns.md)
     * [Patrones Slice](slice-patterns.md)
     * [Constantes Asociadas](associated-constants.md)
 * [Glosario](glossary.md)
