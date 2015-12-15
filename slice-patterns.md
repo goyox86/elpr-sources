@@ -15,7 +15,7 @@ fn main() {
 }
 ```
 
-El feature gate `advanced_slice_patterns` te permite usar `..` para indicar cualquier numero de elementos dentro de una coincidencia de patrones aplicada a un slice. Este comodin puede ser solo usado una vez para un determniado arreglo. De haber un identificador antes de el `..`, el resultado de el slice sera asociado a ese nombre. Por ejemplo:
+El feature gate `advanced_slice_patterns` te permite usar `..` para indicar cualquier numero de elementos dentro de una coincidencia de patrones aplicada a un slice. Este comodín puede ser solo usado una vez para un determinado arreglo. De haber un identificador antes de el `..`, el resultado de el slice sera asociado a ese nombre. Por ejemplo:
 
 ```rust
 #![feature(advanced_slice_patterns, slice_patterns)]
