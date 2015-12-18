@@ -1,20 +1,20 @@
 % Asignadores de Memoria Personalizados
 
-La asignacion de memoria no es siempre la cosa mas facil de hacer, y si bien Rust generalmente lo hace por defecto en algunas oportunidades se hace necesario personalizar como ocurre la asignacion de memoria. El compilador y la biblioteca estandar actualmente permite cambier el asginador global de memoria por defecto en uso en timepo de compilacion. El diseno esta actualmente delineado en el [RFC 1183][rfc] pero esta seccion te dara un tour acerca de como poner tu asignador de memoria personalizado en funcionamiento.
+La asignación de memoria no es siempre la cosa mas fácil de hacer, y si bien Rust generalmente lo hace por defecto en algunas oportunidades se hace necesario personalizar como ocurre la asignación de memoria. El compilador y la biblioteca estándar actualmente permiten cambiar el asignador global de memoria por defecto a usar en tiempo de compilación. El diseño esta actualmente delineado en el [RFC 1183][rfc] pero esta sección te dará un tour acerca de como poner tu asignador de memoria personalizado en funcionamiento.
 
 [rfc]: https://github.com/rust-lang/rfcs/blob/master/text/1183-swap-out-jemalloc.md
 
 # Asignador por defecto
 
-El compilador actualmente viene con dos asignadores de memoria por defecto: `alloc_system` y `alloc_jemalloc` (algunos sistemas, sin embargo, no soportan jemalloc). Dichos asignadores son crates regulares Rust y contienen la implementacion para la asignacion y liberacion de memoria. La biblioteca estamdar no es compilada asumiendo ningun asignador en particular, y el compiladroe decidira cual asignador esta en uso en timpo de compilacion dependiendo del tipo de artefacto de salida que este siendo producido.
+El compilador actualmente viene con dos asignadores de memoria por defecto: `alloc_system` y `alloc_jemalloc` (algunos sistemas, sin embargo, no soportan jemalloc). Dichos asignadores son crates regulares Rust y contienen la implementación para la asignación y liberación de memoria. La biblioteca estándar no es compilada asumiendo ningún asignador en particular, y el compilador decidirá cual asignador esta en uso en tiempo de compilación dependiendo del tipo de artefacto de salida que este siendo producido.
 
-Los ejecutables generados por el compilador usaran `alloc_jemalloc` por defecto (donde este disponible). En esta situacion el compilador "controla el mundo" en el sentido que posee poder acerca del enlace final. Esto principalmente significa que la desicion de cual asignador es usado puede ser delegada al compilador.
+Los ejecutables generados por el compilador usaran `alloc_jemalloc` por defecto (donde este disponible). En esta situación el compilador "controla el mundo" en el sentido que posee poder acerca del enlace final. Esto principalmente significa que la decisión de cual asignador es usado puede ser delegada al compilador.
 
-Las bibliotecas estaticas y dinamicas, sin embargo, haran uso de el asignador `alloc_system` por defecto. En esta situacion Rust es tipicamente un 'invitado' dentro de otra aplicacion u otro mundo en el cual no puede de manera autoritaria decidir cual asignador de memoria esta en uso. Como resultado recurre a las APIs estandar (e.j. `malloc` y `free`) para adquirir y liberar memoria.
+Las bibliotecas estáticas y dinámicas, sin embargo, harán uso de el asignador `alloc_system` por defecto. En esta situación Rust es típicamente un 'invitado' dentro de otra aplicación u otro mundo en el cual no puede de manera autoritaria decidir cual asignador de memoria usar. Como resultado recurre a las APIs estándar (e.j. `malloc` y `free`) para adquirir y liberar memoria.
 
 # Cambiando Asignadores
 
-Si bien las elecciones del compilador pueden funcionar la mayoria del tiempo, algunas veces es necesario personalizar ciertos aspectos. Sobreescribir la desicion acerca de cual asignador se debe usar puede hacerse simplemente mendiante el enlazado a el asignador deseado:
+Si bien las elecciones del compilador pueden funcionar la mayoría del tiempo, algunas veces es necesario personalizar ciertos aspectos. Sobreescribir la decisión acerca de cual asignador se debe usar puede hacerse simplemente enlazando con el asignador deseado:
 
 ```rust,no_run
 #![feature(alloc_system)]
@@ -27,7 +27,7 @@ fn main() {
 }
 ```
 
-En este ejemplo el ejecutable generado no enlazara con jemalloc por defecto y en su lugar usara el asignador del sistema. De manera similar, para generar una biblioteca dinamica que se jemalloc por defecto uno prodira escribir:
+En este ejemplo el ejecutable generado no enlazara con jemalloc por defecto y en su lugar usara el asignador del sistema. De manera similar, para generar una biblioteca dinámica que use jemalloc por defecto uno podría escribir:
 
 ```rust,ignore
 #![feature(alloc_jemalloc)]
@@ -44,7 +44,7 @@ pub fn foo() {
 
 # Escribiendo un asignador personalizado
 
-Algunas veces las opciones de jemalloc vs el asignador del sistema no son suficientes y un asignador completamente se hace necesario. En este caso escribiras tu propio crate implementando el API de asignacion de memoria. (e.j lo mismo que `alloc_system` o `alloc_jemalloc`). Como ejemplo, echemos un vistazo a una version simplificada y  anotada de `alloc_system`
+Algunas veces las opciones de jemalloc vs el asignador del sistema no son suficientes y un asignador completamente nuevo se hace necesario. En este caso escribirías tu propio crate implementando el API de asignación de memoria. (e.j lo mismo que `alloc_system` o `alloc_jemalloc`). Como ejemplo, echemos un vistazo a una version simplificada y anotada de `alloc_system`
 
 ```rust,no_run
 # // necesario solo para rustdoc --test
@@ -57,32 +57,32 @@ Algunas veces las opciones de jemalloc vs el asignador del sistema no son sufici
 #![allocator]
 
 // Los asignadores de memoria no tienen permitido depender de la biblioteca
-// estandar que a su vez requiere un asignador con la finalidad de evitar
-// dependencias ciclicas. Este crate, sin embergo, puede hacer uso de todo
+// estándar que a su vez requiere un asignador con la finalidad de evitar
+// dependencias cíclicas. Este crate, sin embargo, puede hacer uso de todo
 // en libcore.
 #![no_std]
 
-// Demosle un nombre a nuestro asignador personalizado
+// Démosle un nombre a nuestro asignador personalizado
 #![crate_name = "my_allocator"]
 #![crate_type = "rlib"]
 
-// Nuestro asignador de sistema hara uso de el crate libc que vive en el arbol
+// Nuestro asignador de sistema hará uso de el crate libc que vive en el árbol
 // de Rust. Nota que actualmente el crate libc externo (crates.io) no puede ser
-// usado debido a que este enlaza con la biblioteca estandar (e.j. `#![no_std]`
-// no esta estable todavia). Es por ello que reuiqre especificamente la version
-// en el arbol.
+// usado debido a que este enlaza con la biblioteca estándar (e.j. `#![no_std]`
+// no esta estable todavía). Es por ello que requiere específicamente la 
+// version en el arbol.
 #![feature(libc)]
 extern crate libc;
 
-// A continuacion se listan las cinco funciones de asignacion requeridas
+// A continuación se listan las cinco funciones de asignación requeridas
 // actualmente por los asignadores de memoria. Los tipos en sus firmas y
-// nombres de simbolo actualmente no son chequeados por el compilador ,
+// nombres de símbolo actualmente no son chequeados por el compilador,
 // pero esta es una extension futura y son requeridas para coincidir con
-// lo que sigue a continucaion.
+// lo que sigue a continuación.
 //
-// Nota que las funciones `malloc` y `realloc` estandar no proveen de una
-// via para comunicar la alineacion y es por ello que esta implementacion
-// necesitaria ser mejorada en loq ue respacta a la alineacion.
+// Nota que las funciones `malloc` y `realloc` estándar no proveen una
+// via para comunicar la alineación y es por ello que esta implementación
+// necesitaría ser mejorada en lo que respecta a la alineación.
 
 #[no_mangle]
 pub extern fn __rust_allocate(size: usize, _align: usize) -> *mut u8 {
@@ -135,8 +135,8 @@ fn main() {
 
 # Limitaciones de los asignadores personalizados
 
-Hay unas pocas restricciones cuando se trabaja con asignadores de memoria personalizados que pueden causar errores de compilacion:
+Hay algunas restricciones cuando se trabaja con asignadores de memoria personalizados que pueden causar errores de compilación:
 
-* Cualquier artefacto puede ser enlazado con un unico asignador . Los ejecutables, dylibs y staticlibs deben ser enlazados con exactamente un asignador, de no haber sido seleccionado uno de maner explicita el compilador seleccionara uno. Por otro lado rlibs no necesitan enlazar con un asignador (pero igual pueden hacerlo).
+* Cualquier artefacto puede ser enlazado con un máximo de un asignador. Los ejecutables, dylibs y staticlibs deben ser enlazados con exactamente un asignador, de no haber sido seleccionado uno de manera explicita el compilador seleccionara uno. Por otro lado rlibs no necesitan enlazar con un asignador (pero igual pueden hacerlo).
 
-* Un consumidor de un asignador se etiqueta con `#![needs_allocator]` (e.j. el crate `liballoc` actualmente) y un crate `#[allocator]` no puede depender transitivamente en un crate que necesita un asignador (e.j las dependencias circulares no estan permitidas). Esto significa basicamente que los asignadores de memoria actualmente deben restringirse a libcore.
+* Un consumidor de un asignador se etiqueta con `#![needs_allocator]` (e.j. el crate `liballoc` actualmente) y un crate `#[allocator]` no puede depender transitivamente en un crate que necesita un asignador (e.j las dependencias circulares no estan permitidas). Esto significa básicamente que los asignadores de memoria en la actualidad deben restringirse a libcore.
