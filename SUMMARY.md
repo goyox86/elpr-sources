@@ -67,5 +67,6 @@
     * [Sintaxis Box y Patrones](box-syntax-and-patterns.md)
     * [Patrones Slice](slice-patterns.md)
     * [Constantes Asociadas](associated-constants.md)
+    * [Asignadores de Memoria Personalizados](custom-allocators.md)
 * [Glosario](glossary.md)
 * [Investigación Académica](academic-research.md)
