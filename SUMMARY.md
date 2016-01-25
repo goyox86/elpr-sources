@@ -69,4 +69,4 @@
     * [Constantes Asociadas](associated-constants.md)
     * [Asignadores de Memoria Personalizados](custom-allocators.md)
 * [Glosario](glossary.md)
-* [Investigación Académica](academic-research.md)
+* [Bibliografia](bibliography.md)

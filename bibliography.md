@@ -1,6 +1,6 @@
 % Bibliografia
 
-Esta es una lista de lectura de material relevante a Rust. Incluye investigacion previa que ha - en un momento u otro - influenciado el diseno de Rust, asi como publicaciones relacionadas directamente con Rust.
+Esta es una lista de lectura de material relevante a Rust. Incluye investigación previa que ha - en un momento u otro - influenciado el diseño de Rust, así como publicaciones relacionadas directamente con Rust.
 
 ### Sistema de tipos
 
@@ -23,7 +23,7 @@ Esta es una lista de lectura de material relevante a Rust. Incluye investigacion
 * [The data locality of work stealing](http://www.aladdin.cs.cmu.edu/papers/pdfs/y2000/locality_spaa00.pdf)
 * [Dynamic circular work stealing deque](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.170.1097&rep=rep1&type=pdf) - El deque Chase/Lev
 * [Work-first and help-first scheduling policies for async-finish task parallelism](http://www.cs.rice.edu/%7Eyguo/pubs/PID824943.pdf) - Mas general que robo de trabajo completamente estricto
-* [A Java fork/join calamity](http://www.coopsoft.com/ar/CalamityArticle.html) - critica de la biblioteca fork/join de Java, particularmenre su aplicacion de robo de trabajo a computacion no estricta
+* [A Java fork/join calamity](http://www.coopsoft.com/ar/CalamityArticle.html) - critica de la biblioteca fork/join de Java, particularmente su aplicación de robo de trabajo a computación no estricta
 * [Scheduling techniques for concurrent systems](http://www.stanford.edu/~ouster/cgi-bin/papers/coscheduling.pdf)
 * [Contention aware scheduling](http://www.blagodurov.net/files/a8-blagodurov.pdf)
 * [Balanced work stealing for time-sharing multicores](http://www.cse.ohio-state.edu/hpcs/WWW/HTML/publications/papers/TR-12-1.pdf)
@@ -48,24 +48,23 @@ Language](http://www.cs.indiana.edu/~eholk/papers/hips2013.pdf). Trabajo tempran
   idea](https://www.usenix.org/conference/hotpar12/parallel-closures-new-twist-old-idea)
   - no exactamente acerca de Rust, pero por nmatsakis
 * [Patina: A Formalization of the Rust Programming
-  Language](ftp://ftp.cs.washington.edu/tr/2015/03/UW-CSE-15-03-02.pdf). Formalizacion temprana de un subconjunto del sistema de tipos, por Eric Reed.
+  Language](ftp://ftp.cs.washington.edu/tr/2015/03/UW-CSE-15-03-02.pdf). Formalización temprana de un subconjunto del sistema de tipos, por Eric Reed.
 * [Experience Report: Developing the Servo Web Browser Engine using
   Rust](http://arxiv.org/abs/1505.07383). Por Lars Bergstrom.
 * [Implementing a Generic Radix Trie in
-  Rust](https://michaelsproul.github.io/rust_radix_paper/rust-radix-sproul.pdf). Paper pregrado por Michael Sproul.
+  Rust](https://michaelsproul.github.io/rust_radix_paper/rust-radix-sproul.pdf). Paper pre-grado por Michael Sproul.
 * [Reenix: Implementing a Unix-Like Operating System in
-  Rust](http://scialex.github.io/reenix.pdf). Paper pregrado por  Alex
+  Rust](http://scialex.github.io/reenix.pdf). Paper pre-grado por  Alex
   Light.
 * [Evaluation of performance and productivity metrics of potential
   programming languages in the HPC environment]
   (http://octarineparrot.com/assets/mrfloya-thesis-ba.pdf).
-  Tesis pregrado por lorian Wilkens. Compara C, Go y Rust.
+  Tesis pre-grado por lorian Wilkens. Compara C, Go y Rust.
 * [Nom, a byte oriented, streaming, zero copy, parser combinators library
   in Rust](http://spw15.langsec.org/papers/couprie-nom.pdf). Por
-  Geoffroy Couprie, investigacion para VLC.
+  Geoffroy Couprie, investigación para VLC.
 * [Graph-Based Higher-Order Intermediate
-  Representation](http://compilers.cs.uni-saarland.de/papers/lkh15_cgo.pdf). An
-  experimental IR implemented in Impala, a Rust-like language.
+  Representation](http://compilers.cs.uni-saarland.de/papers/lkh15_cgo.pdf). Una RI implementada en impala, un lenguaje similar a Rust.
 * [Code Refinement of Stencil
   Codes](http://compilers.cs.uni-saarland.de/papers/ppl14_web.pdf). Otro paper usando Impala.
 * [Parallelization in Rust with fork-join and
@@ -75,4 +74,4 @@ Language](http://www.cs.indiana.edu/~eholk/papers/hips2013.pdf). Trabajo tempran
   Rust](http://munksgaard.me/papers/laumann-munksgaard-larsen.pdf). Tesis de master de Philip
   Munksgaard's. Investigacion para Servo.
 * [Ownership is Theft: Experiences Building an Embedded OS in Rust - Amit Levy, et. al.](http://amitlevy.com/papers/tock-plos2015.pdf)
-* [You can't spell trust without Rust](https://raw.githubusercontent.com/Gankro/thesis/master/thesis.pdf). Alexis Beingessner's tesis de master.
+* [You can't spell trust without Rust](https://raw.githubusercontent.com/Gankro/thesis/master/thesis.pdf). Tesis de master de Alexis Beingessner.
