@@ -1,4 +1,4 @@
-% El Lenguaje de Programación Rust
+# El Lenguaje de Programación Rust
 
 ¡Bienvenido! Este libro te enseñará acerca del [Lenguaje de Programación Rust][rust].
 Rust es un lenguaje de programación de sistemas enfocado en tres objetivos: seguridad, velocidad y concurrencia. Rust logra estos objetivos sin tener un recolector de basura, haciendolo util para un numero de casos de uso para los cuales otros lenguajes no son tan buenos: embeber en otros lenguajes, programas con requerimientos específicos de tiempo y espacio, escritura de código de bajo nivel, como controladores de dispositivo y sistemas operativos. Rust mejora por sobre los lenguajes actuales en este nicho a través de un numero de chequeos en tiempo de compilación que no incurren ninguna penalidad en tiempo de ejecución, eliminando al mismo tiempo las condiciones de carrera. Rust también implementa 'abstracciones con cero costo', abstracciones que se sienten como las de un lenguaje de alto nivel. Aun así, Rust permite control preciso tal y como un lenguaje de bajo nivel lo haria.
